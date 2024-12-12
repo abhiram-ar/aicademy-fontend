@@ -3,7 +3,12 @@ import BodyBlock from "@/components/base/BodyBlock";
 import NavbarOnlyLogo from "@/components/extended/NavbarOnlyLogo";
 import loginArt from "./.././assets/loginArt.png";
 import { Link } from "react-router-dom";
+
 const LoginPage = () => {
+    const handleLogin: (data: object) => void = (data) => {
+        console.log(data);
+    };
+
     return (
         <>
             <NavbarOnlyLogo />
@@ -13,7 +18,7 @@ const LoginPage = () => {
                         <h2 className="text-xl font-bold mb-5">
                             Log in to continue your learning journey
                         </h2>
-                        <Login />
+                        <Login handleLogin={handleLogin} />
                         <p className="text-center mt-5 font-medium">
                             Don’t have an account?
                             <Link
