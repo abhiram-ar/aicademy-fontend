@@ -30,7 +30,7 @@ const LoginPage = () => {
                         </p>
                     </div>
 
-                    <div className="w-full flex justify-center items-center border mt-20 ">
+                    <div className="w-full flex justify-center items-center border mt-5 ">
                         <img src={loginArt} alt="login Art peice" />
                     </div>
                 </div>

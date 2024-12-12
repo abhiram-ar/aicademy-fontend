@@ -7,6 +7,7 @@ import SignInWithGoogle from "./components/auth/SignInWithGoogle";
 import { Provider } from "react-redux";
 import store from "./redux/store";
 import LoginPage from "./pages/LoginPage";
+import SignupPage from "./pages/SignupPage";
 
 const appRouter = createBrowserRouter([
     {
@@ -16,6 +17,9 @@ const appRouter = createBrowserRouter([
     {
         path: "/login",
         element: <LoginPage />,
+    },{
+        path: "/signup",
+        element: <SignupPage />,
     },
     {
         path: "/test",
