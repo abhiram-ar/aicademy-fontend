@@ -5,7 +5,9 @@ import {
     InputOTPGroup,
     InputOTPSeparator,
     InputOTPSlot,
+    
 } from "@/components/ui/input-otp";
+import { REGEXP_ONLY_DIGITS } from "input-otp"
 
 type Props = {email: string}
 
@@ -14,7 +16,7 @@ const Otp:React.FC<Props> = ({email}) => {
         <AuthBlock>
           <p className="font-medium mb-2">Enter OTP sent to {email || "temp@email.com"}</p>
             <div className="w-fit mx-auto">
-                <InputOTP maxLength={4}>
+                <InputOTP maxLength={4} pattern={REGEXP_ONLY_DIGITS}>
                     <InputOTPGroup>
                         <InputOTPSlot index={0} />
                         <InputOTPSlot index={1} />
