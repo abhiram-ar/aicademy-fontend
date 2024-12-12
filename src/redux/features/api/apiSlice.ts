@@ -1,5 +1,12 @@
-import { createApi, fetchBaseQuery } from "@reduxjs/toolkit/query/react";
+import { logout, setCredentials } from "../auth/authSlice";
 import { RootState } from "./../../store";
+import {
+    createApi,
+    fetchBaseQuery,
+    FetchArgs,
+    BaseQueryFn,
+    FetchBaseQueryError,
+} from "@reduxjs/toolkit/query/react";
 
 const basequery = fetchBaseQuery({
     baseUrl: "http://localhost:3000",
@@ -13,4 +20,44 @@ const basequery = fetchBaseQuery({
     },
 });
 
+const baseQuerywithReauth: BaseQueryFn<
+    string | FetchArgs,
+    unknown,
+    FetchBaseQueryError
+> = async (args, api, extraOptions) => {
+    const { url } = args as FetchArgs;
 
+    // avoid trying to hit refresh route, for public routes
+    if (url === "/api/auth/login" || url === "/api/auth/signup") {
+        return basequery(args, api, extraOptions);
+    }
+
+    let result = await basequery(args, api, extraOptions);
+
+    if (result.error && result.error.status === 401) {
+        const refershResult = await basequery(
+            "/api/user/auth/refresh",
+            api,
+            extraOptions
+        );
+        if (refershResult.data) {
+            const newAccessToken = refershResult.data;
+            api.dispatch(setCredentials({ token: newAccessToken }));
+
+            //retry the original request
+            result = await basequery(args, api, extraOptions);
+        } else {
+            //logout if refresh fails
+            api.dispatch(logout());
+        }
+    }
+
+    return result;
+};
+
+const apiSlice = createApi({
+    baseQuery: baseQuerywithReauth,
+    endpoints: () => ({}),
+});
+
+export default apiSlice
