@@ -3,12 +3,21 @@ import BodyBlock from "@/components/base/BodyBlock";
 import NavbarOnlyLogo from "@/components/extended/NavbarOnlyLogo";
 import loginArt from "./.././assets/loginArt.png";
 import { Link } from "react-router-dom";
+import { useLoginMutation } from "@/redux/features/auth/authApi";
 
 const LoginPage = () => {
-    const handleLogin: (data: object) => void = (data) => {
+    const handleLogin: (data: object) => void = async (data) => {
         console.log(data);
+        try {
+            const res = await login(data).unwrap();
+            console.log(res);
+        } catch (error) {
+            console.error("error while logging in");
+            console.log(error);
+            //toast
+        }
     };
-
+    const [login] = useLoginMutation();
     return (
         <>
             <NavbarOnlyLogo />
