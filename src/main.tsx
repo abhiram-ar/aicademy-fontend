@@ -3,7 +3,7 @@ import { createRoot } from "react-dom/client";
 import "./index.css";
 import App from "./App";
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
-import Signup from "./components/auth/Signup";
+import Otp from "./components/auth/Otp";
 
 const appRouter = createBrowserRouter([
     {
@@ -12,7 +12,7 @@ const appRouter = createBrowserRouter([
     },
     {
         path: "/test",
-        element: <Signup/>,
+        element: <Otp/>,
     },
 ]);
 
