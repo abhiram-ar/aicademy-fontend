@@ -28,7 +28,7 @@ const Otp:React.FC<Props> = ({email}) => {
                     </InputOTPGroup>
                 </InputOTP>
             </div>
-            <button className="w-full bg-white py-2 px-3 border-2 border-black rounded-base mt-10 hover:bg-black hover:text-white active:bg-zinc-700">
+            <button className="w-96 bg-white py-2 px-3 border-2 border-black rounded-base mt-10 hover:bg-black hover:text-white active:bg-zinc-700">
                 verify
             </button>
         </AuthBlock>
