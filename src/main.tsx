@@ -6,11 +6,16 @@ import { createBrowserRouter, RouterProvider } from "react-router-dom";
 import SignInWithGoogle from "./components/auth/SignInWithGoogle";
 import { Provider } from "react-redux";
 import store from "./redux/store";
+import LoginPage from "./pages/LoginPage";
 
 const appRouter = createBrowserRouter([
     {
         path: "/",
         element: <App />,
+    },
+    {
+        path: "/login",
+        element: <LoginPage />,
     },
     {
         path: "/test",
