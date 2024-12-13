@@ -10,7 +10,7 @@ import {
     DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
 
-const UserButton = () => {
+const UserInfoDropdown = () => {
     const username = useSelector<RootState, string | undefined>(
         (state) => state.auth.user?.firstName
     );
@@ -47,4 +47,4 @@ const UserButton = () => {
     );
 };
 
-export default UserButton;
+export default UserInfoDropdown;

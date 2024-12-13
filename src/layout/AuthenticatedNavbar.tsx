@@ -3,7 +3,7 @@ import Navbar from "../components/base/Navbar";
 import SearchBar from "../components/ui/SearchBar";
 import MylearningButton from "@/components/extended/MyLearningButton";
 import NotificationButton from "@/components/extended/NotificationButton";
-import UserButton from "@/components/extended/UserButton";
+import UserInfoDropdown from "@/components/extended/UserInfoDropdown";
 
 const AutheicatedNavbar = () => {
     return (
@@ -17,7 +17,7 @@ const AutheicatedNavbar = () => {
                     <MylearningButton />
                     <CartButton />
                     <NotificationButton />
-                    <UserButton />
+                    <UserInfoDropdown />
                 </div>
             </Navbar>
         </>
