@@ -1,10 +1,12 @@
 import { Button } from "../ui/button";
-import {Link} from "react-router-dom"
+import { Link } from "react-router-dom";
 const LoginButton = () => {
     return (
-        <Button variant="neutral" size="md">
-            <Link to="/login">Login</Link>
-        </Button>
+        <Link to="/login">
+            <Button variant="neutral" size="md">
+                Login
+            </Button>
+        </Link>
     );
 };
 

@@ -1,4 +1,4 @@
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import demopic from "./../../assets/studentDemo.png";
 import { RootState } from "@/redux/store";
 import {
@@ -9,15 +9,27 @@ import {
     DropdownMenuSeparator,
     DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
+import { useLogoutMutation } from "@/redux/features/auth/authApi";
+import { logout } from "./../../redux/features/auth/authSlice";
 
 const UserInfoDropdown = () => {
     const username = useSelector<RootState, string | undefined>(
         (state) => state.auth.user?.firstName
     );
 
-    const handleLogout = ()=>{
-        console.log(`logout`);
-    }
+    const [logoutApi] = useLogoutMutation();
+    const dispatch = useDispatch();
+
+    const handleLogout = async () => {
+        console.log(`trying to logout`);
+
+        try {
+            await logoutApi({}).unwrap();
+            dispatch(logout());
+        } catch (error) {
+            console.log(`error while logging out`, error);
+        }
+    };
 
     return (
         <div>
@@ -40,7 +52,9 @@ const UserInfoDropdown = () => {
                     <DropdownMenuItem>My account</DropdownMenuItem>
                     <DropdownMenuItem>Orders</DropdownMenuItem>
                     <DropdownMenuItem>Help</DropdownMenuItem>
-                    <DropdownMenuItem onClick={handleLogout}>logout</DropdownMenuItem>
+                    <DropdownMenuItem onClick={handleLogout}>
+                        logout
+                    </DropdownMenuItem>
                 </DropdownMenuContent>
             </DropdownMenu>
         </div>
