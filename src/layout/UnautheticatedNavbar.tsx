@@ -9,11 +9,13 @@ const UnautheicatedNavbar = () => {
         <>
             <Navbar>
                 <h1 className="text-3xl font-bold">AIcademy</h1>
-                <SearchBar />
-                <div className=" -ms-8 flex gap-3">
+                <div className="w-full mx-10 ms-16">
+                    <SearchBar />
+                </div>
+                <div className="flex gap-3">
                     <TeachButton />
-                    <LoginButton/>
-                    <SignupButton/>
+                    <LoginButton />
+                    <SignupButton />
                 </div>
             </Navbar>
         </>

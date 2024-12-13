@@ -1,9 +1,14 @@
-import React from 'react'
+import AutheicatedNavbar from "@/layout/AuthenticatedNavbar";
+import UnautheicatedNavbar from "@/layout/UnautheticatedNavbar";
+import { RootState } from "@/redux/store";
+import { useSelector } from "react-redux";
 
 const LandingPage = () => {
-  return (
-    <div>LandingPage</div>
-  )
-}
+    const isLoggedIn = useSelector<RootState>((state) =>
+        state.auth.user ? true : false
+    );
 
-export default LandingPage
+    return <>{isLoggedIn ? <AutheicatedNavbar /> : <UnautheicatedNavbar />}</>;
+};
+
+export default LandingPage;

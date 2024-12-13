@@ -2,7 +2,7 @@ import Login from "@/components/auth/Login";
 import BodyBlock from "@/components/base/BodyBlock";
 import NavbarOnlyLogo from "@/components/extended/NavbarOnlyLogo";
 import loginArt from "./.././assets/loginArt.png";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { useLoginMutation } from "@/redux/features/auth/authApi";
 import { setCredentials } from "@/redux/features/auth/authSlice";
 import { useDispatch } from "react-redux";
@@ -12,6 +12,8 @@ import { Toaster } from "@/components/ui/toaster";
 const LoginPage = () => {
     const dispatch = useDispatch();
     const { toast } = useToast();
+    const navigate = useNavigate()
+
 
     const handleLogin: (data: object) => void = async (data) => {
         console.log(data);
@@ -23,6 +25,7 @@ const LoginPage = () => {
                     user: payload.user,
                 })
             );
+            navigate("/")
         } catch (error) {
             console.error("error while logging in", error);
             toast({
