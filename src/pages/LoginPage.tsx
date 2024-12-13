@@ -6,27 +6,40 @@ import { Link } from "react-router-dom";
 import { useLoginMutation } from "@/redux/features/auth/authApi";
 import { setCredentials } from "@/redux/features/auth/authSlice";
 import { useDispatch } from "react-redux";
+import { useToast } from "./../hooks/use-toast";
+import { Toaster } from "@/components/ui/toaster";
 
 const LoginPage = () => {
-    const dispatch = useDispatch()
+    const dispatch = useDispatch();
+    const { toast } = useToast();
 
     const handleLogin: (data: object) => void = async (data) => {
         console.log(data);
         try {
             const payload = await login(data).unwrap();
-            console.log(payload);
+            dispatch(
+                setCredentials({
+                    accessToken: payload.token,
+                    user: payload.user,
+                })
+            );
         } catch (error) {
-            console.error("error while logging in");
-            console.log(error);
-            //toast
+            console.error("error while logging in", error);
+            toast({
+                variant: "destructive",
+                title: "Error while Login",
+                description: (error as { data: { message: string } }).data
+                    .message,
+            });
         }
     };
-    
+
     const [login] = useLoginMutation();
     return (
         <>
             <NavbarOnlyLogo />
             <BodyBlock>
+                <Toaster />
                 <div className="mx-2 flex-col min-h-fit h-[90vh] lg:mx-52 lg:flex lg:flex-row justify-center items-baseline border gap-5">
                     <div className="m-auto mt-20 w-fit border  ">
                         <h2 className="text-xl font-bold mb-5">
