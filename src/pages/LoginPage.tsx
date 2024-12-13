@@ -43,8 +43,8 @@ const LoginPage = () => {
             <NavbarOnlyLogo />
             <BodyBlock>
                 <Toaster />
-                <div className="mx-2 flex-col min-h-fit h-[90vh] lg:mx-52 lg:flex lg:flex-row justify-center items-baseline border gap-5">
-                    <div className="m-auto mt-20 w-fit border  ">
+            <div className="w-full lg:w-2/3  mx-auto flex-col min-h-fit h-[90vh] lg:flex lg:flex-row justify-between items-center gap-10">
+                    <div className="m-auto mt-20 w-fit">
                         <h2 className="text-xl font-bold mb-5">
                             Log in to continue your learning journey
                         </h2>
@@ -60,7 +60,7 @@ const LoginPage = () => {
                         </p>
                     </div>
 
-                    <div className="w-full flex justify-center items-center border mt-5 ">
+                    <div className="w-full flex justify-center items-center -mt-5">
                         <img src={loginArt} alt="login Art peice" />
                     </div>
                 </div>
