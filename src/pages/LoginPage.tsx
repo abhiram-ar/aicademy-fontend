@@ -12,8 +12,7 @@ import { Toaster } from "@/components/ui/toaster";
 const LoginPage = () => {
     const dispatch = useDispatch();
     const { toast } = useToast();
-    const navigate = useNavigate()
-
+    const navigate = useNavigate();
 
     const handleLogin: (data: object) => void = async (data) => {
         console.log(data);
@@ -25,7 +24,7 @@ const LoginPage = () => {
                     user: payload.user,
                 })
             );
-            navigate("/")
+            navigate("/");
         } catch (error) {
             console.error("error while logging in", error);
             toast({
@@ -43,7 +42,7 @@ const LoginPage = () => {
             <NavbarOnlyLogo />
             <BodyBlock>
                 <Toaster />
-            <div className="w-full lg:w-2/3  mx-auto flex-col min-h-fit h-[90vh] lg:flex lg:flex-row justify-between items-center gap-10">
+                <div className="w-full lg:w-2/3  mx-auto flex-col min-h-fit h-[90vh] lg:flex lg:flex-row justify-between items-center gap-10">
                     <div className="m-auto mt-20 w-fit">
                         <h2 className="text-xl font-bold mb-5">
                             Log in to continue your learning journey
