@@ -1,4 +1,5 @@
 import apiSlice from "./../api/apiSlice";
+import { logout } from "./authSlice";
 
 const authApi = apiSlice.injectEndpoints({
     endpoints: (builder) => ({
@@ -17,13 +18,24 @@ const authApi = apiSlice.injectEndpoints({
             }),
         }),
         verify: builder.mutation({
-            query: (data)=>({
+            query: (data) => ({
                 url: "/api/user/auth/activate",
                 method: "POST",
-                body: data
-            })
-        })
+                body: data,
+            }),
+        }),
+        logout: builder.mutation({
+            query: () => ({
+                url: "/api/user/auth/logout",
+                method: "POST",
+            }),
+        }),
     }),
 });
 
-export const { useRegisterMutation, useLoginMutation, useVerifyMutation } = authApi;
+export const {
+    useRegisterMutation,
+    useLoginMutation,
+    useVerifyMutation,
+    useLogoutMutation,
+} = authApi;
