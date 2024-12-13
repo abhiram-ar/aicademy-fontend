@@ -2,7 +2,7 @@ import Signup from "@/components/auth/Signup";
 import BodyBlock from "@/components/base/BodyBlock";
 import NavbarOnlyLogo from "@/components/extended/NavbarOnlyLogo";
 import SignupArt from "./.././assets/SignupArt.png";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { useRegisterMutation, useVerifyMutation } from "@/redux/features/auth/authApi";
 import { useState } from "react";
 import Otp from "@/components/auth/Otp";
@@ -14,8 +14,9 @@ import { newUser } from "@/components/auth/Signup";
 
 
 const SignupPage = () => {
-    const [register] = useRegisterMutation();
-    const [verifyEmail] = useVerifyMutation()
+    const [register, {isLoading: isRegistrationLoading}] = useRegisterMutation();
+    const [verifyEmail, {isLoading: isVerifyLoading}] = useVerifyMutation()
+    const navigate = useNavigate()
     
     const [activationDetails, setActivationDetails] = useState<{
         activationToken: string | null;
@@ -25,16 +26,12 @@ const SignupPage = () => {
         user: null,
     });
 
-
-
-    console.log(activationDetails);
     const handleSignup: (data: newUser) => void = async (data) => {
         console.log(data);
         try {
-            const res = await register(data).unwrap();
-            console.log(res);
+            const payload = await register(data).unwrap();
             setActivationDetails({
-                activationToken: res.activationToken,
+                activationToken: payload.activationToken,
                 user: data,
             });
         } catch (error) {
@@ -50,6 +47,7 @@ const SignupPage = () => {
         try{
             const res = await verifyEmail({activationCode: otp, activationToken: activationDetails.activationToken}).unwrap()
             console.log(res)
+            navigate("/login")
         }catch(error){
             console.warn("error while verifying user account");
             console.log(error)
@@ -72,7 +70,7 @@ const SignupPage = () => {
                         </h2>
                         {!activationDetails.activationToken ? (
                             <>
-                                <Signup handleSignup={handleSignup} />
+                                <Signup handleSignup={handleSignup} isSignupDisabled={isRegistrationLoading}/>
                                 <p className="text-center mt-5 font-medium">
                                     Already have an account?
                                     <Link
@@ -84,7 +82,7 @@ const SignupPage = () => {
                                 </p>
                             </>
                         ) : (
-                            <Otp email={activationDetails.user?.email} handleOTPVerification={handleOTPVerification}/>
+                            <Otp email={activationDetails.user?.email} handleOTPVerification={handleOTPVerification} isVerifyDisabled={isVerifyLoading}/>
                         )}
                     </div>
                 </div>

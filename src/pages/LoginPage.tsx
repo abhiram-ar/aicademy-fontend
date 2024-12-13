@@ -4,19 +4,24 @@ import NavbarOnlyLogo from "@/components/extended/NavbarOnlyLogo";
 import loginArt from "./.././assets/loginArt.png";
 import { Link } from "react-router-dom";
 import { useLoginMutation } from "@/redux/features/auth/authApi";
+import { setCredentials } from "@/redux/features/auth/authSlice";
+import { useDispatch } from "react-redux";
 
 const LoginPage = () => {
+    const dispatch = useDispatch()
+
     const handleLogin: (data: object) => void = async (data) => {
         console.log(data);
         try {
-            const res = await login(data).unwrap();
-            console.log(res);
+            const payload = await login(data).unwrap();
+            console.log(payload);
         } catch (error) {
             console.error("error while logging in");
             console.log(error);
             //toast
         }
     };
+    
     const [login] = useLoginMutation();
     return (
         <>

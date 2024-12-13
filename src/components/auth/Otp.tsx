@@ -11,9 +11,10 @@ import { REGEXP_ONLY_DIGITS } from "input-otp";
 type Props = {
     email: string | undefined;
     handleOTPVerification: (enteredOTP: string) => void;
+    isVerifyDisabled?: boolean
 };
 
-const Otp: React.FC<Props> = ({ email, handleOTPVerification }) => {
+const Otp: React.FC<Props> = ({ email, handleOTPVerification, isVerifyDisabled=false }) => {
     const [otp, setOtp] = useState("");
     return (
         <AuthBlock>
@@ -41,6 +42,7 @@ const Otp: React.FC<Props> = ({ email, handleOTPVerification }) => {
             <button
                 className="w-96 bg-white py-2 px-3 border-2 border-black rounded-base mt-10 hover:bg-black hover:text-white active:bg-zinc-700"
                 onClick={() => handleOTPVerification(otp)}
+                disabled={isVerifyDisabled}
             >
                 verify
             </button>
