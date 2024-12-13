@@ -3,7 +3,7 @@ import BodyBlock from "@/components/base/BodyBlock";
 import NavbarOnlyLogo from "@/components/extended/NavbarOnlyLogo";
 import SignupArt from "./.././assets/SignupArt.png";
 import { Link } from "react-router-dom";
-import { useRegisterMutation } from "@/redux/features/auth/authApi";
+import { useRegisterMutation, useVerifyMutation } from "@/redux/features/auth/authApi";
 import { useState } from "react";
 import Otp from "@/components/auth/Otp";
 import { newUser } from "@/components/auth/Signup";
@@ -12,8 +12,11 @@ import { newUser } from "@/components/auth/Signup";
 
 
 
+
 const SignupPage = () => {
     const [register] = useRegisterMutation();
+    const [verifyEmail] = useVerifyMutation()
+    
     const [activationDetails, setActivationDetails] = useState<{
         activationToken: string | null;
         user: newUser | null;
@@ -21,6 +24,8 @@ const SignupPage = () => {
         activationToken: null,
         user: null,
     });
+
+
 
     console.log(activationDetails);
     const handleSignup: (data: newUser) => void = async (data) => {
@@ -38,6 +43,19 @@ const SignupPage = () => {
             //toast
         }
     };
+
+
+    const handleOTPVerification:(otp: string)=>void = async (otp)=>{
+        console.log(otp)
+        try{
+            const res = await verifyEmail({activationCode: otp, activationToken: activationDetails.activationToken}).unwrap()
+            console.log(res)
+        }catch(error){
+            console.warn("error while verifying user account");
+            console.log(error)
+            //toast
+        }
+    }
 
     return (
         <>
@@ -66,7 +84,7 @@ const SignupPage = () => {
                                 </p>
                             </>
                         ) : (
-                            <Otp email={activationDetails.user?.email} />
+                            <Otp email={activationDetails.user?.email} handleOTPVerification={handleOTPVerification}/>
                         )}
                     </div>
                 </div>
