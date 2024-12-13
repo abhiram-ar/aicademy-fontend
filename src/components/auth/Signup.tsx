@@ -2,8 +2,16 @@ import AuthBlock from "../base/AuthBlock";
 import { useForm } from "react-hook-form";
 import SignInWithGoogle from "./SignInWithGoogle";
 
+export interface newUser {
+    firstName: string,
+    lastName:string,
+    email:string,
+    password: string
+}
+
+
 interface Props {
-    handleSignup: (data: object) => void;
+    handleSignup: (data: newUser) => void;
 }
 
 const Signup: React.FC<Props> = ({ handleSignup }) => {
@@ -16,7 +24,7 @@ const Signup: React.FC<Props> = ({ handleSignup }) => {
     return (
         <AuthBlock>
             <form
-                onSubmit={handleSubmit((data) => handleSignup(data))}
+                onSubmit={handleSubmit((data) => handleSignup(data as newUser))}
                 className="flex flex-col gap-4"
             >
                 {/* name */}

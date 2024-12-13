@@ -9,7 +9,7 @@ import {
 } from "@/components/ui/input-otp";
 import { REGEXP_ONLY_DIGITS } from "input-otp"
 
-type Props = {email: string}
+type Props = {email: string | undefined}
 
 const Otp:React.FC<Props> = ({email}) => {
     return (

@@ -6,18 +6,30 @@ import { Link } from "react-router-dom";
 import { useRegisterMutation } from "@/redux/features/auth/authApi";
 import { useState } from "react";
 import Otp from "@/components/auth/Otp";
+import { newUser } from "@/components/auth/Signup";
+
+
+
+
 
 const SignupPage = () => {
     const [register] = useRegisterMutation();
-    const [activationToken, setActivationToken] = useState(null);
-    console.log(activationToken)
-    const handleSignup: (data: object) => void = async (data) => {
+    const [activationDetails, setActivationDetails] = useState<{
+        activationToken: string | null;
+        user: newUser | null;
+    }>({
+        activationToken: null,
+        user: null,
+    });
+
+    console.log(activationDetails);
+    const handleSignup: (data: newUser) => void = async (data) => {
         console.log(data);
         try {
             const res = await register(data).unwrap();
             console.log(res);
-            setActivationToken({
-                ...res,
+            setActivationDetails({
+                activationToken: res.activationToken,
                 user: data,
             });
         } catch (error) {
@@ -40,7 +52,7 @@ const SignupPage = () => {
                         <h2 className="text-2xl font-bold mb-5 text-center">
                             Sign up and start learning
                         </h2>
-                        {!activationToken ? (
+                        {!activationDetails.activationToken ? (
                             <>
                                 <Signup handleSignup={handleSignup} />
                                 <p className="text-center mt-5 font-medium">
@@ -54,7 +66,7 @@ const SignupPage = () => {
                                 </p>
                             </>
                         ) : (
-                            <Otp email={activationToken.user.email} />
+                            <Otp email={activationDetails.user?.email} />
                         )}
                     </div>
                 </div>
