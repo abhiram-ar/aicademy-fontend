@@ -2,7 +2,19 @@ import AuthBlock from "../base/AuthBlock";
 import { useForm } from "react-hook-form";
 import SignInWithGoogle from "./SignInWithGoogle";
 
-const Signup = () => {
+export interface newUser {
+    firstName: string;
+    lastName: string;
+    email: string;
+    password: string;
+}
+
+interface Props {
+    handleSignup: (data: newUser) => void;
+    isSignupDisabled?: boolean;
+}
+
+const Signup: React.FC<Props> = ({ handleSignup, isSignupDisabled = false }) => {
     const {
         register,
         handleSubmit,
@@ -12,7 +24,7 @@ const Signup = () => {
     return (
         <AuthBlock>
             <form
-                onSubmit={handleSubmit((data) => console.log(data))}
+                onSubmit={handleSubmit((data) => handleSignup(data as newUser))}
                 className="flex flex-col gap-4"
             >
                 {/* name */}
@@ -120,7 +132,12 @@ const Signup = () => {
 
                 <button
                     type="submit"
-                    className="py-2 px-3 border-2 border-black bg-white rounded-base w-full font-medium hover:bg-black hover:text-white active:bg-zinc-700"
+                    disabled={isSignupDisabled}
+                    className={`py-2 px-3 border-2 border-black rounded-base w-full font-medium ${
+                        !isSignupDisabled
+                            ? "bg-white   hover:bg-black hover:text-white active:bg-zinc-700"
+                            : "bg-zinc-500 hover:bg-zinc-500 hover:text-black"
+                    }`}
                 >
                     Sign up
                 </button>

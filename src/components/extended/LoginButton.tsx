@@ -1,9 +1,13 @@
-import {Button} from "../ui/button"
-
+import { Button } from "../ui/button";
+import { Link } from "react-router-dom";
 const LoginButton = () => {
-  return (
-    <Button variant="neutral" size="md">Login</Button>
-  )
-}
+    return (
+        <Link to="/login">
+            <Button variant="neutral" size="md">
+                Login
+            </Button>
+        </Link>
+    );
+};
 
-export default LoginButton
+export default LoginButton;

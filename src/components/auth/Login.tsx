@@ -1,8 +1,13 @@
 import AuthBlock from "../base/AuthBlock";
 import { useForm } from "react-hook-form";
 import SignInWithGoogle from "./SignInWithGoogle";
+import React from "react";
 
-const Login = () => {
+interface Props {
+    handleLogin: (data: object) => void;
+}
+
+const Login: React.FC<Props> = ({ handleLogin }) => {
     const {
         register,
         handleSubmit,
@@ -12,7 +17,7 @@ const Login = () => {
     return (
         <AuthBlock>
             <form
-                onSubmit={handleSubmit((data) => console.log(data))}
+                onSubmit={handleSubmit((data) => handleLogin(data))}
                 className="flex flex-col gap-4"
             >
                 {/* email */}
@@ -48,7 +53,10 @@ const Login = () => {
 
                 {/* password */}
                 <div>
-                    <label htmlFor="password" className="font-semibold flex gap-2 items-baseline">
+                    <label
+                        htmlFor="password"
+                        className="font-semibold flex gap-2 items-baseline"
+                    >
                         password
                         {errors.password?.type === "required" && (
                             <p className="validation-error">

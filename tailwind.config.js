@@ -19,6 +19,9 @@ export default {
                 darkText: "#eeefe9",
                 darkBorder: "#000",
                 secondaryBlack: "#212121", // opposite of plain white, not used pitch black because borders and box-shadows are that color
+
+                // AIcademy color-schemes
+                paperYellow: "#fffbee"
             },
             borderRadius: {
                 base: "5px",
