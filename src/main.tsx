@@ -3,11 +3,11 @@ import { createRoot } from "react-dom/client";
 import "./index.css";
 import App from "./App";
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
-import SignInWithGoogle from "./components/auth/SignInWithGoogle";
 import { Provider } from "react-redux";
 import store from "./redux/store";
 import LoginPage from "./pages/LoginPage";
 import SignupPage from "./pages/SignupPage";
+import AutheicatedNavbar from "./layout/authenticatedNavbar";
 
 const appRouter = createBrowserRouter([
     {
@@ -23,7 +23,7 @@ const appRouter = createBrowserRouter([
     },
     {
         path: "/test",
-        element: <SignInWithGoogle />,
+        element: <AutheicatedNavbar />,
     },
 ]);
 
