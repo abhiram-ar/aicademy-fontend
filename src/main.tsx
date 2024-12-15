@@ -8,6 +8,8 @@ import LoginPage from "./pages/LoginPage";
 import SignupPage from "./pages/SignupPage";
 import AutheicatedNavbar from "./layout/AuthenticatedNavbar";
 import LandingPage from "./pages/LandingPage";
+import TeacherSignupPage from "./pages/teacher/auth/TeacherSignupPage";
+import TeacherLoginPage from "./pages/teacher/auth/TeacherLoginPage";
 
 const appRouter = createBrowserRouter([
     {
@@ -25,6 +27,19 @@ const appRouter = createBrowserRouter([
     {
         path: "/test",
         element: <AutheicatedNavbar />,
+    },
+    {
+        path: "/teach",
+        children: [
+            {
+                path: "/teach/login",
+                element: <TeacherLoginPage />,
+            },
+            {
+                path: "/teach/signup",
+                element: <TeacherSignupPage/>
+            }
+        ],
     },
 ]);
 
