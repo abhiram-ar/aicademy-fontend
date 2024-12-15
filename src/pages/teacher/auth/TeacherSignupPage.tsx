@@ -4,9 +4,8 @@ import NavbarOnlyLogo from "@/components/extended/NavbarOnlyLogo";
 import SignupArt from "./../../../assets/SignupArt.png";
 import { Link, useNavigate } from "react-router-dom";
 import {
-    useRegisterMutation,
-    useVerifyMutation,
-} from "@/redux/features/auth/authApi";
+    useTeacherRegisterMutation, useTeacherVerifyMutation
+} from "@/redux/features/auth/teacherAuthAPI";
 import { useState } from "react";
 import Otp from "@/components/auth/Otp";
 import { newUser } from "@/components/auth/Signup";
@@ -15,8 +14,8 @@ import { toast } from "@/hooks/use-toast";
 
 const TeacherSignupPage = () => {
     const [register, { isLoading: isRegistrationLoading }] =
-        useRegisterMutation();
-    const [verifyEmail, { isLoading: isVerifyLoading }] = useVerifyMutation();
+        useTeacherRegisterMutation();
+    const [verifyEmail, { isLoading: isVerifyLoading }] = useTeacherVerifyMutation();
     const navigate = useNavigate();
 
     const [activationDetails, setActivationDetails] = useState<{
@@ -38,7 +37,7 @@ const TeacherSignupPage = () => {
         } catch (error) {
             console.error("error while user signup");
             console.log(error);
-             toast({
+            toast({
                 variant: "destructive",
                 title: "Error while signup",
                 description: (error as { data: { message: string } }).data
@@ -66,7 +65,7 @@ const TeacherSignupPage = () => {
         <>
             <NavbarOnlyLogo />
             <BodyBlock>
-                <Toaster/>
+                <Toaster />
                 <div className="w-full lg:w-2/3 mx-auto flex flex-col-reverse min-h-fit h-[90vh] lg:flex lg:flex-row justify-center items-center gap-16">
                     <div className="w-full flex justify-center items-center">
                         <img src={SignupArt} alt="login Art peice" />
@@ -85,7 +84,7 @@ const TeacherSignupPage = () => {
                                 <p className="text-center mt-5 font-medium">
                                     Already have an account?
                                     <Link
-                                        to="/login"
+                                        to="/teach/login"
                                         className="font-bold underline ms-1"
                                     >
                                         login

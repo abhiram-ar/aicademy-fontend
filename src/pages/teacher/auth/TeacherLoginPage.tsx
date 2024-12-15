@@ -3,7 +3,7 @@ import BodyBlock from "@/components/base/BodyBlock";
 import NavbarOnlyLogo from "@/components/extended/NavbarOnlyLogo";
 import loginArt from "./../../../assets/loginArt.png";
 import { Link, useNavigate } from "react-router-dom";
-import { useLoginMutation } from "@/redux/features/auth/authApi";
+import { useTeacherLoginMutation } from "@/redux/features/auth/teacherAuthAPI";
 import { setCredentials } from "@/redux/features/auth/authSlice";
 import { useDispatch } from "react-redux";
 import { useToast } from "../../../hooks/use-toast";
@@ -13,11 +13,13 @@ const TeacherLoginPage = () => {
     const dispatch = useDispatch();
     const { toast } = useToast();
     const navigate = useNavigate();
+    const [login] = useTeacherLoginMutation();
 
     const handleLogin: (data: object) => void = async (data) => {
         console.log(data);
         try {
             const payload = await login(data).unwrap();
+            console.log(payload);
             dispatch(
                 setCredentials({
                     accessToken: payload.token,
@@ -36,7 +38,6 @@ const TeacherLoginPage = () => {
         }
     };
 
-    const [login] = useLoginMutation();
     return (
         <>
             <NavbarOnlyLogo />
