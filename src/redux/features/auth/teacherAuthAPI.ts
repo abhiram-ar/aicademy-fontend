@@ -23,6 +23,12 @@ const teacherAuthApi = apiSlice.injectEndpoints({
                 body: data,
             }),
         }),
+        teacherLogout: builder.mutation({
+            query: () => ({
+                url: "/api/teacher/auth/logout",
+                method: "POST",
+            }),
+        }),
         teacherOnboarding: builder.mutation({
             query: (data) => ({
                 url: "/api/teacher/onboard",
@@ -38,4 +44,5 @@ export const {
     useTeacherVerifyMutation,
     useTeacherLoginMutation,
     useTeacherOnboardingMutation,
+    useTeacherLogoutMutation
 } = teacherAuthApi;

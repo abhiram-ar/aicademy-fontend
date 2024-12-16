@@ -1,18 +1,20 @@
+import { Action } from "@radix-ui/react-toast";
 import { createSlice } from "@reduxjs/toolkit";
 
-
 interface IUser {
-    firstName: string,
-    lastName: string,
-    email: string
+    teacherId?: string;
+    userId?: string;
+    firstName?: string;
+    role: string;
+    isApproved?: string;
 }
 
 interface IState {
-    token: string | null,
-    user: IUser | null
+    token: string | null;
+    user: IUser | null;
 }
 
-const initialState:IState = {
+const initialState: IState = {
     token: null,
     user: null,
 };
@@ -21,7 +23,6 @@ const authSlice = createSlice({
     name: "auth",
     initialState,
     reducers: {
-     
         setCredentials: (state, action) => {
             state.token = action.payload.accessToken;
             state.user = action.payload.user;
@@ -30,9 +31,12 @@ const authSlice = createSlice({
             state.token = null;
             state.user = null;
         },
+
+        setUser: (state, action) => {
+            state.user = action.payload;
+        },
     },
 });
 
-export default authSlice.reducer
-export const { setCredentials, logout}  = authSlice.actions
-
+export default authSlice.reducer;
+export const { setCredentials, logout, setUser } = authSlice.actions;

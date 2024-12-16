@@ -26,7 +26,7 @@ const TeacherLoginPage = () => {
                     user: payload.teacher,
                 })
             );
-            navigate("/");
+            navigate("/teach/onboard");
         } catch (error) {
             console.error("error while logging in", error);
             toast({
