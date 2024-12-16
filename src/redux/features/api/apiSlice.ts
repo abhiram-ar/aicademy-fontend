@@ -28,7 +28,7 @@ const baseQuerywithReauth: BaseQueryFn<
     const { url } = args as FetchArgs;
 
     // avoid trying to hit refresh route, for public routes
-    if (url === "/api/auth/login" || url === "/api/auth/signup") {
+    if (url === "/api/auth/refresh") {
         return basequery(args, api, extraOptions);
     }
 
@@ -36,7 +36,7 @@ const baseQuerywithReauth: BaseQueryFn<
 
     if (result.error && result.error.status === 401) {
         const refershResult = await basequery(
-            "/api/user/auth/refresh",
+            "/api/auth/refresh",
             api,
             extraOptions
         );
@@ -57,7 +57,14 @@ const baseQuerywithReauth: BaseQueryFn<
 
 const apiSlice = createApi({
     baseQuery: baseQuerywithReauth,
-    endpoints: () => ({}),
+    endpoints: (builder) => ({
+        refresh: builder.query({
+            query: () => ({
+                url: "/api/auth/refresh",
+            }),
+            keepUnusedDataFor: 0 //nocache
+        }),
+    }),
 });
-
-export default apiSlice
+export const { useRefreshQuery } = apiSlice;
+export default apiSlice;

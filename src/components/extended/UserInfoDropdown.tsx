@@ -14,7 +14,7 @@ import { logout } from "./../../redux/features/auth/authSlice";
 
 const UserInfoDropdown = () => {
     const username = useSelector<RootState, string | undefined>(
-        (state) => state.auth.user?.firstName
+        (state) => state.auth.user?.username
     );
 
     const [logoutApi] = useLogoutMutation();
