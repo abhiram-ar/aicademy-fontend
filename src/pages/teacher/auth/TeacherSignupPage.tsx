@@ -4,7 +4,8 @@ import NavbarOnlyLogo from "@/components/extended/NavbarOnlyLogo";
 import SignupArt from "./../../../assets/SignupArt.png";
 import { Link, useNavigate } from "react-router-dom";
 import {
-    useTeacherRegisterMutation, useTeacherVerifyMutation
+    useTeacherRegisterMutation,
+    useTeacherVerifyMutation,
 } from "@/redux/features/auth/teacherAuthAPI";
 import { useState } from "react";
 import Otp from "@/components/auth/Otp";
@@ -13,10 +14,12 @@ import { Toaster } from "@/components/ui/toaster";
 import { toast } from "@/hooks/use-toast";
 
 const TeacherSignupPage = () => {
+    const [verifyEmail, { isLoading: isVerifyLoading }] =
+        useTeacherVerifyMutation();
+    const navigate = useNavigate();
+
     const [register, { isLoading: isRegistrationLoading }] =
         useTeacherRegisterMutation();
-    const [verifyEmail, { isLoading: isVerifyLoading }] = useTeacherVerifyMutation();
-    const navigate = useNavigate();
 
     const [activationDetails, setActivationDetails] = useState<{
         activationToken: string | null;
@@ -35,8 +38,7 @@ const TeacherSignupPage = () => {
                 user: data,
             });
         } catch (error) {
-            console.error("error while user signup");
-            console.log(error);
+            console.error("error while user signup", error);
             toast({
                 variant: "destructive",
                 title: "Error while signup",
@@ -57,7 +59,12 @@ const TeacherSignupPage = () => {
             navigate("/teach/login");
         } catch (error) {
             console.warn("error while verifying user account", error);
-            //toast
+            toast({
+                variant: "destructive",
+                title: "Error while OTP verification",
+                description: (error as { data: { message: string } }).data
+                    .message,
+            });
         }
     };
 

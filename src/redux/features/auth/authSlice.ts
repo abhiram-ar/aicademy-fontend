@@ -1,4 +1,3 @@
-import { Action } from "@radix-ui/react-toast";
 import { createSlice } from "@reduxjs/toolkit";
 
 interface IUser {
