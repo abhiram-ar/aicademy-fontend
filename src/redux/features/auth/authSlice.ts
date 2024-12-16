@@ -3,7 +3,7 @@ import { createSlice } from "@reduxjs/toolkit";
 interface IUser {
     teacherId?: string;
     userId?: string;
-    firstName?: string;
+    username?: string;
     role: string;
     isApproved?: string;
 }
