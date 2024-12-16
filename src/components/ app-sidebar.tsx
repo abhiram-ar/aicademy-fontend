@@ -1,9 +1,4 @@
 import {
-    Calendar,
-    Home,
-    Inbox,
-    Search,
-    Settings,
     UserPenIcon,
 } from "lucide-react";
 
