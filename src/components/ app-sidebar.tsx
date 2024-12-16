@@ -26,7 +26,7 @@ const items = [
 
 export function AppSidebar() {
     return (
-        <Sidebar className="bg-[#374151] text-white">
+        <Sidebar className="">
             <SidebarContent>
                 <SidebarGroup>
                     <SidebarGroupLabel>Admin Dashboard</SidebarGroupLabel>
