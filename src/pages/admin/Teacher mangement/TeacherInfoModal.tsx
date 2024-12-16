@@ -4,10 +4,47 @@ import {
 } from "@/redux/features/admin/teacher mangement/onboardingAPI";
 import { CircleX } from "lucide-react";
 import React from "react";
-interface Props {
-    teacherDetails: object;
-    setSelectedTeacher: (data: object | null) => void;
+
+export interface ITeacher {
+    _id: string; // MongoDB ObjectId in string format
+    firstName: string;
+    lastName: string;
+    email: string;
+    password: string; // Hashed password
+    role: "teacher" | "admin" | "student"; // Assuming possible roles
+    isVerified: boolean;
+    isApproved: "pending" | "approved" | "rejected"; // Approval status
+    isBlocked: boolean;
+    coursesCreated: string[]; // Array of course IDs or course names
+    createdAt: string; // ISO string
+    updatedAt: string; // ISO string
+    biography: string;
+    college: string;
+    country: string;
+    education: string;
+    legalName: string;
+    legalNameProof: {
+        url: string; // URL to the proof document
+        public_id: string; // Cloudinary or other storage identifier
+    };
+    phoneNo: number; // Assuming a valid 10-digit phone number
+    profilePic: {
+        url: string; // URL to the profile picture
+        public_id: string; // Cloudinary or other storage identifier
+    };
+    qualification: string;
+    qualificationProof: {
+        url: string; // URL to the qualification proof document
+        public_id: string; // Cloudinary or other storage identifier
+    };
+    remark: string; // Additional remark from the teacher
 }
+
+interface Props {
+    teacherDetails: ITeacher;
+    setSelectedTeacher: (data: ITeacher | null) => void;
+}
+
 const TeacherInfoModal: React.FC<Props> = ({
     teacherDetails,
     setSelectedTeacher,
@@ -15,7 +52,7 @@ const TeacherInfoModal: React.FC<Props> = ({
     const [approve] = useApproveOnboardingMutation();
     const [reject] = useRejectOnboardingMutation();
 
-    const handleApproval = async (teacherId) => {
+    const handleApproval = async (teacherId: string) => {
         console.log(teacherId);
         try {
             const res = await approve({ teacherId: teacherId });
@@ -26,7 +63,7 @@ const TeacherInfoModal: React.FC<Props> = ({
         }
     };
 
-    const handleReject = async (teacherId) => {
+    const handleReject = async (teacherId: string) => {
         console.log(teacherId);
         try {
             const res = await reject({ teacherId: teacherId });

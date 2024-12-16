@@ -11,11 +11,47 @@ import {
 } from "@/components/ui/table";
 import { createPortal } from "react-dom";
 
+export interface ITeacher {
+    _id: string; // MongoDB ObjectId in string format
+    firstName: string;
+    lastName: string;
+    email: string;
+    password: string; // Hashed password
+    role: "teacher" | "admin" | "student"; // Assuming possible roles
+    isVerified: boolean;
+    isApproved: "pending" | "approved" | "rejected"; // Approval status
+    isBlocked: boolean;
+    coursesCreated: string[]; // Array of course IDs or course names
+    createdAt: string; // ISO string
+    updatedAt: string; // ISO string
+    biography: string;
+    college: string;
+    country: string;
+    education: string;
+    legalName: string;
+    legalNameProof: {
+        url: string; // URL to the proof document
+        public_id: string; // Cloudinary or other storage identifier
+    };
+    phoneNo: number; // Assuming a valid 10-digit phone number
+    profilePic: {
+        url: string; // URL to the profile picture
+        public_id: string; // Cloudinary or other storage identifier
+    };
+    qualification: string;
+    qualificationProof: {
+        url: string; // URL to the qualification proof document
+        public_id: string; // Cloudinary or other storage identifier
+    };
+    remark: string; // Additional remark from the teacher
+}
+
 const TeacherOnboadingPage = () => {
-    const { data, isFetching, isLoading, isError } = useGetOnbordPendingQuery(
-        {}
+    const { data } = useGetOnbordPendingQuery({});
+    const [selectedTeacher, setSelectedTeacher] = useState<ITeacher | null>(
+        null
     );
-    const [selectedTeacher, setSelectedTeacher] = useState(null);
+
     return (
         <div className="absolute ms-20 w-2/3 ">
             {selectedTeacher &&
@@ -46,7 +82,7 @@ const TeacherOnboadingPage = () => {
                 </TableHeader>
                 <TableBody>
                     {data &&
-                        data.onboardingTeacherList.map((teacher) => (
+                        data.onboardingTeacherList.map((teacher: ITeacher) => (
                             <TableRow
                                 key={teacher._id}
                                 className="hover:bg-green-100"
