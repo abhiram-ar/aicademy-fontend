@@ -16,6 +16,7 @@ import {
     authLoader,
     fetchAccessTokenOnload,
 } from "./utils/fetchAccessTokenOnLoad";
+import AdminLoginPage from "./pages/admin/AminLoginPage";
 
 fetchAccessTokenOnload();
 const appRouter = createBrowserRouter([
@@ -48,9 +49,18 @@ const appRouter = createBrowserRouter([
                     },
                     {
                         path: "/teach/onboard",
-                        loader: ()=>authLoader("teacher"),
+                        loader: () => authLoader("teacher"),
                         hydrateFallbackElement: <p>loading...</p>,
                         element: <OnboardingPage />,
+                    },
+                ],
+            },
+            {
+                path: "/admin",
+                children: [
+                    {
+                        path: "/admin/login",
+                        element: <AdminLoginPage />,
                     },
                 ],
             },

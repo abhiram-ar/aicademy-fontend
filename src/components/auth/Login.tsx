@@ -5,9 +5,10 @@ import React from "react";
 
 interface Props {
     handleLogin: (data: object) => void;
+    enableSocialAuth?: boolean;
 }
 
-const Login: React.FC<Props> = ({ handleLogin }) => {
+const Login: React.FC<Props> = ({ handleLogin, enableSocialAuth = true }) => {
     const {
         register,
         handleSubmit,
@@ -88,12 +89,16 @@ const Login: React.FC<Props> = ({ handleLogin }) => {
                     Login
                 </button>
             </form>
-            <div className="flex justify-between items-center my-5">
-                <hr className="text-black border border-black w-2/5" />
-                OR
-                <hr className="text-black border border-black w-2/5" />
-            </div>
-            <SignInWithGoogle />
+            {enableSocialAuth && (
+                <>
+                    <div className="flex justify-between items-center my-5">
+                        <hr className="text-black border border-black w-2/5" />
+                        OR
+                        <hr className="text-black border border-black w-2/5" />
+                    </div>
+                    <SignInWithGoogle />
+                </>
+            )}
         </AuthBlock>
     );
 };
