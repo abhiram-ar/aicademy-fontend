@@ -37,6 +37,7 @@ const OnboardingForm: React.FC = () => {
 
     return (
         <div className="p-10">
+            <h2 className="text-xl font-semibold  mx-28 my-3  px-3 bg-zinc-300 w-fit" >Tell us more about yourself</h2>
             <form
                 onSubmit={handleSubmit((data) => {
                     handleOnboarding(data);
@@ -197,7 +198,7 @@ const OnboardingForm: React.FC = () => {
                             </label>
                             <textarea
                                 {...register("biography", { required: true })}
-                                className="input-neo w-full h-auto"
+                                className="input-neo w-full h-32"
                                 id="bio"
                             ></textarea>
                         </div>
@@ -225,12 +226,12 @@ const OnboardingForm: React.FC = () => {
                                 })}
                                 id="education"
                                 placeholder="eg: India"
-                                className="input-neo "
+                                className="input-neo w-full"
                             />
                         </div>
 
                         {/* college  */}
-                        <div>
+                        <div className="mt-3">
                             <label
                                 htmlFor="college"
                                 className="font-semibold flex gap-2 items-baseline"
@@ -250,60 +251,63 @@ const OnboardingForm: React.FC = () => {
                                 })}
                                 id="college"
                                 placeholder="eg: India"
-                                className="input-neo "
+                                className="input-neo w-full"
                             />
                         </div>
 
-                        {/* qualification  */}
-                        <div>
-                            <label
-                                htmlFor="college"
-                                className="font-semibold flex gap-2 items-baseline"
-                            >
-                                Qualification
-                                {errors.qualification?.type === "required" && (
-                                    <p className="validation-error">
-                                        (required)
-                                    </p>
-                                )}
-                            </label>
+                        {/* qualificatin group */}
+                        <div className="border border-zinc-400 rounded-base bg-slate-400/30 flex flex-col p-3 my-5  gap-3">
+                            {/* qualification  */}
+                            <div>
+                                <label
+                                    htmlFor="college"
+                                    className="font-semibold flex gap-2 items-baseline"
+                                >
+                                    Qualification
+                                    {errors.qualification?.type ===
+                                        "required" && (
+                                        <p className="validation-error">
+                                            (required)
+                                        </p>
+                                    )}
+                                </label>
 
-                            <input
-                                type="text"
-                                {...register("qualification", {
-                                    required: true,
-                                })}
-                                id="qualification"
-                                placeholder="eg: India"
-                                className="input-neo "
-                            />
+                                <input
+                                    type="text"
+                                    {...register("qualification", {
+                                        required: true,
+                                    })}
+                                    id="qualification"
+                                    placeholder="eg: India"
+                                    className="input-neo w-full"
+                                />
+                            </div>
+
+                            {/* qualification Proof  */}
+                            <div>
+                                <label
+                                    htmlFor="qualificationProof"
+                                    className="font-semibold flex gap-2 items-baseline"
+                                >
+                                    Qualification proof
+                                    {errors.qualificationProof?.type ===
+                                        "required" && (
+                                        <p className="validation-error">
+                                            (required)
+                                        </p>
+                                    )}
+                                </label>
+
+                                <input
+                                    type="file"
+                                    {...register("qualificationProof", {
+                                        required: true,
+                                    })}
+                                    id="qualificationProof"
+                                    className="input-neo w-full"
+                                />
+                            </div>
                         </div>
-
-                        {/* qualification Proof  */}
-                        <div>
-                            <label
-                                htmlFor="qualificationProof"
-                                className="font-semibold flex gap-2 items-baseline"
-                            >
-                                Identity Proof
-                                {errors.qualificationProof?.type ===
-                                    "required" && (
-                                    <p className="validation-error">
-                                        (required)
-                                    </p>
-                                )}
-                            </label>
-
-                            <input
-                                type="file"
-                                {...register("qualificationProof", {
-                                    required: true,
-                                })}
-                                id="qualificationProof"
-                                className="input-neo "
-                            />
-                        </div>
-
                         {/* remark */}
                         <div>
                             <label
@@ -314,21 +318,21 @@ const OnboardingForm: React.FC = () => {
                             </label>
                             <textarea
                                 {...register("remark", { required: true })}
-                                className="input-neo"
+                                className="input-neo w-full h-24"
                                 id="remark"
                             ></textarea>
                         </div>
-                <button
-                    type="submit"
-                    disabled={isLoading}
-                    className={`py-2 px-3 border-2 mt-10 border-black rounded-base w-1/3 font-medium ${
-                        !isLoading
-                            ? "bg-orange-300   hover:bg-black hover:text-white active:bg-zinc-700"
-                            : "bg-zinc-500 hover:bg-zinc-500 hover:text-black"
-                    }`}
-                >
-                    Sign up
-                </button>
+                        <button
+                            type="submit"
+                            disabled={isLoading}
+                            className={`py-2 px-3 border-2 w-full  mt-5 border-black rounded-base  font-medium ${
+                                !isLoading
+                                    ? "bg-orange-300   hover:bg-black hover:text-white active:bg-zinc-700"
+                                    : "bg-zinc-500 hover:bg-zinc-500 hover:text-black"
+                            }`}
+                        >
+                            Submit
+                        </button>
                     </div>
                 </div>
                 <hr />

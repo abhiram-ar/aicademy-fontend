@@ -16,6 +16,9 @@ import {
     authLoader,
     fetchAccessTokenOnload,
 } from "./utils/fetchAccessTokenOnLoad";
+import AdminLoginPage from "./pages/admin/AminLoginPage";
+import AdminDashBoardHomePage from "./pages/admin/AdminDashBoardHomePage";
+import TeacherOnboadingPage from "./pages/admin/Teacher mangement/TeacherOnboadingPage";
 
 fetchAccessTokenOnload();
 const appRouter = createBrowserRouter([
@@ -48,9 +51,31 @@ const appRouter = createBrowserRouter([
                     },
                     {
                         path: "/teach/onboard",
-                        loader: ()=>authLoader("teacher"),
+                        loader: () => authLoader("teacher"),
                         hydrateFallbackElement: <p>loading...</p>,
                         element: <OnboardingPage />,
+                    },
+                ],
+            },
+            {
+                path: "/admin",
+                children: [
+                    {
+                        path: "/admin/login",
+                        element: <AdminLoginPage />,
+                    },
+                    {
+                        path: "/admin/dashboard",
+                        loader: () => authLoader("admin"),
+                        hydrateFallbackElement: <p>loading...</p>,
+                        element:<AdminDashBoardHomePage/>,
+                        children: [
+                           
+                            {
+                                path: "/admin/dashboard/onboard",
+                                element: <TeacherOnboadingPage/>
+                            }
+                        ],
                     },
                 ],
             },
