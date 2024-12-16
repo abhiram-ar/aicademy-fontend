@@ -1,9 +1,14 @@
-import React from 'react'
+import Layout from "@/layout/sidebar";
+import { Outlet } from "react-router-dom";
 
 const AdminDashBoardHomePage = () => {
-  return (
-    <div>AdminDashBoardHomePage</div>
-  )
-}
+    return (
+        <div>
+            <Layout>
+                <Outlet />
+            </Layout>
+        </div>
+    );
+};
 
-export default AdminDashBoardHomePage
+export default AdminDashBoardHomePage;

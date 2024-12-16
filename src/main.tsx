@@ -18,6 +18,7 @@ import {
 } from "./utils/fetchAccessTokenOnLoad";
 import AdminLoginPage from "./pages/admin/AminLoginPage";
 import AdminDashBoardHomePage from "./pages/admin/AdminDashBoardHomePage";
+import TeacherOnboadingPage from "./pages/admin/Teacher mangement/TeacherOnboadingPage";
 
 fetchAccessTokenOnload();
 const appRouter = createBrowserRouter([
@@ -67,11 +68,13 @@ const appRouter = createBrowserRouter([
                         path: "/admin/dashboard",
                         loader: () => authLoader("admin"),
                         hydrateFallbackElement: <p>loading...</p>,
+                        element:<AdminDashBoardHomePage/>,
                         children: [
+                           
                             {
-                                index: true,
-                                element: <AdminDashBoardHomePage />,
-                            },
+                                path: "/admin/dashboard/onboard",
+                                element: <TeacherOnboadingPage/>
+                            }
                         ],
                     },
                 ],
