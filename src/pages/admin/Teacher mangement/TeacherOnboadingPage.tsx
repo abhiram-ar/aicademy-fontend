@@ -16,11 +16,6 @@ const TeacherOnboadingPage = () => {
         {}
     );
     const [selectedTeacher, setSelectedTeacher] = useState(null);
-
-    console.log(selectedTeacher);
-
-    const renderList = new Array(7).fill("loading..");
-
     return (
         <div className="absolute ms-20 w-2/3 ">
             {selectedTeacher &&

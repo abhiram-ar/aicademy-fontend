@@ -1,14 +1,42 @@
+import {
+    useApproveOnboardingMutation,
+    useRejectOnboardingMutation,
+} from "@/redux/features/admin/teacher mangement/onboardingAPI";
 import { CircleX } from "lucide-react";
 import React from "react";
 interface Props {
     teacherDetails: object;
-    setSelectedTeacher: (data: object) => void;
+    setSelectedTeacher: (data: object | null) => void;
 }
 const TeacherInfoModal: React.FC<Props> = ({
     teacherDetails,
     setSelectedTeacher,
 }) => {
-    const fieldTitleStyle = "text-bold";
+    const [approve] = useApproveOnboardingMutation();
+    const [reject] = useRejectOnboardingMutation();
+
+    const handleApproval = async (teacherId) => {
+        console.log(teacherId);
+        try {
+            const res = await approve({ teacherId: teacherId });
+            console.log(res);
+            setSelectedTeacher(null);
+        } catch (error) {
+            console.error("errorr while approving user", error);
+        }
+    };
+
+    const handleReject = async (teacherId) => {
+        console.log(teacherId);
+        try {
+            const res = await reject({ teacherId: teacherId });
+            console.log(res);
+            setSelectedTeacher(null);
+        } catch (error) {
+            console.error("errorr while rejecting user", error);
+        }
+    };
+
     return (
         <div className="absolute inset-0  bg-zinc-900/50 z-40">
             <div className="relative bg-white border-2 border-black rounded-base w-2/3 mx-auto p-5 mt-5">
@@ -22,8 +50,7 @@ const TeacherInfoModal: React.FC<Props> = ({
                     <CircleX className={`text-black hover:text-red-600`} />
                 </button>
                 <p>
-                    <span className={fieldTitleStyle}>Legal name</span>:
-                    {teacherDetails?.legalName}
+                    <span>Legal name</span>:{teacherDetails?.legalName}
                 </p>
                 <p>Biography: {teacherDetails?.biography}</p>
                 <p>Country: {teacherDetails?.country}</p>
@@ -57,10 +84,16 @@ const TeacherInfoModal: React.FC<Props> = ({
                     />
                 </div>
                 <div className="flex justify-end gap-3 w-full mt-5">
-                    <button className="bg-red-500 border-2 border-black rounded-base px-5 py-2">
+                    <button
+                        onClick={() => handleReject(teacherDetails._id)}
+                        className="bg-red-500 border-2 border-black rounded-base px-5 py-2"
+                    >
                         reject
                     </button>
-                    <button className="bg-green-500 border-2 border-black rounded-base px-5 py-2">
+                    <button
+                        onClick={() => handleApproval(teacherDetails._id)}
+                        className="bg-green-500 border-2 border-black rounded-base px-5 py-2"
+                    >
                         approve
                     </button>
                 </div>
