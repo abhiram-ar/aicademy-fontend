@@ -1,16 +1,23 @@
+import React from "react";
 import { useForm } from "react-hook-form";
 
-const OnboardingForm = () => {
+interface Props {
+    handleOnboarding: (data: object) => void;
+}
+
+const OnboardingForm: React.FC<Props> = ({ handleOnboarding }) => {
     const {
         register,
         handleSubmit,
         formState: { errors },
     } = useForm();
-
+    console.log(errors);
     return (
         <div>
             <form
-                onSubmit={handleSubmit((data) => console.log(data))}
+                onSubmit={handleSubmit((data) => {
+                    handleOnboarding(data);
+                })}
                 className=""
             >
                 <div className="">
@@ -46,13 +53,21 @@ const OnboardingForm = () => {
                             {errors.legalName?.type === "required" && (
                                 <p className="validation-error">(required)</p>
                             )}
+                            {errors.legalName?.type === "validate" && (
+                                <p className="validation-error">
+                                    (Cannot be empty whitespaces)
+                                </p>
+                            )}
                         </label>
 
                         <input
                             type="text"
-                            {...register("legalName")}
+                            {...register("legalName", {
+                                required: true,
+                                validate: (value) => value.trim() !== "" || "",
+                            })}
                             placeholder="eg: Jhon Doe K"
-                            id="lastName"
+                            id="legalName"
                             className="input-neo"
                         />
                     </div>
@@ -76,11 +91,11 @@ const OnboardingForm = () => {
                             required: true,
                         })}
                         id="legalNameProof"
-                        className="input-neo "
+                        className="input-neo"
                     />
                 </div>
 
-                {/* legal Name Proof  */}
+                {/* country  */}
                 <div>
                     <label
                         htmlFor="country"
@@ -92,18 +107,12 @@ const OnboardingForm = () => {
                         )}
                     </label>
 
-                    <input
-                        type="text"
-                        {...register("country", {
-                            required: true,
-                        })}
-                        id="country"
-                        placeholder="eg: India"
-                        className="input-neo "
-                    />
+                    <select className="input-neo px-5">
+                        <option>India</option>
+                    </select>
                 </div>
 
-                {/* legal Name Proof  */}
+                {/* phone no  */}
                 <div>
                     <label
                         htmlFor="phoneNo"
@@ -113,12 +122,18 @@ const OnboardingForm = () => {
                         {errors.phoneNo?.type === "required" && (
                             <p className="validation-error">(required)</p>
                         )}
+                        {errors.phoneNo?.type === "pattern" && (
+                            <p className="validation-error">
+                                (Invalid phone number)
+                            </p>
+                        )}
                     </label>
 
                     <input
-                        type="file"
+                        type="text"
                         {...register("phoneNo", {
-                            required: true
+                            required: true,
+                            pattern: /^[1-9]\d{9}$/,
                         })}
                         id="phoneNo"
                         placeholder="eg: 9940123123"
@@ -127,67 +142,127 @@ const OnboardingForm = () => {
                 </div>
 
                 {/* bio */}
-                <textarea className="input-neo"></textarea>
-
-                {/* email */}
                 <div>
                     <label
-                        htmlFor="email"
+                        htmlFor="bio"
                         className="font-semibold flex gap-2 items-baseline"
                     >
-                        email
-                        {errors.email?.type === "required" && (
-                            <p className="validation-error">
-                                (Email is required)
-                            </p>
+                        Biography
+                        {errors.biography?.type === "required" && (
+                            <p className="validation-error">(required)</p>
                         )}
-                        {errors.email?.type === "pattern" && (
-                            <p className="validation-error">(Invalid email)</p>
+                    </label>
+                    <textarea
+                        {...register("biography", { required: true })}
+                        className="input-neo"
+                        id="bio"
+                    ></textarea>
+                </div>
+
+                {/* education  */}
+                <div>
+                    <label
+                        htmlFor="education"
+                        className="font-semibold flex gap-2 items-baseline"
+                    >
+                        Education
+                        {errors.education?.type === "required" && (
+                            <p className="validation-error">(required)</p>
                         )}
                     </label>
 
                     <input
                         type="text"
-                        {...register("email", {
+                        {...register("education", {
                             required: true,
-                            pattern:
-                                // eslint-disable-next-line no-useless-escape
-                                /[A-Za-z0-9\._%+\-]+@[A-Za-z0-9\.\-]+\.[A-Za-z]{2,}/,
                         })}
-                        placeholder="eg: jhon@email.com"
-                        id="email"
-                        className="input-neo w-full"
+                        id="education"
+                        placeholder="eg: India"
+                        className="input-neo "
                     />
                 </div>
 
-                {/* password */}
+                {/* college  */}
                 <div>
                     <label
-                        htmlFor="password"
+                        htmlFor="college"
                         className="font-semibold flex gap-2 items-baseline"
                     >
-                        password
-                        {errors.password?.type === "required" && (
-                            <p className="validation-error">
-                                (password is required)
-                            </p>
-                        )}
-                        {errors.password?.type === "minLength" && (
-                            <p className="validation-error">
-                                (8 characters required)
-                            </p>
+                        College
+                        {errors.college?.type === "required" && (
+                            <p className="validation-error">(required)</p>
                         )}
                     </label>
+
                     <input
-                        type="password"
-                        {...register("password", {
+                        type="text"
+                        {...register("college", {
                             required: true,
-                            minLength: 8,
                         })}
-                        placeholder="password"
-                        id="password"
-                        className="input-neo w-full"
+                        id="college"
+                        placeholder="eg: India"
+                        className="input-neo "
                     />
+                </div>
+
+                {/* qualification  */}
+                <div>
+                    <label
+                        htmlFor="college"
+                        className="font-semibold flex gap-2 items-baseline"
+                    >
+                        Qualification
+                        {errors.qualification?.type === "required" && (
+                            <p className="validation-error">(required)</p>
+                        )}
+                    </label>
+
+                    <input
+                        type="text"
+                        {...register("qualification", {
+                            required: true,
+                        })}
+                        id="qualification"
+                        placeholder="eg: India"
+                        className="input-neo "
+                    />
+                </div>
+
+                {/* qualification Proof  */}
+                <div>
+                    <label
+                        htmlFor="qualificationProof"
+                        className="font-semibold flex gap-2 items-baseline"
+                    >
+                        Identity Proof
+                        {errors.qualificationProof?.type === "required" && (
+                            <p className="validation-error">(required)</p>
+                        )}
+                    </label>
+
+                    <input
+                        type="file"
+                        {...register("qualificationProof", {
+                            required: true,
+                        })}
+                        id="qualificationProof"
+                        className="input-neo "
+                    />
+                </div>
+
+                {/* remark */}
+                <div>
+                    <label
+                        htmlFor="remark"
+                        className="font-semibold flex gap-2 items-baseline"
+                    >
+                        Remark
+                    </label>
+                    <textarea
+                        {...register("remark", { required: true })}
+                        className="input-neo"
+                        id="remark"
+                    ></textarea>
                 </div>
 
                 <button
