@@ -47,7 +47,7 @@ const LoginPage = () => {
                         <h2 className="text-xl font-bold mb-5">
                             Log in to continue your learning journey
                         </h2>
-                        <Login handleLogin={handleLogin} />
+                        <Login handleLogin={handleLogin} role="user"/>
                         <p className="text-center mt-5 font-medium">
                             Don’t have an account?
                             <Link

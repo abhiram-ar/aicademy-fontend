@@ -87,6 +87,7 @@ const TeacherSignupPage = () => {
                                 <Signup
                                     handleSignup={handleSignup}
                                     isSignupDisabled={isRegistrationLoading}
+                                    role="teacher"
                                 />
                                 <p className="text-center mt-5 font-medium">
                                     Already have an account?

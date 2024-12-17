@@ -63,9 +63,16 @@ const apiSlice = createApi({
             query: () => ({
                 url: "/api/auth/refresh",
             }),
-            keepUnusedDataFor: 0 //nocache
+            keepUnusedDataFor: 0, //nocache
+        }),
+        googleSignin: builder.mutation({
+            query: (data) => ({
+                url: "/api/auth/google",
+                method: "POST",
+                body: data,
+            }),
         }),
     }),
 });
-export const { useRefreshQuery } = apiSlice;
+export const { useRefreshQuery, useGoogleSigninMutation } = apiSlice;
 export default apiSlice;

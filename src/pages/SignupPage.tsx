@@ -38,7 +38,7 @@ const SignupPage = () => {
         } catch (error) {
             console.error("error while user signup");
             console.log(error);
-             toast({
+            toast({
                 variant: "destructive",
                 title: "Error while signup",
                 description: (error as { data: { message: string } }).data
@@ -66,7 +66,7 @@ const SignupPage = () => {
         <>
             <NavbarOnlyLogo />
             <BodyBlock>
-                <Toaster/>
+                <Toaster />
                 <div className="w-full lg:w-2/3 mx-auto flex flex-col-reverse min-h-fit h-[90vh] lg:flex lg:flex-row justify-center items-center gap-16">
                     <div className="w-full flex justify-center items-center">
                         <img src={SignupArt} alt="login Art peice" />
@@ -81,6 +81,7 @@ const SignupPage = () => {
                                 <Signup
                                     handleSignup={handleSignup}
                                     isSignupDisabled={isRegistrationLoading}
+                                    role="user"
                                 />
                                 <p className="text-center mt-5 font-medium">
                                     Already have an account?
