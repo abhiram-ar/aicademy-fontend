@@ -1,22 +1,44 @@
+import { Button } from "@/components/ui/button";
+import apiSlice from "@/redux/features/api/apiSlice";
+import { logout } from "@/redux/features/auth/authSlice";
+import { useTeacherLogoutMutation } from "@/redux/features/auth/teacherAuthAPI";
 import { RootState } from "@/redux/store";
 import { useEffect } from "react";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
 
 const TeacherDashboardHome = () => {
     const navigate = useNavigate();
-    const isApproved = useSelector(
-        (state: RootState) => state.auth.user?.isApproved
-    );
-    console.log(isApproved) 
     useEffect(() => {
-      //need improvement - to many rerenders
+        //need improvement - to many rerenders
         if (!(isApproved === "success")) {
             navigate("/teach/onboard");
         }
     });
 
-    return <div>TeacherDashboardHome</div>;
+    const isApproved = useSelector(
+        (state: RootState) => state.auth.user?.isApproved
+    );
+
+    const [logoutAPI] = useTeacherLogoutMutation();
+    const dispatch = useDispatch();
+    const handleLogout = async () => {
+        try {
+            await logoutAPI({}).unwrap();
+            dispatch(logout());
+            // dispatch(apiSlice.util.resetApiState())
+            navigate("/")
+        } catch (error) {
+            console.error(`error while logging out teacher`, error);
+        }
+    };
+
+    return (
+        <div>
+            <h1>Teacher Dashboard Home</h1>
+            <Button onClick={handleLogout}>logout</Button>
+        </div>
+    );
 };
 
 export default TeacherDashboardHome;
