@@ -9,7 +9,7 @@ import {
     DropdownMenuSeparator,
     DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
-import { useLogoutMutation } from "@/redux/features/auth/authApi";
+import { useLogoutMutation } from "@/redux/features/auth/userAuthAPIs";
 import { logout } from "./../../redux/features/auth/authSlice";
 
 const UserInfoDropdown = () => {

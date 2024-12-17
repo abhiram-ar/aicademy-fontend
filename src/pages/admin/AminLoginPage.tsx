@@ -43,8 +43,8 @@ const AdminLoginPage = () => {
             <NavbarOnlyLogo />
             <div className="bg-[#374151]">
                 <Toaster />
-                <div className="w-full lg:w-2/3  mx-auto flex-col min-h-fit h-[90vh] lg:flex lg:flex-row justify-between items-center gap-10 pt-20">
-                    <div className="m-auto w-fit">
+                <div className="w-full lg:w-2/3  mx-auto flex-col min-h-fit h-[90vh] lg:flex lg:flex-row justify-between items-center">
+                    <div className="mx-auto w-fit">
                         <h2 className="text-xl text-[#eeefe9] font-bold mb-5">
                             SUDO
                         </h2>

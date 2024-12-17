@@ -1,17 +1,17 @@
 import Signup from "@/components/auth/Signup";
 import BodyBlock from "@/components/base/BodyBlock";
 import NavbarOnlyLogo from "@/components/extended/NavbarOnlyLogo";
-import SignupArt from "./.././assets/SignupArt.png";
+import SignupArt from "./../../../assets/SignupArt.png";
 import { Link, useNavigate } from "react-router-dom";
-import {
-    useRegisterMutation,
-    useVerifyMutation,
-} from "@/redux/features/auth/authApi";
 import { useState } from "react";
 import Otp from "@/components/auth/Otp";
 import { newUser } from "@/components/auth/Signup";
 import { Toaster } from "@/components/ui/toaster";
 import { toast } from "@/hooks/use-toast";
+import {
+    useRegisterMutation,
+    useVerifyMutation,
+} from "@/redux/features/auth/userAuthAPIs";
 
 const SignupPage = () => {
     const [register, { isLoading: isRegistrationLoading }] =
