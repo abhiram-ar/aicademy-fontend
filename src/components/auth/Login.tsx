@@ -91,7 +91,7 @@ const Login: React.FC<Props> = ({ handleLogin, enableSocialAuth = true, role  })
                     Login
                 </button>
             </form>
-            {enableSocialAuth || role!== "admin" && (
+            {enableSocialAuth && role!== "admin" && (
                 <>
                     <div className="flex justify-between items-center my-5">
                         <hr className="text-black border border-black w-2/5" />

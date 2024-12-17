@@ -39,7 +39,13 @@ const SignInWithGoogle: React.FC<{ gAuthRole: GoogleAuthRoles }> = ({
 
     return (
         <GoogleOAuthProvider clientId={import.meta.env.VITE_GOOGLE_CLIENT_ID}>
-            <GoogleLogin onSuccess={handleGoogleSuccess} theme="filled_black" />
+            <div className="flex justify-center items-center">
+                <GoogleLogin
+                    onSuccess={handleGoogleSuccess}
+                    theme="filled_black"
+                    width={"320px"}
+                />
+            </div>
             {/* <div className="w-fit mx-auto px-3 py-2 rounded-base bg-[#d9d9d9] flex justify-center items-center gap-2 border  border-black hover:bg-[#bababa] active:bg-zinc-400">
                 <GoogleIcon />
 

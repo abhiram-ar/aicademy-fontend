@@ -19,6 +19,7 @@ import {
 import AdminLoginPage from "./pages/admin/AminLoginPage";
 import AdminDashBoardHomePage from "./pages/admin/AdminDashBoardHomePage";
 import TeacherOnboadingPage from "./pages/admin/Teacher mangement/TeacherOnboadingPage";
+import TeacherDashboardHome from "./pages/teacher/dashboard/TeacherDashboardHome";
 
 fetchAccessTokenOnload();
 const appRouter = createBrowserRouter([
@@ -40,7 +41,14 @@ const appRouter = createBrowserRouter([
             },
             {
                 path: "/teach",
+
                 children: [
+                    {
+                        index: true,
+                        loader: () => authLoader("teacher"),
+                        hydrateFallbackElement: <p>loading...</p>,
+                        element: <TeacherDashboardHome />,
+                    },
                     {
                         path: "/teach/login",
                         element: <TeacherLoginPage />,
@@ -68,13 +76,12 @@ const appRouter = createBrowserRouter([
                         path: "/admin/dashboard",
                         loader: () => authLoader("admin"),
                         hydrateFallbackElement: <p>loading...</p>,
-                        element:<AdminDashBoardHomePage/>,
+                        element: <AdminDashBoardHomePage />,
                         children: [
-                           
                             {
                                 path: "/admin/dashboard/onboard",
-                                element: <TeacherOnboadingPage/>
-                            }
+                                element: <TeacherOnboadingPage />,
+                            },
                         ],
                     },
                 ],
