@@ -1,7 +1,7 @@
 import Signup from "@/components/auth/Signup";
 import BodyBlock from "@/components/base/BodyBlock";
 import NavbarOnlyLogo from "@/components/extended/NavbarOnlyLogo";
-import SignupArt from "./../../../assets/SignupArt.png";
+import SignupArt from "./../../../assets/teacherDoogle.png";
 import { Link, useNavigate } from "react-router-dom";
 import {
     useTeacherRegisterMutation,
@@ -74,7 +74,7 @@ const TeacherSignupPage = () => {
             <BodyBlock>
                 <Toaster />
                 <div className="w-full lg:w-2/3 mx-auto flex flex-col-reverse min-h-fit h-[90vh] lg:flex lg:flex-row justify-center items-center gap-16">
-                    <div className="w-full flex justify-center items-center">
+                    <div className="w-1/2 flex justify-center items-center mix-blend-multiply">
                         <img src={SignupArt} alt="login Art peice" />
                     </div>
 

@@ -1,13 +1,14 @@
 import Login from "@/components/auth/Login";
 import BodyBlock from "@/components/base/BodyBlock";
 import NavbarOnlyLogo from "@/components/extended/NavbarOnlyLogo";
-import loginArt from "./../../../assets/loginArt.png";
+import loginArt from "./../../../assets/teacherDoogle.png";
 import { Link, useNavigate } from "react-router-dom";
 import { useTeacherLoginMutation } from "@/redux/features/auth/teacherAuthAPI";
 import { setCredentials } from "@/redux/features/auth/authSlice";
 import { useDispatch } from "react-redux";
 import { useToast } from "../../../hooks/use-toast";
 import { Toaster } from "@/components/ui/toaster";
+import { jwtDecode } from "jwt-decode";
 
 const TeacherLoginPage = () => {
     const dispatch = useDispatch();
@@ -19,14 +20,14 @@ const TeacherLoginPage = () => {
         console.log(data);
         try {
             const payload = await login(data).unwrap();
-            console.log(payload);
+            const decoded = jwtDecode(payload.token)
             dispatch(
                 setCredentials({
                     accessToken: payload.token,
-                    user: payload.teacher,
+                    user: decoded,
                 })
             );
-            navigate("/teach/onboard");
+            navigate("/teach");
         } catch (error) {
             console.error("error while logging in", error);
             toast({
@@ -60,8 +61,8 @@ const TeacherLoginPage = () => {
                         </p>
                     </div>
 
-                    <div className="w-full flex justify-center items-center -mt-5">
-                        <img src={loginArt} alt="login Art peice" />
+                    <div className="w-2/4 flex justify-between items-center -mt-5 mix-blend-multiply max-w-1/3">
+                        <img src={loginArt} alt="" />
                     </div>
                 </div>
             </BodyBlock>

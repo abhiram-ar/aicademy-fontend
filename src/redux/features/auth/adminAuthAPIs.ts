@@ -18,4 +18,4 @@ const adminAuthAPIs = apiSlice.injectEndpoints({
     }),
 });
 
-export const { useAdminLoginMutation } = adminAuthAPIs;
+export const { useAdminLoginMutation, useAdminLogoutMutation } = adminAuthAPIs;
