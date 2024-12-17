@@ -99,13 +99,13 @@ const TeacherInfoModal: React.FC<Props> = ({
                 <p className="relative">Profile picture - ld proof:</p>
                 <div className=" w-full flex justify-center gap-5 h-40">
                     <img
-                        src={teacherDetails.profilePic.url}
+                        src={teacherDetails.profilePic?.url}
                         alt="profile picture"
                         className="rounded-base"
                     />
 
                     <img
-                        src={teacherDetails.legalNameProof.url}
+                        src={teacherDetails.legalNameProof?.url}
                         alt="legal name proof document"
                         className="rounded-base"
                     />
@@ -115,7 +115,7 @@ const TeacherInfoModal: React.FC<Props> = ({
                 <p>Qualification: {teacherDetails?.qualification}</p>
                 <div className="w-full flex justify-center">
                     <img
-                        src={teacherDetails.qualificationProof.url}
+                        src={teacherDetails.qualificationProof?.url}
                         alt="qualification-proof"
                         className="rounded-base h-40"
                     />
