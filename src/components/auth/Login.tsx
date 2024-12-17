@@ -7,7 +7,7 @@ import { GoogleAuthRoles } from "./SignInWithGoogle";
 interface Props {
     handleLogin: (data: object) => void;
     enableSocialAuth?: boolean;
-    role: GoogleAuthRoles
+    role: GoogleAuthRoles | "admin"
 }
 
 const Login: React.FC<Props> = ({ handleLogin, enableSocialAuth = true, role  }) => {
@@ -91,7 +91,7 @@ const Login: React.FC<Props> = ({ handleLogin, enableSocialAuth = true, role  })
                     Login
                 </button>
             </form>
-            {enableSocialAuth && (
+            {enableSocialAuth || role!== "admin" && (
                 <>
                     <div className="flex justify-between items-center my-5">
                         <hr className="text-black border border-black w-2/5" />
