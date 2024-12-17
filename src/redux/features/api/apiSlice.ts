@@ -28,7 +28,7 @@ const baseQuerywithReauth: BaseQueryFn<
     const { url } = args as FetchArgs;
 
     // avoid trying to hit refresh route, for public routes
-    if (url === "/api/auth/refresh") {
+    if (url === "/api/auth/refresh" || url === "/api/auth/goole") {
         return basequery(args, api, extraOptions);
     }
 
@@ -63,9 +63,16 @@ const apiSlice = createApi({
             query: () => ({
                 url: "/api/auth/refresh",
             }),
-            keepUnusedDataFor: 0 //nocache
+            keepUnusedDataFor: 0, //nocache
+        }),
+        googleSignin: builder.mutation({
+            query: (data) => ({
+                url: "/api/auth/google",
+                method: "POST",
+                body: data,
+            }),
         }),
     }),
 });
-export const { useRefreshQuery } = apiSlice;
+export const { useRefreshQuery, useGoogleSigninMutation } = apiSlice;
 export default apiSlice;

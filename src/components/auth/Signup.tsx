@@ -1,6 +1,6 @@
 import AuthBlock from "../base/AuthBlock";
 import { useForm } from "react-hook-form";
-import SignInWithGoogle from "./SignInWithGoogle";
+import SignInWithGoogle, { GoogleAuthRoles } from "./SignInWithGoogle";
 
 export interface newUser {
     firstName: string;
@@ -12,9 +12,10 @@ export interface newUser {
 interface Props {
     handleSignup: (data: newUser) => void;
     isSignupDisabled?: boolean;
+    role: GoogleAuthRoles
 }
 
-const Signup: React.FC<Props> = ({ handleSignup, isSignupDisabled = false }) => {
+const Signup: React.FC<Props> = ({ handleSignup, isSignupDisabled = false, role }) => {
     const {
         register,
         handleSubmit,
@@ -147,7 +148,7 @@ const Signup: React.FC<Props> = ({ handleSignup, isSignupDisabled = false }) => 
                 OR
                 <hr className="text-black border border-black w-2/5" />
             </div>
-            <SignInWithGoogle />
+            <SignInWithGoogle gAuthRole={role}/>
         </AuthBlock>
     );
 };

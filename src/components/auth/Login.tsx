@@ -2,13 +2,15 @@ import AuthBlock from "../base/AuthBlock";
 import { useForm } from "react-hook-form";
 import SignInWithGoogle from "./SignInWithGoogle";
 import React from "react";
+import { GoogleAuthRoles } from "./SignInWithGoogle";
 
 interface Props {
     handleLogin: (data: object) => void;
     enableSocialAuth?: boolean;
+    role: GoogleAuthRoles | "admin"
 }
 
-const Login: React.FC<Props> = ({ handleLogin, enableSocialAuth = true }) => {
+const Login: React.FC<Props> = ({ handleLogin, enableSocialAuth = true, role  }) => {
     const {
         register,
         handleSubmit,
@@ -89,14 +91,14 @@ const Login: React.FC<Props> = ({ handleLogin, enableSocialAuth = true }) => {
                     Login
                 </button>
             </form>
-            {enableSocialAuth && (
+            {enableSocialAuth && role!== "admin" && (
                 <>
                     <div className="flex justify-between items-center my-5">
                         <hr className="text-black border border-black w-2/5" />
                         OR
                         <hr className="text-black border border-black w-2/5" />
                     </div>
-                    <SignInWithGoogle />
+                    <SignInWithGoogle gAuthRole={role}/>
                 </>
             )}
         </AuthBlock>

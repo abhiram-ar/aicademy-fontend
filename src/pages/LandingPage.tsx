@@ -5,7 +5,7 @@ import { useSelector } from "react-redux";
 
 const LandingPage = () => {
     const isLoggedIn = useSelector<RootState>((state) =>
-        state.auth.user ? true : false
+        state.auth.user?.role === "user" ? true : false
     );
 
     return <>{isLoggedIn ? <AutheicatedNavbar /> : <UnautheicatedNavbar />}</>;

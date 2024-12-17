@@ -51,6 +51,7 @@ const AdminLoginPage = () => {
                         <Login
                             handleLogin={handleLogin}
                             enableSocialAuth={false}
+                            role="admin"
                         />
                     </div>
                 </div>
