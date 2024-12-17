@@ -24,9 +24,14 @@ export const fetchAccessTokenOnload = async () => {
 };
 
 export const authLoader = async (role: string) => {
-    const isAuthenticated = await fetchAccessTokenOnload();
+    const user = store.getState().auth.user;
+
+    let isAuthenticated = user ? true : false;
+    
+    //only refetch the data if user is not authicated
+    if (!user) isAuthenticated = await fetchAccessTokenOnload();
     if (!isAuthenticated) {
-        return redirect("/"); // Redirect to login if not authenticated
+        return redirect("/"); 
     }
     if (role === store.getState().auth.user?.role) {
         return null; // Proceed to the protected route

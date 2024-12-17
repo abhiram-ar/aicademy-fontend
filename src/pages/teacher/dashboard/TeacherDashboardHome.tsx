@@ -8,7 +8,7 @@ const TeacherDashboardHome = () => {
     const isApproved = useSelector(
         (state: RootState) => state.auth.user?.isApproved
     );
-    
+    console.log(isApproved) 
     useEffect(() => {
       //need improvement - to many rerenders
         if (!(isApproved === "success")) {
