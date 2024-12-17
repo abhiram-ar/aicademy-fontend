@@ -6,38 +6,38 @@ import { CircleX } from "lucide-react";
 import React from "react";
 
 export interface ITeacher {
-    _id: string; // MongoDB ObjectId in string format
+    _id: string;
     firstName: string;
     lastName: string;
     email: string;
-    password: string; // Hashed password
-    role: "teacher" | "admin" | "student"; // Assuming possible roles
+    password: string;
+    role: "teacher" | "admin" | "student";
     isVerified: boolean;
-    isApproved: "pending" | "approved" | "rejected"; // Approval status
+    isApproved: "pending" | "approved" | "rejected";
     isBlocked: boolean;
-    coursesCreated: string[]; // Array of course IDs or course names
-    createdAt: string; // ISO string
-    updatedAt: string; // ISO string
+    coursesCreated: string[];
+    createdAt: string;
+    updatedAt: string;
     biography: string;
     college: string;
     country: string;
     education: string;
     legalName: string;
     legalNameProof: {
-        url: string; // URL to the proof document
-        public_id: string; // Cloudinary or other storage identifier
+        url: string;
+        public_id: string;
     };
-    phoneNo: number; // Assuming a valid 10-digit phone number
+    phoneNo: number;
     profilePic: {
-        url: string; // URL to the profile picture
-        public_id: string; // Cloudinary or other storage identifier
+        url: string;
+        public_id: string;
     };
     qualification: string;
     qualificationProof: {
-        url: string; // URL to the qualification proof document
-        public_id: string; // Cloudinary or other storage identifier
+        url: string;
+        public_id: string;
     };
-    remark: string; // Additional remark from the teacher
+    remark: string;
 }
 
 interface Props {
@@ -87,16 +87,39 @@ const TeacherInfoModal: React.FC<Props> = ({
                     <CircleX className={`text-black hover:text-red-600`} />
                 </button>
                 <p>
-                    <span>Legal name</span>:{teacherDetails?.legalName}
+                    <span className="font-semibold">Legal name: </span>{" "}
+                    {teacherDetails?.legalName}
                 </p>
-                <p>Biography: {teacherDetails?.biography}</p>
-                <p>Country: {teacherDetails?.country}</p>
-                <p>Phone: {teacherDetails?.phoneNo}</p>
-                <p>Education: {teacherDetails?.education}</p>
-                <p>College: {teacherDetails?.college}</p>
-                <p>Remark: {teacherDetails?.remark}</p>
+                <p>
+                    <span className="font-semibold">Biography: </span>{" "}
+                    {teacherDetails?.biography}
+                </p>
+                <p>
+                    <span className="font-semibold">Country: </span>{" "}
+                    {teacherDetails?.country}
+                </p>
+                <p>
+                    <span className="font-semibold">Phone: </span>{" "}
+                    {teacherDetails?.phoneNo}
+                </p>
+                <p>
+                    <span className="font-semibold">Education: </span>{" "}
+                    {teacherDetails?.education}
+                </p>
+                <p>
+                    <span className="font-semibold">College: </span>{" "}
+                    {teacherDetails?.college}
+                </p>
+                <p>
+                    <span className="font-semibold">Remark: </span>{" "}
+                    {teacherDetails?.remark}
+                </p>
                 <hr className="my-3" />
-                <p className="relative">Profile picture - ld proof:</p>
+                <p className="relative">
+                    <span className="font-semibold">
+                        Profile picture - ld proof:
+                    </span>
+                </p>
                 <div className=" w-full flex justify-center gap-5 h-40">
                     <img
                         src={teacherDetails.profilePic?.url}
@@ -112,7 +135,7 @@ const TeacherInfoModal: React.FC<Props> = ({
                 </div>
 
                 <hr className="my-3" />
-                <p>Qualification: {teacherDetails?.qualification}</p>
+                <p className="font-semibold">Qualification: {teacherDetails?.qualification}</p>
                 <div className="w-full flex justify-center">
                     <img
                         src={teacherDetails.qualificationProof?.url}
