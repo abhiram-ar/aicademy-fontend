@@ -28,7 +28,7 @@ const baseQuerywithReauth: BaseQueryFn<
     const { url } = args as FetchArgs;
 
     // avoid trying to hit refresh route, for public routes
-    if (url === "/api/auth/refresh") {
+    if (url === "/api/auth/refresh" || url === "/api/auth/goole") {
         return basequery(args, api, extraOptions);
     }
 

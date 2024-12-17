@@ -42,7 +42,7 @@ const LoginPage = () => {
             <NavbarOnlyLogo />
             <BodyBlock>
                 <Toaster />
-                <div className="w-full lg:w-2/3  mx-auto flex-col min-h-fit h-[90vh] lg:flex lg:flex-row justify-between items-center gap-10">
+                <div className="w-full lg:w-2/3  mx-auto  flex flex-col gap-10 min-h-fit h-[90vh] lg:flex lg:flex-row justify-between items-center">
                     <div className="m-auto mt-20 w-fit">
                         <h2 className="text-xl font-bold mb-5">
                             Log in to continue your learning journey

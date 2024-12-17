@@ -67,7 +67,7 @@ const SignupPage = () => {
             <NavbarOnlyLogo />
             <BodyBlock>
                 <Toaster />
-                <div className="w-full lg:w-2/3 mx-auto flex flex-col-reverse min-h-fit h-[90vh] lg:flex lg:flex-row justify-center items-center gap-16">
+                <div className="w-full  lg:w-2/3 mx-auto flex flex-col-reverse gap-16  min-h-fit h-[90vh] lg:flex lg:flex-row justify-center items-center ">
                     <div className="w-full flex justify-center items-center">
                         <img src={SignupArt} alt="login Art peice" />
                     </div>

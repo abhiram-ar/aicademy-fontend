@@ -29,6 +29,7 @@ const SignInWithGoogle: React.FC<{ gAuthRole: GoogleAuthRoles }> = ({
                 role: gAuthRole,
             }).unwrap();
             const decoded = jwtDecode(res.token);
+            console.log(decoded);
             dispatch(setCredentials({ accessToken: res.token, user: decoded }));
             if (gAuthRole === "user") navigate("/");
             if (gAuthRole === "teacher") navigate("/teach");
