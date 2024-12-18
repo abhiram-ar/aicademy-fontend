@@ -16,7 +16,7 @@ const OnboardingForm: React.FC = () => {
     } = useForm();
 
     const handleOnboarding = async (data: object) => {
-        console.log(data);
+        console.log("formdata", data);
         const formData = new FormData();
 
         Object.entries(data).forEach(([key, value]) => {
@@ -34,7 +34,19 @@ const OnboardingForm: React.FC = () => {
             console.error("error while onboarding", error);
         }
     };
+    const maxFileSizeInMB = 2;
+    const fileValidation = {
+        fileType: (value: { type: string }[]) =>
+            value[0] && ["image/jpeg", "image/png"].includes(value[0].type)
+                ? true
+                : "Only JPEG and PNG files are allowed",
+        fileSize: (value: { size: number }[]) =>
+            value[0] && value[0].size < maxFileSizeInMB * 1024 * 1024
+                ? true
+                : `Max file size ${maxFileSizeInMB}mb`,
+    };
 
+    console.log("errors", errors);
     return (
         <div className="p-10">
             <div className="w-4/5 m-auto">
@@ -56,9 +68,10 @@ const OnboardingForm: React.FC = () => {
                                     className="font-semibold flex gap-2 items-baseline"
                                 >
                                     Profile Picture
-                                    {errors.profilePic?.type === "required" && (
+                                    {errors.profilePic && (
                                         <p className="validation-error">
-                                            (required)
+                                            ({String(errors.profilePic.message)}
+                                            )
                                         </p>
                                     )}
                                 </label>
@@ -66,7 +79,8 @@ const OnboardingForm: React.FC = () => {
                                 <input
                                     type="file"
                                     {...register("profilePic", {
-                                        required: true,
+                                        required: "required",
+                                        validate: fileValidation,
                                     })}
                                     id="profilePic"
                                     className="input-neo w-full"
@@ -116,10 +130,14 @@ const OnboardingForm: React.FC = () => {
                                         className="font-semibold flex gap-2 items-baseline"
                                     >
                                         Identity Proof
-                                        {errors.legalNameProof?.type ===
-                                            "required" && (
+                                        {errors.legalNameProof && (
                                             <p className="validation-error">
-                                                (required)
+                                                (
+                                                {String(
+                                                    errors.legalNameProof
+                                                        .message
+                                                )}
+                                                )
                                             </p>
                                         )}
                                     </label>
@@ -127,7 +145,8 @@ const OnboardingForm: React.FC = () => {
                                     <input
                                         type="file"
                                         {...register("legalNameProof", {
-                                            required: true,
+                                            required: "requried",
+                                            validate: fileValidation,
                                         })}
                                         id="legalNameProof"
                                         className="input-neo w-full"
@@ -299,10 +318,14 @@ const OnboardingForm: React.FC = () => {
                                         className="font-semibold flex gap-2 items-baseline"
                                     >
                                         Qualification proof
-                                        {errors.qualificationProof?.type ===
-                                            "required" && (
+                                        {errors.qualificationProof && (
                                             <p className="validation-error">
-                                                (required)
+                                                (
+                                                {String(
+                                                    errors.qualificationProof
+                                                        .message
+                                                )}
+                                                )
                                             </p>
                                         )}
                                     </label>
@@ -311,6 +334,7 @@ const OnboardingForm: React.FC = () => {
                                         type="file"
                                         {...register("qualificationProof", {
                                             required: true,
+                                            validate: fileValidation,
                                         })}
                                         id="qualificationProof"
                                         className="input-neo w-full"
