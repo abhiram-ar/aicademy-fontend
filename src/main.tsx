@@ -6,7 +6,7 @@ import { Provider } from "react-redux";
 import store from "./redux/store";
 import LoginPage from "./pages/user/auth/LoginPage";
 import SignupPage from "./pages/user/auth/SignupPage";
-import LandingPage from "./pages/LandingPage";
+import LandingPage from "./pages/landing/LandingPage";
 import TeacherSignupPage from "./pages/teacher/auth/TeacherSignupPage";
 import TeacherLoginPage from "./pages/teacher/auth/TeacherLoginPage";
 import OnboardingPage from "./pages/teacher/onboarding/OnboardingPage";
