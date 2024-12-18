@@ -16,10 +16,11 @@ import { toast } from "@/hooks/use-toast";
 const TeacherSignupPage = () => {
     const [verifyEmail, { isLoading: isVerifyLoading }] =
         useTeacherVerifyMutation();
-    const navigate = useNavigate();
-
     const [register, { isLoading: isRegistrationLoading }] =
         useTeacherRegisterMutation();
+
+    const [teacher, setTeacher] = useState<newUser>();
+    const navigate = useNavigate();
 
     const [activationDetails, setActivationDetails] = useState<{
         activationToken: string | null;
@@ -31,6 +32,7 @@ const TeacherSignupPage = () => {
 
     const handleSignup: (data: newUser) => void = async (data) => {
         console.log(data);
+        setTeacher(data);
         try {
             const payload = await register(data).unwrap();
             setActivationDetails({
@@ -66,6 +68,11 @@ const TeacherSignupPage = () => {
                     .message,
             });
         }
+    };
+
+    const handleOTPResent = async () => {
+        console.log(`resent`);
+        handleSignup(teacher as newUser);
     };
 
     return (
@@ -104,6 +111,7 @@ const TeacherSignupPage = () => {
                                 email={activationDetails.user?.email}
                                 handleOTPVerification={handleOTPVerification}
                                 isVerifyDisabled={isVerifyLoading}
+                                handleOTPResent={handleOTPResent}
                             />
                         )}
                     </div>

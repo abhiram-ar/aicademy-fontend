@@ -11,11 +11,18 @@ import { REGEXP_ONLY_DIGITS } from "input-otp";
 type Props = {
     email: string | undefined;
     handleOTPVerification: (enteredOTP: string) => void;
-    isVerifyDisabled?: boolean
+    isVerifyDisabled?: boolean;
+    handleOTPResent: () => void;
 };
 
-const Otp: React.FC<Props> = ({ email, handleOTPVerification, isVerifyDisabled=false }) => {
+const Otp: React.FC<Props> = ({
+    email,
+    handleOTPVerification,
+    isVerifyDisabled = false,
+    handleOTPResent,
+}) => {
     const [otp, setOtp] = useState("");
+    const [isResendDisabled, setResendDisabled] = useState(false);
     return (
         <AuthBlock>
             <p className="font-medium mb-2">
@@ -39,9 +46,23 @@ const Otp: React.FC<Props> = ({ email, handleOTPVerification, isVerifyDisabled=f
                     </InputOTPGroup>
                 </InputOTP>
             </div>
-            <button>Resend?</button>
             <button
-                className="w-96 bg-white py-2 px-3 border-2 border-black rounded-base mt-10 hover:bg-black hover:text-white active:bg-zinc-700"
+                disabled={isResendDisabled}
+                onClick={() => {
+                    handleOTPResent();
+                    setResendDisabled(true);
+                    setTimeout(() => setResendDisabled(false), 60 * 1000);
+                }}
+                className={`${
+                    isResendDisabled
+                        ? "text-zinc-400"
+                        : "text-black font-semibold"
+                }`}
+            >
+                Resend?
+            </button>
+            <button
+                className="w-96 bg-white py-2 px-3 border-2 border-black rounded-base mt-5 hover:bg-black hover:text-white active:bg-zinc-700"
                 onClick={() => handleOTPVerification(otp)}
                 disabled={isVerifyDisabled}
             >
