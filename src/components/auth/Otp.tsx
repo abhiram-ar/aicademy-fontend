@@ -39,6 +39,7 @@ const Otp: React.FC<Props> = ({ email, handleOTPVerification, isVerifyDisabled=f
                     </InputOTPGroup>
                 </InputOTP>
             </div>
+            <button>Resend?</button>
             <button
                 className="w-96 bg-white py-2 px-3 border-2 border-black rounded-base mt-10 hover:bg-black hover:text-white active:bg-zinc-700"
                 onClick={() => handleOTPVerification(otp)}
