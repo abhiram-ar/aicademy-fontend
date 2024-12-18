@@ -61,14 +61,23 @@ const SignupPage = () => {
             console.log(res);
             navigate("/login");
         } catch (error) {
-            console.warn("error while verifying user account", error);
-            //toast
+            console.warn("Error while OTP verification", error);
+             toast({
+                variant: "destructive",
+                title: "Error while OTP verification",
+                description: (error as { data: { message: string } }).data
+                    .message,
+            });
         }
     };
 
     const handleOTPResent = async () => {
         console.log(`resent`);
         handleSignup(user as newUser);
+        toast({
+            variant: "default",
+            description: `New OTP send to ${user?.email}`,
+        });
     };
 
     return (

@@ -90,7 +90,7 @@ const appRouter = createBrowserRouter([
     },
     {
         path: "/test",
-        element: <CountdownTimer />,
+        element: <CountdownTimer durationInSeconds={10}/>,
     },
 ]);
 

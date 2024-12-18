@@ -1,13 +1,13 @@
 import React, { useState } from "react";
 import AuthBlock from "../base/AuthBlock";
+import { REGEXP_ONLY_DIGITS } from "input-otp";
+import CountdownTimer from "../CountdownTimer";
 import {
     InputOTP,
     InputOTPGroup,
     InputOTPSeparator,
     InputOTPSlot,
 } from "@/components/ui/input-otp";
-import { REGEXP_ONLY_DIGITS } from "input-otp";
-import CountdownTimer from "../CountdownTimer";
 
 type Props = {
     email: string | undefined;
@@ -19,7 +19,7 @@ type Props = {
 const Otp: React.FC<Props> = ({
     email,
     handleOTPVerification,
-    isVerifyDisabled = false,
+    isVerifyDisabled,
     handleOTPResent,
 }) => {
     const [otp, setOtp] = useState("");
@@ -29,7 +29,7 @@ const Otp: React.FC<Props> = ({
 
     return (
         <AuthBlock>
-            <p className="font-medium mb-2">
+            <p className="font-medium mb-2 text-center">
                 Enter OTP sent to {email || "temp@email.com"}
             </p>
             <div className="w-fit mx-auto">
@@ -74,9 +74,9 @@ const Otp: React.FC<Props> = ({
                     />
                 )}
             <button
-                className="w-96 bg-white py-2 px-3 border-2 border-black rounded-base mt-5 hover:bg-black hover:text-white active:bg-zinc-700"
+                className={`${isVerifyDisabled || otp.length < 4 ? "bg-zinc-400 hover: " : "bg-white hover:bg-black hover:text-white"  } " min-w-96 w-full py-2 px-3 border-2 border-black rounded-base mt-5  active:bg-zinc-700"`}
                 onClick={() => handleOTPVerification(otp)}
-                disabled={isVerifyDisabled}
+                disabled={isVerifyDisabled || otp.length < 4}
             >
                 verify
             </button>

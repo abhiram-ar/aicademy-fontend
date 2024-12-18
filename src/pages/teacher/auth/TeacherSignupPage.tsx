@@ -73,14 +73,18 @@ const TeacherSignupPage = () => {
     const handleOTPResent = async () => {
         console.log(`resent`);
         handleSignup(teacher as newUser);
+        toast({
+            variant: "default",
+            description: `New OTP send to ${teacher?.email}`,
+        });
     };
 
     return (
         <>
             <NavbarOnlyLogo />
             <BodyBlock>
-                <Toaster />
-                <div className="w-full lg:w-2/3 mx-auto flex flex-col-reverse min-h-fit h-[90vh] lg:flex lg:flex-row justify-center items-center gap-16">
+                <div className="w-full lg:w-2/3 mx-auto flex flex-col-reverse min-h-fit h-[90vh] lg:flex lg:flex-row justify-center items-center gap-24">
+                    <Toaster />
                     <div className="w-1/2 flex justify-center items-center mix-blend-multiply">
                         <img src={SignupArt} alt="login Art peice" />
                     </div>
