@@ -9,7 +9,6 @@ import SignupPage from "./pages/user/auth/SignupPage";
 import LandingPage from "./pages/LandingPage";
 import TeacherSignupPage from "./pages/teacher/auth/TeacherSignupPage";
 import TeacherLoginPage from "./pages/teacher/auth/TeacherLoginPage";
-import Onboarding from "./pages/teacher/onboarding/OnboardingPage";
 import OnboardingPage from "./pages/teacher/onboarding/OnboardingPage";
 import App from "./App";
 import {
@@ -20,6 +19,7 @@ import AdminLoginPage from "./pages/admin/AminLoginPage";
 import AdminDashBoardHomePage from "./pages/admin/AdminDashBoardHomePage";
 import TeacherOnboadingPage from "./pages/admin/Teacher mangement/TeacherOnboadingPage";
 import TeacherDashboardHome from "./pages/teacher/dashboard/TeacherDashboardHome";
+import CountdownTimer from "./components/CountdownTimer";
 
 fetchAccessTokenOnload();
 const appRouter = createBrowserRouter([
@@ -90,7 +90,7 @@ const appRouter = createBrowserRouter([
     },
     {
         path: "/test",
-        element: <Onboarding />,
+        element: <CountdownTimer />,
     },
 ]);
 

@@ -7,6 +7,7 @@ import {
     InputOTPSlot,
 } from "@/components/ui/input-otp";
 import { REGEXP_ONLY_DIGITS } from "input-otp";
+import CountdownTimer from "../CountdownTimer";
 
 type Props = {
     email: string | undefined;
@@ -23,6 +24,9 @@ const Otp: React.FC<Props> = ({
 }) => {
     const [otp, setOtp] = useState("");
     const [isResendDisabled, setResendDisabled] = useState(false);
+
+    const OTPResendExpiryInSeconds = 60;
+
     return (
         <AuthBlock>
             <p className="font-medium mb-2">
@@ -51,16 +55,24 @@ const Otp: React.FC<Props> = ({
                 onClick={() => {
                     handleOTPResent();
                     setResendDisabled(true);
-                    setTimeout(() => setResendDisabled(false), 60 * 1000);
+                    setTimeout(
+                        () => setResendDisabled(false),
+                        OTPResendExpiryInSeconds * 1000
+                    );
                 }}
-                className={`${
+                className={`underline ${
                     isResendDisabled
                         ? "text-zinc-400"
                         : "text-black font-semibold"
                 }`}
             >
-                Resend?
+                Resend? 
             </button>
+                {isResendDisabled && (
+                    <CountdownTimer
+                        durationInSeconds={OTPResendExpiryInSeconds}
+                    />
+                )}
             <button
                 className="w-96 bg-white py-2 px-3 border-2 border-black rounded-base mt-5 hover:bg-black hover:text-white active:bg-zinc-700"
                 onClick={() => handleOTPVerification(otp)}
