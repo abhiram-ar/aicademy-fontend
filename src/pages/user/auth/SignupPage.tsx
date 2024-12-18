@@ -14,10 +14,10 @@ import {
 } from "@/redux/features/auth/userAuthAPIs";
 
 const SignupPage = () => {
+    const [verifyEmail, { isLoading: isVerifyLoading }] = useVerifyMutation();
+
     const [register, { isLoading: isRegistrationLoading }] =
         useRegisterMutation();
-    const [verifyEmail, { isLoading: isVerifyLoading }] = useVerifyMutation();
-    const navigate = useNavigate();
 
     const [activationDetails, setActivationDetails] = useState<{
         activationToken: string | null;
@@ -27,7 +27,11 @@ const SignupPage = () => {
         user: null,
     });
 
+    const [user, setUser] = useState<newUser>();
+    const navigate = useNavigate();
+
     const handleSignup: (data: newUser) => void = async (data) => {
+        setUser(data);
         console.log(data);
         try {
             const payload = await register(data).unwrap();
@@ -57,9 +61,23 @@ const SignupPage = () => {
             console.log(res);
             navigate("/login");
         } catch (error) {
-            console.warn("error while verifying user account", error);
-            //toast
+            console.warn("Error while OTP verification", error);
+             toast({
+                variant: "destructive",
+                title: "Error while OTP verification",
+                description: (error as { data: { message: string } }).data
+                    .message,
+            });
         }
+    };
+
+    const handleOTPResent = async () => {
+        console.log(`resent`);
+        handleSignup(user as newUser);
+        toast({
+            variant: "default",
+            description: `New OTP send to ${user?.email}`,
+        });
     };
 
     return (
@@ -98,6 +116,7 @@ const SignupPage = () => {
                                 email={activationDetails.user?.email}
                                 handleOTPVerification={handleOTPVerification}
                                 isVerifyDisabled={isVerifyLoading}
+                                handleOTPResent={handleOTPResent}
                             />
                         )}
                     </div>
