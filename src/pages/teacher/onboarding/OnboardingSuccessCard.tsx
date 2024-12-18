@@ -3,6 +3,8 @@ import { Button } from "@/components/ui/button";
 import { Link } from "react-router-dom";
 
 const OnboardingSuccessCard = () => {
+
+
     return (
         <div className="flex justify-center items-center">
             <div className="w-2/5 max-w-[32rem] my-40">
@@ -20,7 +22,7 @@ const OnboardingSuccessCard = () => {
                         create amazing learning experiences!
                     </div>
                     <div className="flex justify-end">
-                        <Link to="teach/dashboard">
+                        <Link to="/teach">
                             <Button className="mt-5 bg-white" variant="reverse">
                                 Take me to Dashboard
                             </Button>
