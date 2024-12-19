@@ -16,11 +16,11 @@ const HeroSection = () => {
                     or an organization streamlining training, our LMS empowers
                     you to achieve more with smart, efficient, and engaging
                     solutions.
+                </p>
                     <div className="font-publicSans mt-16">
                         <p className="my-2">Discover the future of Learning-Today</p>
                         <Button size="lg">Explore courses</Button>
                     </div>
-                </p>
             </div>
             <div className="w-[35rem] relative -right-14">
                 <img src={heroart}  className="" alt="" />
