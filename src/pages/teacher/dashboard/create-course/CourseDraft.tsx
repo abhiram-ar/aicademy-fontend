@@ -1,15 +1,13 @@
 import { useGetFullCourseDetailsQuery } from "@/redux/features/teacher/courseCreationAPIs";
 import React from "react";
-import {Link, Outlet, useParams } from "react-router-dom";
+import { Link, Outlet, useParams } from "react-router-dom";
 
 const CourseDraft: React.FC = () => {
     const { id } = useParams();
-    const { data } = useGetFullCourseDetailsQuery({
+    const { currentData } = useGetFullCourseDetailsQuery({
         courseId: id,
     });
-
-    console.log(data);
-
+    console.log("Parnet requestData: ", currentData);
     return (
         <div>
             <nav className="w-4/5 mx-auto rounded-base bg-zinc-100 border border-black box-border grid grid-cols-4 overflow-hidden">
@@ -38,7 +36,7 @@ const CourseDraft: React.FC = () => {
                     Publish
                 </Link>
             </nav>
-            {data?.courseDetails && <Outlet context={data.courseDetails} />}
+            {currentData?.courseDetails && <Outlet context={currentData.courseDetails} />}
         </div>
     );
 };

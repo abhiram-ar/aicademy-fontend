@@ -17,6 +17,15 @@ const courseCreationsAPI = apiSlice.injectEndpoints({
             query: (data) => ({
                 url: `/api/course/full-details?courseId=${data.courseId}`,
             }),
+            providesTags: ["draftCourseDetails"],
+        }),
+        updateBasisCourseDetails: builder.mutation({
+            query: (data) => ({
+                url: "/api/course/draft/basic-info",
+                method: "PATCH",
+                body: data,
+            }),
+            invalidatesTags: ["draftCourseDetails"]
         }),
     }),
 });
@@ -25,4 +34,5 @@ export const {
     useCreateCourseDraftMutation,
     useGetDraftCourseListQuery,
     useGetFullCourseDetailsQuery,
+    useUpdateBasisCourseDetailsMutation,
 } = courseCreationsAPI;

@@ -1,7 +1,8 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { useOutletContext } from "react-router-dom";
 import { useForm } from "react-hook-form";
 import { Button } from "@/components/ui/button";
+import { useUpdateBasisCourseDetailsMutation } from "@/redux/features/teacher/courseCreationAPIs";
 
 const CourseDetailsOutlet: React.FC = () => {
     const courseDetails = useOutletContext();
@@ -21,11 +22,29 @@ const CourseDetailsOutlet: React.FC = () => {
         },
     });
 
+
     console.log("outlet outlet", courseDetails);
+    const [updateBasicDetails] = useUpdateBasisCourseDetailsMutation();
+
+    const handleBasicDetailsUpdate = async (data: object) => {
+        console.log(data);
+        try {
+            const res = await updateBasicDetails({
+                ...data,
+                courseId: courseDetails._id,
+            });
+            console.log(res);
+        } catch (error) {
+            console.log("error while updating course basic detals", error);
+        }
+    };
+
     return (
         <div>
             <form
-                onSubmit={handleSubmit((data) => console.log(data))}
+                onSubmit={handleSubmit((data) =>
+                    handleBasicDetailsUpdate(data)
+                )}
                 className="relative w-fit mx-auto mt-10"
             >
                 {/* title */}
