@@ -9,7 +9,10 @@ const courseCreationsAPI = apiSlice.injectEndpoints({
                 body: data,
             }),
         }),
+        getDraftCourseList: builder.query({
+            query: () => "/api/course/draft-list"
+        })
     }),
 });
 
-export const { useCreateCourseDraftMutation } = courseCreationsAPI;
+export const { useCreateCourseDraftMutation, useGetDraftCourseListQuery } = courseCreationsAPI;
