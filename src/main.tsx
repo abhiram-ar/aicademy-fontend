@@ -22,6 +22,10 @@ import Page from "./pages/teacher/dashboard/Layout";
 import TeacherDashboard from "./pages/teacher/dashboard/Layout";
 import CreateCoursePage from "./pages/teacher/dashboard/create-course/CreateDraftPage";
 import CourseDraft from "./pages/teacher/dashboard/create-course/CourseDraft";
+import CourseDetailsOutlet from "./pages/teacher/dashboard/create-course/CourseDetailsOutlet";
+import CourseStrucureOutlet from "./pages/teacher/dashboard/create-course/CourseStrucureOutlet";
+import CourseAssetsOutlet from "./pages/teacher/dashboard/create-course/CourseAssetsOutlet";
+import PublishOutlet from "./pages/teacher/dashboard/create-course/PublishOutlet";
 
 fetchAccessTokenOnload();
 const appRouter = createBrowserRouter([
@@ -51,12 +55,34 @@ const appRouter = createBrowserRouter([
                         element: <TeacherDashboard />,
                         children: [
                             {
-                                path: "/teach/course/draft/:id",
-                                element: <CourseDraft/>
-                            },
-                            {
                                 path: "/teach/course/create",
                                 element: <CreateCoursePage />,
+                            },
+                            {
+                                path: "/teach/course/draft/:id",
+                                element: <CourseDraft />,
+                                children: [
+                                    {
+                                        index: true,
+                                        element: <CourseDetailsOutlet />,
+                                    },
+                                    {
+                                        path: "teach/course/draft/:id/details",
+                                        element: <CourseDetailsOutlet />,
+                                    },
+                                    {
+                                        path: "teach/course/draft/:id/structure",
+                                        element: <CourseStrucureOutlet />,
+                                    },
+                                    {
+                                        path: "teach/course/draft/:id/assets",
+                                        element: <CourseAssetsOutlet />,
+                                    },
+                                    {
+                                        path: "teach/course/draft/:id/publish",
+                                        element: <PublishOutlet />,
+                                    },
+                                ],
                             },
                         ],
                     },
