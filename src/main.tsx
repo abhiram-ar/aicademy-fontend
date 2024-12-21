@@ -18,8 +18,9 @@ import {
 import AdminLoginPage from "./pages/admin/AminLoginPage";
 import AdminDashBoardHomePage from "./pages/admin/AdminDashBoardHomePage";
 import TeacherOnboadingPage from "./pages/admin/Teacher mangement/TeacherOnboadingPage";
-import TeacherDashboardHome from "./pages/teacher/dashboard/TeacherDashboardHome";
-import CountdownTimer from "./components/CountdownTimer";
+import Page from "./pages/teacher/dashboard/Layout";
+import TeacherDashboard from "./pages/teacher/dashboard/Layout";
+import { Test } from "./pages/Test";
 
 fetchAccessTokenOnload();
 const appRouter = createBrowserRouter([
@@ -41,13 +42,15 @@ const appRouter = createBrowserRouter([
             },
             {
                 path: "/teach",
-
                 children: [
                     {
-                        index: true,
+                        path: "/teach",
                         loader: () => authLoader("teacher"),
                         hydrateFallbackElement: <p>loading...</p>,
-                        element: <TeacherDashboardHome />,
+                        element: <TeacherDashboard />,
+                        children: [
+                            { path: "/teach/course/create", element: <Test /> },
+                        ],
                     },
                     {
                         path: "/teach/login",
@@ -90,7 +93,7 @@ const appRouter = createBrowserRouter([
     },
     {
         path: "/test",
-        element: <CountdownTimer durationInSeconds={10}/>,
+        element: <Page />,
     },
 ]);
 

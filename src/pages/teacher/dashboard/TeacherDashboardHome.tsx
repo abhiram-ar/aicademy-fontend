@@ -1,5 +1,4 @@
 import { Button } from "@/components/ui/button";
-import apiSlice from "@/redux/features/api/apiSlice";
 import { logout } from "@/redux/features/auth/authSlice";
 import { useTeacherLogoutMutation } from "@/redux/features/auth/teacherAuthAPI";
 import { RootState } from "@/redux/store";
