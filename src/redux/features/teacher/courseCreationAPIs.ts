@@ -10,9 +10,19 @@ const courseCreationsAPI = apiSlice.injectEndpoints({
             }),
         }),
         getDraftCourseList: builder.query({
-            query: () => "/api/course/draft-list"
-        })
+            query: () => "/api/course/draft-list",
+            providesTags: ["draftCourseList"],
+        }),
+        getFullCourseDetails: builder.query({
+            query: (data) => ({
+                url: `/api/course/full-details?courseId=${data.courseId}`,
+            }),
+        }),
     }),
 });
 
-export const { useCreateCourseDraftMutation, useGetDraftCourseListQuery } = courseCreationsAPI;
+export const {
+    useCreateCourseDraftMutation,
+    useGetDraftCourseListQuery,
+    useGetFullCourseDetailsQuery,
+} = courseCreationsAPI;

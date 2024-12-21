@@ -57,7 +57,7 @@ const baseQuerywithReauth: BaseQueryFn<
 
 const apiSlice = createApi({
     baseQuery: baseQuerywithReauth,
-    tagTypes: ["onboarding", "draftCourse"],
+    tagTypes: ["onboarding", "draftCourseList"],
     endpoints: (builder) => ({
         refresh: builder.query({
             query: () => ({

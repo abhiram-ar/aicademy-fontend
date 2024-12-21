@@ -45,7 +45,7 @@ export function NavCourse() {
         </SidebarMenu>
     );
 
-    console.log(data);
+
     return (
         <SidebarGroup className="group-data-[collapsible=icon]:hidden">
             <SidebarGroupLabel>Course</SidebarGroupLabel>
