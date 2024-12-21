@@ -20,7 +20,8 @@ import AdminDashBoardHomePage from "./pages/admin/AdminDashBoardHomePage";
 import TeacherOnboadingPage from "./pages/admin/Teacher mangement/TeacherOnboadingPage";
 import Page from "./pages/teacher/dashboard/Layout";
 import TeacherDashboard from "./pages/teacher/dashboard/Layout";
-import { Test } from "./pages/Test";
+import CreateCoursePage from "./pages/teacher/dashboard/create-course/CreateDraftPage";
+import CourseDraft from "./pages/teacher/dashboard/create-course/CourseDraft";
 
 fetchAccessTokenOnload();
 const appRouter = createBrowserRouter([
@@ -49,7 +50,14 @@ const appRouter = createBrowserRouter([
                         hydrateFallbackElement: <p>loading...</p>,
                         element: <TeacherDashboard />,
                         children: [
-                            { path: "/teach/course/create", element: <Test /> },
+                            {
+                                path: "/teach/course/draft/:id",
+                                element: <CourseDraft/>
+                            },
+                            {
+                                path: "/teach/course/create",
+                                element: <CreateCoursePage />,
+                            },
                         ],
                     },
                     {
