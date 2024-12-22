@@ -67,19 +67,19 @@ const appRouter = createBrowserRouter([
                                         element: <CourseDetailsOutlet />,
                                     },
                                     {
-                                        path: "teach/course/draft/:id/details",
+                                        path: "details",
                                         element: <CourseDetailsOutlet />,
                                     },
                                     {
-                                        path: "teach/course/draft/:id/structure",
+                                        path: "structure",
                                         element: <CourseStrucureOutlet />,
                                     },
                                     {
-                                        path: "teach/course/draft/:id/assets",
+                                        path: "assets",
                                         element: <CourseAssetsOutlet />,
                                     },
                                     {
-                                        path: "teach/course/draft/:id/publish",
+                                        path: "publish",
                                         element: <PublishOutlet />,
                                     },
                                 ],

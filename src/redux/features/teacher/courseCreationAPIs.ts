@@ -8,6 +8,7 @@ const courseCreationsAPI = apiSlice.injectEndpoints({
                 method: "POST",
                 body: data,
             }),
+            invalidatesTags:["draftCourseList"]
         }),
         getDraftCourseList: builder.query({
             query: () => "/api/course/draft-list",

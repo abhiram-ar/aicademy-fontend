@@ -62,25 +62,25 @@ const CourseDraft: React.FC = () => {
             />
             <nav className="w-4/5 mx-auto rounded-base bg-zinc-100 border-2 border-black box-border grid grid-cols-4 overflow-hidden -mt-10 shadow-light">
                 <Link
-                    to={`teach/course/draft/${id}/details`}
+                    to={`/teach/course/draft/${id}/details`}
                     className="hover:bg-zinc-300 text-center p-3 transition-all duration-300"
                 >
                     Course Details
                 </Link>
                 <Link
-                    to={`teach/course/draft/${id}/structure`}
+                    to={`/teach/course/draft/${id}/structure`}
                     className="hover:bg-zinc-300 text-center p-3 transition-all duration-300"
                 >
                     Course Structure
                 </Link>
                 <Link
-                    to={`teach/course/draft/${id}/assets`}
+                    to={`/teach/course/draft/${id}/assets`}
                     className="hover:bg-zinc-300 text-center p-3 transition-all duration-300"
                 >
                     Course Assets
                 </Link>
                 <Link
-                    to={`teach/course/draft/${id}/publish`}
+                    to={`/teach/course/draft/${id}/publish`}
                     className="hover:bg-zinc-300 text-center p-3 transition-all duration-300"
                 >
                     Publish
