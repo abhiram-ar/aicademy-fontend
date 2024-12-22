@@ -1,12 +1,13 @@
-import React, { useEffect } from "react";
+import React from "react";
 import { useOutletContext } from "react-router-dom";
 import { useForm } from "react-hook-form";
 import { Button } from "@/components/ui/button";
 import { useUpdateBasisCourseDetailsMutation } from "@/redux/features/teacher/courseCreationAPIs";
 import Thumbnail from "./Thumbnail";
+import { ICourse } from "./CourseDraft";
 
 const CourseDetailsOutlet: React.FC = () => {
-    const courseDetails = useOutletContext();
+    const courseDetails: ICourse = useOutletContext();
 
     const {
         handleSubmit,
@@ -275,14 +276,18 @@ const CourseDetailsOutlet: React.FC = () => {
                         </select>
                     </div>
                 </div>
-                <Button
-                    disabled={Object.keys(errors).length !== 0 ? true : false}
-                    type="submit"
-                    variant="reverse"
-                    className="bg-green-300 absolute right-0 mt-5"
-                >
-                    Save and Next
-                </Button>
+                <div className="flex justify-end my-5">
+                    <Button
+                        disabled={
+                            Object.keys(errors).length !== 0 ? true : false
+                        }
+                        type="submit"
+                        variant="reverse"
+                        className="bg-green-300"
+                    >
+                        Save and Next
+                    </Button>
+                </div>
             </form>
         </div>
     );
