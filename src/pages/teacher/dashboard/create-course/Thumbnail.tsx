@@ -34,7 +34,7 @@ const Thumbnail: React.FC<{ courseDetails: object }> = ({ courseDetails }) => {
     };
 
     return (
-        <div className="mx-auto w-[50rem] mt-10">
+        <div className="mx-auto w-[50rem] mt-10 min-h-10">
             <p className="font-semibold">Thumbnail</p>
             <div className="border-2 rounded-base border-black min-h-5 mt-1 relative">
                 <input

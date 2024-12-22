@@ -34,6 +34,7 @@ const courseCreationsAPI = apiSlice.injectEndpoints({
                 method: "PATCH",
                 body: data,
             }),
+            invalidatesTags: ["draftCourseDetails"]
         }),
     }),
 });
