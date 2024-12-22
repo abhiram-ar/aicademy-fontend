@@ -3,6 +3,7 @@ import { useOutletContext } from "react-router-dom";
 import { useForm } from "react-hook-form";
 import { Button } from "@/components/ui/button";
 import { useUpdateBasisCourseDetailsMutation } from "@/redux/features/teacher/courseCreationAPIs";
+import Thumbnail from "./Thumbnail";
 
 const CourseDetailsOutlet: React.FC = () => {
     const courseDetails = useOutletContext();
@@ -22,7 +23,6 @@ const CourseDetailsOutlet: React.FC = () => {
         },
     });
 
-
     console.log("outlet outlet", courseDetails);
     const [updateBasicDetails] = useUpdateBasisCourseDetailsMutation();
 
@@ -41,11 +41,12 @@ const CourseDetailsOutlet: React.FC = () => {
 
     return (
         <div>
+            <Thumbnail courseDetails={courseDetails} />
             <form
                 onSubmit={handleSubmit((data) =>
                     handleBasicDetailsUpdate(data)
                 )}
-                className="relative w-fit mx-auto mt-10"
+                className="relative w-fit mx-auto mt-5"
             >
                 {/* title */}
                 <div className="w-fit">
@@ -113,7 +114,7 @@ const CourseDetailsOutlet: React.FC = () => {
                             maxLength: 300,
                         })}
                         id="title"
-                        rows={10}
+                        rows={5}
                         placeholder="eg: Master the fundamentals of JavaScript, the world's most popular programming language for web development. This course covers essential topics like variables, functions, loops, DOM manipulation, and modern ES6+ features. Learn to create dynamic, interactive websites and build a strong foundation for advanced frameworks like React, Angular, or Node.js. Perfect for beginners and aspiring developers!"
                         className="input-neo w-[50rem]"
                     />

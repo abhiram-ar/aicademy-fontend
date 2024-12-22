@@ -18,6 +18,7 @@ const courseCreationsAPI = apiSlice.injectEndpoints({
                 url: `/api/course/full-details?courseId=${data.courseId}`,
             }),
             providesTags: ["draftCourseDetails"],
+            keepUnusedDataFor: 0
         }),
         updateBasisCourseDetails: builder.mutation({
             query: (data) => ({
@@ -25,7 +26,7 @@ const courseCreationsAPI = apiSlice.injectEndpoints({
                 method: "PATCH",
                 body: data,
             }),
-            invalidatesTags: ["draftCourseDetails"]
+            invalidatesTags: ["draftCourseDetails", "draftCourseList"]
         }),
     }),
 });
