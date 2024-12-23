@@ -1,0 +1,189 @@
+import { Button } from "@/components/ui/button";
+import { Plus } from "lucide-react";
+import React, { useState } from "react";
+import { useForm } from "react-hook-form";
+const CourseStrucureOutlet: React.FC = () => {
+    const {
+        register,
+        formState: { errors },
+        handleSubmit,
+        trigger,
+    } = useForm();
+
+    const [lessonCount, setLessonCount] = useState<number>(1);
+
+    const handleAddLesson = async () => {
+        const isValid = await trigger();
+        if (isValid) {
+            setLessonCount(lessonCount + 1);
+        }
+    };
+
+    console.log(errors);
+    return (
+        <form
+            onSubmit={handleSubmit((data) => console.log("form data", data))}
+            className="w-[50rem] mx-auto mt-10"
+        >
+            {/* chapterTitle */}
+            <div className="w-full bg-white border border-black min-h-5 rounded-base p-5  ">
+                <div className="">
+                    <label
+                        htmlFor="chapterTitle"
+                        className=" font-semibold flex justify-between gap-2 items-baseline"
+                    >
+                        {" "}
+                        <div className="flex gap-2 items-baseline">
+                            chapter 1 title
+                            <span className="validation-error">
+                                {errors.chapterTitle?.type === "required" &&
+                                    "(required)"}
+                            </span>
+                        </div>
+                        <p
+                            className={`validation-error ${
+                                errors.chapterTitle?.type === "maxLength"
+                                    ? " "
+                                    : "text-zinc-500"
+                            }`}
+                        >
+                            Max 70 characters
+                        </p>
+                    </label>
+                    <input
+                        type="text"
+                        {...register("chapterTitle", {
+                            required: "is required",
+                            maxLength: 70,
+                        })}
+                        className="input-neo w-full"
+                        id="title"
+                        placeholder="eg: Javascript variables"
+                    />
+                </div>
+
+                {/* lesson group */}
+                {/* lesson */}
+                {new Array(lessonCount).fill(0).map((_, index) => (
+                    <div key={index}>
+                        <h2 className="font-semibold mt-5">
+                            Lesson {index + 1}
+                        </h2>
+                        <div className="w-full bg-zinc-100 rounded-base p-3">
+                            <div className="">
+                                <label
+                                    htmlFor={`lessons.${index}.lessonTitle`}
+                                    className=" font-semibold flex justify-between gap-2 items-baseline"
+                                >
+                                    {" "}
+                                    <div className="flex gap-2 items-baseline">
+                                        Lesson Title
+                                        <span className="validation-error">
+                                            {errors?.[
+                                                `lessons.${index}.lessonTitle`
+                                            ]?.type === "required" &&
+                                                "(required)"}
+                                        </span>
+                                    </div>
+                                    <p
+                                        className={`validation-error ${
+                                            errors.(lessons as object)?.["hello"].lessonTitle
+                                                ?.type === "maxLength"
+                                                ? " "
+                                                : "text-zinc-500"
+                                        }`}
+                                    >
+                                        Max 70 characters
+                                    </p>
+                                </label>
+                                <input
+                                    type="text"
+                                    {...register(
+                                        `lessons.${index}.lessonTitle`,
+                                        {
+                                            required: "is required",
+                                            maxLength: 70,
+                                        }
+                                    )}
+                                    className="input-neo w-full"
+                                    id={`lessons.${index}.lessonTitle`}
+                                    placeholder="eg: Javascript variables"
+                                />
+                            </div>
+
+                            {/* video */}
+                            <div className="mt-3">
+                                <label
+                                    htmlFor={`lessons.${index}.videoKey`}
+                                    className="font-semibold flex justify-between gap-2 items-baseline"
+                                >
+                                    {" "}
+                                    <div className="flex gap-2 items-baseline">
+                                        Video
+                                        {errors?.[
+                                            `lessons.${index}.videoKey`
+                                        ] && (
+                                            <span className="validation-error">
+                                                (
+                                                {String(
+                                                    errors?.[
+                                                        `lessons.${index}.videoKey`
+                                                    ]?.message
+                                                )}
+                                                )
+                                            </span>
+                                        )}
+                                    </div>
+                                </label>
+
+                                <select
+                                    {...register(`lessons.${index}.videoKey`, {
+                                        required: "Select a Video",
+                                    })}
+                                    defaultValue=""
+                                    id={`lessons.${index}.videoKey`}
+                                    className="input-neo appearance-none w-full"
+                                >
+                                    <option value="" disabled>
+                                        Select a category
+                                    </option>
+                                    <option value="softwareDevelopment">
+                                        Sofware Development
+                                    </option>
+                                    <option value="AIandMachineLearning">
+                                        AI and Machine Learning
+                                    </option>
+                                    <option value="Pychology">Pychology</option>
+                                    <option value="healthAndWellness">
+                                        Health and Wellness
+                                    </option>
+                                    <option value="personalDevelopment">
+                                        Personal Development
+                                    </option>
+                                </select>
+                            </div>
+                        </div>
+                    </div>
+                ))}
+                <Button
+                    className="bg-zinc-200 hover:bg-zinc-300 mt-5 ms-5"
+                    variant="noShadow"
+                    onClick={handleAddLesson}
+                >
+                    <Plus />
+                    Add lesson
+                </Button>
+
+                <Button
+                    className="bg-zinc-200 hover:bg-zinc-300 mt-5 ms-5"
+                    variant="noShadow"
+                    type="submit"
+                >
+                    Save
+                </Button>
+            </div>
+        </form>
+    );
+};
+
+export default CourseStrucureOutlet;
