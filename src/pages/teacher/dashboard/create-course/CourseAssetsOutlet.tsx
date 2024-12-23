@@ -1,14 +1,17 @@
-import { Button } from "@/components/ui/button";
 import { RootState } from "@/redux/store";
 import axios from "axios";
 import { useRef, useState } from "react";
 import { useSelector } from "react-redux";
+import { useSaveUploadedVideoMetadaMutation } from "@/redux/features/teacher/courseCreationAPIs";
+import { useParams } from "react-router-dom";
 
 const CourseAssetsOutlet = () => {
     const token = useSelector((state: RootState) => state.auth.token);
     const [isUploading, setIsUploading] = useState<boolean>(false);
     const [uploadProgress, setUploadProgress] = useState<number>(0);
     const abortController = useRef<AbortController | null>(null);
+    const [saveMetadata] = useSaveUploadedVideoMetadaMutation();
+    const { id } = useParams();
 
     const handleUpload = async (file: File) => {
         try {
@@ -26,13 +29,12 @@ const CourseAssetsOutlet = () => {
                 }
             );
 
-            console.log(data);
-
+            // upload file to S3
             abortController.current = new AbortController();
-
-            const res = await axios.put(data.preSignedURL, file, {
+            await axios.put(data.preSignedURL, file, {
                 headers: { "Content-Type": file.type },
                 onUploadProgress: (event) => {
+                    if (!event.total) return;
                     const percentComplete = Math.round(
                         (event.loaded * 100) / event.total
                     );
@@ -41,8 +43,15 @@ const CourseAssetsOutlet = () => {
                 signal: abortController.current.signal,
             });
 
-            console.log(res);
-            console.log(`mock uploading to DB..`);
+            // save file metadata to DB
+            await saveMetadata({
+                courseId: id,
+                key: data.preSignedURL,
+                originalFileName: file.name,
+                originalFileSize: file.size,
+                originalFileType: file.type,
+            }).unwrap();
+            console.log(`video metadata added to DB`);
         } catch (error) {
             if (axios.isCancel(error)) {
                 console.log(`upload cancelled`);
@@ -73,7 +82,7 @@ const CourseAssetsOutlet = () => {
                     console.log(e.target.files);
                     if (e.target.files && e.target?.files?.length > 0) {
                         console.log(e.target.files[0]);
-                        // handleUpload(e.target.files[0]);
+                        handleUpload(e.target.files[0]);
                     }
                 }}
             />
