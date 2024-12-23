@@ -8,7 +8,7 @@ const courseCreationsAPI = apiSlice.injectEndpoints({
                 method: "POST",
                 body: data,
             }),
-            invalidatesTags:["draftCourseList"]
+            invalidatesTags: ["draftCourseList"],
         }),
         getDraftCourseList: builder.query({
             query: () => "/api/course/draft-list",
@@ -35,7 +35,14 @@ const courseCreationsAPI = apiSlice.injectEndpoints({
                 method: "PATCH",
                 body: data,
             }),
-            invalidatesTags: ["draftCourseDetails"]
+            invalidatesTags: ["draftCourseDetails"],
+        }),
+        saveUploadedVideoMetada: builder.mutation({
+            query: (data) => ({
+                url: "/api/course/upload/save-metadata",
+                method: "POST",
+                body: data,
+            }),
         }),
     }),
 });
@@ -46,4 +53,5 @@ export const {
     useGetFullCourseDetailsQuery,
     useUpdateBasisCourseDetailsMutation,
     useUpdateThumnailMutation,
+    useSaveUploadedVideoMetadaMutation,
 } = courseCreationsAPI;
