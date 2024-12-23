@@ -1,3 +1,4 @@
+import { Button } from "@/components/ui/button";
 import {
     Select,
     SelectContent,
@@ -5,6 +6,7 @@ import {
     SelectTrigger,
     SelectValue,
 } from "@/components/ui/select";
+import { FilePlus2, FileX2, PackageMinus, PackagePlus } from "lucide-react";
 import React from "react";
 import {
     useForm,
@@ -56,11 +58,19 @@ const CourseStrucureOutlet = () => {
 
     return (
         <div>
-            <form onSubmit={handleSubmit((data) => console.log(data))}>
+            <form
+                onSubmit={handleSubmit((data) => console.log(data))}
+                className="w-fit mx-auto"
+            >
                 {chapterFields.map((chapter, chapterIndex) => (
                     // chapter section
-                    <div key={chapter.id}>
-                        <h1>Chapter {chapterIndex + 1}</h1>
+                    <div
+                        key={chapter.id}
+                        className="bg-white m-5 border-2 border-black rounded-base p-5 w-fit mx-auto mt-10 relative"
+                    >
+                        <h1 className="font-semibold text-zinc-500 text-center text-xl">
+                            Chapter {chapterIndex + 1}
+                        </h1>
 
                         {/* chapter title */}
                         <div>
@@ -77,7 +87,7 @@ const CourseStrucureOutlet = () => {
                                             (
                                             {String(
                                                 errors?.chapters?.[chapterIndex]
-                                                    ?.message
+                                                    ?.chapterTitle.message
                                             )}
                                             )
                                         </span>
@@ -96,21 +106,26 @@ const CourseStrucureOutlet = () => {
                                         },
                                     }
                                 )}
-                                className="input-neo border"
+                                className="input-neo w-[50rem] border-zinc-300"
                             />
                         </div>
                         {chapterFields.length > 1 && (
                             <button
                                 type="button"
+                                title="delete course"
                                 onClick={() => removeChapter(chapterIndex)}
+                                className="absolute top-5 right-5 "
                             >
-                                Remove chapter
+                                <PackageMinus className="text-zinc-400 hover:text-red-500" />
                             </button>
                         )}
 
-                        <h3>lessons</h3>
+                        {/* lesson component */}
+                        <h3 className="font-semibold text-zinc-500 mt-3 mb-1">
+                            Lessons
+                        </h3>
+
                         <div>
-                            {/* lesson component */}
                             <LessonForm
                                 register={register}
                                 errors={errors}
@@ -120,17 +135,25 @@ const CourseStrucureOutlet = () => {
                         </div>
                     </div>
                 ))}
-                <button
-                    type="button"
-                    onClick={() =>
-                        appendChapter({
-                            chapterTitle: "",
-                            lessons: [{ lessonTitle: "", videoKey: "" }],
-                        })
-                    }
-                >
-                    Add chapter
-                </button>
+                <div className="flex justify-between items-center">
+                    <Button variant="noShadow"
+                        type="button"
+                        className="flex gap-2 items-center border-2 py-3 px-4 rounded-base bg-white hover:bg-blue-300 "
+                        onClick={() =>
+                            appendChapter({
+                                chapterTitle: "",
+                                lessons: [{ lessonTitle: "", videoKey: "" }],
+                            })
+                        }
+                    >
+                        <PackagePlus className="size-5" />
+                        Add chapter
+                    </Button>
+
+                    <Button variant="noShadow" type="submit" className="py-3 px-10 border-2 rounded-base bg-green-300 hover:bg-green-400">
+                        Save
+                    </Button>
+                </div>
             </form>
         </div>
     );
@@ -166,7 +189,10 @@ const LessonForm: React.FC<Props> = ({
     return (
         <div>
             {lessonFields.map((lesson, lessonIndex) => (
-                <div key={lesson.id}>
+                <div
+                    key={lesson.id}
+                    className="rounded-base border-black p-5 bg-slate-100 mb-3 relative"
+                >
                     {/* lesson Title */}
                     <div>
                         <label
@@ -175,7 +201,7 @@ const LessonForm: React.FC<Props> = ({
                         >
                             {" "}
                             <div className="flex gap-2 items-baseline">
-                                Lesson Title
+                                Lesson {lessonIndex + 1} Title
                                 {errors?.chapters?.[chapterIndex]?.lessons?.[
                                     lessonIndex
                                 ]?.lessonTitle?.message && (
@@ -196,11 +222,12 @@ const LessonForm: React.FC<Props> = ({
                             {...register(
                                 `chapters.${chapterIndex}.lessons.${lessonIndex}.lessonTitle`
                             )}
+                            className="input-neo w-full border-zinc-200"
                         />
                     </div>
 
                     {/* video selectiion */}
-                    <div className="flex-1">
+                    <div className="flex-1 mt-2">
                         <label
                             htmlFor="category"
                             className="font-semibold flex justify-between gap-2 items-baseline"
@@ -223,26 +250,29 @@ const LessonForm: React.FC<Props> = ({
                                 )}
                             </div>
                         </label>
-                        <Select
-                            onValueChange={(value) => {
-                                register(
-                                    `chapters.${chapterIndex}.lessons.${lessonIndex}.videoKey`
-                                ).onChange({
-                                    target: { value },
-                                });
-                            }}
-                        >
-                            <SelectTrigger>
-                                <SelectValue placeholder="Select video" />
-                            </SelectTrigger>
-                            <SelectContent>
-                                {mockVideoKeys.map((key) => (
-                                    <SelectItem key={key} value={key}>
-                                        {key}
-                                    </SelectItem>
-                                ))}
-                            </SelectContent>
-                        </Select>
+
+                        <div className="bg-white rounded-base">
+                            <Select
+                                onValueChange={(value) => {
+                                    register(
+                                        `chapters.${chapterIndex}.lessons.${lessonIndex}.videoKey`
+                                    ).onChange({
+                                        target: { value },
+                                    });
+                                }}
+                            >
+                                <SelectTrigger>
+                                    <SelectValue placeholder="Select video" />
+                                </SelectTrigger>
+                                <SelectContent>
+                                    {mockVideoKeys.map((key) => (
+                                        <SelectItem key={key} value={key}>
+                                            {key}
+                                        </SelectItem>
+                                    ))}
+                                </SelectContent>
+                            </Select>
+                        </div>
                         {errors.chapters?.[chapterIndex]?.lessons?.[lessonIndex]
                             ?.videoKey && (
                             <p className="text-sm text-red-500 mt-1">
@@ -255,12 +285,13 @@ const LessonForm: React.FC<Props> = ({
                         )}
                     </div>
                     {lessonFields.length > 1 && (
-                        <div>
+                        <div className="absolute top-2 right-2">
                             <button
                                 type="button"
                                 onClick={() => removeLesson(lessonIndex)}
+                                title="delete lessson"
                             >
-                                Remove
+                                <FileX2 className="text-zinc-400 hover:text-red-400 size-5" />
                             </button>
                         </div>
                     )}
@@ -270,7 +301,9 @@ const LessonForm: React.FC<Props> = ({
             <button
                 type="button"
                 onClick={() => appendLesson({ lessonTitle: "", videoKey: "" })}
+                className="flex gap-2 items-center border-2 py-1 px-3 rounded-base bg-slate-100 hover:bg-slate-300"
             >
+                <FilePlus2 className="size-4" />
                 Add lesson
             </button>
         </div>
