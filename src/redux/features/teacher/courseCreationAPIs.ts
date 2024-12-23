@@ -44,6 +44,11 @@ const courseCreationsAPI = apiSlice.injectEndpoints({
                 body: data,
             }),
         }),
+        getAllCourseVideos: builder.query({
+            query: (data) => ({
+                url: `/api/course/draft/videos?courseId=${data.courseId}`,
+            }),
+        }),
     }),
 });
 
@@ -54,4 +59,5 @@ export const {
     useUpdateBasisCourseDetailsMutation,
     useUpdateThumnailMutation,
     useSaveUploadedVideoMetadaMutation,
+    useGetAllCourseVideosQuery,
 } = courseCreationsAPI;

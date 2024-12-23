@@ -2,7 +2,10 @@ import { RootState } from "@/redux/store";
 import axios from "axios";
 import { useRef, useState } from "react";
 import { useSelector } from "react-redux";
-import { useSaveUploadedVideoMetadaMutation } from "@/redux/features/teacher/courseCreationAPIs";
+import {
+    useGetAllCourseVideosQuery,
+    useSaveUploadedVideoMetadaMutation,
+} from "@/redux/features/teacher/courseCreationAPIs";
 import { useParams } from "react-router-dom";
 
 const CourseAssetsOutlet = () => {
@@ -12,6 +15,7 @@ const CourseAssetsOutlet = () => {
     const abortController = useRef<AbortController | null>(null);
     const [saveMetadata] = useSaveUploadedVideoMetadaMutation();
     const { id } = useParams();
+    const { data } = useGetAllCourseVideosQuery({ courseId: id });
 
     const handleUpload = async (file: File) => {
         try {
@@ -73,6 +77,8 @@ const CourseAssetsOutlet = () => {
             abortController.current.abort();
         }
     };
+
+    console.log(data);
 
     return (
         <div>
