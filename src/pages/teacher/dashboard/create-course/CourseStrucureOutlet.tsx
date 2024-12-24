@@ -1,10 +1,12 @@
 import { Button } from "@/components/ui/button";
+import { FilePlus2, FileX2, PackageMinus, PackagePlus } from "lucide-react";
+import React from "react";
+import { Ivideo } from "./CourseAssetsOutlet";
+import { ICourse } from "./CourseDraft";
 import {
     useGetAllCourseVideosQuery,
     useUpdateCouseStructureMutation,
 } from "@/redux/features/teacher/courseCreationAPIs";
-import { FilePlus2, FileX2, PackageMinus, PackagePlus } from "lucide-react";
-import React from "react";
 import {
     useForm,
     useFieldArray,
@@ -13,10 +15,8 @@ import {
     FieldErrors,
 } from "react-hook-form";
 import { useOutletContext, useParams } from "react-router-dom";
-import { Ivideo } from "./CourseAssetsOutlet";
-import { ICourse } from "./CourseDraft";
 
-type formValue = {
+interface formValue  {
     chapters: {
         chapterTitle: string;
         lessons: {
@@ -41,7 +41,7 @@ const CourseStrucureOutlet = () => {
         handleSubmit,
         formState: { errors },
         control,
-    } = useForm({
+    } = useForm<formValue>({
         defaultValues: {
             chapters:
                 courseDetails.chapters?.length !== 0
@@ -79,7 +79,9 @@ const CourseStrucureOutlet = () => {
     return (
         <div>
             <form
-                onSubmit={handleSubmit((data) => handleStructureUpdate(data))}
+                onSubmit={handleSubmit((data) =>
+                    handleStructureUpdate(data as formValue)
+                )}
                 className="w-fit mx-auto"
             >
                 {chapterFields.map((chapter, chapterIndex) => (
