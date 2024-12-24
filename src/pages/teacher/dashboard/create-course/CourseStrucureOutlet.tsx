@@ -6,6 +6,7 @@ import {
     SelectTrigger,
     SelectValue,
 } from "@/components/ui/select";
+import { useGetAllCourseVideosQuery } from "@/redux/features/teacher/courseCreationAPIs";
 import { FilePlus2, FileX2, PackageMinus, PackagePlus } from "lucide-react";
 import React from "react";
 import {
@@ -15,6 +16,8 @@ import {
     UseFormRegister,
     FieldErrors,
 } from "react-hook-form";
+import { useParams } from "react-router-dom";
+import { Ivideo } from "./CourseAssetsOutlet";
 
 type formValue = {
     chapters: {
@@ -136,7 +139,8 @@ const CourseStrucureOutlet = () => {
                     </div>
                 ))}
                 <div className="flex justify-between items-center">
-                    <Button variant="noShadow"
+                    <Button
+                        variant="noShadow"
                         type="button"
                         className="flex gap-2 items-center border-2 py-3 px-4 rounded-base bg-white hover:bg-blue-300 "
                         onClick={() =>
@@ -150,7 +154,11 @@ const CourseStrucureOutlet = () => {
                         Add chapter
                     </Button>
 
-                    <Button variant="noShadow" type="submit" className="py-3 px-10 border-2 rounded-base bg-green-300 hover:bg-green-400">
+                    <Button
+                        variant="noShadow"
+                        type="submit"
+                        className="py-3 px-10 border-2 rounded-base bg-green-300 hover:bg-green-400"
+                    >
                         Save
                     </Button>
                 </div>
@@ -177,6 +185,11 @@ const LessonForm: React.FC<Props> = ({
     errors,
     chapterIndex,
 }) => {
+    const { id } = useParams();
+    const { currentData: content } = useGetAllCourseVideosQuery({
+        courseId: id,
+    });
+
     const {
         fields: lessonFields,
         append: appendLesson,
@@ -220,7 +233,8 @@ const LessonForm: React.FC<Props> = ({
                         <input
                             type="text"
                             {...register(
-                                `chapters.${chapterIndex}.lessons.${lessonIndex}.lessonTitle`
+                                `chapters.${chapterIndex}.lessons.${lessonIndex}.lessonTitle`,
+                                { required: "lesson title required" }
                             )}
                             className="input-neo w-full border-zinc-200"
                         />
@@ -251,38 +265,35 @@ const LessonForm: React.FC<Props> = ({
                             </div>
                         </label>
 
-                        <div className="bg-white rounded-base">
-                            <Select
-                                onValueChange={(value) => {
-                                    register(
-                                        `chapters.${chapterIndex}.lessons.${lessonIndex}.videoKey`
-                                    ).onChange({
-                                        target: { value },
-                                    });
-                                }}
+                        <div className="bg-white rounded-base p-2 border-2">
+                            <select
+                                {...register(
+                                    `chapters.${chapterIndex}.lessons.${lessonIndex}.videoKey`,
+                                    {
+                                        required: {
+                                            value: true,
+                                            message: "select a video",
+                                        },
+                                    }
+                                )}
+                                className="w-full border-none outline-none"
                             >
-                                <SelectTrigger>
-                                    <SelectValue placeholder="Select video" />
-                                </SelectTrigger>
-                                <SelectContent>
-                                    {mockVideoKeys.map((key) => (
-                                        <SelectItem key={key} value={key}>
-                                            {key}
-                                        </SelectItem>
-                                    ))}
-                                </SelectContent>
-                            </Select>
+                                <option value="" disabled>
+                                    Select video for lesson
+                                </option>
+                                {content &&
+                                    content.courseVideos.map(
+                                        (video: Ivideo) => (
+                                            <option
+                                                key={video._id}
+                                                value={video.key}
+                                            >
+                                                {video.displayName}
+                                            </option>
+                                        )
+                                    )}
+                            </select>
                         </div>
-                        {errors.chapters?.[chapterIndex]?.lessons?.[lessonIndex]
-                            ?.videoKey && (
-                            <p className="text-sm text-red-500 mt-1">
-                                {
-                                    errors.chapters[chapterIndex].lessons[
-                                        lessonIndex
-                                    ].videoKey.message
-                                }
-                            </p>
-                        )}
                     </div>
                     {lessonFields.length > 1 && (
                         <div className="absolute top-2 right-2">
