@@ -88,7 +88,7 @@ const CourseStrucureOutlet = () => {
                     // chapter section
                     <div
                         key={chapter.id}
-                        className="bg-white m-5 border-2 border-black rounded-base p-5 w-fit mx-auto mt-10 relative"
+                        className="bg-white m-5 border-2  rounded-base py-5 px-8 w-fit mx-auto mt-10 relative"
                     >
                         <h1 className="font-semibold text-zinc-500 text-center text-xl">
                             Chapter {chapterIndex + 1}
