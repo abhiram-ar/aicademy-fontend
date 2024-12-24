@@ -28,7 +28,13 @@ type formValue = {
 
 const CourseStrucureOutlet = () => {
     const courseDetails: ICourse = useOutletContext();
-    console.log(`outlet contet`, courseDetails);
+
+    const emptyChapterPlaceholder = [
+        {
+            chapterTitle: "",
+            lessons: [{ lessonTitle: "", videoKey: "" }],
+        },
+    ];
 
     const {
         register,
@@ -37,12 +43,10 @@ const CourseStrucureOutlet = () => {
         control,
     } = useForm({
         defaultValues: {
-            chapters: [
-                {
-                    chapterTitle: "",
-                    lessons: [{ lessonTitle: "", videoKey: "" }],
-                },
-            ],
+            chapters:
+                courseDetails.chapters?.length !== 0
+                    ? courseDetails.chapters
+                    : emptyChapterPlaceholder,
         },
     });
 
@@ -62,7 +66,7 @@ const CourseStrucureOutlet = () => {
         try {
             const res = await updateCourseStructure({
                 courseId: courseDetails._id,
-                chapters: data,
+                chapters: data.chapters,
             });
             console.log("update res", res);
         } catch (error) {
