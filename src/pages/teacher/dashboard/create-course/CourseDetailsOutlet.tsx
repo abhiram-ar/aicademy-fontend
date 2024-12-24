@@ -107,7 +107,7 @@ const CourseDetailsOutlet: React.FC = () => {
                 onSubmit={handleSubmit((data) =>
                     handleBasicDetailsUpdate(data)
                 )}
-                className="relative w-fit mx-auto mt-5"
+                className="relative w-fit mx-auto mt-5 bg-white border py-5 px-10 mb-10 rounded-base"
             >
                 {/* title */}
                 <div className="w-fit">
