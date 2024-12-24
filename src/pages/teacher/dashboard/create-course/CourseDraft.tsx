@@ -23,7 +23,7 @@ export interface ICourse {
     boughtCount?: number;
     category?: string;
     level?: "beginner" | "intermediate" | "advanced";
-    benifits?: string[];
+    benefits?: string[];
     prerequisites?: string[];
     chapters?: Array<{
         chapterTitle: string;

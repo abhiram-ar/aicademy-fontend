@@ -1,19 +1,44 @@
 import React from "react";
 import { useOutletContext } from "react-router-dom";
-import { useForm } from "react-hook-form";
+import { useFieldArray, useForm } from "react-hook-form";
 import { Button } from "@/components/ui/button";
 import { useUpdateBasisCourseDetailsMutation } from "@/redux/features/teacher/courseCreationAPIs";
 import Thumbnail from "./Thumbnail";
 import { ICourse } from "./CourseDraft";
+import { Plus, X } from "lucide-react";
+
+type FormData = {
+    title: string;
+    description: string;
+    createdBy: string;
+    courseState: "draft" | "published" | "unpublished";
+    price?: number;
+    estimatedPrice?: number;
+    thumbnail?: {
+        public_id: string;
+        url: string;
+    };
+    category?: string;
+    level?: "beginner" | "intermediate" | "advanced";
+    benefits: { value: string }[];
+    prerequisites: { value: string }[];
+};
 
 const CourseDetailsOutlet: React.FC = () => {
     const courseDetails: ICourse = useOutletContext();
 
+    const normalizeFormData = (data: string[]): { value: string }[] => {
+        const res = data.map((item) => ({ value: item }));
+        console.log(`transformed array`, res);
+        return res;
+    };
+
     const {
         handleSubmit,
         formState: { errors },
+        control,
         register,
-    } = useForm({
+    } = useForm<FormData>({
         defaultValues: {
             title: courseDetails.title,
             description: courseDetails.description,
@@ -21,17 +46,52 @@ const CourseDetailsOutlet: React.FC = () => {
             estimatedPrice: courseDetails.estimatedPrice,
             category: courseDetails.category,
             level: courseDetails.level,
+            benefits:
+                courseDetails?.benefits && courseDetails.benefits?.length > 0
+                    ? normalizeFormData(courseDetails.benefits)
+                    : [{ value: "" }],
+            prerequisites:
+                courseDetails.prerequisites &&
+                courseDetails.prerequisites.length > 0
+                    ? normalizeFormData(courseDetails.prerequisites)
+                    : [{ value: "" }],
         },
     });
 
-    console.log("outlet outlet", courseDetails);
-    const [updateBasicDetails] = useUpdateBasisCourseDetailsMutation();
+    const {
+        fields: benefitsFields,
+        append: appendBenefit,
+        remove: removeBenefit,
+    } = useFieldArray({
+        control,
+        name: "benefits" as never,
+    });
 
-    const handleBasicDetailsUpdate = async (data: object) => {
-        console.log(data);
+    const {
+        fields: prerequisitesFields,
+        append: appendPrerequisite,
+        remove: removePrerequisite,
+    } = useFieldArray({
+        control,
+        name: "prerequisites" as never,
+    });
+    const [updateBasicDetails] = useUpdateBasisCourseDetailsMutation();
+    const handleBasicDetailsUpdate = async (data: FormData) => {
+        console.log(`form data `, data);
+
+        const modifiedFormdata = {
+            ...data,
+            benefits: data.benefits.map((benifit) => benifit.value),
+            prerequisites: data.prerequisites.map(
+                (prerequisites) => prerequisites.value
+            ),
+        };
+
+        console.log("modifed form data", modifiedFormdata);
+
         try {
             const res = await updateBasicDetails({
-                ...data,
+                ...modifiedFormdata,
                 courseId: courseDetails._id,
             });
             console.log(res);
@@ -276,6 +336,143 @@ const CourseDetailsOutlet: React.FC = () => {
                         </select>
                     </div>
                 </div>
+
+                {/* benifits filed */}
+                <h3 className="font-semibold flex justify-between gap-2 items-baseline mt-5">
+                    Benefits
+                </h3>
+                <div className="bg-slate-100 px-5 py-2 rounded-base">
+                    {benefitsFields.map((benefit, benefitIndex) => (
+                        // chapter section
+                        <div key={benefit.id} className="mt-2">
+                            {/* chapter title */}
+                            <div className="w-full  flex justify-center items-center gap-3">
+                                <input
+                                    type="text"
+                                    {...register(
+                                        `benefits.${benefitIndex}.value`,
+                                        {
+                                            required: {
+                                                value: true,
+                                                message: "required",
+                                            },
+                                            maxLength: {
+                                                value: 70,
+                                                message: "max 70 characters",
+                                            },
+                                        }
+                                    )}
+                                    className={`input-neo w-full ${
+                                        errors?.benefits?.[benefitIndex]
+                                            ?.value &&
+                                        " border-2 border-red-500 "
+                                    }`}
+                                    placeholder={`benifit ${benefitIndex + 1}`}
+                                />
+                                <button
+                                    type="button"
+                                    title="delete course"
+                                    disabled={benefitsFields.length <= 1}
+                                    onClick={() => removeBenefit(benefitIndex)}
+                                >
+                                    <X
+                                        className={` ${
+                                            benefitsFields.length <= 1
+                                                ? "opacity-10"
+                                                : " text-zinc-500 hover:text-red-500 "
+                                        }`}
+                                    />
+                                </button>
+                            </div>
+                        </div>
+                    ))}
+                    <div className="flex justify-between items-center mt-3">
+                        <button
+                            type="button"
+                            className="bg-white px-3 py-1 rounded-base border-2 flex justify-center items-center gap-2 hover:bg-slate-300"
+                            onClick={() => appendBenefit("")}
+                        >
+                            <Plus className="size-4" />
+                            Add benefits
+                        </button>
+                    </div>
+                </div>
+                {/* end benifits fied */}
+
+                {/* prerequsires filed */}
+                <h3 className="font-semibold flex justify-between gap-2 items-baseline mt-5">
+                    Prerequisites
+                </h3>
+                <div className="bg-slate-100 px-5 py-2 rounded-base">
+                    {prerequisitesFields.map(
+                        (prerequisites, prerequisitesIndex) => (
+                            // chapter section
+                            <div key={prerequisites.id} className="mt-2">
+                                {/* chapter title */}
+                                <div className="w-full  flex justify-center items-center gap-3">
+                                    <input
+                                        type="text"
+                                        {...register(
+                                            `prerequisites.${prerequisitesIndex}.value`,
+                                            {
+                                                required: {
+                                                    value: true,
+                                                    message: "required",
+                                                },
+                                                maxLength: {
+                                                    value: 70,
+                                                    message:
+                                                        "max 70 characters",
+                                                },
+                                            }
+                                        )}
+                                        className={`input-neo w-full ${
+                                            errors?.prerequisites?.[
+                                                prerequisitesIndex
+                                            ]?.value &&
+                                            " border-2 border-red-500 "
+                                        }`}
+                                        placeholder={`benifit ${
+                                            prerequisitesIndex + 1
+                                        }`}
+                                    />
+                                    <button
+                                        type="button"
+                                        title="delete course"
+                                        disabled={
+                                            prerequisitesFields.length <= 1
+                                        }
+                                        onClick={() =>
+                                            removePrerequisite(
+                                                prerequisitesIndex
+                                            )
+                                        }
+                                    >
+                                        <X
+                                            className={` ${
+                                                prerequisitesFields.length <= 1
+                                                    ? "opacity-10"
+                                                    : " text-zinc-500 hover:text-red-500 "
+                                            }`}
+                                        />
+                                    </button>
+                                </div>
+                            </div>
+                        )
+                    )}
+                    <div className="flex justify-between items-center mt-3">
+                        <button
+                            type="button"
+                            className="bg-white px-3 py-1 rounded-base border-2 flex justify-center items-center gap-2 hover:bg-slate-300"
+                            onClick={() => appendPrerequisite("")}
+                        >
+                            <Plus className="size-4" />
+                            Add prerequisites
+                        </button>
+                    </div>
+                </div>
+                {/* end pre-requisites fied */}
+
                 <div className="flex justify-end my-5">
                     <Button
                         disabled={
