@@ -43,11 +43,13 @@ const courseCreationsAPI = apiSlice.injectEndpoints({
                 method: "POST",
                 body: data,
             }),
+            invalidatesTags: ["draftCourseContent"]
         }),
         getAllCourseVideos: builder.query({
             query: (data) => ({
                 url: `/api/course/draft/videos?courseId=${data.courseId}`,
             }),
+            providesTags: ["draftCourseContent"]
         }),
     }),
 });

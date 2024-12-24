@@ -86,7 +86,7 @@ const Upload = () => {
     };
 
     return (
-        <div className="w-[50rem] border-2 border-black mx-auto mt-10 p-3 bg-white grid grid-cols-7 items-center gap-5">
+        <div className="w-[50rem] border-2 border-black mx-auto mt-10 p-3 bg-slate-100 grid grid-cols-7 items-center gap-5 rounded-t-base border-b-0">
             <input
                 type="file"
                 ref={uploadRef}
