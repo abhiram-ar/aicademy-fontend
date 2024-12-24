@@ -1,5 +1,8 @@
 import { Button } from "@/components/ui/button";
-import { useGetAllCourseVideosQuery } from "@/redux/features/teacher/courseCreationAPIs";
+import {
+    useGetAllCourseVideosQuery,
+    useUpdateCouseStructureMutation,
+} from "@/redux/features/teacher/courseCreationAPIs";
 import { FilePlus2, FileX2, PackageMinus, PackagePlus } from "lucide-react";
 import React from "react";
 import {
@@ -9,8 +12,9 @@ import {
     UseFormRegister,
     FieldErrors,
 } from "react-hook-form";
-import { useParams } from "react-router-dom";
+import { useOutletContext, useParams } from "react-router-dom";
 import { Ivideo } from "./CourseAssetsOutlet";
+import { ICourse } from "./CourseDraft";
 
 type formValue = {
     chapters: {
@@ -22,8 +26,10 @@ type formValue = {
     }[];
 };
 
-
 const CourseStrucureOutlet = () => {
+    const courseDetails: ICourse = useOutletContext();
+    console.log(`outlet contet`, courseDetails);
+
     const {
         register,
         handleSubmit,
@@ -48,12 +54,28 @@ const CourseStrucureOutlet = () => {
         control,
         name: "chapters",
     });
-    console.log(errors);
+
+    const [updateCourseStructure] = useUpdateCouseStructureMutation();
+
+    const handleStructureUpdate = async (data: formValue) => {
+        console.log(data);
+        try {
+            const res = await updateCourseStructure({
+                courseId: courseDetails._id,
+                chapters: data,
+            });
+            console.log("update res", res);
+        } catch (error) {
+            console.error(`error while updating course sturucture`, error);
+        }
+    };
+
+    console.log(`structure errors`, errors);
 
     return (
         <div>
             <form
-                onSubmit={handleSubmit((data) => console.log(data))}
+                onSubmit={handleSubmit((data) => handleStructureUpdate(data))}
                 className="w-fit mx-auto"
             >
                 {chapterFields.map((chapter, chapterIndex) => (

@@ -43,13 +43,21 @@ const courseCreationsAPI = apiSlice.injectEndpoints({
                 method: "POST",
                 body: data,
             }),
-            invalidatesTags: ["draftCourseContent"]
+            invalidatesTags: ["draftCourseContent"],
         }),
         getAllCourseVideos: builder.query({
             query: (data) => ({
                 url: `/api/course/draft/videos?courseId=${data.courseId}`,
             }),
-            providesTags: ["draftCourseContent"]
+            providesTags: ["draftCourseContent"],
+        }),
+        updateCouseStructure: builder.mutation({
+            query: (data: { courseId: string; chapters: object }) => ({
+                url: "/api/course/draft/structure",
+                method: "PATCH",
+                body: data,
+            }),
+            invalidatesTags: ["draftCourseDetails"],
         }),
     }),
 });
@@ -62,4 +70,5 @@ export const {
     useUpdateThumnailMutation,
     useSaveUploadedVideoMetadaMutation,
     useGetAllCourseVideosQuery,
+    useUpdateCouseStructureMutation,
 } = courseCreationsAPI;
