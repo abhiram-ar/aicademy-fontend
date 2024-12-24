@@ -1,11 +1,4 @@
 import { Button } from "@/components/ui/button";
-import {
-    Select,
-    SelectContent,
-    SelectItem,
-    SelectTrigger,
-    SelectValue,
-} from "@/components/ui/select";
 import { useGetAllCourseVideosQuery } from "@/redux/features/teacher/courseCreationAPIs";
 import { FilePlus2, FileX2, PackageMinus, PackagePlus } from "lucide-react";
 import React from "react";
@@ -29,8 +22,6 @@ type formValue = {
     }[];
 };
 
-// repcce with apis
-const mockVideoKeys = ["video1.mp4", "video2.mp4", "video3.mp4"];
 
 const CourseStrucureOutlet = () => {
     const {
