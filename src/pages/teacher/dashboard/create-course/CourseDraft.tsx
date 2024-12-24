@@ -1,13 +1,13 @@
 import { useGetFullCourseDetailsQuery } from "@/redux/features/teacher/courseCreationAPIs";
 import React from "react";
-import { Link, Outlet, useParams } from "react-router-dom";
+import { NavLink, Outlet, useParams } from "react-router-dom";
 import { Toaster } from "react-hot-toast";
 
 export interface ICourse {
     _id: string;
     title: string;
     description: string;
-    createdBy:string; // Reference to the Teacher model
+    createdBy: string; // Reference to the Teacher model
     courseState?: "draft" | "published" | "unpublished";
     price?: number;
     estimatedPrice?: number;
@@ -36,14 +36,11 @@ export interface ICourse {
     }>;
 }
 
-
 const CourseDraft: React.FC = () => {
     const { id } = useParams();
     const { currentData } = useGetFullCourseDetailsQuery({
         courseId: id,
     });
-
-
 
     console.log("Parnet requestData: ", currentData);
     return (
@@ -60,31 +57,47 @@ const CourseDraft: React.FC = () => {
                     },
                 }}
             />
-            <nav className="w-4/5 mx-auto rounded-base bg-zinc-100 border-2 border-black box-border grid grid-cols-4 overflow-hidden -mt-10 shadow-light">
-                <Link
+            <nav className="w-4/5 mx-auto rounded-base bg-zinc-100 border-2 border-black box-border grid grid-cols-4 overflow-hidden -mt-10 shadow-light font-semibold">
+                <NavLink
                     to={`/teach/course/draft/${id}/details`}
-                    className="hover:bg-zinc-300 text-center p-3 transition-all duration-300"
+                    className={({ isActive }) =>
+                        `text-center p-3 transition-all duration-300 hover:bg-zinc-300 ${
+                            isActive ? "bg-zinc-300 " : ""
+                        }`
+                    }
                 >
                     Course Details
-                </Link>
-                <Link
+                </NavLink>
+                <NavLink
                     to={`/teach/course/draft/${id}/structure`}
-                    className="hover:bg-zinc-300 text-center p-3 transition-all duration-300"
+                    className={({ isActive }) =>
+                        `text-center p-3 transition-all duration-300 hover:bg-zinc-300 ${
+                            isActive ? "bg-zinc-300 " : ""
+                        }`
+                    }
                 >
                     Course Structure
-                </Link>
-                <Link
+                </NavLink>
+                <NavLink
                     to={`/teach/course/draft/${id}/assets`}
-                    className="hover:bg-zinc-300 text-center p-3 transition-all duration-300"
+                    className={({ isActive }) =>
+                        `text-center p-3 transition-all duration-300 hover:bg-zinc-300 ${
+                            isActive ? "bg-zinc-300 " : ""
+                        }`
+                    }
                 >
                     Course Assets
-                </Link>
-                <Link
+                </NavLink>
+                <NavLink
                     to={`/teach/course/draft/${id}/publish`}
-                    className="hover:bg-zinc-300 text-center p-3 transition-all duration-300"
+                    className={({ isActive }) =>
+                        `text-center p-3 transition-all duration-300 hover:bg-zinc-300 ${
+                            isActive ? "bg-zinc-300 " : ""
+                        }`
+                    }
                 >
                     Publish
-                </Link>
+                </NavLink>
             </nav>
             {currentData?.courseDetails && (
                 <Outlet context={currentData.courseDetails as ICourse} />
