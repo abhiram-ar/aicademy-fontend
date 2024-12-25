@@ -5,12 +5,12 @@ import ReactCrop, {
     makeAspectCrop,
     Crop,
     PixelCrop,
-    convertToPixelCrop,
 } from "react-image-crop";
 import { canvasPreview } from "./canvasPreview";
 import { useDebounceEffect } from "./useDebounceEffect";
 
 import "react-image-crop/dist/ReactCrop.css";
+import { Button } from "@/components/ui/button";
 
 // This is to demonstate how to make and center a % aspect crop
 // which is a bit trickier so we use some helper functions.
@@ -33,18 +33,19 @@ function centerAspectCrop(
         mediaHeight
     );
 }
+type ImgCropProps = {
+    handleUpload: (file: File) => void; 
+};
 
-export default function ImgCrop({ handleUpload }) {
+export default function ImgCrop({ handleUpload }: ImgCropProps) {
     const [imgSrc, setImgSrc] = useState("");
     const previewCanvasRef = useRef<HTMLCanvasElement>(null);
     const imgRef = useRef<HTMLImageElement>(null);
-    const hiddenAnchorRef = useRef<HTMLAnchorElement>(null);
-    const blobUrlRef = useRef("");
     const [crop, setCrop] = useState<Crop>();
     const [completedCrop, setCompletedCrop] = useState<PixelCrop>();
-    const [scale, setScale] = useState(1);
-    const [rotate, setRotate] = useState(0);
-    const [aspect, setAspect] = useState<number | undefined>(16 / 9);
+    const [scale] = useState(1);
+    const [rotate] = useState(0);
+    const [aspect] = useState<number | undefined>(16 / 9);
 
     function onSelectFile(e: React.ChangeEvent<HTMLInputElement>) {
         if (e.target.files && e.target.files.length > 0) {
@@ -103,21 +104,15 @@ export default function ImgCrop({ handleUpload }) {
             type: "image/png",
         });
 
-        const newFile = new File([blob], "newfile.jpg", { type: "image/png" });
+        const newFile = new File(
+            [blob],
+            `${Date.now().toString()}-newfile.png`,
+            { type: "image/png" }
+        );
 
         console.log(`blog`, newFile);
 
         handleUpload(newFile);
-
-        // if (blobUrlRef.current) {
-        //     URL.revokeObjectURL(blobUrlRef.current);
-        // }
-        // blobUrlRef.current = URL.createObjectURL(blob);
-
-        // if (hiddenAnchorRef.current) {
-        //     hiddenAnchorRef.current.href = blobUrlRef.current;
-        //     hiddenAnchorRef.current.click();
-        // }
     }
 
     useDebounceEffect(
@@ -142,55 +137,15 @@ export default function ImgCrop({ handleUpload }) {
         [completedCrop, scale, rotate]
     );
 
-    function handleToggleAspectClick() {
-        if (aspect) {
-            setAspect(undefined);
-        } else {
-            setAspect(16 / 9);
-
-            if (imgRef.current) {
-                const { width, height } = imgRef.current;
-                const newCrop = centerAspectCrop(width, height, 16 / 9);
-                setCrop(newCrop);
-                // Updates the preview
-                setCompletedCrop(convertToPixelCrop(newCrop, width, height));
-            }
-        }
-    }
-
     return (
-        <div className="h-2/3">
-            <div className="Crop-Controls">
-                <input type="file" accept="image/*" onChange={onSelectFile} />
-                <div>
-                    {/* 
-          <label htmlFor="scale-input">Scale: </label>
-          <input
-            id="scale-input"
-            type="number"
-            step="0.1"
-            value={scale}
-            disabled={!imgSrc}
-            onChange={(e) => setScale(Number(e.target.value))}
-          /> */}
-                </div>
-                <div>
-                    {/* <label htmlFor="rotate-input">Rotate: </label>
-          <input
-            id="rotate-input"
-            type="number"
-            value={rotate}
-            disabled={!imgSrc}
-            onChange={(e) =>
-              setRotate(Math.min(180, Math.max(-180, Number(e.target.value))))
-            }
-          /> */}
-                </div>
-                <div>
-                    {/* <button onClick={handleToggleAspectClick}>
-            Toggle aspect {aspect ? 'off' : 'on'}
-          </button> */}
-                </div>
+        <div>
+            <div className="bg-slate-200 border p-2 rounded-base mb-2">
+                <input
+                    type="file"
+                    accept="image/*"
+                    onChange={onSelectFile}
+                    className="bg-none border-0 outline-none file:bg-blue-300 file:rounded-base file:border file:px-4 file:py-1 file:hover:bg-blue-400"
+                />
             </div>
             {!!imgSrc && (
                 <ReactCrop
@@ -227,23 +182,14 @@ export default function ImgCrop({ handleUpload }) {
                             }}
                         />
                     </div>
-                    <div>
-                        <button onClick={onDownloadCropClick}>
-                            Download Crop
-                        </button>
-
-                        <a
-                            href="#hidden"
-                            ref={hiddenAnchorRef}
-                            download
-                            style={{
-                                position: "absolute",
-                                top: "-200vh",
-                                visibility: "hidden",
-                            }}
+                    <div className="w-fit mx-auto  mt-2">
+                        <Button
+                            variant="noShadow"
+                            className="bg-green-300 hover:bg-green-400"
+                            onClick={onDownloadCropClick}
                         >
-                            Hidden download
-                        </a>
+                            Update Tumbnail
+                        </Button>
                     </div>
                 </>
             )}

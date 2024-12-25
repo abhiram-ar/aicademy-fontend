@@ -3,26 +3,26 @@ import { Pencil, Upload } from "lucide-react";
 import React, { useRef } from "react";
 import toast from "react-hot-toast";
 import { ICourse } from "./CourseDraft";
-
-import { Button } from "@/components/ui/button";
+import ImgCrop from "./Crop";
 import {
     Dialog,
+    DialogClose,
     DialogContent,
     DialogDescription,
-    DialogFooter,
     DialogHeader,
     DialogTitle,
     DialogTrigger,
 } from "@/components/ui/dialog";
-import { Input } from "@/components/ui/input";
-import ImgCrop from "./Crop";
 
 const Thumbnail: React.FC<{ courseDetails: ICourse }> = ({ courseDetails }) => {
     const fileButtonRef = useRef<HTMLInputElement | null>(null);
     const [updateThumbnail] = useUpdateThumnailMutation();
+    const modalTriggerRef = useRef<HTMLButtonElement | null>(null);
+    const modalSubmitRef = useRef<HTMLButtonElement | null>(null);
 
     const handleClick = () => {
-        fileButtonRef.current?.click();
+        if (modalTriggerRef.current) modalTriggerRef.current.click();
+        // fileButtonRef.current?.click();
     };
 
     const handleFileChnage = async () => {
@@ -57,6 +57,7 @@ const Thumbnail: React.FC<{ courseDetails: ICourse }> = ({ courseDetails }) => {
     };
 
     const handleCroppedUpload = async (file: File) => {
+        console.log(`file`, file);
         const formData = new FormData();
         formData.append("newThumbnail", file);
         formData.append("courseId", courseDetails._id);
@@ -71,6 +72,7 @@ const Thumbnail: React.FC<{ courseDetails: ICourse }> = ({ courseDetails }) => {
 
         try {
             const request = updateThumbnail(formData).unwrap();
+            if (modalSubmitRef.current) modalSubmitRef.current.click();
             toast.promise(request, {
                 loading: "updating thumbnail",
                 success: "Thumbnail successfully updated",
@@ -79,6 +81,7 @@ const Thumbnail: React.FC<{ courseDetails: ICourse }> = ({ courseDetails }) => {
             await request;
         } catch (error) {
             console.error("error while upadating thumbnali", error);
+            toast("Error while updating thumbnail");
         }
     };
 
@@ -86,7 +89,9 @@ const Thumbnail: React.FC<{ courseDetails: ICourse }> = ({ courseDetails }) => {
         <div className="mx-auto w-[50rem]  mt-10 ">
             <Dialog>
                 <DialogTrigger asChild>
-                    <Button variant="default">Edit Profile</Button>
+                    <button ref={modalTriggerRef} className="hidden">
+                        Edit Profile
+                    </button>
                 </DialogTrigger>
                 <DialogContent className="sm:max-w-[425px]">
                     <DialogHeader>
@@ -98,9 +103,15 @@ const Thumbnail: React.FC<{ courseDetails: ICourse }> = ({ courseDetails }) => {
                     <div className="grid gap-4 py-4">
                         <ImgCrop handleUpload={handleCroppedUpload} />
                     </div>
-                    <DialogFooter>
-                        <Button type="submit">Save changes</Button>
-                    </DialogFooter>
+                    <DialogClose asChild>
+                        <button
+                            type="button"
+                            ref={modalSubmitRef}
+                            className="hidden"
+                        >
+                            Close
+                        </button>
+                    </DialogClose>
                 </DialogContent>
             </Dialog>
 
@@ -115,8 +126,11 @@ const Thumbnail: React.FC<{ courseDetails: ICourse }> = ({ courseDetails }) => {
                 />
 
                 {courseDetails.thumbnail && courseDetails.thumbnail?.url ? (
-                    <div className="h-fit min-h-5">
-                        <img src={courseDetails.thumbnail.url} />
+                    <div className="min-h-5 w-full">
+                        <img
+                            src={courseDetails.thumbnail.url}
+                            className="w-full h-full object-cover"
+                        />
                         <div
                             onClick={handleClick}
                             className="absolute top-2 right-2 bg-zinc-500  p-3 rounded-full border border-black hover:bg-zinc-600"
