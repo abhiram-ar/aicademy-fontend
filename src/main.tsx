@@ -18,8 +18,14 @@ import {
 import AdminLoginPage from "./pages/admin/AminLoginPage";
 import AdminDashBoardHomePage from "./pages/admin/AdminDashBoardHomePage";
 import TeacherOnboadingPage from "./pages/admin/Teacher mangement/TeacherOnboadingPage";
-import TeacherDashboardHome from "./pages/teacher/dashboard/TeacherDashboardHome";
-import CountdownTimer from "./components/CountdownTimer";
+import Page from "./pages/teacher/dashboard/Layout";
+import TeacherDashboard from "./pages/teacher/dashboard/Layout";
+import CreateCoursePage from "./pages/teacher/dashboard/create-course/CreateDraftPage";
+import CourseDraft from "./pages/teacher/dashboard/create-course/CourseDraft";
+import CourseDetailsOutlet from "./pages/teacher/dashboard/create-course/basic details/CourseDetailsOutlet";
+import CourseStrucureOutlet from "./pages/teacher/dashboard/create-course/CourseStrucureOutlet";
+import CourseAssetsOutlet from "./pages/teacher/dashboard/create-course/course-assets/CourseAssetsOutlet";
+import PublishOutlet from "./pages/teacher/dashboard/create-course/PublishOutlet";
 
 fetchAccessTokenOnload();
 const appRouter = createBrowserRouter([
@@ -41,13 +47,44 @@ const appRouter = createBrowserRouter([
             },
             {
                 path: "/teach",
-
                 children: [
                     {
-                        index: true,
+                        path: "/teach",
                         loader: () => authLoader("teacher"),
                         hydrateFallbackElement: <p>loading...</p>,
-                        element: <TeacherDashboardHome />,
+                        element: <TeacherDashboard />,
+                        children: [
+                            {
+                                path: "/teach/course/create",
+                                element: <CreateCoursePage />,
+                            },
+                            {
+                                path: "/teach/course/draft/:id",
+                                element: <CourseDraft />,
+                                children: [
+                                    {
+                                        index: true,
+                                        element: <CourseDetailsOutlet />,
+                                    },
+                                    {
+                                        path: "details",
+                                        element: <CourseDetailsOutlet />,
+                                    },
+                                    {
+                                        path: "structure",
+                                        element: <CourseStrucureOutlet />,
+                                    },
+                                    {
+                                        path: "assets",
+                                        element: <CourseAssetsOutlet />,
+                                    },
+                                    {
+                                        path: "publish",
+                                        element: <PublishOutlet />,
+                                    },
+                                ],
+                            },
+                        ],
                     },
                     {
                         path: "/teach/login",
@@ -90,7 +127,7 @@ const appRouter = createBrowserRouter([
     },
     {
         path: "/test",
-        element: <CountdownTimer durationInSeconds={10}/>,
+        element: <Page />,
     },
 ]);
 
