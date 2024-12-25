@@ -7,9 +7,9 @@ import {
     useUpdateBasisCourseDetailsMutation,
 } from "@/redux/features/teacher/courseCreationAPIs";
 import Thumbnail from "./Thumbnail";
-import { ICourse } from "./CourseDraft";
+import { ICourse } from "../CourseDraft";
 import { Plus, X } from "lucide-react";
-import { Ivideo } from "./CourseAssetsOutlet";
+import { Ivideo } from "../course-assets/CourseAssetsOutlet";
 
 type FormData = {
     title: string;

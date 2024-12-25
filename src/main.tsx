@@ -22,9 +22,9 @@ import Page from "./pages/teacher/dashboard/Layout";
 import TeacherDashboard from "./pages/teacher/dashboard/Layout";
 import CreateCoursePage from "./pages/teacher/dashboard/create-course/CreateDraftPage";
 import CourseDraft from "./pages/teacher/dashboard/create-course/CourseDraft";
-import CourseDetailsOutlet from "./pages/teacher/dashboard/create-course/CourseDetailsOutlet";
+import CourseDetailsOutlet from "./pages/teacher/dashboard/create-course/basic details/CourseDetailsOutlet";
 import CourseStrucureOutlet from "./pages/teacher/dashboard/create-course/CourseStrucureOutlet";
-import CourseAssetsOutlet from "./pages/teacher/dashboard/create-course/CourseAssetsOutlet";
+import CourseAssetsOutlet from "./pages/teacher/dashboard/create-course/course-assets/CourseAssetsOutlet";
 import PublishOutlet from "./pages/teacher/dashboard/create-course/PublishOutlet";
 
 fetchAccessTokenOnload();

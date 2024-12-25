@@ -1,7 +1,7 @@
 import { Button } from "@/components/ui/button";
 import { FilePlus2, FileX2, PackageMinus, PackagePlus } from "lucide-react";
 import React from "react";
-import { Ivideo } from "./CourseAssetsOutlet";
+import { Ivideo } from "./course-assets/CourseAssetsOutlet";
 import { ICourse } from "./CourseDraft";
 import {
     useGetAllCourseVideosQuery,
