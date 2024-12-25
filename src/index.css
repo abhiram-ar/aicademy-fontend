@@ -73,6 +73,9 @@
     .input-neo {
         @apply bg-white border-2 border-black rounded-base px-3 py-2 focus:outline-none focus:outline-blue-300 mt-1;
     }
+    .explore-nav{
+        @apply px-5 py-0.5 font-publicSans font-semibold
+    }
     .validation-error {
         @apply text-[#ff5a5a] text-sm;
     }
