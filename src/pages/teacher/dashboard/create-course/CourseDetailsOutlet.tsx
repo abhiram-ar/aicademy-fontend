@@ -1,11 +1,15 @@
 import React from "react";
-import { useOutletContext } from "react-router-dom";
+import { useOutletContext, useParams } from "react-router-dom";
 import { useFieldArray, useForm } from "react-hook-form";
 import { Button } from "@/components/ui/button";
-import { useUpdateBasisCourseDetailsMutation } from "@/redux/features/teacher/courseCreationAPIs";
+import {
+    useGetAllCourseVideosQuery,
+    useUpdateBasisCourseDetailsMutation,
+} from "@/redux/features/teacher/courseCreationAPIs";
 import Thumbnail from "./Thumbnail";
 import { ICourse } from "./CourseDraft";
 import { Plus, X } from "lucide-react";
+import { Ivideo } from "./CourseAssetsOutlet";
 
 type FormData = {
     title: string;
@@ -22,10 +26,16 @@ type FormData = {
     level?: "beginner" | "intermediate" | "advanced";
     benefits: { value: string }[];
     prerequisites: { value: string }[];
+    demoVideoKey: string;
 };
 
 const CourseDetailsOutlet: React.FC = () => {
     const courseDetails: ICourse = useOutletContext();
+    const { id } = useParams();
+
+    const { currentData: content } = useGetAllCourseVideosQuery({
+        courseId: id,
+    });
 
     const normalizeFormData = (data: string[]): { value: string }[] => {
         const res = data.map((item) => ({ value: item }));
@@ -42,6 +52,7 @@ const CourseDetailsOutlet: React.FC = () => {
         defaultValues: {
             title: courseDetails.title,
             description: courseDetails.description,
+            demoVideoKey: courseDetails.demoVideoKey || "",
             price: courseDetails.price,
             estimatedPrice: courseDetails.estimatedPrice,
             category: courseDetails.category,
@@ -179,6 +190,61 @@ const CourseDetailsOutlet: React.FC = () => {
                         placeholder="eg: Master the fundamentals of JavaScript, the world's most popular programming language for web development. This course covers essential topics like variables, functions, loops, DOM manipulation, and modern ES6+ features. Learn to create dynamic, interactive websites and build a strong foundation for advanced frameworks like React, Angular, or Node.js. Perfect for beginners and aspiring developers!"
                         className="input-neo w-[50rem]"
                     />
+                </div>
+
+                {/* demovideo */}
+                <label
+                    htmlFor="category"
+                    className="font-semibold flex justify-between gap-2 items-baseline mb-1 mt-2"
+                >
+                    {" "}
+                    <div className="flex gap-2 items-baseline">
+                        Demo Video
+                        {errors?.demoVideoKey && (
+                            <span className="validation-error">
+                                ({String(errors?.demoVideoKey.message)})
+                            </span>
+                        )}
+                    </div>
+                </label>
+                <div className="bg-white rounded-base p-2 border-2 border-black">
+                    <select
+                        {...register("demoVideoKey", {
+                            required: {
+                                value: true,
+                                message: "select a video",
+                            },
+                        })}
+                        id="demoVideo"
+                        className="w-full border-none outline-none"
+                    >
+                        <option value="" disabled>
+                            Select video for lesson
+                        </option>
+                        {courseDetails.demoVideoKey && (
+                            <option value={courseDetails.demoVideoKey}>
+                                {courseDetails.demoVideoKey
+                                    .split("-")
+                                    .slice(1)
+                                    .join("")}
+                            </option>
+                        )}
+                        {courseDetails &&
+                            content &&
+                            content.courseVideos.map((video: Ivideo) => (
+                                <>
+                                    {courseDetails.demoVideoKey !==
+                                        video.key && (
+                                        <option
+                                            key={video._id}
+                                            value={video.key}
+                                        >
+                                            {video.displayName}
+                                        </option>
+                                    )}
+                                </>
+                            ))}
+                    </select>
                 </div>
 
                 {/* price group */}

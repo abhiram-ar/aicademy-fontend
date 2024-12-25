@@ -15,10 +15,7 @@ export interface ICourse {
         public_id: string;
         url: string;
     };
-    demoVideos?: Array<{
-        key: string;
-        public_url: string;
-    }>;
+    demoVideoKey: string;
     rating?: number;
     boughtCount?: number;
     category?: string;

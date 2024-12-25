@@ -16,7 +16,7 @@ import {
 } from "react-hook-form";
 import { useOutletContext, useParams } from "react-router-dom";
 
-interface formValue  {
+interface formValue {
     chapters: {
         chapterTitle: string;
         lessons: {
@@ -24,7 +24,7 @@ interface formValue  {
             videoKey: string;
         }[];
     }[];
-};
+}
 
 const CourseStrucureOutlet = () => {
     const courseDetails: ICourse = useOutletContext();
@@ -220,113 +220,114 @@ const LessonForm: React.FC<Props> = ({
 
     return (
         <div>
-            {lessonFields.map((lesson, lessonIndex) => (
-                <div
-                    key={lesson.id}
-                    className="rounded-base border-black p-5 bg-slate-100 mb-3 relative"
-                >
-                    {/* lesson Title */}
-                    <div>
-                        <label
-                            htmlFor="category"
-                            className="font-semibold flex justify-between gap-2 items-baseline"
-                        >
-                            {" "}
-                            <div className="flex gap-2 items-baseline">
-                                Lesson {lessonIndex + 1} Title
-                                {errors?.chapters?.[chapterIndex]?.lessons?.[
-                                    lessonIndex
-                                ]?.lessonTitle?.message && (
-                                    <span className="validation-error">
-                                        (
-                                        {String(
-                                            errors?.chapters?.[chapterIndex]
-                                                ?.lessons?.[lessonIndex]
-                                                ?.lessonTitle.message
-                                        )}
-                                        )
-                                    </span>
-                                )}
-                            </div>
-                        </label>
-                        <input
-                            type="text"
-                            {...register(
-                                `chapters.${chapterIndex}.lessons.${lessonIndex}.lessonTitle`,
-                                { required: "lesson title required" }
-                            )}
-                            className="input-neo w-full border-zinc-200"
-                        />
-                    </div>
-
-                    {/* video selectiion */}
-                    <div className="flex-1 mt-2">
-                        <label
-                            htmlFor="category"
-                            className="font-semibold flex justify-between gap-2 items-baseline"
-                        >
-                            {" "}
-                            <div className="flex gap-2 items-baseline">
-                                Lesson Video
-                                {errors?.chapters?.[chapterIndex]?.lessons?.[
-                                    lessonIndex
-                                ]?.videoKey?.message && (
-                                    <span className="validation-error">
-                                        (
-                                        {String(
-                                            errors?.chapters?.[chapterIndex]
-                                                ?.lessons?.[lessonIndex]
-                                                ?.videoKey?.message
-                                        )}
-                                        )
-                                    </span>
-                                )}
-                            </div>
-                        </label>
-
-                        <div className="bg-white rounded-base p-2 border-2">
-                            <select
-                                {...register(
-                                    `chapters.${chapterIndex}.lessons.${lessonIndex}.videoKey`,
-                                    {
-                                        required: {
-                                            value: true,
-                                            message: "select a video",
-                                        },
-                                    }
-                                )}
-                                className="w-full border-none outline-none"
+            {content &&
+                lessonFields.map((lesson, lessonIndex) => (
+                    <div
+                        key={lesson.id}
+                        className="rounded-base border-black p-5 bg-slate-100 mb-3 relative"
+                    >
+                        {/* lesson Title */}
+                        <div>
+                            <label
+                                htmlFor="category"
+                                className="font-semibold flex justify-between gap-2 items-baseline"
                             >
-                                <option value="" disabled>
-                                    Select video for lesson
-                                </option>
-                                {content &&
-                                    content.courseVideos.map(
-                                        (video: Ivideo) => (
-                                            <option
-                                                key={video._id}
-                                                value={video.key}
-                                            >
-                                                {video.displayName}
-                                            </option>
-                                        )
+                                {" "}
+                                <div className="flex gap-2 items-baseline">
+                                    Lesson {lessonIndex + 1} Title
+                                    {errors?.chapters?.[chapterIndex]
+                                        ?.lessons?.[lessonIndex]?.lessonTitle
+                                        ?.message && (
+                                        <span className="validation-error">
+                                            (
+                                            {String(
+                                                errors?.chapters?.[chapterIndex]
+                                                    ?.lessons?.[lessonIndex]
+                                                    ?.lessonTitle.message
+                                            )}
+                                            )
+                                        </span>
                                     )}
-                            </select>
+                                </div>
+                            </label>
+                            <input
+                                type="text"
+                                {...register(
+                                    `chapters.${chapterIndex}.lessons.${lessonIndex}.lessonTitle`,
+                                    { required: "lesson title required" }
+                                )}
+                                className="input-neo w-full border-zinc-200"
+                            />
                         </div>
-                    </div>
-                    {lessonFields.length > 1 && (
-                        <div className="absolute top-2 right-2">
-                            <button
-                                type="button"
-                                onClick={() => removeLesson(lessonIndex)}
-                                title="delete lessson"
+
+                        {/* video selectiion */}
+                        <div className="flex-1 mt-2">
+                            <label
+                                htmlFor="category"
+                                className="font-semibold flex justify-between gap-2 items-baseline"
                             >
-                                <FileX2 className="text-zinc-400 hover:text-red-400 size-5" />
-                            </button>
+                                {" "}
+                                <div className="flex gap-2 items-baseline">
+                                    Lesson Video
+                                    {errors?.chapters?.[chapterIndex]
+                                        ?.lessons?.[lessonIndex]?.videoKey
+                                        ?.message && (
+                                        <span className="validation-error">
+                                            (
+                                            {String(
+                                                errors?.chapters?.[chapterIndex]
+                                                    ?.lessons?.[lessonIndex]
+                                                    ?.videoKey?.message
+                                            )}
+                                            )
+                                        </span>
+                                    )}
+                                </div>
+                            </label>
+
+                            <div className="bg-white rounded-base p-2 border-2">
+                                <select
+                                    {...register(
+                                        `chapters.${chapterIndex}.lessons.${lessonIndex}.videoKey`,
+                                        {
+                                            required: {
+                                                value: true,
+                                                message: "select a video",
+                                            },
+                                        }
+                                    )}
+                                    className="w-full border-none outline-none"
+                                >
+                                    <option value="" disabled>
+                                        Select video for lesson
+                                    </option>
+                                    {content &&
+                                        content.courseVideos.map(
+                                            (video: Ivideo) => (
+                                                <option
+                                                    key={video._id}
+                                                    value={video.key}
+                                                >
+                                                    {video.displayName}
+                                                </option>
+                                            )
+                                        )}
+                                </select>
+                            </div>
                         </div>
-                    )}
-                </div>
-            ))}
+                        {lessonFields.length > 1 && (
+                            <div className="absolute top-2 right-2">
+                                <button
+                                    type="button"
+                                    onClick={() => removeLesson(lessonIndex)}
+                                    title="delete lessson"
+                                >
+                                    <FileX2 className="text-zinc-400 hover:text-red-400 size-5" />
+                                </button>
+                            </div>
+                        )}
+                    </div>
+                ))}
 
             <button
                 type="button"
