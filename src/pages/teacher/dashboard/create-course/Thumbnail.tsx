@@ -4,12 +4,27 @@ import React, { useRef } from "react";
 import toast from "react-hot-toast";
 import { ICourse } from "./CourseDraft";
 
+import { Button } from "@/components/ui/button";
+import {
+    Dialog,
+    DialogContent,
+    DialogDescription,
+    DialogFooter,
+    DialogHeader,
+    DialogTitle,
+    DialogTrigger,
+} from "@/components/ui/dialog";
+import { Input } from "@/components/ui/input";
+import ImgCrop from "./Crop";
+
 const Thumbnail: React.FC<{ courseDetails: ICourse }> = ({ courseDetails }) => {
     const fileButtonRef = useRef<HTMLInputElement | null>(null);
     const [updateThumbnail] = useUpdateThumnailMutation();
+
     const handleClick = () => {
         fileButtonRef.current?.click();
     };
+
     const handleFileChnage = async () => {
         const fileInput = fileButtonRef.current;
         if (fileInput?.files && fileInput.files?.length > 0) {
@@ -26,6 +41,7 @@ const Thumbnail: React.FC<{ courseDetails: ICourse }> = ({ courseDetails }) => {
             }
 
             console.log(formData);
+
             try {
                 const request = updateThumbnail(formData).unwrap();
                 toast.promise(request, {
@@ -40,8 +56,54 @@ const Thumbnail: React.FC<{ courseDetails: ICourse }> = ({ courseDetails }) => {
         }
     };
 
+    const handleCroppedUpload = async (file: File) => {
+        const formData = new FormData();
+        formData.append("newThumbnail", file);
+        formData.append("courseId", courseDetails._id);
+        if (courseDetails.thumbnail?.public_id) {
+            formData.append(
+                "thumbnailPublic_id",
+                courseDetails.thumbnail.public_id
+            );
+        }
+
+        console.log(formData);
+
+        try {
+            const request = updateThumbnail(formData).unwrap();
+            toast.promise(request, {
+                loading: "updating thumbnail",
+                success: "Thumbnail successfully updated",
+                error: "Error While updating thumbnail",
+            });
+            await request;
+        } catch (error) {
+            console.error("error while upadating thumbnali", error);
+        }
+    };
+
     return (
         <div className="mx-auto w-[50rem]  mt-10 ">
+            <Dialog>
+                <DialogTrigger asChild>
+                    <Button variant="default">Edit Profile</Button>
+                </DialogTrigger>
+                <DialogContent className="sm:max-w-[425px]">
+                    <DialogHeader>
+                        <DialogTitle>Update Thumbnail</DialogTitle>
+                        <DialogDescription>
+                            Image should have 16: 9 aspect ratio
+                        </DialogDescription>
+                    </DialogHeader>
+                    <div className="grid gap-4 py-4">
+                        <ImgCrop handleUpload={handleCroppedUpload} />
+                    </div>
+                    <DialogFooter>
+                        <Button type="submit">Save changes</Button>
+                    </DialogFooter>
+                </DialogContent>
+            </Dialog>
+
             <p className="font-semibold">Thumbnail</p>
             <div className="border-2 rounded-base border-black min-h-5 mt-1 relative bg-white">
                 <input
