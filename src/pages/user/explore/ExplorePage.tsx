@@ -27,7 +27,9 @@ const ExplorePage = () => {
                             <SortDropDown />
                         </div>
                         <div className="mt-12">
-                            <CourseCardLong />
+                            {Array.from({ length: 5 }).map((_, index) => (
+                                <CourseCardLong key={index} />
+                            ))}
                         </div>
                     </div>
                 </div>
