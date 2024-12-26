@@ -3,8 +3,28 @@ import FIlterCategoryNav from "./FIlterCategoryNav";
 import FilterSidebar from "./FilterSidebar";
 import SortDropDown from "./SortDropDown";
 import CourseCardLong from "./CourseCardLong";
+import { useGetCoursesCardDetailsQuery } from "./exploreApiSlice.ts";
+
+export interface ICourse {
+    title: string;
+    description: string;
+    createdBy: {
+        firstName: string;
+        lastName: string;
+        legalName: string;
+    };
+    price: number;
+    estimatedPrice: number;
+    thumbnail: { public_id: string; url: string };
+    rating?: number;
+    boughtCount: number;
+    category: string;
+    level: "beginner" | "intermediate" | "advanced";
+}
 
 const ExplorePage = () => {
+    const { data: courseCardDetails } = useGetCoursesCardDetailsQuery({});
+    console.log(courseCardDetails);
     return (
         <div>
             <MainNavbar />
@@ -27,9 +47,15 @@ const ExplorePage = () => {
                             <SortDropDown />
                         </div>
                         <div className="mt-12">
-                            {Array.from({ length: 5 }).map((_, index) => (
-                                <CourseCardLong key={index} />
-                            ))}
+                            {courseCardDetails &&
+                                courseCardDetails.courses.map(
+                                    (courseDetails: ICourse, index: number) => (
+                                        <CourseCardLong
+                                            key={index}
+                                            courseDetails={courseDetails}
+                                        />
+                                    )
+                                )}
                         </div>
                     </div>
                 </div>
