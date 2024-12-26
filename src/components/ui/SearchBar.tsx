@@ -21,11 +21,8 @@ type Props = {
 const SearchBar: React.FC<Props> = ({ query, setFilter }) => {
     const [searchValue, setSearchValue] = useState(query);
     const deferedQuery = useDeferredValue(searchValue);
-
-
     return (
         <div className="flex border-2 border-black p-3 rounded-base w-full xlg:w-3/5 gap-2">
-
             <Search />
             <input
                 type="text"

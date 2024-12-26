@@ -41,8 +41,8 @@ const ExplorePage = () => {
 
     return (
         <div>
-            <MainNavbar query={filter.search} setFilter={setFilter}/>
-            <FIlterCategoryNav />
+            <MainNavbar query={filter.search} setFilter={setFilter} />
+            <FIlterCategoryNav filter={filter} setFilter={setFilter} />
 
             {/* paper bg */}
             <div className="bg-[#fffbee] w-full min-h-screen pt-10">
