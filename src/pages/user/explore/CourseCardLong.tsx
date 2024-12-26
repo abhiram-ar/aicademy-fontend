@@ -11,7 +11,7 @@ const CourseCardLong: React.FC<{ courseDetails: ICourse }> = ({
             {/* image */}
             <div className="h-[11.25rem] w-80 border-e border-black shrink-0">
                 <img
-                    src={courseDetails.thumbnail.url}
+                    src={courseDetails.thumbnail?.url}
                     alt=""
                     className="object-contain"
                 />

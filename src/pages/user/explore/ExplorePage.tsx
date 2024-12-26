@@ -4,6 +4,7 @@ import FilterSidebar from "./FilterSidebar";
 import SortDropDown from "./SortDropDown";
 import CourseCardLong from "./CourseCardLong";
 import { useGetCoursesCardDetailsQuery } from "./exploreApiSlice.ts";
+import { useState } from "react";
 
 export interface ICourse {
     title: string;
@@ -23,11 +24,24 @@ export interface ICourse {
 }
 
 const ExplorePage = () => {
-    const { data: courseCardDetails } = useGetCoursesCardDetailsQuery({});
+    const [filter, setFilter] = useState({
+        search: "",
+        category: "",
+        level: "",
+        minPrice: "",
+        maxPrice: "",
+        sortBy: "price",
+        sortOrder: -1,
+        page: "",
+        limit: 10,
+    });
+
+    const { data: courseCardDetails } = useGetCoursesCardDetailsQuery(filter);
     console.log(courseCardDetails);
+
     return (
         <div>
-            <MainNavbar />
+            <MainNavbar query={filter.search} setFilter={setFilter}/>
             <FIlterCategoryNav />
 
             {/* paper bg */}
