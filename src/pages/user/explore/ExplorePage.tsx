@@ -53,7 +53,7 @@ const ExplorePage = () => {
                             Showing all Courses
                         </h2>
 
-                        <FilterSidebar />
+                        <FilterSidebar filter={filter} setFilter={setFilter} />
                     </div>
                     {/* rigt seciotn - main */}
                     <div className="border border-green-400 relative col-span-9">
