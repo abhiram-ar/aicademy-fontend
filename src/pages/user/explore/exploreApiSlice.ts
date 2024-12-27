@@ -8,6 +8,7 @@ const explorePageApiSlice = apiSlice.injectEndpoints({
                 console.log(queryParams);
                 return `/api/course/list?${queryParams}`;
             },
+            //Invalidate cache If necessary
         }),
     }),
 });

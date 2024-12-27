@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useRef, useState } from "react";
 import { Label } from "@/components/ui/label";
 import { RadioGroup, RadioGroupItem } from "@/components/ui/radio-group";
 
@@ -56,13 +56,25 @@ const priceFilter: {
     },
     {
         value: "custom",
+        minPrice: "",
+        maxPrice: "",
     },
 ];
 
 const FilterSidebar: React.FC<Props> = ({ filter, setFilter }) => {
     const [customMinPrice, setCustomMinPrice] = useState("");
     const [customMaxPrice, setCustomMaxPrice] = useState("");
+    const customPriceRef = useRef<HTMLDivElement>(null);
 
+    const handleCustomPriceSubmit = (e: React.FormEvent<HTMLFormElement>) => {
+        e.preventDefault();
+        const form = e.target as HTMLFormElement;
+        setFilter((prev) => ({
+            ...prev,
+            minPrice: String(form.minPrice.value as HTMLInputElement),
+            maxPrice: String(form.maxPrice.value as HTMLInputElement),
+        }));
+    };
 
     return (
         <div className="bg-white border border-black rounded-base w-64 mt-5">
@@ -81,63 +93,75 @@ const FilterSidebar: React.FC<Props> = ({ filter, setFilter }) => {
                         const filter = priceFilter.find(
                             (filter) => filter.value === value
                         );
-                        if (filter?.value !== "custom") {
-                            setFilter((prev) => ({
-                                ...prev,
-                                minPrice: String(filter?.minPrice),
-                                maxPrice: String(filter?.maxPrice),
-                            }));
-                        } else {
-                            setFilter((prev) => ({
-                                ...prev,
-                                maxPrice: String(customMaxPrice),
-                                minPrice: String(customMinPrice),
-                            }));
-                        }
+
+                        setFilter((prev) => ({
+                            ...prev,
+                            minPrice: String(filter?.minPrice),
+                            maxPrice: String(filter?.maxPrice),
+                        }));
                     }}
                     defaultValue=""
                     className="font-normal ps-3 my-2"
                 >
                     <div className="flex items-center space-x-2">
-                        <RadioGroupItem value="free" id="r1" />
-                        <Label htmlFor="r1">Free</Label>
+                        <RadioGroupItem value="free" id="p1" />
+                        <Label htmlFor="p1">Free</Label>
                     </div>
                     <div className="flex items-center space-x-2">
-                        <RadioGroupItem value="under500" id="r3" />
-                        <Label htmlFor="r3">Under 500 ₹</Label>
+                        <RadioGroupItem value="under500" id="p2" />
+                        <Label htmlFor="p2">Under 500 ₹</Label>
                     </div>
                     <div className="flex items-center space-x-2">
-                        <RadioGroupItem value="under1000" id="r3" />
-                        <Label htmlFor="r3">Under 1000 ₹</Label>
+                        <RadioGroupItem value="under1000" id="p3" />
+                        <Label htmlFor="p3">Under 1000 ₹</Label>
                     </div>
 
                     <div>
-                        <div className="flex items-center space-x-2">
-                            <RadioGroupItem value="custom" id="r3" />
-                            <Label htmlFor="r3">Custom</Label>
+                        <div
+                            className="flex items-center space-x-2"
+                            ref={customPriceRef}
+                        >
+                            <RadioGroupItem value="custom" id="p4" />
+                            <Label htmlFor="p4">Custom</Label>
                         </div>
-                        <div className="ps-7">
-                            <input
-                                type="number"
-                                min={0}
-                                value={customMinPrice}
-                                onChange={(e) =>
-                                    setCustomMinPrice(e.target.value)
-                                }
-                                placeholder="min"
-                                className="input-neo w-full border bg-slate-100 h-8 "
-                            />
-                            <input
-                                type="number"
-                                max={10000}
-                                value={customMaxPrice}
-                                onChange={(e) =>
-                                    setCustomMaxPrice(e.target.value)
-                                }
-                                placeholder="max"
-                                className="input-neo w-full border bg-slate-100 h-8"
-                            />
-                        </div>
+                        {(
+                            customPriceRef.current
+                                ?.firstChild as HTMLButtonElement
+                        )?.dataset?.state === "checked" && (
+                            <form
+                                className="ps-7"
+                                onSubmit={(e) => handleCustomPriceSubmit(e)}
+                            >
+                                <input
+                                    type="number"
+                                    min={0}
+                                    name="minPrice"
+                                    value={customMinPrice}
+                                    onChange={(e) =>
+                                        setCustomMinPrice(e.target.value)
+                                    }
+                                    placeholder="min"
+                                    className="input-neo w-full border bg-slate-100 h-8 "
+                                />
+                                <input
+                                    type="number"
+                                    max={10000}
+                                    name="maxPrice"
+                                    value={customMaxPrice}
+                                    onChange={(e) =>
+                                        setCustomMaxPrice(e.target.value)
+                                    }
+                                    placeholder="max"
+                                    className="input-neo w-full border bg-slate-100 h-8"
+                                />
+                                <button
+                                    type="submit"
+                                    className="border border-slate-500 bg-blue-200 px-5 py-1 block mt-1 rounded-base mx-auto hover:bg-blue-300"
+                                >
+                                    Go
+                                </button>
+                            </form>
+                        )}
                     </div>
                 </RadioGroup>
             </div>
@@ -155,7 +179,7 @@ const FilterSidebar: React.FC<Props> = ({ filter, setFilter }) => {
                 >
                     <div className="flex items-center space-x-2">
                         <RadioGroupItem value="" id="l1" />
-                        <Label htmlFor="l1">Free</Label>
+                        <Label htmlFor="l1">All</Label>
                     </div>
                     <div className="flex items-center space-x-2">
                         <RadioGroupItem value="beginner" id="l2" />
