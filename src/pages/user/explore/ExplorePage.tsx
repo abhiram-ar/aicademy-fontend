@@ -5,6 +5,7 @@ import SortDropDown from "./SortDropDown";
 import CourseCardLong from "./CourseCardLong";
 import { useGetCoursesCardDetailsQuery } from "./exploreApiSlice.ts";
 import { useState } from "react";
+import { useLocation } from "react-router-dom";
 
 export interface ICourse {
     title: string;
@@ -24,8 +25,11 @@ export interface ICourse {
 }
 
 const ExplorePage = () => {
+    //if redirected from somewhere else
+    const { state } = useLocation();
+
     const [filter, setFilter] = useState({
-        search: "",
+        search: state?.searchQuery || "",
         category: "",
         level: "",
         minPrice: "",
@@ -38,6 +42,8 @@ const ExplorePage = () => {
 
     const { data: courseCardDetails } = useGetCoursesCardDetailsQuery(filter);
     console.log(courseCardDetails);
+
+    console.log(state);
 
     return (
         <div>
