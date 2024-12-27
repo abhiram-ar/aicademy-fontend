@@ -54,17 +54,6 @@ const SearchBar: React.FC<Props> = ({ query, setFilter = null }) => {
                 }}
                 onChange={(e) => {
                     setSearchValue(e.target.value);
-
-                    // // todo debounce this
-                    // if (e.target.value === "" && setFilter) {
-                    //     setFilter((prev) => ({ ...prev, search: "" }));
-                    // }
-
-                    // if (setFilter)
-                    //     setFilter((value) => ({
-                    //         ...value,
-                    //         search: e.target.value,
-                    //     }));
                 }}
                 className="w-full border-none outline-none"
             />
