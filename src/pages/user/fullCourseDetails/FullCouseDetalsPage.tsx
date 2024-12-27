@@ -1,9 +1,9 @@
 import MainNavbar from "@/layout/MainNavbar";
-import { Check, Heart, Star } from "lucide-react";
+import { Check, Heart, MapPinPlusInside, Plus, Star } from "lucide-react";
 import React from "react";
 import priceBanner from "./../../../assets/priceBanner.png";
 import { Button } from "@/components/ui/button";
-import ChapterAccordian from "./ChapterAccordian";
+import ChapterAccordion, { IChapter } from "./ChapterAccordian";
 
 const mockCourseData = {
     title: "ChatGPT Complete Guide: Learn Generative AI, ChatGPT & More",
@@ -143,11 +143,8 @@ const FullCouseDetalsPage = () => {
 
             {/* body */}
             <div className="bg-paperYellow w-full min-h-screen py-12">
-                
-              {/* content */}
+                {/* content */}
                 <div className="w-9/12 mx-auto rounded-base">
-
-
                     {/* banner */}
                     <div className="bg-[#212121] border border-black  w-full h-80 grid grid-cols-12 py-10 ps-20 pe-10 gap-5 rounded-t-base">
                         {/* banner text */}
@@ -219,7 +216,7 @@ const FullCouseDetalsPage = () => {
                                     <p className="font-medium mb-1">
                                         What you will learn
                                     </p>
-                                    <p className="ms-3 ">
+                                    <p className="ms-3 text-black/80">
                                         {fullCourseData.benefits.map(
                                             (benifit, index) => (
                                                 <p
@@ -240,14 +237,14 @@ const FullCouseDetalsPage = () => {
                                     <p className="font-medium mt-3 mb-1">
                                         Prerequisites
                                     </p>
-                                    <p className="ms-3">
+                                    <p className="ms-3 text-black/80">
                                         {fullCourseData.prerequisites.map(
                                             (benifit, index) => (
                                                 <p
                                                     key={index}
                                                     className="flex gap-2 items-baseline"
                                                 >
-                                                    <Check size={14} />
+                                                    <Plus size={14} />
 
                                                     {benifit}
                                                 </p>
@@ -258,11 +255,15 @@ const FullCouseDetalsPage = () => {
                             </div>
 
                             {/* cousecontent */}
-                            <div className="p-5 bg-white border-x border-b border-black rounded-b-base">
-                              <p className="font-medium">Contents</p>
-                              <div>
-                              <ChapterAccordian/>
-                              </div>
+                            <div className="p-5 bg-zinc-100 border-x border-b border-black rounded-b-base">
+                                <p className="font-medium">Contents</p>
+                                <div>
+                                    <ChapterAccordion
+                                        chapters={
+                                            fullCourseData.chapters as IChapter[]
+                                        }
+                                    />
+                                </div>
                             </div>
                         </div>
 
