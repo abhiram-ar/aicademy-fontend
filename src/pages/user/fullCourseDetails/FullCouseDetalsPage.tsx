@@ -1,6 +1,5 @@
 import MainNavbar from "@/layout/MainNavbar";
-import { Check, Heart, MapPinPlusInside, Plus, Star } from "lucide-react";
-import React from "react";
+import { Check, Heart, Plus, Star } from "lucide-react";
 import priceBanner from "./../../../assets/priceBanner.png";
 import { Button } from "@/components/ui/button";
 import ChapterAccordion, { IChapter } from "./ChapterAccordian";
@@ -167,8 +166,8 @@ const FullCouseDetalsPage = () => {
                         </div>
 
                         {/* banner thumnail and demo */}
-                        <div className="col-span-5 -mt-3">
-                            <div className="w-full h-full border-2 border-zinc-500 rounded-base overflow-hidden">
+                        <div className="col-span-5">
+                            <div className="w-[26rem] h-[14.625rem] border-2 border-zinc-500 rounded-base overflow-hidden mx-auto">
                                 <img
                                     src={fullCourseData.thumbnail.url}
                                     className="object-contain"
