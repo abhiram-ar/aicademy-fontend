@@ -3,10 +3,10 @@ import HeroSection from "./sections/HeroSection";
 const LandingPage = () => {
     return (
         <>
-            <MainNavbar />
+            <MainNavbar query="" />
             <div className="bg-[#fffbee] w-full h-screen">
                 <HeroSection />
-                <hr className="border-t-4 border-black border-dashed"/>
+                <hr className="border-t-4 border-black border-dashed" />
             </div>
         </>
     );
