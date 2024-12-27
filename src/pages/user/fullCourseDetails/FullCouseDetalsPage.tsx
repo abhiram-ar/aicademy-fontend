@@ -179,7 +179,7 @@ const FullCouseDetalsPage = () => {
                     {/* detals and buy section */}
                     <div className="grid grid-cols-12">
                         {/* cosurse more detasils section */}
-                        <div className="border col-span-7">
+                        <div className="border col-span-7 font-publicSans">
                             {/* mdeta data */}
                             <div className="border-x border-black grid grid-cols-3 justify-center text-center bg-white">
                                 <div className="py-5">
@@ -212,7 +212,7 @@ const FullCouseDetalsPage = () => {
                             <div className="border h-m-96 border-black bg-white p-5">
                                 {/* benifite */}
                                 <div>
-                                    <p className="font-medium mb-1">
+                                    <p className="font-semibold mb-1">
                                         What you will learn
                                     </p>
                                     <p className="ms-3 text-black/80">
@@ -220,7 +220,7 @@ const FullCouseDetalsPage = () => {
                                             (benifit, index) => (
                                                 <p
                                                     key={index}
-                                                    className="flex gap-2 items-baseline"
+                                                    className="flex gap-2 items-baseline mb-1"
                                                 >
                                                     <Check size={14} />
 
@@ -233,7 +233,7 @@ const FullCouseDetalsPage = () => {
 
                                 {/* prerequites */}
                                 <div>
-                                    <p className="font-medium mt-3 mb-1">
+                                    <p className="font-semibold mt-3 mb-1">
                                         Prerequisites
                                     </p>
                                     <p className="ms-3 text-black/80">
@@ -241,7 +241,7 @@ const FullCouseDetalsPage = () => {
                                             (benifit, index) => (
                                                 <p
                                                     key={index}
-                                                    className="flex gap-2 items-baseline"
+                                                    className="flex gap-2 items-baseline mb-1"
                                                 >
                                                     <Plus size={14} />
 
@@ -255,7 +255,7 @@ const FullCouseDetalsPage = () => {
 
                             {/* cousecontent */}
                             <div className="p-5 bg-zinc-100 border-x border-b border-black rounded-b-base">
-                                <p className="font-medium">Contents</p>
+                                <p className="font-semibold">Course contents</p>
                                 <div>
                                     <ChapterAccordion
                                         chapters={
@@ -267,7 +267,7 @@ const FullCouseDetalsPage = () => {
                         </div>
 
                         {/* buy and add to cart */}
-                        <div className="border-e border-b rounded-br-base h-fit border-black bg-white col-span-5 py-5 px-8">
+                        <div className="border-e border-b rounded-br-base h-fit border-black bg-white col-span-5 py-7 px-12 font-publicSans">
                             {/* perice and off */}
                             <div className="flex gap-5 items-center">
                                 <div className="relative w-32 min-h-12">
@@ -300,7 +300,7 @@ const FullCouseDetalsPage = () => {
                             {/* add to cart and wishlist */}
                             <div className="flex gap-5 my-5">
                                 <Button
-                                    className="bg-[#ffdc58] w-full p-6 font-semibold text-xl"
+                                    className="bg-[#ffdc58] w-full p-7 font-semibold text-xl"
                                     size="lg"
                                 >
                                     Add to cart
@@ -308,7 +308,7 @@ const FullCouseDetalsPage = () => {
 
                                 <Button
                                     size="lg"
-                                    className="bg-zinc-100 p-6 hover:bg-[#fd6182]"
+                                    className="bg-zinc-100 p-7 hover:bg-[#fd6182]"
                                 >
                                     <Heart className="fill-black" />
                                 </Button>
