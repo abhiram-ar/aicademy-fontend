@@ -140,6 +140,7 @@ const FilterSidebar: React.FC<Props> = ({ filter, setFilter }) => {
                                 <input
                                     type="number"
                                     min={0}
+                                    max={100000}
                                     name="minPrice"
                                     value={customMinPrice}
                                     onChange={(e) =>
@@ -150,7 +151,8 @@ const FilterSidebar: React.FC<Props> = ({ filter, setFilter }) => {
                                 />
                                 <input
                                     type="number"
-                                    max={10000}
+                                    min={0}
+                                    max={100000}
                                     name="maxPrice"
                                     value={customMaxPrice}
                                     onChange={(e) =>
