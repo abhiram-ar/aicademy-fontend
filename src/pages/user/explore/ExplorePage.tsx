@@ -58,7 +58,7 @@ const ExplorePage = () => {
                     {/* rigt seciotn - main */}
                     <div className="border border-green-400 relative col-span-9">
                         <div className="absolute right-0">
-                            <SortDropDown />
+                            <SortDropDown setFilter={setFilter} />
                         </div>
                         <div className="mt-12">
                             {courseCardDetails &&
