@@ -84,6 +84,7 @@ const FilterSidebar: React.FC<Props> = ({ filter, setFilter }) => {
 
             <hr className="border-black" />
 
+            {/* price filter */}
             <div className="px-5 py-2">
                 <h4 className="text-text  font-publicSans font-medium">
                     Price
@@ -103,6 +104,10 @@ const FilterSidebar: React.FC<Props> = ({ filter, setFilter }) => {
                     defaultValue=""
                     className="font-normal ps-3 my-2"
                 >
+                     <div className="flex items-center space-x-2">
+                        <RadioGroupItem value="" id="p0" />
+                        <Label htmlFor="p0">none</Label>
+                    </div>
                     <div className="flex items-center space-x-2">
                         <RadioGroupItem value="free" id="p1" />
                         <Label htmlFor="p1">Free</Label>
@@ -168,6 +173,7 @@ const FilterSidebar: React.FC<Props> = ({ filter, setFilter }) => {
 
             <hr className="border-black" />
 
+            {/* level filter */}
             <div className="px-5 py-3 pb-5">
                 <h4 className="text-text font-medium font-publicSans">Level</h4>
                 <RadioGroup
