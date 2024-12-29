@@ -2,140 +2,65 @@ import MainNavbar from "@/layout/MainNavbar";
 import { Check, Heart, Plus, Star } from "lucide-react";
 import priceBanner from "./../../../assets/priceBanner.png";
 import { Button } from "@/components/ui/button";
-import ChapterAccordion, { IChapter } from "./ChapterAccordian";
+import ChapterAccordion from "./ChapterAccordian";
+import { useGetFullCoursePublicDetailsQuery } from "./CourseDetailsApiSlice";
 
-const mockCourseData = {
-    title: "ChatGPT Complete Guide: Learn Generative AI, ChatGPT & More",
-    description:
-        "25+ Generative AI Tools to 10x Business, Productivity, Creativity | Prompt Engineering, ChatGPT, Custom GPTs, Midjourney",
-    createdBy: { legalName: "Abhiram S Sajeev" },
-    courseState: "draft",
-    boughtCount: 0,
-    prerequisites: [
-        "ChatGPT: Create content, synthesize information",
-        "ChatGPT: Turn your creativity into paid work",
-        "Productivity: Achieve your goals faster with ChatGPT",
-        "Marketing: Generate targeted content with ChatGPT,  newsletters, and media campaigns!",
-        "Soft Skills: Improve your communication, ",
-    ],
-    demoVideos: [],
-    chapters: [
-        {
-            chapterTitle: "Introduction to JavaScript",
-            lessons: [
-                {
-                    lessonTitle: "What is JavaScript?",
-                    videoKey: "6762d2e79e4e6d9d0f66202d/intro-to-js.mp4",
-                    _id: "676aa72d30a39b7002646a09",
-                },
-                {
-                    lessonTitle: "Setting up Your Environment",
-                    videoKey: "6762d2e79e4e6d9d0f66202d/env-setup.mp4",
-                    _id: "676aa72d30a39b7002646a10",
-                },
-            ],
-            _id: "676aa72d30a39b7002646a11",
-        },
-        {
-            chapterTitle: "JavaScript Basics",
-            lessons: [
-                {
-                    lessonTitle: "Variables and Data Types",
-                    videoKey:
-                        "6762d2e79e4e6d9d0f66202d/variables-data-types.mp4",
-                    _id: "676aa72d30a39b7002646a12",
-                },
-                {
-                    lessonTitle: "Control Structures",
-                    videoKey: "6762d2e79e4e6d9d0f66202d/control-structures.mp4",
-                    _id: "676aa72d30a39b7002646a13",
-                },
-                {
-                    lessonTitle: "Functions and Scope",
-                    videoKey: "6762d2e79e4e6d9d0f66202d/functions-scope.mp4",
-                    _id: "676aa72d30a39b7002646a14",
-                },
-            ],
-            _id: "676aa72d30a39b7002646a15",
-        },
-        {
-            chapterTitle: "Intermediate JavaScript",
-            lessons: [
-                {
-                    lessonTitle: "Objects and Arrays",
-                    videoKey: "6762d2e79e4e6d9d0f66202d/objects-arrays.mp4",
-                    _id: "676aa72d30a39b7002646a16",
-                },
-                {
-                    lessonTitle: "Asynchronous JavaScript",
-                    videoKey: "6762d2e79e4e6d9d0f66202d/async-js.mp4",
-                    _id: "676aa72d30a39b7002646a17",
-                },
-            ],
-            _id: "676aa72d30a39b7002646a18",
-        },
-        {
-            chapterTitle: "Advanced Topics",
-            lessons: [
-                {
-                    lessonTitle: "JavaScript Design Patterns",
-                    videoKey: "6762d2e79e4e6d9d0f66202d/design-patterns.mp4",
-                    _id: "676aa72d30a39b7002646a19",
-                },
-                {
-                    lessonTitle: "Building a Project with JavaScript",
-                    videoKey: "6762d2e79e4e6d9d0f66202d/building-project.mp4",
-                    _id: "676aa72d30a39b7002646a20",
-                },
-            ],
-            _id: "676aa72d30a39b7002646a21",
-        },
-        {
-            chapterTitle: "Final Review and Next Steps",
-            lessons: [
-                {
-                    lessonTitle: "Course Summary",
-                    videoKey: "6762d2e79e4e6d9d0f66202d/course-summary.mp4",
-                    _id: "676aa72d30a39b7002646a22",
-                },
-                {
-                    lessonTitle: "Where to Go From Here?",
-                    videoKey: "6762d2e79e4e6d9d0f66202d/next-steps.mp4",
-                    _id: "676aa72d30a39b7002646a23",
-                },
-            ],
-            _id: "676aa72d30a39b7002646a24",
-        },
-    ],
+export interface IChapter {
+    chapterTitle: string;
+    lessons: {
+        lessonTitle: string;
+        _id: string;
+    }[];
+    _id: string;
+}
 
-    __v: 0,
-    category: "healthAndWellness",
-    estimatedPrice: 421,
-    level: "intermediate",
-    price: 34,
+interface IFullCourseData {
     thumbnail: {
-        public_id: "auo9skx6gcs3rxxzkonx",
-        url: "http://res.cloudinary.com/dzahlmbyl/image/upload/v1735114313/auo9skx6gcs3rxxzkonx.png",
-    },
-    benefits: [
-        "ChatGPT: Create content,  and learn faster than ever with effective prompt engineering!",
-        "ChatGPT: Turn your creativity fresh ideas, reach new audiences, and scale your projects!",
-        "Productivity: Achieve your goals faster with ChatGPT, ioritize tasks, and create an optimized daily schedule!",
-        "Marketing: Generate targeted content  create ads, newsletters, and media campaigns!",
-        "Soft Skills: Improve your communication,problem-solving, and social skills ],",
-    ],
-    demoVideoKey:
-        "6762d2e79e4e6d9d0f66202d/1b5f2b94d462d74d-vlcsnap-2023-04-30-23h59m45s237.png",
-
-    updatedAt: "12/2024",
-    lessonCount: 40,
-    rating: 4.5,
-    ratingCount: 100,
-};
+        public_id: string;
+        url: string;
+    };
+    _id: string;
+    title: string;
+    description: string;
+    createdBy: {
+        _id: string;
+        legalName: string;
+    };
+    courseState: string;
+    boughtCount: number;
+    prerequisites: string[];
+    demoVideos: string;
+    chapters: IChapter[];
+    category: string;
+    estimatedPrice: number;
+    level: string;
+    price: number;
+    benefits: string[];
+    demoVideoKey: string;
+    updatedAt: string; // ISO date string
+    rating?: number;
+}
 
 const FullCouseDetalsPage = () => {
-    const fullCourseData = mockCourseData;
+    const { data } = useGetFullCoursePublicDetailsQuery({
+        courseId: "6766c2f1040682b6bfe3b1b3",
+    });
 
+    const fullCourseData: IFullCourseData = data?.fullCourseData;
+    const formatDateToYYYYMM = (dateString: string) => {
+        const date = new Date(dateString);
+        const year = date.getFullYear();
+        const month = String(date.getMonth() + 1);
+        return `${month}/${year}`;
+    };
+
+    const calculateLessonCount = (chapters: IChapter[]) => {
+        let lessonCount = 0;
+        chapters.forEach((chapter) => (lessonCount += chapter.lessons.length));
+        return lessonCount;
+    };
+
+    if (!fullCourseData) return;
     return (
         <div>
             <MainNavbar query="" />
@@ -170,7 +95,7 @@ const FullCouseDetalsPage = () => {
                             <div className="w-[26rem] h-[14.625rem] border-2 border-zinc-500 rounded-base overflow-hidden mx-auto">
                                 <img
                                     src={fullCourseData.thumbnail.url}
-                                    className="object-contain"
+                                    className="object-cover w-full h-full"
                                 />
                             </div>
                         </div>
@@ -183,28 +108,40 @@ const FullCouseDetalsPage = () => {
                             {/* mdeta data */}
                             <div className="border-x border-black grid grid-cols-3 justify-center text-center bg-white">
                                 <div className="py-5">
-                                    Last updated: {fullCourseData.updatedAt}
+                                    Last updated:{" "}
+                                    {formatDateToYYYYMM(
+                                        fullCourseData.updatedAt
+                                    )}
                                 </div>
 
                                 <div className="py-5 border-x border-black">
-                                    {fullCourseData.lessonCount} Lectures
+                                    {calculateLessonCount(
+                                        fullCourseData.chapters
+                                    )}{" "}
+                                    Lectures
                                 </div>
 
                                 <div className="flex gap-1 justify-center items-center ">
-                                    {fullCourseData.rating}{" "}
-                                    <div className="flex">
-                                        {Array.from({
-                                            length: Math.floor(
-                                                fullCourseData.rating
-                                            ),
-                                        }).map((_, index) => (
-                                            <Star
-                                                key={index}
-                                                className="w-4 fill-yellow-300 "
-                                            />
-                                        ))}
-                                    </div>
-                                    ({fullCourseData.ratingCount})
+                                    {fullCourseData.rating ? (
+                                        <>
+                                            {fullCourseData.rating}{" "}
+                                            <div className="flex">
+                                                {Array.from({
+                                                    length: Math.floor(
+                                                        fullCourseData.rating
+                                                    ),
+                                                }).map((_, index) => (
+                                                    <Star
+                                                        key={index}
+                                                        className="w-4 fill-yellow-300 "
+                                                    />
+                                                ))}
+                                            </div>
+                                            ({fullCourseData.ratingCount})
+                                        </>
+                                    ) : (
+                                        <p>No rating yet</p>
+                                    )}
                                 </div>
                             </div>
 
@@ -215,9 +152,9 @@ const FullCouseDetalsPage = () => {
                                     <p className="font-semibold mb-1">
                                         What you will learn
                                     </p>
-                                    <p className="ms-3 text-black/80">
+                                    <div className="ms-3 text-black/80">
                                         {fullCourseData.benefits.map(
-                                            (benifit, index) => (
+                                            (benifit, index: number) => (
                                                 <p
                                                     key={index}
                                                     className="flex gap-2 items-baseline mb-1"
@@ -228,7 +165,7 @@ const FullCouseDetalsPage = () => {
                                                 </p>
                                             )
                                         )}
-                                    </p>
+                                    </div>
                                 </div>
 
                                 {/* prerequites */}
@@ -236,7 +173,7 @@ const FullCouseDetalsPage = () => {
                                     <p className="font-semibold mt-3 mb-1">
                                         Prerequisites
                                     </p>
-                                    <p className="ms-3 text-black/80">
+                                    <div className="ms-3 text-black/80">
                                         {fullCourseData.prerequisites.map(
                                             (benifit, index) => (
                                                 <p
@@ -249,7 +186,7 @@ const FullCouseDetalsPage = () => {
                                                 </p>
                                             )
                                         )}
-                                    </p>
+                                    </div>
                                 </div>
                             </div>
 

@@ -7,15 +7,6 @@ import {
     AccordionTrigger,
 } from "@/components/ui/accordion";
 
-export interface IChapter {
-    chapterTitle: string;
-    lessons: {
-        lessonTitle: string;
-        _id: string;
-    }[];
-    _id: "676aa72d30a39b7002646a11";
-}
-
 type Props = {
     chapters: IChapter[];
 };
