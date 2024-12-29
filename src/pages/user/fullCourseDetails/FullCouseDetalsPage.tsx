@@ -4,6 +4,7 @@ import priceBanner from "./../../../assets/priceBanner.png";
 import { Button } from "@/components/ui/button";
 import ChapterAccordion from "./ChapterAccordian";
 import { useGetFullCoursePublicDetailsQuery } from "./CourseDetailsApiSlice";
+import { useParams } from "react-router-dom";
 
 export interface IChapter {
     chapterTitle: string;
@@ -42,8 +43,9 @@ interface IFullCourseData {
 }
 
 const FullCouseDetalsPage = () => {
+    const { id } = useParams();
     const { data } = useGetFullCoursePublicDetailsQuery({
-        courseId: "6766c2f1040682b6bfe3b1b3",
+        courseId: id,
     });
 
     const fullCourseData: IFullCourseData = data?.fullCourseData;
@@ -60,7 +62,8 @@ const FullCouseDetalsPage = () => {
         return lessonCount;
     };
 
-    if (!fullCourseData) return;
+    if (!fullCourseData) return <p>loading</p>;
+
     return (
         <div>
             <MainNavbar query="" />

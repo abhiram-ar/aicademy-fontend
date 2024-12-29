@@ -6,6 +6,7 @@ import {
     AccordionItem,
     AccordionTrigger,
 } from "@/components/ui/accordion";
+import { IChapter } from "./FullCouseDetalsPage";
 
 type Props = {
     chapters: IChapter[];
