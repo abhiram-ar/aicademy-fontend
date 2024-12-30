@@ -5,9 +5,10 @@ import SortDropDown from "./SortDropDown";
 import CourseCardLong from "./CourseCardLong";
 import { useGetCoursesCardDetailsQuery } from "./exploreApiSlice.ts";
 import { useState } from "react";
-import { useLocation } from "react-router-dom";
+import { Link, useLocation } from "react-router-dom";
 
 export interface ICourse {
+    _id: string;
     title: string;
     description: string;
     createdBy: {
@@ -43,8 +44,6 @@ const ExplorePage = () => {
     const { data: courseCardDetails } = useGetCoursesCardDetailsQuery(filter);
     console.log(courseCardDetails);
 
-    console.log(state);
-
     return (
         <div>
             <MainNavbar query={filter.search} setFilter={setFilter} />
@@ -69,11 +68,15 @@ const ExplorePage = () => {
                         <div className="mt-12">
                             {courseCardDetails &&
                                 courseCardDetails.courses.map(
-                                    (courseDetails: ICourse, index: number) => (
-                                        <CourseCardLong
-                                            key={index}
-                                            courseDetails={courseDetails}
-                                        />
+                                    (courseDetails: ICourse) => (
+                                        <Link
+                                            key={courseCardDetails._id}
+                                            to={`/explore/course/${courseDetails._id}`}
+                                        >
+                                            <CourseCardLong
+                                                courseDetails={courseDetails}
+                                            />
+                                        </Link>
                                     )
                                 )}
                         </div>

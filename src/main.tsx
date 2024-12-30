@@ -27,6 +27,7 @@ import CourseStrucureOutlet from "./pages/teacher/dashboard/create-course/Course
 import CourseAssetsOutlet from "./pages/teacher/dashboard/create-course/course-assets/CourseAssetsOutlet";
 import PublishOutlet from "./pages/teacher/dashboard/create-course/PublishOutlet";
 import ExplorePage from "./pages/user/explore/ExplorePage";
+import FullCouseDetalsPage from "./pages/user/fullCourseDetails/FullCouseDetalsPage";
 
 fetchAccessTokenOnload();
 const appRouter = createBrowserRouter([
@@ -49,6 +50,10 @@ const appRouter = createBrowserRouter([
             {
                 path: "/explore",
                 element: <ExplorePage />,
+            },
+            {
+                path: "/explore/course/:id",
+                element: <FullCouseDetalsPage />,
             },
             {
                 path: "/teach",
