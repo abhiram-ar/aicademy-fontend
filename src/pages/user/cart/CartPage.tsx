@@ -62,7 +62,7 @@ const CartPage = () => {
                                     </div>
                                 ))
                             ) : (
-                                <div className="bg-slate-200 p-10 flex flex-col justify-center items-center rounded-base text-zinc-800">
+                                <div className="bg-slate-200 p-10 flex flex-col gap-2 justify-center items-center rounded-base text-zinc-800">
                                     <AddShoppingCartOutlinedIcon fontSize="large" />
                                     <p className="font-medium text-xl">
                                         Cart is empty!
