@@ -77,7 +77,7 @@ const CartPage = () => {
                             )}
                         </div>
 
-                        <div className="col-span-4 bg-white border-2 border-black shadow-light rounded-base p-10">
+                        <div className="col-span-4 bg-white border-2 border-black shadow-light rounded-base p-10 h-fit">
                             todo: checkout component
                         </div>
                     </div>
