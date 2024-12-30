@@ -5,6 +5,7 @@ import { useSelector } from "react-redux";
 import { RootState } from "@/redux/store";
 import { ICourse } from "../explore/ExplorePage";
 import AddShoppingCartOutlinedIcon from "@mui/icons-material/AddShoppingCartOutlined";
+import { Link } from "react-router-dom";
 
 const CartPage = () => {
     const user = useSelector((state: RootState) => state.auth.user);
@@ -39,11 +40,15 @@ const CartPage = () => {
                                         key={course._id}
                                         className="bg-slate-100 mb-5 rounded-base font-publicSans"
                                     >
-                                        <div className="relative z-20">
-                                            <CourseCardLong
-                                                courseDetails={course}
-                                            />
-                                        </div>
+                                        <Link
+                                            to={`/explore/course/${course._id}`}
+                                        >
+                                            <div className="relative z-20">
+                                                <CourseCardLong
+                                                    courseDetails={course}
+                                                />
+                                            </div>
+                                        </Link>
                                         <div className="flex justify-end gap-5 -mt-3 p-2 border border-t-0 border-slate-300 rounded-b-base text-zinc-600 px-5 font-medium relative z-10">
                                             <button className="hover:underline hover:text-zinc-800">
                                                 Move to wishlist
@@ -67,7 +72,6 @@ const CartPage = () => {
                                     <p className="font-medium text-xl">
                                         Cart is empty!
                                     </p>{" "}
-                            
                                     {/* <p className="text-zinc-500 underline">add course to cart</p> */}
                                 </div>
                             )}
