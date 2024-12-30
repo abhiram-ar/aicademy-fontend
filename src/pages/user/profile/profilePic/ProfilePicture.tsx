@@ -32,8 +32,6 @@ const ProfilePicture: React.FC<IUserProfileDetails> = ({ userDetails }) => {
         if (modalTriggerRef.current) modalTriggerRef.current.click();
     };
 
-    console.log("new", userDetails);
-
     const handleCroppedUpload = async (file: File) => {
         console.log(`file`, file);
         const formData = new FormData();
