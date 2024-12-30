@@ -14,14 +14,16 @@ import {
 } from "@/components/ui/dialog";
 import { useUpdateUserProfilePictureMutation } from "../profileApiSlice";
 
-type Props = {
+export interface IUserProfileDetails {
     userDetails: {
+        firstName: string;
+        lastName: string;
         _id: string;
         profilePicture: { url: string; public_id: string };
     };
-};
+}
 
-const ProfilePicture: React.FC<Props> = ({ userDetails }) => {
+const ProfilePicture: React.FC<IUserProfileDetails> = ({ userDetails }) => {
     const [updateProfilePic] = useUpdateUserProfilePictureMutation();
     const modalTriggerRef = useRef<HTMLButtonElement | null>(null);
     const modalSubmitRef = useRef<HTMLButtonElement | null>(null);
@@ -91,7 +93,7 @@ const ProfilePicture: React.FC<Props> = ({ userDetails }) => {
                 </DialogContent>
             </Dialog>
 
-            {userDetails.profilePicture && userDetails.profilePicture.url  ? (
+            {userDetails.profilePicture && userDetails.profilePicture.url ? (
                 <div>
                     <div className="min-h-5 flex justify-center  relative w-fit mx-auto">
                         <div className="size-40 border-2 border-black rounded-full overflow-hidden bg-slate-400">
