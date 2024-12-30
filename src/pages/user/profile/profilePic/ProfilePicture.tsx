@@ -1,6 +1,6 @@
 import { Pencil, Upload } from "lucide-react";
 import React, { useRef } from "react";
-import toast, { Toaster } from "react-hot-toast";
+import toast from "react-hot-toast";
 
 import ImgCrop from "./Crop";
 import {
@@ -62,7 +62,6 @@ const ProfilePicture: React.FC<IUserProfileDetails> = ({ userDetails }) => {
 
     return (
         <div className="mx-auto w-full">
-            <Toaster position="top-right" />
             <Dialog>
                 <DialogTrigger asChild>
                     <button ref={modalTriggerRef} className="hidden">
