@@ -1,12 +1,15 @@
 import React from "react";
 import { useForm } from "react-hook-form";
 import { IUserProfileDetails } from "./profilePic/ProfilePicture";
+import { useUpdateUserProfileMutation } from "./profileApiSlice";
 
 const ProfileForm: React.FC<IUserProfileDetails> = ({ userDetails }) => {
+    const [updateUserProfile] = useUpdateUserProfileMutation();
+
     const {
         register,
         handleSubmit,
-        formState: { errors },
+        formState: { errors, dirtyFields },
     } = useForm({
         defaultValues: {
             firstName: userDetails.firstName,
@@ -14,10 +17,21 @@ const ProfileForm: React.FC<IUserProfileDetails> = ({ userDetails }) => {
         },
     });
 
+    const handleUpdateProfile = async (data: {
+        firstName: string;
+        lastName: string;
+    }) => {
+        try {
+            await updateUserProfile(data).unwrap();
+        } catch (error) {
+            console.error("error while updating user profie", error);
+        }
+    };
+
     return (
         <div className="px-32">
             <form
-                onSubmit={handleSubmit((data) => console.log(data))}
+                onSubmit={handleSubmit((data) => handleUpdateProfile(data))}
                 className="flex flex-col gap-4"
             >
                 {/* name */}
@@ -78,11 +92,14 @@ const ProfileForm: React.FC<IUserProfileDetails> = ({ userDetails }) => {
                             className="input-neo w-full"
                         />
                     </div>
-                        
-    
-                    <button type="submit"
-                    disabled={errors && Object.keys(errors).length > 0}
-                    className="bg-green-300  px-5 py-1 mt-4 rounded-base border-2 border-zinc-600 block mx-auto hover:bg-green-400 disabled:bg-zinc-300">Save</button>
+
+                    <button
+                        type="submit"
+                        disabled={errors && Object.keys(errors).length > 0 || Object.keys(dirtyFields).length === 0 }
+                        className="bg-green-300  px-5 py-1 mt-4 rounded-base border-2 border-zinc-600 block mx-auto hover:bg-green-400 disabled:bg-zinc-300"
+                    >
+                        Save
+                    </button>
                 </div>
             </form>
         </div>

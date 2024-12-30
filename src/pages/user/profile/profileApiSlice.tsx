@@ -6,6 +6,15 @@ const profileApiSlice = apiSlice.injectEndpoints({
             query: () => "/api/user/profile",
             providesTags: ["userDetails"],
         }),
+        updateUserProfile: builder.mutation({
+            query: (data) => ({
+                url: "/api/user/profile",
+                method: "PATCH",
+                body: data,
+            }),
+            invalidatesTags: ["userDetails"],
+        }),
+
         updateUserProfilePicture: builder.mutation({
             query: (data) => ({
                 url: "/api/user/profilePic",
@@ -17,5 +26,8 @@ const profileApiSlice = apiSlice.injectEndpoints({
     }),
 });
 
-export const { useGetUserProfileQuery, useUpdateUserProfilePictureMutation } =
-    profileApiSlice;
+export const {
+    useGetUserProfileQuery,
+    useUpdateUserProfilePictureMutation,
+    useUpdateUserProfileMutation,
+} = profileApiSlice;
