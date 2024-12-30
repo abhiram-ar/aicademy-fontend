@@ -7,6 +7,12 @@ import { useGetFullCoursePublicDetailsQuery } from "./CourseDetailsApiSlice";
 import { useNavigate, useParams } from "react-router-dom";
 import { useSelector } from "react-redux";
 import { RootState } from "@/redux/store";
+import { ICourse } from "../explore/ExplorePage";
+import {
+    useAddToCartMutation,
+    useGetCartQuery,
+    useRemoveFromCartMutation,
+} from "../cart/cartApiSlice";
 
 export interface IChapter {
     chapterTitle: string;
@@ -52,6 +58,10 @@ const FullCouseDetalsPage = () => {
         courseId: id,
     });
 
+    const { data: cartInfo } = useGetCartQuery(undefined, { skip: !user });
+    const [addToCart] = useAddToCartMutation();
+    const [removeFromCart] = useRemoveFromCartMutation();
+
     const fullCourseData: IFullCourseData = data?.fullCourseData;
     const formatDateToYYYYMM = (dateString: string) => {
         const date = new Date(dateString);
@@ -66,12 +76,30 @@ const FullCouseDetalsPage = () => {
         return lessonCount;
     };
 
-    const handleAddToCart = () => {
+    const handleAddToCart = async () => {
         if (!user || !user.userId) {
-            return navigate("/login", { state: { from: window.location.pathname } });
+            return navigate("/login", {
+                state: { from: window.location.pathname },
+            });
         }
 
-        alert("item addded to cartL to do");
+        try {
+            const addTocartResult = await addToCart({ courseId: id }).unwrap();
+            console.log(`response`, addTocartResult);
+        } catch (error) {
+            console.error(`error while adding to cart`, error);
+        }
+    };
+
+    const handleRemoveFromCart = async () => {
+        try {
+            const addTocartResult = await removeFromCart({
+                courseId: id,
+            }).unwrap();
+            console.log(`response`, addTocartResult);
+        } catch (error) {
+            console.error(`error while removing cart`, error);
+        }
     };
 
     if (!fullCourseData) return <p>loading</p>;
@@ -251,13 +279,27 @@ const FullCouseDetalsPage = () => {
 
                             {/* add to cart and wishlist */}
                             <div className="flex gap-5 my-5">
-                                <Button
-                                    className="bg-[#ffdc58] w-full p-7 font-semibold text-xl"
-                                    size="lg"
-                                    onClick={handleAddToCart}
-                                >
-                                    Add to cart
-                                </Button>
+                                {user &&
+                                cartInfo &&
+                                cartInfo.cart.find(
+                                    (course: ICourse) => course._id === id
+                                ) ? (
+                                    <Button
+                                        className="bg-[#fd9745] w-full py-7 px-5 font-semibold text-xl"
+                                        size="lg"
+                                        onClick={handleRemoveFromCart}
+                                    >
+                                        Remove from cart
+                                    </Button>
+                                ) : (
+                                    <Button
+                                        className="bg-[#ffdc58] w-full p-7 font-semibold text-xl"
+                                        size="lg"
+                                        onClick={handleAddToCart}
+                                    >
+                                        Add to cart
+                                    </Button>
+                                )}
 
                                 <Button
                                     size="lg"

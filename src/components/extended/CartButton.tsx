@@ -8,7 +8,7 @@ const CartButton = () => {
     return (
         <Button className="p-3 bg-white relative" size="md">
             {cartData 
-            // && cartData.length > 0 
+            && cartData.length > 0 
             && (
                 <div className="absolute -top-2 -right-2 bg-red-500 border border-black text-darkText size-5  rounded-full  text-xs font-publicSans p-0.5">
                     {cartData.length}
