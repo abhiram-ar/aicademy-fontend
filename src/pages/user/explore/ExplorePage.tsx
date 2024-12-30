@@ -70,10 +70,10 @@ const ExplorePage = () => {
                                 courseCardDetails.courses.map(
                                     (courseDetails: ICourse) => (
                                         <Link
+                                            key={courseCardDetails._id}
                                             to={`/explore/course/${courseDetails._id}`}
                                         >
                                             <CourseCardLong
-                                                key={courseCardDetails._id}
                                                 courseDetails={courseDetails}
                                             />
                                         </Link>

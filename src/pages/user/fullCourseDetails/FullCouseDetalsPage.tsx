@@ -4,7 +4,9 @@ import priceBanner from "./../../../assets/priceBanner.png";
 import { Button } from "@/components/ui/button";
 import ChapterAccordion from "./ChapterAccordian";
 import { useGetFullCoursePublicDetailsQuery } from "./CourseDetailsApiSlice";
-import { useParams } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
+import { useSelector } from "react-redux";
+import { RootState } from "@/redux/store";
 
 export interface IChapter {
     chapterTitle: string;
@@ -43,6 +45,8 @@ interface IFullCourseData {
 }
 
 const FullCouseDetalsPage = () => {
+    const user = useSelector((state: RootState) => state.auth.user);
+    const navigate = useNavigate();
     const { id } = useParams();
     const { data } = useGetFullCoursePublicDetailsQuery({
         courseId: id,
@@ -60,6 +64,14 @@ const FullCouseDetalsPage = () => {
         let lessonCount = 0;
         chapters.forEach((chapter) => (lessonCount += chapter.lessons.length));
         return lessonCount;
+    };
+
+    const handleAddToCart = () => {
+        if (!user || !user.userId) {
+            return navigate("/login", { state: { from: window.location.pathname } });
+        }
+
+        alert("item addded to cartL to do");
     };
 
     if (!fullCourseData) return <p>loading</p>;
@@ -242,6 +254,7 @@ const FullCouseDetalsPage = () => {
                                 <Button
                                     className="bg-[#ffdc58] w-full p-7 font-semibold text-xl"
                                     size="lg"
+                                    onClick={handleAddToCart}
                                 >
                                     Add to cart
                                 </Button>

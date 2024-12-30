@@ -2,7 +2,7 @@ import Login from "@/components/auth/Login";
 import BodyBlock from "@/components/base/BodyBlock";
 import NavbarOnlyLogo from "@/components/extended/NavbarOnlyLogo";
 import loginArt from "./../../../assets/loginArt.png";
-import { Link, useNavigate } from "react-router-dom";
+import { Link, useLocation, useNavigate } from "react-router-dom";
 import { useLoginMutation } from "@/redux/features/auth/userAuthAPIs";
 import { setCredentials } from "@/redux/features/auth/authSlice";
 import { useDispatch } from "react-redux";
@@ -14,19 +14,26 @@ const LoginPage = () => {
     const dispatch = useDispatch();
     const { toast } = useToast();
     const navigate = useNavigate();
+    const location = useLocation();
+
+    console.log(location);
 
     const handleLogin: (data: object) => void = async (data) => {
         console.log(data);
         try {
             const payload = await login(data).unwrap();
-            const decoded = jwtDecode(payload.token)
+            const decoded = jwtDecode(payload.token);
             dispatch(
                 setCredentials({
                     accessToken: payload.token,
                     user: decoded,
                 })
             );
-            navigate("/");
+            if (location.state && location.state.from) {
+                navigate(location.state.from);
+            } else {
+                navigate("/");
+            }
         } catch (error) {
             console.error("error while logging in", error);
             toast({
@@ -49,7 +56,7 @@ const LoginPage = () => {
                         <h2 className="text-xl font-bold mb-5">
                             Log in to continue your learning journey
                         </h2>
-                        <Login handleLogin={handleLogin} role="user"/>
+                        <Login handleLogin={handleLogin} role="user" />
                         <p className="text-center mt-5 font-medium">
                             Don’t have an account?
                             <Link

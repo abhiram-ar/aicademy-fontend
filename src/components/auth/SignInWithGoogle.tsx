@@ -3,7 +3,7 @@ import { setCredentials } from "@/redux/features/auth/authSlice";
 import { jwtDecode } from "jwt-decode";
 import React from "react";
 import { useDispatch } from "react-redux";
-import { useNavigate } from "react-router-dom";
+import { useLocation, useNavigate } from "react-router-dom";
 import {
     GoogleLogin,
     GoogleOAuthProvider,
@@ -18,6 +18,8 @@ const SignInWithGoogle: React.FC<{ gAuthRole: GoogleAuthRoles }> = ({
     const [authenticateWithGoogleCredentials] = useGoogleSigninMutation();
     const dispatch = useDispatch();
     const navigate = useNavigate();
+    const location = useLocation();
+    console.log(`socual location`, location);
 
     const handleGoogleSuccess = async (
         credentialResponse: CredentialResponse
@@ -31,6 +33,13 @@ const SignInWithGoogle: React.FC<{ gAuthRole: GoogleAuthRoles }> = ({
             const decoded = jwtDecode(res.token);
             console.log(decoded);
             dispatch(setCredentials({ accessToken: res.token, user: decoded }));
+
+            // if redirected from any page, navigate to that page from where the login request came
+            if (location.state && location.state.from) {
+                return navigate(location.state.from);
+            }
+
+            // else navigate to defailt user routes
             if (gAuthRole === "user") navigate("/");
             if (gAuthRole === "teacher") navigate("/teach");
         } catch (error) {
