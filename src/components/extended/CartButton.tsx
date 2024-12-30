@@ -1,12 +1,14 @@
 import { useGetCartQuery } from "@/pages/user/cart/cartApiSlice";
 import { Button } from "../ui/button";
 import ShoppingCartOutlinedIcon from "@mui/icons-material/ShoppingCartOutlined";
+import { useNavigate } from "react-router-dom";
 
-const CartButton = () => {
+const CartButton = () => {    
     const { data: cartData } = useGetCartQuery({});
-    console.log(`cartdeta`, cartData);
+    const navigate = useNavigate()
+
     return (
-        <Button className="p-3 bg-white relative" size="md">
+        <Button className="p-3 bg-white relative" size="md" onClick={()=> navigate("/cart")}>
             {cartData 
             && cartData.length > 0 
             && (
