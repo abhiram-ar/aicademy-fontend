@@ -29,6 +29,9 @@ import PublishOutlet from "./pages/teacher/dashboard/create-course/PublishOutlet
 import ExplorePage from "./pages/user/explore/ExplorePage";
 import FullCouseDetalsPage from "./pages/user/fullCourseDetails/FullCouseDetalsPage";
 import CartPage from "./pages/user/cart/CartPage";
+import UserProfileLayout from "./pages/user/profile/UserProfileLayout";
+import ProfileOutlet from "./pages/user/profile/ProfileOutlet";
+import ChangePasswordOutlet from "./pages/user/profile/ChangePasswordOutlet";
 
 fetchAccessTokenOnload();
 const appRouter = createBrowserRouter([
@@ -59,6 +62,20 @@ const appRouter = createBrowserRouter([
             {
                 path: "/cart",
                 element: <CartPage />,
+            },
+            {
+                path: "/user",
+                loader: () => authLoader("user"),
+                hydrateFallbackElement: <p>loading...</p>,
+                element: <UserProfileLayout />,
+                children: [
+                    { index: true, element: <ProfileOutlet /> },
+                    { path: "/user/profile", element: <ProfileOutlet /> },
+                    {
+                        path: "/user/changePassword",
+                        element: <ChangePasswordOutlet />,
+                    },
+                ],
             },
             {
                 path: "/teach",
