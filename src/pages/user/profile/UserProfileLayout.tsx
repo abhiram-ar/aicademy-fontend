@@ -1,7 +1,26 @@
 import NavbarOnlyLogo from "@/components/extended/NavbarOnlyLogo";
-import { NavLink, Outlet } from "react-router-dom";
+import { logout } from "@/redux/features/auth/authSlice";
+import { useLogoutMutation } from "@/redux/features/auth/userAuthAPIs";
+import { useDispatch } from "react-redux";
+import { NavLink, Outlet, useNavigate } from "react-router-dom";
 
 const UserProfileLayout = () => {
+    const [logoutApi] = useLogoutMutation();
+    const dispatch = useDispatch();
+    const navigate = useNavigate();
+    
+    const handleLogout = async () => {
+        console.log(`trying to logout`);
+
+        try {
+            await logoutApi({}).unwrap();
+            dispatch(logout());
+            navigate("/");
+        } catch (error) {
+            console.log(`error while logging out`, error);
+        }
+    };
+
     return (
         <div>
             <NavbarOnlyLogo />
@@ -35,9 +54,12 @@ const UserProfileLayout = () => {
                         >
                             Change password
                         </NavLink>
-                        <p className="px-10 py-2 border-b border-black hover:bg-slate-300">
+                        <button
+                            onClick={handleLogout}
+                            className="px-10 py-2 border-b border-black hover:bg-slate-300 text-left"
+                        >
                             Logout
-                        </p>
+                        </button>
                     </div>
 
                     <div className="col-span-3 border">
