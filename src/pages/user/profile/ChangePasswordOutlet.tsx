@@ -2,7 +2,7 @@ import { useForm } from "react-hook-form";
 import toast, { Toaster } from "react-hot-toast";
 import { useChangeUserPasswordMutation } from "./profileApiSlice";
 import { useState } from "react";
-import { useResetUserPaswordMutation } from "@/redux/features/auth/userAuthAPIs";
+import { useForgotUserPaswordMutation } from "@/redux/features/auth/userAuthAPIs";
 
 type Formfileds = {
     oldPassword: string;
@@ -14,7 +14,8 @@ const ChangePasswordOutlet = () => {
     const [email, setEmail] = useState("");
     const [forgetPasswordState, setForgetPasswordState] = useState(false);
     const [changePassword] = useChangeUserPasswordMutation();
-    const [resetPassword] = useResetUserPaswordMutation();
+    const [forgetPassword] = useForgotUserPaswordMutation();
+
     const {
         register,
         handleSubmit,
@@ -50,10 +51,10 @@ const ChangePasswordOutlet = () => {
 
     const handleForgetPassword = async () => {
         try {
-            const res = await resetPassword({ email }).unwrap();
+            const res = await forgetPassword({ email }).unwrap();
             console.log(`forget result`, res);
             toast.success(`Recovery mail send to ${email}`);
-            setEmail("")
+            setEmail("");
         } catch (error) {
             console.error("error while resetting password", error);
             toast.error("failed to reset password");
