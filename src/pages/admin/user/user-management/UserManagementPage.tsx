@@ -21,7 +21,7 @@ import {
     TableRow,
 } from "@/components/ui/table";
 import { TableBody } from "@mui/material";
-import { Ellipsis } from "lucide-react";
+import { Ellipsis, ShieldAlert } from "lucide-react";
 import {
     useBlockUserAdminUserManagementMutation,
     useGetUserDetailsAdminUserManagementQuery,
@@ -76,27 +76,44 @@ const UserManagementPage = () => {
                     <Table>
                         <TableHeader>
                             <TableRow className="bg-zinc-700 ">
-                                <TableHead className="min-w-32 text-darkText">
+                                <TableHead className="w-32 text-darkText">
                                     First name
                                 </TableHead>
-                                <TableHead className="min-w-32 text-darkText">
+                                <TableHead className="w-32 text-darkText">
                                     Last name
                                 </TableHead>
-                                <TableHead className="min-w-52 text-darkText">
+                                <TableHead className="w-52 text-darkText">
                                     Email
                                 </TableHead>
-                                <TableHead className="min-w-40 text-center text-darkText">
+                                <TableHead className="w-52 text-center text-darkText">
                                     UID
                                 </TableHead>
-                                <TableHead className="min-w-20 text-center text-darkText">
+                                <TableHead className="w-30 text-center text-darkText">
                                     isBlocked
                                 </TableHead>
-                                <TableHead className="min-w-20 text-center text-darkText">
+                                <TableHead className="w-20 text-center text-darkText">
                                     option
                                 </TableHead>
                             </TableRow>
                         </TableHeader>
                         <TableBody>
+                            {currentData &&
+                                currentData.userList.length === 0 && (
+                                    <TableRow>
+                                        <TableCell></TableCell>
+                                        <TableCell
+                                            colSpan={4}
+                                            className="text-center"
+                                        >
+                                            <p className="flex justify-center items-center gap-3 p-5 -ms-10">
+                                                <ShieldAlert />
+                                                No user found
+                                            </p>
+                                        </TableCell>
+
+                                        <TableCell></TableCell>
+                                    </TableRow>
+                                )}
                             {currentData &&
                                 currentData.userList &&
                                 currentData.userList.map(

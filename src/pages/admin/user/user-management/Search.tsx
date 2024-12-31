@@ -22,7 +22,7 @@ const SearchUser: React.FC<Props> = ({ search, setFilter }) => {
         );
 
         return () => clearTimeout(timer);
-    }, [query]);
+    }, [query, setFilter]);
 
     return (
         <div className="flex  justify-center items-center border-2 border-black rounded-base px-2  py-2 gap-2 m-2">
