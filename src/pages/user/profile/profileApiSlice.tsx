@@ -23,6 +23,13 @@ const profileApiSlice = apiSlice.injectEndpoints({
             }),
             invalidatesTags: ["userDetails"],
         }),
+        changeUserPassword: builder.mutation({
+            query: (data) => ({
+                url: "/api/user/password",
+                method: "PATCH",
+                body: data,
+            }),
+        }),
     }),
 });
 
@@ -30,4 +37,5 @@ export const {
     useGetUserProfileQuery,
     useUpdateUserProfilePictureMutation,
     useUpdateUserProfileMutation,
+    useChangeUserPasswordMutation,
 } = profileApiSlice;
