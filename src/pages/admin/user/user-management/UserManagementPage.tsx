@@ -22,7 +22,11 @@ import {
 } from "@/components/ui/table";
 import { TableBody } from "@mui/material";
 import { Ellipsis } from "lucide-react";
-import { useGetUserDetailsAdminUserManagementQuery } from "./userApiSlice";
+import {
+    useBlockUserAdminUserManagementMutation,
+    useGetUserDetailsAdminUserManagementQuery,
+    useUnBlockUserAdminUserManagementMutation,
+} from "./userApiSlice";
 import { useState } from "react";
 import SearchUser from "./Search";
 
@@ -40,9 +44,26 @@ const UserManagementPage = () => {
         limit: 10,
         page: 1,
     });
-    const { currentData } = useGetUserDetailsAdminUserManagementQuery(filter);
+    const { data: currentData } =
+        useGetUserDetailsAdminUserManagementQuery(filter);
 
-    console.log();
+    const [unblockUser] = useUnBlockUserAdminUserManagementMutation();
+    const [blockUser] = useBlockUserAdminUserManagementMutation();
+
+    const handleUnBlockUser = async (userId: string) => {
+        try {
+            await unblockUser({ userId }).unwrap();
+        } catch (error) {
+            console.error("error while unblocking user", error);
+        }
+    };
+    const handleBlockUser = async (userId: string) => {
+        try {
+            await blockUser({ userId }).unwrap();
+        } catch (error) {
+            console.error("error while unblocking user", error);
+        }
+    };
 
     return (
         <div className="mx-10">
@@ -55,22 +76,22 @@ const UserManagementPage = () => {
                     <Table>
                         <TableHeader>
                             <TableRow className="bg-zinc-700 ">
-                                <TableHead className=" text-darkText">
+                                <TableHead className="min-w-32 text-darkText">
                                     First name
                                 </TableHead>
-                                <TableHead className="text-darkText">
+                                <TableHead className="min-w-32 text-darkText">
                                     Last name
                                 </TableHead>
-                                <TableHead className="text-darkText">
+                                <TableHead className="min-w-52 text-darkText">
                                     Email
                                 </TableHead>
-                                <TableHead className="text-center text-darkText">
+                                <TableHead className="min-w-40 text-center text-darkText">
                                     UID
                                 </TableHead>
-                                <TableHead className="text-center text-darkText">
+                                <TableHead className="min-w-20 text-center text-darkText">
                                     isBlocked
                                 </TableHead>
-                                <TableHead className="text-center text-darkText">
+                                <TableHead className="min-w-20 text-center text-darkText">
                                     option
                                 </TableHead>
                             </TableRow>
@@ -124,8 +145,21 @@ const UserManagementPage = () => {
                                                         <DropdownMenuItem className="bg-white hover:bg-slate-400 border-0 px-3 ">
                                                             View full profile
                                                         </DropdownMenuItem>
-                                                        <DropdownMenuItem className="bg-white hover:bg-slate-400 border-0 px-3">
-                                                            Block user
+                                                        <DropdownMenuItem
+                                                            onClick={() => {
+                                                                return userDetails.isBlocked
+                                                                    ? handleUnBlockUser(
+                                                                          userDetails._id
+                                                                      )
+                                                                    : handleBlockUser(
+                                                                          userDetails._id
+                                                                      );
+                                                            }}
+                                                            className="bg-white hover:bg-slate-400 border-0 px-3"
+                                                        >
+                                                            {userDetails.isBlocked
+                                                                ? "Unblock user"
+                                                                : "Block user"}
                                                         </DropdownMenuItem>
                                                     </DropdownMenuContent>
                                                 </DropdownMenu>

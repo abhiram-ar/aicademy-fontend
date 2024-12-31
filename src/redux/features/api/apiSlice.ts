@@ -65,6 +65,7 @@ const apiSlice = createApi({
         "draftCourseContent",
         "cart",
         "userDetails",
+        "userList",
     ],
     endpoints: (builder) => ({
         refresh: builder.query({
