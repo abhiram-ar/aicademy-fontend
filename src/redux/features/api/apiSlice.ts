@@ -40,6 +40,7 @@ const baseQuerywithReauth: BaseQueryFn<
             api,
             extraOptions
         );
+        console.log(`refreshed token`, refershResult);
         if (refershResult.data) {
             const newAccessToken = refershResult.data;
             api.dispatch(setCredentials({ token: newAccessToken }));
@@ -63,6 +64,7 @@ const apiSlice = createApi({
         "draftCourseDetails",
         "draftCourseContent",
         "cart",
+        "userDetails",
     ],
     endpoints: (builder) => ({
         refresh: builder.query({

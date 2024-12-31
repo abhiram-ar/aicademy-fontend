@@ -11,11 +11,13 @@ import {
 } from "@/components/ui/dropdown-menu";
 import { useLogoutMutation } from "@/redux/features/auth/userAuthAPIs";
 import { logout } from "./../../redux/features/auth/authSlice";
+import { useNavigate } from "react-router-dom";
 
 const UserInfoDropdown = () => {
     const username = useSelector<RootState, string | undefined>(
         (state) => state.auth.user?.username
     );
+    const navigate = useNavigate()
 
     const [logoutApi] = useLogoutMutation();
     const dispatch = useDispatch();
@@ -49,7 +51,7 @@ const UserInfoDropdown = () => {
                         )}
                     </DropdownMenuLabel>
                     <DropdownMenuSeparator />
-                    <DropdownMenuItem>My account</DropdownMenuItem>
+                    <DropdownMenuItem onClick={()=> navigate("/user")}>My account</DropdownMenuItem>
                     <DropdownMenuItem>Orders</DropdownMenuItem>
                     <DropdownMenuItem>Help</DropdownMenuItem>
                     <DropdownMenuItem onClick={handleLogout}>
