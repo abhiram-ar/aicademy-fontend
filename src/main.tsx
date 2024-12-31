@@ -33,6 +33,7 @@ import UserProfileLayout from "./pages/user/profile/UserProfileLayout";
 import ProfileOutlet from "./pages/user/profile/ProfileOutlet";
 import ChangePasswordOutlet from "./pages/user/profile/ChangePasswordOutlet";
 import ResetPasswordPage from "./pages/ResetPasswordPage";
+import UserManagementPage from "./pages/admin/user/user-management/UserManagementPage";
 
 fetchAccessTokenOnload();
 const appRouter = createBrowserRouter([
@@ -155,6 +156,10 @@ const appRouter = createBrowserRouter([
                             {
                                 path: "/admin/dashboard/onboard",
                                 element: <TeacherOnboadingPage />,
+                            },
+                            {
+                                path: "/admin/dashboard/user/management",
+                                element: <UserManagementPage />,
                             },
                         ],
                     },

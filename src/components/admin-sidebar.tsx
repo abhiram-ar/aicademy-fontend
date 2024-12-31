@@ -1,4 +1,4 @@
-import { ChevronUp, User2, UserPenIcon } from "lucide-react";
+import { ChevronUp, User2, UserPenIcon, Users } from "lucide-react";
 
 import {
     Sidebar,
@@ -38,7 +38,6 @@ export function AppSidebar() {
         try {
             dispath(logout());
             await logoutAPI({}).unwrap();
-        
         } catch (error) {
             console.error(`error while logging out admin`, error);
         }
@@ -48,7 +47,7 @@ export function AppSidebar() {
         <Sidebar className="">
             <SidebarContent>
                 <SidebarGroup>
-                    <SidebarGroupLabel>Admin Dashboard</SidebarGroupLabel>
+                    <SidebarGroupLabel>Teacher</SidebarGroupLabel>
                     <SidebarGroupContent>
                         <SidebarMenu>
                             {items.map((item) => (
@@ -61,6 +60,21 @@ export function AppSidebar() {
                                     </SidebarMenuButton>
                                 </SidebarMenuItem>
                             ))}
+                        </SidebarMenu>
+                    </SidebarGroupContent>
+                </SidebarGroup>
+                <SidebarGroup>
+                    <SidebarGroupLabel>User</SidebarGroupLabel>
+                    <SidebarGroupContent>
+                        <SidebarMenu>
+                            <SidebarMenuItem>
+                                <SidebarMenuButton asChild>
+                                    <Link to="/admin/dashboard/user/management">
+                                        <Users />
+                                        <span>User management</span>
+                                    </Link>
+                                </SidebarMenuButton>
+                            </SidebarMenuItem>
                         </SidebarMenu>
                     </SidebarGroupContent>
                 </SidebarGroup>
