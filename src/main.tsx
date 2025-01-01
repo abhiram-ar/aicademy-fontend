@@ -34,6 +34,7 @@ import ProfileOutlet from "./pages/user/profile/ProfileOutlet";
 import ChangePasswordOutlet from "./pages/user/profile/ChangePasswordOutlet";
 import ResetPasswordPage from "./pages/ResetPasswordPage";
 import UserManagementPage from "./pages/admin/user/user-management/UserManagementPage";
+import ForgotPassowordPageUser from "./pages/user/auth/ForgotPassowordPageUser";
 
 fetchAccessTokenOnload();
 const appRouter = createBrowserRouter([
@@ -52,6 +53,10 @@ const appRouter = createBrowserRouter([
             {
                 path: "/signup",
                 element: <SignupPage />,
+            },
+            {
+                path: "/user/forgotPassword",
+                element: <ForgotPassowordPageUser />,
             },
             {
                 path: "/explore",

@@ -57,7 +57,17 @@ const LoginPage = () => {
                             Log in to continue your learning journey
                         </h2>
                         <Login handleLogin={handleLogin} role="user" />
+
                         <p className="text-center mt-5 font-medium">
+                            <Link
+                                to="/user/forgotPassword"
+                                className=" underline ms-1"
+                            >
+                                Forget Password?
+                            </Link>
+                        </p>
+
+                        <p className="text-center mt-2 font-medium">
                             Don’t have an account?
                             <Link
                                 to="/signup"
