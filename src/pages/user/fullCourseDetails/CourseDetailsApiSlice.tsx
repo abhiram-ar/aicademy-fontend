@@ -9,6 +9,7 @@ const courseDetailsPageApiSlice = apiSlice.injectEndpoints({
                 return `/api/course/details?${queryParams}`;
             },
             //Invalidate cache If necessary
+            providesTags: ["fullcourseDetailsPublic"]
         }),
     }),
 });
