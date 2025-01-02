@@ -6,6 +6,7 @@ import { RootState } from "@/redux/store";
 import { ICourse } from "../explore/ExplorePage";
 import AddShoppingCartOutlinedIcon from "@mui/icons-material/AddShoppingCartOutlined";
 import { Link } from "react-router-dom";
+import Checkout from "./Checkout";
 
 const CartPage = () => {
     const user = useSelector((state: RootState) => state.auth.user);
@@ -77,9 +78,10 @@ const CartPage = () => {
                             )}
                         </div>
 
-                        <div className="col-span-4 bg-white border-2 border-black shadow-light rounded-base p-10 h-fit">
-                            todo: checkout component
-                        </div>
+                        <Checkout
+                            totalAmounts={cartData?.totalAmount}
+                            totalCourses={cartData?.length}
+                        />
                     </div>
 
                     {/* wishlist container */}
