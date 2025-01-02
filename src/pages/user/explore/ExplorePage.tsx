@@ -84,13 +84,14 @@ const ExplorePage = () => {
                         </div>
                         {/* pagination */}
                         <div>
-                            {courseCardDetails && (
-                                <PaginationExplore
-                                    filter={filter}
-                                    setFilter={setFilter}
-                                    pages={courseCardDetails.pages}
-                                />
-                            )}
+                            {courseCardDetails &&
+                                courseCardDetails.length > 0 && (
+                                    <PaginationExplore
+                                        filter={filter}
+                                        setFilter={setFilter}
+                                        pages={courseCardDetails.pages}
+                                    />
+                                )}
                         </div>
                     </div>
                 </div>
