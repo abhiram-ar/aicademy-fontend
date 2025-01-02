@@ -11,7 +11,7 @@ type Props = {
         maxPrice: string;
         sortBy: string;
         sortOrder: number;
-        page: string;
+        page: number;
         limit: number;
     };
     setFilter: React.Dispatch<
@@ -23,7 +23,7 @@ type Props = {
             maxPrice: string;
             sortBy: string;
             sortOrder: number;
-            page: string;
+            page: number;
             limit: number;
         }>
     >;
@@ -99,12 +99,13 @@ const FilterSidebar: React.FC<Props> = ({ filter, setFilter }) => {
                             ...prev,
                             minPrice: String(filter?.minPrice),
                             maxPrice: String(filter?.maxPrice),
+                            page: 1,
                         }));
                     }}
                     defaultValue=""
                     className="font-normal ps-3 my-2"
                 >
-                     <div className="flex items-center space-x-2">
+                    <div className="flex items-center space-x-2">
                         <RadioGroupItem value="" id="p0" />
                         <Label htmlFor="p0">none</Label>
                     </div>
@@ -182,7 +183,11 @@ const FilterSidebar: React.FC<Props> = ({ filter, setFilter }) => {
                     defaultValue={filter.level}
                     className="font-normal ps-3 mt-2"
                     onValueChange={(value) =>
-                        setFilter((prev) => ({ ...prev, level: value }))
+                        setFilter((prev) => ({
+                            ...prev,
+                            level: value,
+                            page: 1,
+                        }))
                     }
                 >
                     <div className="flex items-center space-x-2">

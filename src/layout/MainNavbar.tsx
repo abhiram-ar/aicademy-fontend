@@ -23,7 +23,7 @@ type Props = {
             maxPrice: string;
             sortBy: string;
             sortOrder: number;
-            page: string;
+            page: number;
             limit: number;
         }>
     >;

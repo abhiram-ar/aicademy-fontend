@@ -93,7 +93,7 @@ const CourseDraft: React.FC = () => {
                         }`
                     }
                 >
-                    Publish
+                    Preview
                 </NavLink>
             </nav>
             {currentData?.courseDetails && (

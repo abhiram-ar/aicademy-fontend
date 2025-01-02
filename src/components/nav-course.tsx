@@ -2,6 +2,7 @@ import { Link } from "react-router-dom";
 import { useGetDraftCourseListQuery } from "@/redux/features/teacher/courseCreationAPIs";
 
 import {
+    Book,
     BookDashed,
     CirclePlus,
     Folder,
@@ -45,7 +46,6 @@ export function NavCourse() {
         </SidebarMenu>
     );
 
-
     return (
         <SidebarGroup className="group-data-[collapsible=icon]:hidden">
             <SidebarGroupLabel>Course</SidebarGroupLabel>
@@ -62,45 +62,60 @@ export function NavCourse() {
 
                 {isLoading
                     ? shimmer
-                    : data.map((course: { _id: string; title: string }) => (
-                          <SidebarMenuItem key={course._id}>
-                              <SidebarMenuButton asChild>
-                                  <Link
-                                      to={`/teach/course/draft/${course._id}`}
-                                  >
-                                      <BookDashed />
-                                      <span>{course.title}</span>
-                                  </Link>
-                              </SidebarMenuButton>
-                              <DropdownMenu>
-                                  <DropdownMenuTrigger asChild>
-                                      <SidebarMenuAction showOnHover>
-                                          <MoreHorizontal />
-                                          <span className="sr-only">More</span>
-                                      </SidebarMenuAction>
-                                  </DropdownMenuTrigger>
-                                  <DropdownMenuContent
-                                      className="w-48 rounded-lg"
-                                      side={isMobile ? "bottom" : "right"}
-                                      align={isMobile ? "end" : "start"}
-                                  >
-                                      <DropdownMenuItem>
-                                          <Folder className="text-zinc-500 dark:text-zinc-400" />
-                                          <span>View Project</span>
-                                      </DropdownMenuItem>
-                                      <DropdownMenuItem>
-                                          <Forward className="text-zinc-500 dark:text-zinc-400" />
-                                          <span>Share Project</span>
-                                      </DropdownMenuItem>
-                                      <DropdownMenuSeparator />
-                                      <DropdownMenuItem>
-                                          <Trash2 className="text-zinc-500 dark:text-zinc-400" />
-                                          <span>Delete Project</span>
-                                      </DropdownMenuItem>
-                                  </DropdownMenuContent>
-                              </DropdownMenu>
-                          </SidebarMenuItem>
-                      ))}
+                    : data.map(
+                          (course: {
+                              _id: string;
+                              title: string;
+                              courseState:
+                                  | "draft"
+                                  | "published"
+                                  | "unpublished";
+                          }) => (
+                              <SidebarMenuItem key={course._id}>
+                                  <SidebarMenuButton asChild>
+                                      <Link
+                                          to={`/teach/course/draft/${course._id}`}
+                                      >
+                                          {course.courseState === "draft" ? (
+                                              <BookDashed />
+                                          ) : (
+                                              <Book />
+                                          )}
+                                          <span>{course.title}</span>
+                                      </Link>
+                                  </SidebarMenuButton>
+                                  <DropdownMenu>
+                                      <DropdownMenuTrigger asChild>
+                                          <SidebarMenuAction showOnHover>
+                                              <MoreHorizontal />
+                                              <span className="sr-only">
+                                                  More
+                                              </span>
+                                          </SidebarMenuAction>
+                                      </DropdownMenuTrigger>
+                                      <DropdownMenuContent
+                                          className="w-48 rounded-lg"
+                                          side={isMobile ? "bottom" : "right"}
+                                          align={isMobile ? "end" : "start"}
+                                      >
+                                          <DropdownMenuItem>
+                                              <Folder className="text-zinc-500 dark:text-zinc-400" />
+                                              <span>View Project</span>
+                                          </DropdownMenuItem>
+                                          <DropdownMenuItem>
+                                              <Forward className="text-zinc-500 dark:text-zinc-400" />
+                                              <span>Share Project</span>
+                                          </DropdownMenuItem>
+                                          <DropdownMenuSeparator />
+                                          <DropdownMenuItem>
+                                              <Trash2 className="text-zinc-500 dark:text-zinc-400" />
+                                              <span>Delete Project</span>
+                                          </DropdownMenuItem>
+                                      </DropdownMenuContent>
+                                  </DropdownMenu>
+                              </SidebarMenuItem>
+                          )
+                      )}
 
                 <SidebarMenuItem>
                     <SidebarMenuButton className="text-sidebar-foreground/70">

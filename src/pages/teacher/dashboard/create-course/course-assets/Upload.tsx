@@ -90,6 +90,7 @@ const Upload = () => {
             <input
                 type="file"
                 ref={uploadRef}
+                accept="video/*"
                 className="hidden"
                 onChange={(e) => {
                     console.log(e.target.files);
@@ -120,7 +121,7 @@ const Upload = () => {
                     onClick={handleUploadCancel}
                     className="bg-red-400 border-2 hover:bg-red-500 py-1  px-3 rounded-base w-fit h-fit place-self-center flex justify-center items-center gap-2"
                 >
-                    <X className="size-4"/>
+                    <X className="size-4" />
                     Cancel
                 </button>
             )}

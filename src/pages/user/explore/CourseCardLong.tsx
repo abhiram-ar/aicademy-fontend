@@ -13,7 +13,7 @@ const CourseCardLong: React.FC<{ courseDetails: ICourse }> = ({
                 <img
                     src={courseDetails.thumbnail?.url}
                     alt=""
-                    className="object-contain"
+                    className="w-full h-full object-contain"
                 />
             </div>
 
@@ -58,7 +58,7 @@ const CourseCardLong: React.FC<{ courseDetails: ICourse }> = ({
                                 {courseDetails.estimatedPrice}
                             </p>
                         </div>
-                        <div className="relative w-24 h-9 border border-red-200">
+                        <div className="relative w-24 h-9 ">
                             <p className="absolute top-1.5 left-3 z-10 font-publicSans font-medium">
                                 ₹{courseDetails.price}
                             </p>

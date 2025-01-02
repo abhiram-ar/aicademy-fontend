@@ -18,7 +18,7 @@ type Props = {
             maxPrice: string;
             sortBy: string;
             sortOrder: number;
-            page: string;
+            page: number;
             limit: number;
         }>
     >;
@@ -66,6 +66,7 @@ const SortDropDown: React.FC<Props> = ({ setFilter }) => {
                 ...prev,
                 sortBy: sortOption.sortBy,
                 sortOrder: sortOption.sortOrder,
+                page: 1,
             }));
     };
 

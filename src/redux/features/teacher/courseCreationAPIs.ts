@@ -59,6 +59,22 @@ const courseCreationsAPI = apiSlice.injectEndpoints({
             }),
             invalidatesTags: ["draftCourseDetails"],
         }),
+        publishCourse: builder.mutation({
+            query: (data: { courseId: string; chapters: object }) => ({
+                url: "/api/course/publish",
+                method: "PATCH",
+                body: data,
+            }),
+            invalidatesTags: ["draftCourseList", "fullcourseDetailsPublic"],
+        }),
+        unPublishCourse: builder.mutation({
+            query: (data: { courseId: string; chapters: object }) => ({
+                url: "/api/course/unpublish",
+                method: "PATCH",
+                body: data,
+            }),
+            invalidatesTags: ["draftCourseList", "fullcourseDetailsPublic"],
+        }),
     }),
 });
 
@@ -71,4 +87,6 @@ export const {
     useSaveUploadedVideoMetadaMutation,
     useGetAllCourseVideosQuery,
     useUpdateCouseStructureMutation,
+    usePublishCourseMutation,
+    useUnPublishCourseMutation,
 } = courseCreationsAPI;

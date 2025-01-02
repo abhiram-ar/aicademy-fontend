@@ -6,6 +6,7 @@ import CourseCardLong from "./CourseCardLong";
 import { useGetCoursesCardDetailsQuery } from "./exploreApiSlice.ts";
 import { useState } from "react";
 import { Link, useLocation } from "react-router-dom";
+import PaginationExplore from "./Pagination.tsx";
 
 export interface ICourse {
     _id: string;
@@ -23,6 +24,7 @@ export interface ICourse {
     boughtCount: number;
     category: string;
     level: "beginner" | "intermediate" | "advanced";
+    pages: number;
 }
 
 const ExplorePage = () => {
@@ -37,8 +39,8 @@ const ExplorePage = () => {
         maxPrice: "",
         sortBy: "price",
         sortOrder: -1,
-        page: "",
-        limit: 10,
+        page: 1,
+        limit: 5,
     });
 
     const { data: courseCardDetails } = useGetCoursesCardDetailsQuery(filter);
@@ -51,7 +53,7 @@ const ExplorePage = () => {
 
             {/* paper bg */}
             <div className="bg-[#fffbee] w-full min-h-screen pt-10">
-                <div className="w-9/12 border border-red-200 mx-auto grid grid-cols-12">
+                <div className="w-9/12  mx-auto grid grid-cols-12">
                     {/* left section  */}
                     <div className="col-span-3">
                         <h2 className="font-publicSans text-2xl font-semibold">
@@ -61,7 +63,7 @@ const ExplorePage = () => {
                         <FilterSidebar filter={filter} setFilter={setFilter} />
                     </div>
                     {/* rigt seciotn - main */}
-                    <div className="border border-green-400 relative col-span-9">
+                    <div className=" relative col-span-9">
                         <div className="absolute right-0">
                             <SortDropDown setFilter={setFilter} />
                         </div>
@@ -78,6 +80,17 @@ const ExplorePage = () => {
                                             />
                                         </Link>
                                     )
+                                )}
+                        </div>
+                        {/* pagination */}
+                        <div>
+                            {courseCardDetails &&
+                                courseCardDetails.length > 0 && (
+                                    <PaginationExplore
+                                        filter={filter}
+                                        setFilter={setFilter}
+                                        pages={courseCardDetails.pages}
+                                    />
                                 )}
                         </div>
                     </div>
