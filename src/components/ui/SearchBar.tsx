@@ -13,7 +13,7 @@ type Props = {
             maxPrice: string;
             sortBy: string;
             sortOrder: number;
-            page: string;
+            page: number;
             limit: number;
         }>
     >;
@@ -28,7 +28,11 @@ const SearchBar: React.FC<Props> = ({ query, setFilter = null }) => {
     useEffect(() => {
         const timer = setTimeout(() => {
             if (setFilter)
-                return setFilter((prev) => ({ ...prev, search: searchValue }));
+                return setFilter((prev) => ({
+                    ...prev,
+                    search: searchValue,
+                    page: 1,
+                }));
         }, 500);
 
         return () => clearTimeout(timer);

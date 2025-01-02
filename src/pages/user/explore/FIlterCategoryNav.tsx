@@ -10,7 +10,7 @@ type Props = {
         maxPrice: string;
         sortBy: string;
         sortOrder: number;
-        page: string;
+        page: number;
         limit: number;
     };
     setFilter: React.Dispatch<
@@ -22,7 +22,7 @@ type Props = {
             maxPrice: string;
             sortBy: string;
             sortOrder: number;
-            page: string;
+            page: number;
             limit: number;
         }>
     >;
@@ -83,6 +83,7 @@ const FIlterCategoryNav: React.FC<Props> = ({ filter, setFilter }) => {
                         setFilter((prev) => ({
                             ...prev,
                             category: category.value,
+                            page: 1,
                         }))
                     }
                 >
