@@ -23,6 +23,12 @@ const cartApiSlice = apiSlice.injectEndpoints({
             }),
             invalidatesTags: ["cart"],
         }),
+        createOrder: builder.mutation({
+            query: () => ({
+                url: "/api/user/checkout/create-order",
+                method: "POST",
+            }),
+        }),
     }),
 });
 
@@ -30,4 +36,5 @@ export const {
     useGetCartQuery,
     useAddToCartMutation,
     useRemoveFromCartMutation,
+    useCreateOrderMutation,
 } = cartApiSlice;
