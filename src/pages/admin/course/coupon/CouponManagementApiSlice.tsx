@@ -7,6 +7,7 @@ const couponManagementApiSlice = apiSlice.injectEndpoints({
                 const query = new URLSearchParams(data).toString();
                 return `/api/admin/course/coupon?${query}`;
             },
+            providesTags: ["couponList"],
         }),
         createCouponAdmin: builder.mutation({
             query: (data) => ({
@@ -14,6 +15,7 @@ const couponManagementApiSlice = apiSlice.injectEndpoints({
                 method: "POST",
                 body: data,
             }),
+            invalidatesTags: ["couponList"],
         }),
     }),
 });

@@ -2,8 +2,15 @@ import { Table, TableHead, TableHeader, TableRow } from "@/components/ui/table";
 import CreateNewCoupon from "./CreateNewCoupon";
 import SearchField from "./Search";
 import CouponTableBody from "./CouponTableRow";
+import { useState } from "react";
 
 const CouponManagementPage = () => {
+    const [filter, setFilter] = useState({
+        search: "",
+        sortBy: "createdAt",
+        page: 1,
+        limit: 10,
+    });
     return (
         <>
             <h2 className="text-2xl font-semibold bg-zinc-300 w-fit mx-10 px-2 rounded-base -mt-12 ms-12">
@@ -11,7 +18,7 @@ const CouponManagementPage = () => {
             </h2>
             <div className="w-2/3 mx-auto font-publicSans">
                 <div className="flex justify-center items-center gap-2">
-                    <SearchField />
+                    <SearchField search={filter.search} setFilter={setFilter} />
                     <CreateNewCoupon />
                 </div>
 
@@ -37,7 +44,7 @@ const CouponManagementPage = () => {
                                 </TableHead>
                             </TableRow>
                         </TableHeader>
-                        <CouponTableBody />
+                        <CouponTableBody filter={filter} />
                     </Table>
                 </div>
             </div>
