@@ -27,6 +27,8 @@ const CreateNewCoupon = () => {
         register,
     } = useForm<formFields>();
 
+
+
     return (
         <Dialog>
             <DialogTrigger asChild>
@@ -60,6 +62,10 @@ const CreateNewCoupon = () => {
                                     required: {
                                         value: true,
                                         message: "required",
+                                    },
+                                    maxLength: {
+                                        value: 20,
+                                        message: "Max 20 characters",
                                     },
                                 })}
                                 className="input-neo w-full"
