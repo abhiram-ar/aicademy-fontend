@@ -23,6 +23,20 @@ const cartApiSlice = apiSlice.injectEndpoints({
             }),
             invalidatesTags: ["cart"],
         }),
+        createOrder: builder.mutation({
+            query: () => ({
+                url: "/api/user/checkout/create-order",
+                method: "POST",
+            }),
+        }),
+        verifyPaymentandCheckout: builder.mutation({
+            query: (data) => ({
+                url: "/api/user/checkout/verify-payment",
+                method: "POST",
+                body: data,
+            }),
+            invalidatesTags: ["cart"], //invalidte course detalis if necessaary
+        }),
     }),
 });
 
@@ -30,4 +44,6 @@ export const {
     useGetCartQuery,
     useAddToCartMutation,
     useRemoveFromCartMutation,
+    useCreateOrderMutation,
+    useVerifyPaymentandCheckoutMutation,
 } = cartApiSlice;

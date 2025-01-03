@@ -6,6 +6,8 @@ import { RootState } from "@/redux/store";
 import { ICourse } from "../explore/ExplorePage";
 import AddShoppingCartOutlinedIcon from "@mui/icons-material/AddShoppingCartOutlined";
 import { Link } from "react-router-dom";
+import Checkout from "./Checkout";
+import { Toaster } from "react-hot-toast";
 
 const CartPage = () => {
     const user = useSelector((state: RootState) => state.auth.user);
@@ -25,6 +27,7 @@ const CartPage = () => {
     return (
         <div>
             <MainNavbar query="" />
+            <Toaster />
             <div className="w-full min-h-screen bg-[#fffbee] py-10">
                 <div className="w-9/12 border mx-auto">
                     <h2 className="font-semibold text-xl bg-zinc-300 rounded-base w-fit px-2">
@@ -77,9 +80,10 @@ const CartPage = () => {
                             )}
                         </div>
 
-                        <div className="col-span-4 bg-white border-2 border-black shadow-light rounded-base p-10 h-fit">
-                            todo: checkout component
-                        </div>
+                        <Checkout
+                            totalAmounts={cartData?.totalAmount}
+                            totalCourses={cartData?.length}
+                        />
                     </div>
 
                     {/* wishlist container */}
