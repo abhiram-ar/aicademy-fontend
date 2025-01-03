@@ -1,4 +1,4 @@
-import { ChevronUp, User2, UserPenIcon, Users } from "lucide-react";
+import { ChevronUp, Tag, User2, UserPenIcon, Users } from "lucide-react";
 
 import {
     Sidebar,
@@ -72,6 +72,21 @@ export function AppSidebar() {
                                     <Link to="/admin/dashboard/user/management">
                                         <Users />
                                         <span>User management</span>
+                                    </Link>
+                                </SidebarMenuButton>
+                            </SidebarMenuItem>
+                        </SidebarMenu>
+                    </SidebarGroupContent>
+                </SidebarGroup>
+                <SidebarGroup>
+                    <SidebarGroupLabel>Course</SidebarGroupLabel>
+                    <SidebarGroupContent>
+                        <SidebarMenu>
+                            <SidebarMenuItem>
+                                <SidebarMenuButton asChild>
+                                    <Link to="/admin/dashboard/course/coupon">
+                                        <Tag />
+                                    <span>Coupons</span>
                                     </Link>
                                 </SidebarMenuButton>
                             </SidebarMenuItem>
