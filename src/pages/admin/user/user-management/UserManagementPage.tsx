@@ -67,10 +67,10 @@ const UserManagementPage = () => {
 
     return (
         <div className="mx-10">
-            <h2 className="font-medium text-2xl bg-zinc-300 px-1 rounded-base w-fit">
+            <h2 className="font-medium text-2xl bg-zinc-300 px-2 rounded-base w-fit -mt-12 ms-2">
                 User Management
             </h2>
-            <div className="w-fit mx-auto py-10 ">
+            <div className="w-fit mx-auto">
                 <SearchUser search={filter.search} setFilter={setFilter} />
                 <div>
                     <Table>

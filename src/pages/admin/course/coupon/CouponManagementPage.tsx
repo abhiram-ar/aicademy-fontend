@@ -6,7 +6,7 @@ import CouponTableBody from "./CouponTableRow";
 const CouponManagementPage = () => {
     return (
         <>
-            <h2 className="text-2xl font-semibold bg-zinc-300 w-fit mx-10 px-2 rounded-base">
+            <h2 className="text-2xl font-semibold bg-zinc-300 w-fit mx-10 px-2 rounded-base -mt-12 ms-12">
                 Coupons
             </h2>
             <div className="w-2/3 mx-auto font-publicSans">
