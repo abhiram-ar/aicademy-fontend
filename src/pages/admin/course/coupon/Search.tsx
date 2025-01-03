@@ -10,6 +10,7 @@ type Props = {
             page: number;
             limit: number;
             totalPages: number;
+            data: boolean;
         }>
     >;
 };
@@ -19,7 +20,7 @@ const SearchField: React.FC<Props> = ({ search, setFilter }) => {
 
     useEffect(() => {
         const timer = setTimeout(
-            () => setFilter((value) => ({ ...value, search: query })),
+            () => setFilter((value) => ({ ...value, search: query, page: 1 })),
             500
         );
         return () => clearTimeout(timer);

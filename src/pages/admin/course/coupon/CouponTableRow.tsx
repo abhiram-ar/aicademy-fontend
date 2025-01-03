@@ -30,6 +30,7 @@ type Props = {
         page: number;
         limit: number;
         totalPages: number;
+        data: boolean;
     };
     setFilter: React.Dispatch<
         React.SetStateAction<{
@@ -38,6 +39,7 @@ type Props = {
             page: number;
             limit: number;
             totalPages: number;
+            data: boolean;
         }>
     >;
 };
@@ -48,7 +50,11 @@ const CouponTableBody: React.FC<Props> = ({ filter, setFilter }) => {
 
     useEffect(() => {
         if (data) {
-            setFilter((value) => ({ ...value, totalPages: data.pages }));
+            setFilter((value) => ({
+                ...value,
+                totalPages: data.pages,
+                data: data.length > 0 ? true : false,
+            }));
         }
     });
 

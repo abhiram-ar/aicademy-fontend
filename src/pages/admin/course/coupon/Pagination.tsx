@@ -18,6 +18,7 @@ type Props = {
             page: number;
             limit: number;
             totalPages: number;
+            data: boolean;
         }>
     >;
 };
@@ -28,7 +29,8 @@ const PaginationCoupon: React.FC<Props> = ({ totalPages, page, setFilter }) => {
             <PaginationContent>
                 {page > 1 && (
                     <PaginationItem className="cursor-pointer">
-                        <PaginationPrevious className="bg-white"
+                        <PaginationPrevious
+                            className="bg-zinc-200"
                             onClick={() =>
                                 setFilter((value) => ({
                                     ...value,
@@ -44,7 +46,7 @@ const PaginationCoupon: React.FC<Props> = ({ totalPages, page, setFilter }) => {
                 }).map((_, index) => (
                     <PaginationItem key={index + 1} className="cursor-pointer">
                         <PaginationLink
-                            className={`bg-white  ${
+                            className={`bg-zinc-200  ${
                                 index + 1 === page && "bg-black text-white"
                             }`}
                             onClick={() =>
@@ -61,7 +63,8 @@ const PaginationCoupon: React.FC<Props> = ({ totalPages, page, setFilter }) => {
 
                 {page < totalPages && (
                     <PaginationItem className="cursor-pointer">
-                        <PaginationNext className="bg-white"
+                        <PaginationNext
+                            className="bg-zinc-200"
                             onClick={() =>
                                 setFilter((value) => ({
                                     ...value,

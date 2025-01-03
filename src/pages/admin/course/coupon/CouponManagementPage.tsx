@@ -10,8 +10,9 @@ const CouponManagementPage = () => {
         search: "",
         sortBy: "createdAt",
         page: 1,
-        limit: 5,
+        limit: 10,
         totalPages: 1,
+        data: false
     });
     return (
         <>
@@ -53,7 +54,7 @@ const CouponManagementPage = () => {
                     </Table>
                 </div>
                 <div>
-                    {filter.totalPages && (
+                    { filter.data && filter.totalPages && (
                         <PaginationCoupon
                             page={filter.page}
                             totalPages={filter.totalPages}
