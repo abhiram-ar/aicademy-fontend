@@ -8,7 +8,10 @@ import {
 import { TableBody, TableCell, TableRow } from "@/components/ui/table";
 import { CircleCheck, CircleX, Ellipsis, ShieldAlert } from "lucide-react";
 import React, { useEffect } from "react";
-import { useGetCouponListQuery } from "./CouponManagementApiSlice";
+import {
+    useGetCouponListQuery,
+    useUpdateCouponStateAdminMutation,
+} from "./CouponManagementApiSlice";
 
 export interface ICoupon {
     _id: string;
@@ -46,6 +49,7 @@ type Props = {
 
 const CouponTableBody: React.FC<Props> = ({ filter, setFilter }) => {
     const { data } = useGetCouponListQuery(filter);
+    const [updateCouponState] = useUpdateCouponStateAdminMutation();
     const currentData = data;
 
     useEffect(() => {
@@ -57,6 +61,20 @@ const CouponTableBody: React.FC<Props> = ({ filter, setFilter }) => {
             }));
         }
     });
+
+    const handleCouponStateUpdate = async (
+        couponId: string,
+        newState: boolean
+    ) => {
+        try {
+            await updateCouponState({
+                couponId: couponId,
+                isActive: newState,
+            }).unwrap();
+        } catch (error) {
+            console.error("error while updating course state", error);
+        }
+    };
 
     return (
         <TableBody>
@@ -117,8 +135,32 @@ const CouponTableBody: React.FC<Props> = ({ filter, setFilter }) => {
                                     <DropdownMenuItem className="bg-white hover:bg-slate-400 border-0 px-3 ">
                                         Edit
                                     </DropdownMenuItem>
-                                    <DropdownMenuItem className="bg-white hover:bg-slate-400 border-0 px-3 ">
-                                        Deactivate
+                                    <DropdownMenuItem className="bg-white hover:bg-slate-400 border-0 py-0">
+                                        {couponDetails.isActive ? (
+                                            <button
+                                                className="w-full h-full text-left py-1"
+                                                onClick={() =>
+                                                    handleCouponStateUpdate(
+                                                        couponDetails._id,
+                                                        false
+                                                    )
+                                                }
+                                            >
+                                                Deactivate
+                                            </button>
+                                        ) : (
+                                            <button
+                                                className=" w-full h-full text-left py-1"
+                                                onClick={() =>
+                                                    handleCouponStateUpdate(
+                                                        couponDetails._id,
+                                                        true
+                                                    )
+                                                }
+                                            >
+                                                Activate
+                                            </button>
+                                        )}
                                     </DropdownMenuItem>
                                 </DropdownMenuContent>
                             </DropdownMenu>

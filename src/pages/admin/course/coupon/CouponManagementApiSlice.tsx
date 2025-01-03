@@ -17,8 +17,20 @@ const couponManagementApiSlice = apiSlice.injectEndpoints({
             }),
             invalidatesTags: ["couponList"],
         }),
+        updateCouponStateAdmin: builder.mutation({
+            query: (data) => ({
+                url: "/api/admin/course/coupon/state",
+                method: "PATCH",
+                body: data,
+                keepalive: false,
+            }),
+            invalidatesTags: ["couponList"],
+        }),
     }),
 });
 
-export const { useGetCouponListQuery, useCreateCouponAdminMutation } =
-    couponManagementApiSlice;
+export const {
+    useGetCouponListQuery,
+    useCreateCouponAdminMutation,
+    useUpdateCouponStateAdminMutation,
+} = couponManagementApiSlice;
