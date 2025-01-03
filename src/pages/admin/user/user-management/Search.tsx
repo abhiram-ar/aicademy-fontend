@@ -25,7 +25,7 @@ const SearchUser: React.FC<Props> = ({ search, setFilter }) => {
     }, [query, setFilter]);
 
     return (
-        <div className="flex  justify-center items-center border-2 border-black rounded-base px-2  py-2 gap-2 m-2">
+        <div className="flex  justify-center items-center border-2 border-black rounded-base px-2  py-2 gap-2 m-2 bg-white">
             <Search />
             <input
                 type="text"

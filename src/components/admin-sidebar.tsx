@@ -91,13 +91,16 @@ export function AppSidebar() {
                             </DropdownMenuTrigger>
                             <DropdownMenuContent
                                 side="top"
-                                className="w-[--radix-popper-anchor-width]"
+                                className="w-[--radix-popper-anchor-width] bg-slate-300"
                             >
-                                <DropdownMenuItem>
+                                <DropdownMenuItem className="bg-slate-300 hover:bg-slate-400">
                                     <span>Account</span>
                                 </DropdownMenuItem>
 
-                                <DropdownMenuItem onClick={handleLogout}>
+                                <DropdownMenuItem
+                                    onClick={handleLogout}
+                                    className="bg-slate-300 hover:bg-slate-400"
+                                >
                                     <span>Sign out</span>
                                 </DropdownMenuItem>
                             </DropdownMenuContent>

@@ -70,7 +70,7 @@ const UserManagementPage = () => {
             <h2 className="font-medium text-2xl bg-zinc-300 px-1 rounded-base w-fit">
                 User Management
             </h2>
-            <div className="mx-56 py-10 ">
+            <div className="w-fit mx-auto py-10 ">
                 <SearchUser search={filter.search} setFilter={setFilter} />
                 <div>
                     <Table>
