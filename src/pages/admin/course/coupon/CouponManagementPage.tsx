@@ -3,13 +3,15 @@ import CreateNewCoupon from "./CreateNewCoupon";
 import SearchField from "./Search";
 import CouponTableBody from "./CouponTableRow";
 import { useState } from "react";
+import PaginationCoupon from "./Pagination";
 
 const CouponManagementPage = () => {
     const [filter, setFilter] = useState({
         search: "",
         sortBy: "createdAt",
         page: 1,
-        limit: 10,
+        limit: 5,
+        totalPages: 1,
     });
     return (
         <>
@@ -44,8 +46,20 @@ const CouponManagementPage = () => {
                                 </TableHead>
                             </TableRow>
                         </TableHeader>
-                        <CouponTableBody filter={filter} />
+                        <CouponTableBody
+                            filter={filter}
+                            setFilter={setFilter}
+                        />
                     </Table>
+                </div>
+                <div>
+                    {filter.totalPages && (
+                        <PaginationCoupon
+                            page={filter.page}
+                            totalPages={filter.totalPages}
+                            setFilter={setFilter}
+                        />
+                    )}
                 </div>
             </div>
         </>

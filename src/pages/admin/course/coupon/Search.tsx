@@ -9,6 +9,7 @@ type Props = {
             sortBy: string;
             page: number;
             limit: number;
+            totalPages: number;
         }>
     >;
 };

@@ -7,7 +7,7 @@ import {
 } from "@/components/ui/dropdown-menu";
 import { TableBody, TableCell, TableRow } from "@/components/ui/table";
 import { CircleCheck, CircleX, Ellipsis, ShieldAlert } from "lucide-react";
-import React from "react";
+import React, { useEffect } from "react";
 import { useGetCouponListQuery } from "./CouponManagementApiSlice";
 
 export interface ICoupon {
@@ -29,12 +29,28 @@ type Props = {
         sortBy: string;
         page: number;
         limit: number;
+        totalPages: number;
     };
+    setFilter: React.Dispatch<
+        React.SetStateAction<{
+            search: string;
+            sortBy: string;
+            page: number;
+            limit: number;
+            totalPages: number;
+        }>
+    >;
 };
 
-const CouponTableBody: React.FC<Props> = ({ filter }) => {
+const CouponTableBody: React.FC<Props> = ({ filter, setFilter }) => {
     const { data } = useGetCouponListQuery(filter);
     const currentData = data;
+
+    useEffect(() => {
+        if (data) {
+            setFilter((value) => ({ ...value, totalPages: data.pages }));
+        }
+    });
 
     return (
         <TableBody>
