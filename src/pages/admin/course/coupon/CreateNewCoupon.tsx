@@ -9,6 +9,10 @@ import {
     DialogTitle,
     DialogTrigger,
 } from "@/components/ui/dialog";
+import { useCreateCouponAdminMutation } from "./CouponManagementApiSlice";
+import toast from "react-hot-toast";
+import { useRef } from "react";
+import { DialogClose } from "@radix-ui/react-dialog";
 
 type formFields = {
     code: string;
@@ -21,13 +25,24 @@ type formFields = {
 };
 
 const CreateNewCoupon = () => {
+    const [createCoupon] = useCreateCouponAdminMutation();
+    const closeButtonRef = useRef<HTMLButtonElement | null>(null);
+
     const {
         handleSubmit,
         formState: { errors },
         register,
     } = useForm<formFields>();
 
-
+    const handlleCreateCoupon = async (data: formFields) => {
+        try {
+            await createCoupon(data).unwrap();
+            toast.success("coupon created");
+            if (closeButtonRef.current) closeButtonRef.current.click();
+        } catch (error) {
+            console.error("error while creatting coupon", error);
+        }
+    };
 
     return (
         <Dialog>
@@ -44,7 +59,11 @@ const CreateNewCoupon = () => {
                     </DialogDescription>
                 </DialogHeader>
                 <div>
-                    <form onSubmit={handleSubmit((data) => console.log(data))}>
+                    <form
+                        onSubmit={handleSubmit((data) =>
+                            handlleCreateCoupon(data)
+                        )}
+                    >
                         {/* code */}
                         <div className="mb-2">
                             <label htmlFor="code" className="font-medium">
@@ -227,7 +246,7 @@ const CreateNewCoupon = () => {
                                 placeholder="min cart value to use this coupon"
                             />
                         </div>
-
+                        <DialogClose ref={closeButtonRef} />
                         <DialogFooter>
                             <Button
                                 type="submit"

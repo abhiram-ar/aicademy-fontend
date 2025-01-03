@@ -4,6 +4,7 @@ import SearchField from "./Search";
 import CouponTableBody from "./CouponTableRow";
 import { useState } from "react";
 import PaginationCoupon from "./Pagination";
+import { Toaster } from "@/components/ui/toaster";
 
 const CouponManagementPage = () => {
     const [filter, setFilter] = useState({
@@ -12,10 +13,11 @@ const CouponManagementPage = () => {
         page: 1,
         limit: 10,
         totalPages: 1,
-        data: false
+        data: false,
     });
     return (
         <>
+            <Toaster />
             <h2 className="text-2xl font-semibold bg-zinc-300 w-fit mx-10 px-2 rounded-base -mt-12 ms-12">
                 Coupons
             </h2>
@@ -54,7 +56,7 @@ const CouponManagementPage = () => {
                     </Table>
                 </div>
                 <div>
-                    { filter.data && filter.totalPages && (
+                    {filter.data && filter.totalPages && (
                         <PaginationCoupon
                             page={filter.page}
                             totalPages={filter.totalPages}
