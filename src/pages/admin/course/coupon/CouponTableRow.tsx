@@ -159,7 +159,7 @@ const CouponTableBody = () => {
                         className={`${
                             couponDetails.isActive
                                 ? "hover:bg-slate-300 "
-                                : "bg-zinc-300 text-black/80 hover:text-black "
+                                : "bg-zinc-300 hover:bg-zinc-400 text-black/80 hover:text-black "
                         } `}
                     >
                         <TableCell>{couponDetails.code}</TableCell>
