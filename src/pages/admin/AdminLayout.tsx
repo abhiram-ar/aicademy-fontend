@@ -3,7 +3,7 @@ import {
     SidebarProvider,
     SidebarTrigger,
 } from "@/components/ui/sidebar";
-import { AppSidebar } from "@/components/admin-sidebar";
+import { AppSidebar } from "@/pages/admin/admin-sidebar";
 
 export default function Layout({ children }: { children: React.ReactNode }) {
     return (

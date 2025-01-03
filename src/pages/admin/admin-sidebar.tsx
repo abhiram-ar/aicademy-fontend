@@ -17,7 +17,7 @@ import {
     DropdownMenuContent,
     DropdownMenuItem,
     DropdownMenuTrigger,
-} from "./ui/dropdown-menu";
+} from "../../components/ui/dropdown-menu";
 import { logout } from "@/redux/features/auth/authSlice";
 import { useAdminLogoutMutation } from "@/redux/features/auth/adminAuthAPIs";
 import { useDispatch } from "react-redux";
