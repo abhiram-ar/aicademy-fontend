@@ -7,6 +7,7 @@ import { ICourse } from "../explore/ExplorePage";
 import AddShoppingCartOutlinedIcon from "@mui/icons-material/AddShoppingCartOutlined";
 import { Link } from "react-router-dom";
 import Checkout from "./Checkout";
+import { Toaster } from "react-hot-toast";
 
 const CartPage = () => {
     const user = useSelector((state: RootState) => state.auth.user);
@@ -26,6 +27,7 @@ const CartPage = () => {
     return (
         <div>
             <MainNavbar query="" />
+            <Toaster />
             <div className="w-full min-h-screen bg-[#fffbee] py-10">
                 <div className="w-9/12 border mx-auto">
                     <h2 className="font-semibold text-xl bg-zinc-300 rounded-base w-fit px-2">

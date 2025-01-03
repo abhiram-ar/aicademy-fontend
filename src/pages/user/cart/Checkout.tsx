@@ -1,7 +1,12 @@
 import { Button } from "@/components/ui/button";
 import { loadScript } from "@/utils/loadscript";
 import React, { useEffect } from "react";
-import { useCreateOrderMutation } from "./cartApiSlice";
+import { useNavigate } from "react-router-dom";
+import toast from "react-hot-toast";
+import {
+    useCreateOrderMutation,
+    useVerifyPaymentandCheckoutMutation,
+} from "./cartApiSlice";
 
 type Props = {
     totalAmounts?: { totalPrice: number; estimatedTotal: number };
@@ -14,6 +19,8 @@ const Checkout: React.FC<Props> = ({ totalAmounts, totalCourses }) => {
     }, []);
 
     const [createOrder] = useCreateOrderMutation();
+    const [verifyAndCheckout] = useVerifyPaymentandCheckoutMutation();
+    const navigate = useNavigate();
 
     const handleCheckout = async () => {
         try {
@@ -31,23 +38,32 @@ const Checkout: React.FC<Props> = ({ totalAmounts, totalCourses }) => {
                 theme: {
                     color: "#ffdc58",
                 },
-                handler: function (response: {
+                handler: async function (response: {
                     razorpay_payment_id: string;
                     razorpay_order_id: string;
                     razorpay_signature: string;
                 }) {
                     console.log(response);
+                    await verifyAndCheckout({
+                        ...response,
+                        order_id: createOrderResponse.orderDetails.id,
+                    }).unwrap();
+                    toast.success("Start learning");
+                    setTimeout(() => navigate("/"), 2000);
                 },
             };
-            const rzp1 = new Razorpay(options);
 
+            const rzp1 = new Razorpay(options);
             rzp1.open();
         } catch (error) {
             console.log("error while checkout", error);
         }
     };
     return (
-        <div className="col-span-4 bg-white border-2 border-black shadow-light rounded-base p-8 h-fit font-publicSans w-fit">
+        <div className="col-span-4 bg-white border-2 border-black shadow-light rounded-base p-8 h-fit font-publicSans w-fit relative">
+            {!totalCourses && (
+                <div className="absolute inset-0 bg-zinc-400/80 z-50"></div>
+            )}
             <div className="flex justify-between items-center gap-2 -mt-1">
                 <input
                     type="text"
@@ -83,7 +99,7 @@ const Checkout: React.FC<Props> = ({ totalAmounts, totalCourses }) => {
             <Button
                 onClick={handleCheckout}
                 size="lg"
-                className="w-full mt-3 font-medium text-lg py-6"
+                className="w-full mt-3 font-medium text-lg py-6 z-10"
             >
                 Checkout
             </Button>
