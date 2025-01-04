@@ -68,7 +68,12 @@ const Checkout: React.FC<Props> = ({
 
             const err = error as { data?: { errorMessage: string } };
             if (err.data) {
-                toast.error(err.data.errorMessage);
+                toast.error(err.data.errorMessage, {
+                    position: "bottom-right",
+                    style: {
+                        backgroundColor: "orange",
+                    },
+                });
                 // refetch the cart details for valid cart details from backend
                 refetchCart();
             }
