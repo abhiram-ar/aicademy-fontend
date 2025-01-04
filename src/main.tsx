@@ -35,6 +35,7 @@ import ChangePasswordOutlet from "./pages/user/profile/ChangePasswordOutlet";
 import ResetPasswordPage from "./pages/ResetPasswordPage";
 import UserManagementPage from "./pages/admin/user/user-management/UserManagementPage";
 import ForgotPassowordPageUser from "./pages/user/auth/ForgotPassowordPageUser";
+import CouponManagementPage from "./pages/admin/course/coupon/CouponManagementPage";
 
 fetchAccessTokenOnload();
 const appRouter = createBrowserRouter([
@@ -165,6 +166,10 @@ const appRouter = createBrowserRouter([
                             {
                                 path: "/admin/dashboard/user/management",
                                 element: <UserManagementPage />,
+                            },
+                            {
+                                path: "/admin/dashboard/course/coupon",
+                                element: <CouponManagementPage />,
                             },
                         ],
                     },

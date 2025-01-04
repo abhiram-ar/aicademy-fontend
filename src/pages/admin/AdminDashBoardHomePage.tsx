@@ -1,4 +1,4 @@
-import Layout from "@/layout/sidebar";
+import Layout from "@/pages/admin/AdminLayout";
 import { RootState } from "@/redux/store";
 import { useEffect } from "react";
 import { useSelector } from "react-redux";

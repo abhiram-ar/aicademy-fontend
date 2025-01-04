@@ -1,4 +1,4 @@
-import { ChevronUp, User2, UserPenIcon, Users } from "lucide-react";
+import { ChevronUp, Tag, User2, UserPenIcon, Users } from "lucide-react";
 
 import {
     Sidebar,
@@ -17,7 +17,7 @@ import {
     DropdownMenuContent,
     DropdownMenuItem,
     DropdownMenuTrigger,
-} from "./ui/dropdown-menu";
+} from "../../components/ui/dropdown-menu";
 import { logout } from "@/redux/features/auth/authSlice";
 import { useAdminLogoutMutation } from "@/redux/features/auth/adminAuthAPIs";
 import { useDispatch } from "react-redux";
@@ -44,10 +44,10 @@ export function AppSidebar() {
     };
 
     return (
-        <Sidebar className="">
-            <SidebarContent>
+        <Sidebar className="border-none border-e-2  border-black" >
+            <SidebarContent className="bg-zinc-800 text-white">
                 <SidebarGroup>
-                    <SidebarGroupLabel>Teacher</SidebarGroupLabel>
+                    <SidebarGroupLabel className="text-zinc-400">Teacher</SidebarGroupLabel>
                     <SidebarGroupContent>
                         <SidebarMenu>
                             {items.map((item) => (
@@ -64,7 +64,7 @@ export function AppSidebar() {
                     </SidebarGroupContent>
                 </SidebarGroup>
                 <SidebarGroup>
-                    <SidebarGroupLabel>User</SidebarGroupLabel>
+                    <SidebarGroupLabel className="text-zinc-400">User</SidebarGroupLabel>
                     <SidebarGroupContent>
                         <SidebarMenu>
                             <SidebarMenuItem>
@@ -78,26 +78,44 @@ export function AppSidebar() {
                         </SidebarMenu>
                     </SidebarGroupContent>
                 </SidebarGroup>
+                <SidebarGroup>
+                    <SidebarGroupLabel className="text-zinc-400">Course</SidebarGroupLabel>
+                    <SidebarGroupContent>
+                        <SidebarMenu>
+                            <SidebarMenuItem>
+                                <SidebarMenuButton asChild>
+                                    <Link to="/admin/dashboard/course/coupon">
+                                        <Tag />
+                                    <span  >Coupons</span>
+                                    </Link>
+                                </SidebarMenuButton>
+                            </SidebarMenuItem>
+                        </SidebarMenu>
+                    </SidebarGroupContent>
+                </SidebarGroup>
             </SidebarContent>
-            <SidebarFooter>
+            <SidebarFooter className="bg-zinc-600 text-white border-e-2 border-black">
                 <SidebarMenu>
                     <SidebarMenuItem>
                         <DropdownMenu>
                             <DropdownMenuTrigger asChild>
-                                <SidebarMenuButton>
-                                    <User2 /> Username
+                                <SidebarMenuButton className="hover:bg-zinc-500 hover:text-white">
+                                    <User2 /> Admin
                                     <ChevronUp className="ml-auto" />
                                 </SidebarMenuButton>
                             </DropdownMenuTrigger>
                             <DropdownMenuContent
                                 side="top"
-                                className="w-[--radix-popper-anchor-width]"
+                                className="w-[--radix-popper-anchor-width] bg-slate-300"
                             >
-                                <DropdownMenuItem>
+                                <DropdownMenuItem className="bg-slate-300 hover:bg-slate-400">
                                     <span>Account</span>
                                 </DropdownMenuItem>
 
-                                <DropdownMenuItem onClick={handleLogout}>
+                                <DropdownMenuItem
+                                    onClick={handleLogout}
+                                    className="bg-slate-300 hover:bg-slate-400"
+                                >
                                     <span>Sign out</span>
                                 </DropdownMenuItem>
                             </DropdownMenuContent>

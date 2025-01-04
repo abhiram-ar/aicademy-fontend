@@ -52,6 +52,8 @@ const TeacherOnboadingPage = () => {
         null
     );
 
+    console.log(data);
+
     return (
         <div className="absolute ms-20 w-2/3 ">
             {selectedTeacher &&

@@ -3,6 +3,7 @@ import { loadScript } from "@/utils/loadscript";
 import React, { useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import toast from "react-hot-toast";
+import ApplyCoupon from "./ApplyCoupon";
 import {
     useCreateOrderMutation,
     useVerifyPaymentandCheckoutMutation,
@@ -10,10 +11,15 @@ import {
 
 type Props = {
     totalAmounts?: { totalPrice: number; estimatedTotal: number };
-    totalCourses: number;
+    totalCourses?: number;
+    couponDetails?: { code: string; couponDiscount: number };
 };
 
-const Checkout: React.FC<Props> = ({ totalAmounts, totalCourses }) => {
+const Checkout: React.FC<Props> = ({
+    totalAmounts,
+    totalCourses,
+    couponDetails,
+}) => {
     useEffect(() => {
         loadScript("https://checkout.razorpay.com/v1/checkout.js");
     }, []);
@@ -64,24 +70,20 @@ const Checkout: React.FC<Props> = ({ totalAmounts, totalCourses }) => {
             {!totalCourses && (
                 <div className="absolute inset-0 bg-zinc-400/80 z-50"></div>
             )}
-            <div className="flex justify-between items-center gap-2 -mt-1">
-                <input
-                    type="text"
-                    placeholder="enter coupon"
-                    className="input-neo"
-                />
-                <button className="bg-purple-300 h-fit px-5 py-2 rounded-base border-2 border-black mt-1 hover:bg-purple-400">
-                    Apply
-                </button>
+            <div className="-mt-1">
+                <ApplyCoupon couponCode={couponDetails?.code} />
             </div>
+
+            {/* total estiamted Price */}
             <div className="flex justify-between mt-5">
                 <p>
                     Price ({totalCourses}{" "}
-                    {totalCourses > 1 ? "courses" : "course"})
+                    {totalCourses && totalCourses > 1 ? "courses" : "course"})
                 </p>{" "}
                 <p>₹{totalAmounts?.estimatedTotal}</p>
             </div>
 
+            {/* discount from estiamted price */}
             <div className="flex justify-between mt-1">
                 <p>Discount</p>
                 <p className="text-green-600">
@@ -90,6 +92,18 @@ const Checkout: React.FC<Props> = ({ totalAmounts, totalCourses }) => {
                         totalAmounts?.estimatedTotal - totalAmounts?.totalPrice}
                 </p>
             </div>
+
+            {/* discount from coupon */}
+            {couponDetails?.couponDiscount && (
+                <div className="flex justify-between mt-1">
+                    <p>Coupon discount</p>
+                    <p className="text-green-600">
+                        -₹
+                        {couponDetails.couponDiscount}
+                    </p>
+                </div>
+            )}
+
             <hr className="my-3" />
             <div className="flex justify-between font-semibold text-xl">
                 <p>Total Amount</p>
