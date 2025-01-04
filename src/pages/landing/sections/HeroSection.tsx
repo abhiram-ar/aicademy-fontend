@@ -3,7 +3,7 @@ import heroart from "./../../../assets/hero-art.png";
 
 const HeroSection = () => {
     return (
-        <div className=" mx-60 flex flex-col md:flex-row justify-between items-center  py-16">
+        <div className="mx-60 flex flex-col md:flex-row justify-between items-center  py-16">
             <div>
                 <h1 className="font-RedHat text-[3rem] leading-none font-extrabold">
                     Revolutionize Learning
