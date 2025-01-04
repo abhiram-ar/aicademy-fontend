@@ -37,6 +37,13 @@ const cartApiSlice = apiSlice.injectEndpoints({
             }),
             invalidatesTags: ["cart"], //invalidte course detalis if necessaary
         }),
+        applyCoupon: builder.mutation({
+            query: (data) => ({
+                url: "/api/user/cart/apply-coupon",
+                method: "POST",
+                body: data,
+            }),
+        }),
     }),
 });
 
@@ -46,4 +53,5 @@ export const {
     useRemoveFromCartMutation,
     useCreateOrderMutation,
     useVerifyPaymentandCheckoutMutation,
+    useApplyCouponMutation,
 } = cartApiSlice;
