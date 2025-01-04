@@ -13,12 +13,14 @@ type Props = {
     totalAmounts?: { totalPrice: number; estimatedTotal: number };
     totalCourses?: number;
     couponDetails?: { code: string; couponDiscount: number };
+    refetchCart: () => unknown;
 };
 
 const Checkout: React.FC<Props> = ({
     totalAmounts,
     totalCourses,
     couponDetails,
+    refetchCart,
 }) => {
     useEffect(() => {
         loadScript("https://checkout.razorpay.com/v1/checkout.js");
@@ -63,6 +65,13 @@ const Checkout: React.FC<Props> = ({
             rzp1.open();
         } catch (error) {
             console.log("error while checkout", error);
+
+            const err = error as { data?: { errorMessage: string } };
+            if (err.data) {
+                toast.error(err.data.errorMessage);
+                // refetch the cart details for valid cart details from backend
+                refetchCart();
+            }
         }
     };
     return (
