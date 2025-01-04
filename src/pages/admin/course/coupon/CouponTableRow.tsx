@@ -52,6 +52,8 @@ const CouponTableBody: React.FC<Props> = ({ filter, setFilter }) => {
     const [updateCouponState] = useUpdateCouponStateAdminMutation();
     const currentData = data;
 
+    console.log("renders");
+
     useEffect(() => {
         if (data) {
             setFilter((value) => ({
@@ -60,7 +62,7 @@ const CouponTableBody: React.FC<Props> = ({ filter, setFilter }) => {
                 data: data.length > 0 ? true : false,
             }));
         }
-    });
+    }, [data, setFilter]);
 
     const handleCouponStateUpdate = async (
         couponId: string,
