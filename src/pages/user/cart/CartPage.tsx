@@ -24,6 +24,8 @@ const CartPage = () => {
         }
     };
 
+    console.log("cartData", cartData);
+
     return (
         <div>
             <MainNavbar query="" />
@@ -83,6 +85,7 @@ const CartPage = () => {
                         <Checkout
                             totalAmounts={cartData?.totalAmount}
                             totalCourses={cartData?.length}
+                            couponDetails={cartData?.coupon}
                         />
                     </div>
 
