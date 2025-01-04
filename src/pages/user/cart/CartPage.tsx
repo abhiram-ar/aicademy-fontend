@@ -26,6 +26,14 @@ const CartPage = () => {
         }
     };
 
+    let totalWithoutCouponDiscount;
+    if (cartData) {
+        totalWithoutCouponDiscount = cartData.cart.reduce(
+            (sum: number, course: ICourse) => sum + course.price,
+            0
+        );
+    }
+
     console.log("cartData", cartData);
 
     return (
@@ -88,6 +96,9 @@ const CartPage = () => {
                             totalAmounts={cartData?.totalAmount}
                             totalCourses={cartData?.length}
                             couponDetails={cartData?.coupon}
+                            totalWithoutCouponDiscount={
+                                totalWithoutCouponDiscount
+                            }
                             refetchCart={refetch}
                         />
                     </div>

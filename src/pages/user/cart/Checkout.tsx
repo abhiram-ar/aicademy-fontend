@@ -10,6 +10,7 @@ import {
 } from "./cartApiSlice";
 
 type Props = {
+    totalWithoutCouponDiscount: number;
     totalAmounts?: { totalPrice: number; estimatedTotal: number };
     totalCourses?: number;
     couponDetails?: { code: string; couponDiscount: number };
@@ -17,6 +18,7 @@ type Props = {
 };
 
 const Checkout: React.FC<Props> = ({
+    totalWithoutCouponDiscount,
     totalAmounts,
     totalCourses,
     couponDetails,
@@ -103,7 +105,8 @@ const Checkout: React.FC<Props> = ({
                 <p className="text-green-600">
                     -₹
                     {totalAmounts &&
-                        totalAmounts?.estimatedTotal - totalAmounts?.totalPrice}
+                        totalAmounts?.estimatedTotal -
+                            totalWithoutCouponDiscount}
                 </p>
             </div>
 
