@@ -11,7 +11,7 @@ const CouponManagementPage = () => {
         search: "",
         sortBy: "createdAt",
         page: 1,
-        limit: 10,
+        limit: 9,
         totalPages: 1,
         data: false,
     });
