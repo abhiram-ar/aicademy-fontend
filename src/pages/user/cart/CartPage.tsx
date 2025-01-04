@@ -11,7 +11,9 @@ import { Toaster } from "react-hot-toast";
 
 const CartPage = () => {
     const user = useSelector((state: RootState) => state.auth.user);
-    const { data: cartData } = useGetCartQuery(undefined, { skip: !user });
+    const { data: cartData, refetch } = useGetCartQuery(undefined, {
+        skip: !user,
+    });
     const [removeFromCart] = useRemoveFromCartMutation();
 
     const handleRemoveFromCart = async (courseId: string) => {
@@ -86,6 +88,7 @@ const CartPage = () => {
                             totalAmounts={cartData?.totalAmount}
                             totalCourses={cartData?.length}
                             couponDetails={cartData?.coupon}
+                            refetchCart={refetch}
                         />
                     </div>
 
