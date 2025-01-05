@@ -1,5 +1,4 @@
 import MainNavbar from "@/layout/MainNavbar";
-import React from "react";
 import BoughtCourseGrid from "./BoughtCourseGrid";
 
 const MyLearning = () => {
