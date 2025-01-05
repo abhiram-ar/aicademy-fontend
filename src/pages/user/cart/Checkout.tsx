@@ -57,6 +57,7 @@ const Checkout: React.FC<Props> = ({
                     await verifyAndCheckout({
                         ...response,
                         order_id: createOrderResponse.orderDetails.id,
+                        order: createOrderResponse,
                     }).unwrap();
                     toast.success("Start learning");
                     setTimeout(() => navigate("/"), 2000);
