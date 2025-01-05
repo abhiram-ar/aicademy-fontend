@@ -36,6 +36,7 @@ import ResetPasswordPage from "./pages/ResetPasswordPage";
 import UserManagementPage from "./pages/admin/user/user-management/UserManagementPage";
 import ForgotPassowordPageUser from "./pages/user/auth/ForgotPassowordPageUser";
 import CouponManagementPage from "./pages/admin/course/coupon/CouponManagementPage";
+import MyLearning from "./pages/user/myLearning/MyLearning";
 
 fetchAccessTokenOnload();
 const appRouter = createBrowserRouter([
@@ -72,8 +73,19 @@ const appRouter = createBrowserRouter([
                 element: <ResetPasswordPage />,
             },
             {
-                path: "/cart",
-                element: <CartPage />,
+                path: "/user",
+                loader: () => authLoader("user"),
+                hydrateFallbackElement: <p>loading...</p>,
+                children: [
+                    {
+                        path: "/user/cart",
+                        element: <CartPage />,
+                    },
+                    {
+                        path: "/user/my-learning",
+                        element: <MyLearning />,
+                    },
+                ],
             },
             {
                 path: "/user",
@@ -86,6 +98,14 @@ const appRouter = createBrowserRouter([
                     {
                         path: "/user/changePassword",
                         element: <ChangePasswordOutlet />,
+                    },
+                    {
+                        path: "/user/cart",
+                        element: <CartPage />,
+                    },
+                    {
+                        path: "/user/my-learning",
+                        element: <MyLearning />,
                     },
                 ],
             },
