@@ -10,7 +10,7 @@ const CourseCardLong: React.FC<{ courseDetails: ICourse }> = ({
     return (
         <div className="border border-black overflow-hidden  rounded-base mb-3 flex h-[26rem] w-80 flex-col  lg:h-[11.25rem] lg:w-full lg:flex-row  ">
             {/* image */}
-            <div className="h-[11.25rem] w-80 border-e border-black shrink-0">
+            <div className="h-[11.25rem] w-80 border-e border-black shrink-0 bg-zinc-500">
                 <ImageWithShimer src={courseDetails.thumbnail?.url} />
             </div>
 

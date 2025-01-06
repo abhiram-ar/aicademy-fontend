@@ -43,7 +43,8 @@ const ExplorePage = () => {
         limit: 5,
     });
 
-    const { data: courseCardDetails } = useGetCoursesCardDetailsQuery(filter);
+    const { currentData: courseCardDetails, isLoading } =
+        useGetCoursesCardDetailsQuery(filter);
     console.log(courseCardDetails);
 
     return (
@@ -84,24 +85,24 @@ const ExplorePage = () => {
                         </div>
                         {/* pagination */}
                         <div>
-                            {!courseCardDetails &&
-                                Array.from({ length: 5 }).map((_, index) => (
-                                    <div
-                                        key={index}
-                                        className="border bg-zinc-200 animate-pulse border-black overflow-hidden  rounded-base mb-3 flex h-[26rem] w-80 flex-col  lg:h-[11.25rem] lg:w-full lg:flex-row  "
-                                    >
-                                        <div className="h-[11.25rem] bg-zinc-300 w-80 border-e border-black shrink-0"></div>
-                                        <div className="bg-zinc-100 w-full h-full"></div>
-                                    </div>
-                                ))}
-                            {courseCardDetails &&
-                                courseCardDetails.length > 0 && (
-                                    <PaginationExplore
-                                        filter={filter}
-                                        setFilter={setFilter}
-                                        pages={courseCardDetails.pages}
-                                    />
-                                )}
+                            {isLoading
+                                ? Array.from({ length: 5 }).map((_, index) => (
+                                      <div
+                                          key={index + 100}
+                                          className="border bg-zinc-200 animate-pulse border-black overflow-hidden  rounded-base mb-3 flex h-[26rem] w-80 flex-col  lg:h-[11.25rem] lg:w-full lg:flex-row  "
+                                      >
+                                          <div className="h-[11.25rem] bg-zinc-300 w-80 border-e border-black shrink-0"></div>
+                                          <div className="bg-zinc-100 w-full h-full"></div>
+                                      </div>
+                                  ))
+                                : courseCardDetails &&
+                                  courseCardDetails.length > 0 && (
+                                      <PaginationExplore
+                                          filter={filter}
+                                          setFilter={setFilter}
+                                          pages={courseCardDetails.pages}
+                                      />
+                                  )}
                         </div>
                     </div>
                 </div>

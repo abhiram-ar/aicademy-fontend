@@ -12,8 +12,8 @@ const ImageWithShimer = ({ src }: { src: string }) => {
             <img
                 src={src}
                 alt=""
-                className={`w-full h-full object-contain ${
-                    thumbnailLoading ? " hidden " : "block"
+                className={`bg-black w-full h-full object-contain transition-opacity duration-500 ${
+                    thumbnailLoading ? " opacity-0 " : "opacity-100"
                 }`}
                 onLoad={() => setThumbnailLoading(false)}
             />
