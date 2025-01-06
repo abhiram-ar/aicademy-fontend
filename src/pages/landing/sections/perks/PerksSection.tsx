@@ -1,36 +1,37 @@
-import React from "react";
 import quizesArt from "./../../../../assets/quizesArt.png";
 import communityArt from "./../../../../assets/communityArt.png";
 import certificationArt from "./../../../../assets/certificationArt.png";
 
-const primaryPerks: {
-    color: string;
-    icon: string;
-    heading: string;
-    description: string;
-}[] = [
-    {
-        color: "a388ee",
-        icon: quizesArt,
-        heading: "Quizzes",
-        description:
-            "Interactive quizzes to test your knowledge and track progress.",
-    },
-    {
-        color: "88aaee",
-        icon: communityArt,
-        heading: "Community",
-        description: "Join a vibrant community of learners and share insights.",
-    },
-    {
-        color: "ffdc58",
-        icon: certificationArt,
-        heading: "Certification",
-        description: "Earn recognized certifications to showcase your skills",
-    },
-];
-
 const PerksSection = () => {
+    const primaryPerks: {
+        color: string;
+        icon: string;
+        heading: string;
+        description: string;
+    }[] = [
+        {
+            color: "#a388ee",
+            icon: quizesArt,
+            heading: "Quizzes",
+            description:
+                "Interactive quizzes to test your knowledge and track progress.",
+        },
+        {
+            color: "#88aaee",
+            icon: communityArt,
+            heading: "Community",
+            description:
+                "Join a vibrant community of learners and share insights.",
+        },
+        {
+            color: "#ffdc58",
+            icon: certificationArt,
+            heading: "Certification",
+            description:
+                "Earn recognized certifications to showcase your skills",
+        },
+    ];
+
     return (
         <div className=" mx-10 lg:mx-60   py-16 font-publicSans border border-red-400">
             <div className="w-fit mx-auto">
@@ -49,7 +50,7 @@ const PerksSection = () => {
                 {primaryPerks.map((perk, index) => (
                     <div
                         key={index}
-                        className={`bg-[#${perk.color}] border-4 border-black h-fit rounded-base  p-8 text-center`}
+                        className={`bg-[${perk.color}] border-4 border-black h-fit rounded-base  p-8 text-center`}
                     >
                         <div className="size-20 mx-auto">
                             <img src={perk.icon} alt={perk.heading} />
