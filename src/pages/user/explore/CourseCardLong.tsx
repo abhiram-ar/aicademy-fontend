@@ -52,7 +52,7 @@ const CourseCardLong: React.FC<{ courseDetails: ICourse }> = ({
                     <div className="flex gap-4 justify-center items-center">
                         <div>
                             <p className="font-publicSans text-zinc-500 line-through">
-                                {courseDetails.estimatedPrice}
+                                ₹{courseDetails.estimatedPrice}
                             </p>
                         </div>
                         <div className="relative w-24 h-9 ">
