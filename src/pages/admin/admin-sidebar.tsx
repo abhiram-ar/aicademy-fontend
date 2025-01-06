@@ -1,4 +1,11 @@
-import { ChevronUp, Tag, User2, UserPenIcon, Users } from "lucide-react";
+import {
+    ChevronUp,
+    MessageSquareWarning,
+    Tag,
+    User2,
+    UserPenIcon,
+    Users,
+} from "lucide-react";
 
 import {
     Sidebar,
@@ -44,10 +51,12 @@ export function AppSidebar() {
     };
 
     return (
-        <Sidebar className="border-none border-e-2  border-black" >
+        <Sidebar className="border-none border-e-2  border-black">
             <SidebarContent className="bg-zinc-800 text-white">
                 <SidebarGroup>
-                    <SidebarGroupLabel className="text-zinc-400">Teacher</SidebarGroupLabel>
+                    <SidebarGroupLabel className="text-zinc-400">
+                        Teacher
+                    </SidebarGroupLabel>
                     <SidebarGroupContent>
                         <SidebarMenu>
                             {items.map((item) => (
@@ -64,7 +73,9 @@ export function AppSidebar() {
                     </SidebarGroupContent>
                 </SidebarGroup>
                 <SidebarGroup>
-                    <SidebarGroupLabel className="text-zinc-400">User</SidebarGroupLabel>
+                    <SidebarGroupLabel className="text-zinc-400">
+                        User
+                    </SidebarGroupLabel>
                     <SidebarGroupContent>
                         <SidebarMenu>
                             <SidebarMenuItem>
@@ -75,18 +86,28 @@ export function AppSidebar() {
                                     </Link>
                                 </SidebarMenuButton>
                             </SidebarMenuItem>
+                            <SidebarMenuItem>
+                                <SidebarMenuButton asChild>
+                                    <Link to="/admin/dashboard/user/reports">
+                                        <MessageSquareWarning />
+                                        <span>Reports</span>
+                                    </Link>
+                                </SidebarMenuButton>
+                            </SidebarMenuItem>
                         </SidebarMenu>
                     </SidebarGroupContent>
                 </SidebarGroup>
                 <SidebarGroup>
-                    <SidebarGroupLabel className="text-zinc-400">Course</SidebarGroupLabel>
+                    <SidebarGroupLabel className="text-zinc-400">
+                        Course
+                    </SidebarGroupLabel>
                     <SidebarGroupContent>
                         <SidebarMenu>
                             <SidebarMenuItem>
                                 <SidebarMenuButton asChild>
                                     <Link to="/admin/dashboard/course/coupon">
                                         <Tag />
-                                    <span  >Coupons</span>
+                                        <span>Coupons</span>
                                     </Link>
                                 </SidebarMenuButton>
                             </SidebarMenuItem>

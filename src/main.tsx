@@ -38,6 +38,7 @@ import ForgotPassowordPageUser from "./pages/user/auth/ForgotPassowordPageUser";
 import CouponManagementPage from "./pages/admin/course/coupon/CouponManagementPage";
 import MyLearning from "./pages/user/myLearning/MyLearning";
 import ReportCourseIssue from "./pages/user/Help/ReportCourseIssue";
+import UserCourseReportPage from "./pages/admin/user/course-reports/UserCourseReportPage";
 
 fetchAccessTokenOnload();
 const appRouter = createBrowserRouter([
@@ -191,6 +192,10 @@ const appRouter = createBrowserRouter([
                             {
                                 path: "/admin/dashboard/user/management",
                                 element: <UserManagementPage />,
+                            },
+                            {
+                                path: "/admin/dashboard/user/reports",
+                                element: <UserCourseReportPage />,
                             },
                             {
                                 path: "/admin/dashboard/course/coupon",
