@@ -49,7 +49,7 @@ const PerksSection = () => {
                 {primaryPerks.map((perk, index) => (
                     <div
                         key={index}
-                        className={`border-4 border-black h-fit rounded-base bg-[#${perk.color}] p-8 text-center`}
+                        className={`bg-[#${perk.color}] border-4 border-black h-fit rounded-base  p-8 text-center`}
                     >
                         <div className="size-20 mx-auto">
                             <img src={perk.icon} alt={perk.heading} />
