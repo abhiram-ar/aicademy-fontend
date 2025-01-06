@@ -1,25 +1,41 @@
 import NavbarOnlyLogo from "@/components/extended/NavbarOnlyLogo";
 import { useForm } from "react-hook-form";
 import { useGetUserBoughtCourseListQuery } from "../myLearning/myLearningApiSlice";
+import { useReportCourseMutation } from "./ReportPageApiSlice";
+import toast, { Toaster } from "react-hot-toast";
 
 type formFields = {
     courseId: string;
-    issueTitle: string;
+    title: string;
     description: string;
 };
 
 const ReportCourseIssue = () => {
     const { data } = useGetUserBoughtCourseListQuery({});
+    const [reportCourse] = useReportCourseMutation();
     console.log(data);
 
     const {
         handleSubmit,
         formState: { errors },
         register,
+        reset,
     } = useForm<formFields>();
+
+    const handleReportCourse = async (data: formFields) => {
+        try {
+            await reportCourse(data).unwrap();
+            toast.success("Issue reported", { position: "bottom-right" });
+            reset();
+        } catch (error) {
+            console.error("error while reporting course", error);
+        }
+    };
+
     return (
         <div>
             <NavbarOnlyLogo />
+            <Toaster />
 
             {/* body */}
             <div className="bg-paperYellow w-full min-h-screen py-10">
@@ -30,7 +46,9 @@ const ReportCourseIssue = () => {
                     </h2>
 
                     <form
-                        onSubmit={handleSubmit((data) => console.log(data))}
+                        onSubmit={handleSubmit((data) =>
+                            handleReportCourse(data)
+                        )}
                         className="mt-5 bg-slate-100 p-5 rounded-base max-w-[45rem] mx-auto"
                     >
                         <div className="mb-2">
@@ -46,7 +64,8 @@ const ReportCourseIssue = () => {
                                 )}
                             </label>
                             <div className="input-neo py-0 px-1">
-                                <select defaultValue=""
+                                <select
+                                    defaultValue=""
                                     {...register("courseId", {
                                         required: {
                                             value: true,
@@ -56,7 +75,7 @@ const ReportCourseIssue = () => {
                                     id=""
                                     className="w-full py-2 border-none outline-none"
                                 >
-                                    <option value=""  disabled>
+                                    <option value="" disabled>
                                         Select a course to report
                                     </option>
                                     {data &&
@@ -83,16 +102,16 @@ const ReportCourseIssue = () => {
                                 className="font-semibold flex gap-2 items-baseline -mb-1 "
                             >
                                 Report Title
-                                {errors.issueTitle && (
+                                {errors.title && (
                                     <p className="validation-error">
-                                        ({String(errors.issueTitle.message)})
+                                        ({String(errors.title.message)})
                                     </p>
                                 )}
                             </label>
 
                             <input
                                 type="text"
-                                {...register("issueTitle", {
+                                {...register("title", {
                                     required: {
                                         value: true,
                                         message: "required",
