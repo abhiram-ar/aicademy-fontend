@@ -35,7 +35,7 @@ const cartApiSlice = apiSlice.injectEndpoints({
                 method: "POST",
                 body: data,
             }),
-            invalidatesTags: ["cart"], //invalidte course detalis if necessaary
+            invalidatesTags: ["cart", "userBoughtCourseList"], //invalidte course detalis if necessaary
         }),
         applyCoupon: builder.mutation({
             query: (data) => ({
