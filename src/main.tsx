@@ -39,6 +39,7 @@ import CouponManagementPage from "./pages/admin/course/coupon/CouponManagementPa
 import MyLearning from "./pages/user/myLearning/MyLearning";
 import ReportCourseIssue from "./pages/user/Help/ReportCourseIssue";
 import UserCourseReportPage from "./pages/admin/user/course-reports/UserCourseReportPage";
+import OrdersPage from "./pages/user/Orders/OrdersPage";
 
 fetchAccessTokenOnload();
 const appRouter = createBrowserRouter([
@@ -90,6 +91,10 @@ const appRouter = createBrowserRouter([
                     {
                         path: "/user/help",
                         element: <ReportCourseIssue />,
+                    },
+                    {
+                        path: "/user/orders",
+                        element: <OrdersPage />,
                     },
                 ],
             },

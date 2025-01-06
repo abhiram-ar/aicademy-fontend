@@ -1,6 +1,9 @@
 import { useDispatch, useSelector } from "react-redux";
 import demopic from "./../../assets/studentDemo.png";
 import { RootState } from "@/redux/store";
+import { useLogoutMutation } from "@/redux/features/auth/userAuthAPIs";
+import { logout } from "./../../redux/features/auth/authSlice";
+import { useNavigate } from "react-router-dom";
 import {
     DropdownMenu,
     DropdownMenuContent,
@@ -9,9 +12,6 @@ import {
     DropdownMenuSeparator,
     DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
-import { useLogoutMutation } from "@/redux/features/auth/userAuthAPIs";
-import { logout } from "./../../redux/features/auth/authSlice";
-import { useNavigate } from "react-router-dom";
 
 const UserInfoDropdown = () => {
     const username = useSelector<RootState, string | undefined>(
@@ -54,7 +54,9 @@ const UserInfoDropdown = () => {
                     <DropdownMenuItem onClick={() => navigate("/user")}>
                         My account
                     </DropdownMenuItem>
-                    <DropdownMenuItem>Orders</DropdownMenuItem>
+                    <DropdownMenuItem onClick={() => navigate("/user/orders")}>
+                        Orders
+                    </DropdownMenuItem>
                     <DropdownMenuItem onClick={() => navigate("/user/help")}>
                         Help
                     </DropdownMenuItem>
