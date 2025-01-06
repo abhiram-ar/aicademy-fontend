@@ -17,7 +17,7 @@ const UserInfoDropdown = () => {
     const username = useSelector<RootState, string | undefined>(
         (state) => state.auth.user?.username
     );
-    const navigate = useNavigate()
+    const navigate = useNavigate();
 
     const [logoutApi] = useLogoutMutation();
     const dispatch = useDispatch();
@@ -51,9 +51,13 @@ const UserInfoDropdown = () => {
                         )}
                     </DropdownMenuLabel>
                     <DropdownMenuSeparator />
-                    <DropdownMenuItem onClick={()=> navigate("/user")}>My account</DropdownMenuItem>
+                    <DropdownMenuItem onClick={() => navigate("/user")}>
+                        My account
+                    </DropdownMenuItem>
                     <DropdownMenuItem>Orders</DropdownMenuItem>
-                    <DropdownMenuItem>Help</DropdownMenuItem>
+                    <DropdownMenuItem onClick={() => navigate("/user/help")}>
+                        Help
+                    </DropdownMenuItem>
                     <DropdownMenuItem onClick={handleLogout}>
                         logout
                     </DropdownMenuItem>
