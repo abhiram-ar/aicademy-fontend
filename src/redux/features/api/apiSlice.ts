@@ -70,6 +70,7 @@ const apiSlice = createApi({
         "couponList",
         "couponDetails",
         "userBoughtCourseList",
+        "courseReportList",
     ],
     endpoints: (builder) => ({
         refresh: builder.query({
