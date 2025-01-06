@@ -2,6 +2,7 @@ import React from "react";
 import priceBanner from "./../../../assets/priceBanner.png";
 import { Star } from "lucide-react";
 import { ICourse } from "./ExplorePage";
+import ImageWithShimer from "./ImageWithShimer";
 
 const CourseCardLong: React.FC<{ courseDetails: ICourse }> = ({
     courseDetails,
@@ -10,11 +11,7 @@ const CourseCardLong: React.FC<{ courseDetails: ICourse }> = ({
         <div className="border border-black overflow-hidden  rounded-base mb-3 flex h-[26rem] w-80 flex-col  lg:h-[11.25rem] lg:w-full lg:flex-row  ">
             {/* image */}
             <div className="h-[11.25rem] w-80 border-e border-black shrink-0">
-                <img
-                    src={courseDetails.thumbnail?.url}
-                    alt=""
-                    className="w-full h-full object-contain"
-                />
+                <ImageWithShimer src={courseDetails.thumbnail?.url} />
             </div>
 
             {/* detals */}
