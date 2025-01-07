@@ -21,6 +21,14 @@ const orderPageApiSlice = apiSlice.injectEndpoints({
             }),
             invalidatesTags: ["courseReview"],
         }),
+        editCourseReview: builder.mutation({
+            query: (data) => ({
+                url: "/api/user/course/review",
+                method: "PATCH",
+                body: data,
+            }),
+            invalidatesTags: ["courseReview"],
+        }),
     }),
 });
 
@@ -28,4 +36,5 @@ export const {
     useGetUserPurchaseHistoryQuery,
     useGetCourseReviewQuery,
     useAddCourseReviewMutation,
+    useEditCourseReviewMutation,
 } = orderPageApiSlice;

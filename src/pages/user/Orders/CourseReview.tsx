@@ -1,3 +1,6 @@
+import ReviewStars from "./ReviewStars";
+import { useRef, useState } from "react";
+import { Pen, Star } from "lucide-react";
 import {
     Dialog,
     DialogClose,
@@ -9,20 +12,21 @@ import {
 } from "@/components/ui/dialog";
 import {
     useAddCourseReviewMutation,
+    useEditCourseReviewMutation,
     useGetCourseReviewQuery,
 } from "./OrderPageApiSlice";
-import ReviewStars from "./ReviewStars";
-import { useRef, useState } from "react";
-import { Pen, Star } from "lucide-react";
 
 const CourseReview = ({ courseId }: { courseId: string }) => {
     const { data } = useGetCourseReviewQuery({ courseId });
     const [rating, setRating] = useState<number | null>(null);
-    const dialogOpenRef = useRef<HTMLButtonElement>(null);
-    const dialogCloseRef = useRef<HTMLButtonElement>(null);
     const [reviewText, setReviewTest] = useState("");
 
+    const dialogOpenRef = useRef<HTMLButtonElement>(null);
+    const dialogCloseRef = useRef<HTMLButtonElement>(null);
+
     const [addCourseReview] = useAddCourseReviewMutation();
+    const [editCourseReview] = useEditCourseReviewMutation();
+
     const handleAddReview = async () => {
         const reviewData: { rating: number; review?: string } = {
             rating: rating as number,
@@ -33,7 +37,26 @@ const CourseReview = ({ courseId }: { courseId: string }) => {
         console.log(reviewData);
 
         try {
-            await addCourseReview({ ...reviewData, courseId });
+            await addCourseReview({ ...reviewData, courseId }).unwrap();
+            if (dialogCloseRef.current) {
+                dialogCloseRef.current.click();
+            }
+        } catch (error) {
+            console.error("error while addding review", error);
+        }
+    };
+
+    const handleEditReview = async (reviewId: string) => {
+        const reviewData: { rating: number; review?: string } = {
+            rating: rating as number,
+        };
+        if (reviewText) {
+            reviewData.review = reviewText;
+        }
+        console.log(reviewData);
+
+        try {
+            await editCourseReview({ ...reviewData, reviewId }).unwrap();
             if (dialogCloseRef.current) {
                 dialogCloseRef.current.click();
             }
@@ -142,7 +165,9 @@ const CourseReview = ({ courseId }: { courseId: string }) => {
                                 <div>
                                     <button
                                         disabled={rating === null}
-                                        onClick={handleAddReview}
+                                        onClick={() =>
+                                            handleEditReview(data.review._id)
+                                        }
                                         className={`disabled:bg-zinc-300 bg-green-300 hover:bg-green-400 px-3 py-1 mt-2 border-2 border-black rounded-base w-fit block ms-auto`}
                                     >
                                         Update review
