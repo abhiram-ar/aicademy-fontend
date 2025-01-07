@@ -48,6 +48,7 @@ interface IFullCourseData {
     demoVideoKey: string;
     updatedAt: string; // ISO date string
     rating?: number;
+    totalRatingCount: number;
 }
 
 const FullCouseDetalsPage = () => {
@@ -167,7 +168,7 @@ const FullCouseDetalsPage = () => {
                                 <div className="flex gap-1 justify-center items-center ">
                                     {fullCourseData.rating ? (
                                         <>
-                                            {fullCourseData.rating}{" "}
+                                            {fullCourseData.rating.toFixed(1)}{" "}
                                             <div className="flex">
                                                 {Array.from({
                                                     length: Math.floor(
@@ -176,11 +177,11 @@ const FullCouseDetalsPage = () => {
                                                 }).map((_, index) => (
                                                     <Star
                                                         key={index}
-                                                        className="w-4 fill-yellow-300 "
+                                                        className="w-4 stroke-yellow-800 fill-yellow-300 "
                                                     />
                                                 ))}
                                             </div>
-                                            ({fullCourseData.ratingCount})
+                                            ({fullCourseData.totalRatingCount})
                                         </>
                                     ) : (
                                         <p>No rating yet</p>
