@@ -25,6 +25,7 @@ export interface ICourse {
     category: string;
     level: "beginner" | "intermediate" | "advanced";
     pages: number;
+    totalRatingCount: number;
 }
 
 const ExplorePage = () => {
