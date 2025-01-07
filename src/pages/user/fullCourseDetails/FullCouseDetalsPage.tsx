@@ -8,6 +8,7 @@ import { useNavigate, useParams } from "react-router-dom";
 import { useSelector } from "react-redux";
 import { RootState } from "@/redux/store";
 import { ICourse } from "../explore/ExplorePage";
+import { HashLoader } from "react-spinners";
 import {
     useAddToCartMutation,
     useGetCartQuery,
@@ -103,7 +104,12 @@ const FullCouseDetalsPage = () => {
         }
     };
 
-    if (!fullCourseData) return <p>loading</p>;
+    if (!fullCourseData)
+        return (
+            <div className="w-full h-screen flex justify-center items-center">
+                <HashLoader color="#fde047" />
+            </div>
+        )
 
     return (
         <div>
