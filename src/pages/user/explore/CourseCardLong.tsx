@@ -32,7 +32,8 @@ const CourseCardLong: React.FC<{ courseDetails: ICourse }> = ({
 
                         <div className="flex justify-start items-center gap-0.5">
                             <p className=" me-1">
-                                {courseDetails.rating?.toFixed(1) || "No rating yet"}
+                                {courseDetails.rating?.toFixed(1) ||
+                                    "No rating yet"}
                             </p>
                             <div className="flex items-center mt-0.5">
                                 {courseDetails.rating &&
@@ -47,7 +48,9 @@ const CourseCardLong: React.FC<{ courseDetails: ICourse }> = ({
                                         />
                                     ))}
                             </div>
-                            <p>({courseDetails.totalRatingCount})</p>
+                            {courseDetails.totalRatingCount > 0 && (
+                                <p>({courseDetails.totalRatingCount})</p>
+                            )}
                         </div>
 
                         <p>40 lessons • {courseDetails.level}</p>
