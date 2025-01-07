@@ -3,6 +3,7 @@ import communityArt from "./../../../../assets/communityArt.png";
 import certificationArt from "./../../../../assets/certificationArt.png";
 import AIChatExample from "./../../../../assets/AIConvExample.png";
 import afforfablePricingArt from "./../../../../assets/AffrodablePricingArt.png";
+import { Button } from "@/components/ui/button";
 
 const PerksSection = () => {
     const primaryPerks: {
@@ -49,18 +50,21 @@ const PerksSection = () => {
 
             {/* primary perks */}
             <div className=" grid gid-cols-1 md:grid-cols-3 gap-5 mt-10">
-                {primaryPerks.map((perk, index) => (
-                    <div
-                        key={index}
-                        className={`bg-[${perk.color}] border-4 border-black h-full rounded-base  p-8 px-5 lg:px-12 text-center`}
-                    >
-                        <div className="size-20 mx-auto">
-                            <img src={perk.icon} alt={perk.heading} />
+                {primaryPerks &&
+                    primaryPerks.map((perk, index) => (
+                        <div
+                            key={index}
+                            className={` border-4 border-black h-full rounded-base  p-8 px-5 lg:px-12 text-center bg-[${perk.color}]`}
+                        >
+                            <div className="size-20 mx-auto">
+                                <img src={perk.icon} alt={perk.heading} />
+                            </div>
+                            <h5 className="font-semibold mt-2">
+                                {perk.heading}
+                            </h5>
+                            <p className="mt-3">{perk.description}</p>
                         </div>
-                        <h5 className="font-semibold mt-2">{perk.heading}</h5>
-                        <p className="mt-3">{perk.description}</p>
-                    </div>
-                ))}
+                    ))}
             </div>
 
             {/* ai feature */}
@@ -108,20 +112,27 @@ const PerksSection = () => {
             </div>
 
             {/* pricing */}
-            <div className="border-4 border-black mt-5 rounded-base bg-[#a3e636] grid grid-cols-6 px-20 py-10">
+            <div className="border-4 font-publicSans border-black mt-5 rounded-base bg-[#a3e636] grid grid-col-2 lg:grid-cols-6 py-14 px-10 lg:px-20 justify-center items-center">
                 {/* icon */}
-                <div className="col-span-2 ">
-                    <img src={afforfablePricingArt} className="w-full h-full px-10 object-scale-down" alt="" />
+                <div className="col-span-1 w-fit mx-auto  my-auto ">
+                    <img
+                        src={afforfablePricingArt}
+                        className="w-full h-full object-scale-down"
+                        alt=""
+                    />
                 </div>
 
-                <div className="p-20 col-span-4">
-                    <h3>Learning Made Affordable for Everyone</h3>
-                    <p>
+                <div className=" lg:-ms-24 col-span-1   lg:col-span-5 text-center">
+                    <h3 className="font-bold text-2xl">
+                        Learning Made Affordable for Everyone
+                    </h3>
+                    <p className="mt-2 text-center">
                         Access high-quality courses and tools at prices that fit
                         your budget.
                         <br /> Unlock unlimited learning without breaking the
                         bank
                     </p>
+                    <Button size="lg" className="text-darkText bg-[#2c312b] mt-5">Explore Pricing</Button>
                 </div>
             </div>
         </div>
