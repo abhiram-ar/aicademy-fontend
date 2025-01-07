@@ -6,7 +6,26 @@ const orderPageApiSlice = apiSlice.injectEndpoints({
             query: () => "/api/user/order-history",
             providesTags: ["userBoughtCourseList"],
         }),
+        getCourseReview: builder.query({
+            query: (data) => {
+                const query = new URLSearchParams(data);
+                return `/api/user/course/review?${query}`;
+            },
+            providesTags: ["courseReview"],
+        }),
+        addCourseReview: builder.mutation({
+            query: (data) => ({
+                url: "/api/user/course/review",
+                method: "POST",
+                body: data,
+            }),
+            invalidatesTags: ["courseReview"],
+        }),
     }),
 });
 
-export const { useGetUserPurchaseHistoryQuery } = orderPageApiSlice;
+export const {
+    useGetUserPurchaseHistoryQuery,
+    useGetCourseReviewQuery,
+    useAddCourseReviewMutation,
+} = orderPageApiSlice;
