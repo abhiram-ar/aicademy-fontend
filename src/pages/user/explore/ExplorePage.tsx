@@ -7,6 +7,7 @@ import { useGetCoursesCardDetailsQuery } from "./exploreApiSlice.ts";
 import { useState } from "react";
 import { Link, useLocation } from "react-router-dom";
 import PaginationExplore from "./Pagination.tsx";
+import nothingFound from "./../../../assets/NothingFoundSearch.png";
 
 export interface ICourse {
     _id: string;
@@ -25,6 +26,7 @@ export interface ICourse {
     category: string;
     level: "beginner" | "intermediate" | "advanced";
     pages: number;
+    totalRatingCount: number;
 }
 
 const ExplorePage = () => {
@@ -81,6 +83,17 @@ const ExplorePage = () => {
                                             />
                                         </Link>
                                     )
+                                )}
+                            {courseCardDetails &&
+                                courseCardDetails.courses.length === 0 && (
+                                    <div className="flex justify-center bg-white p-10 border border-zinc-400 rounded-base">
+                                        <div className="flex flex-col justify-center items-center hue-rotate-180">
+                                            <img src={nothingFound}  />
+                                            <p className="text font-medium font-publicSans text-zinc-700 mt-2">
+                                                No course found!
+                                            </p>
+                                        </div>
+                                    </div>
                                 )}
                         </div>
                         {/* pagination */}

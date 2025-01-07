@@ -30,19 +30,27 @@ const CourseCardLong: React.FC<{ courseDetails: ICourse }> = ({
                     <div className="text-zinc-500 text-sm ">
                         <p>{courseDetails.createdBy.legalName}</p>
 
-                        <div className="flex justify-start items-center">
+                        <div className="flex justify-start items-center gap-0.5">
                             <p className=" me-1">
-                                {courseDetails.rating || "No rating yet"}
+                                {courseDetails.rating?.toFixed(1) ||
+                                    "No rating yet"}
                             </p>
-                            {courseDetails.rating &&
-                                Array.from({
-                                    length: Math.floor(courseDetails.rating),
-                                }).map((_, index) => (
-                                    <Star
-                                        key={index}
-                                        className="size-4 mt-[1px] stroke-yellow-600 fill-yellow-500 "
-                                    />
-                                ))}
+                            <div className="flex items-center mt-0.5">
+                                {courseDetails.rating &&
+                                    Array.from({
+                                        length: Math.floor(
+                                            courseDetails.rating
+                                        ),
+                                    }).map((_, index) => (
+                                        <Star
+                                            key={index}
+                                            className="size-4 mt-[1px] stroke-1 stroke-yellow-800 fill-yellow-400 "
+                                        />
+                                    ))}
+                            </div>
+                            {courseDetails.totalRatingCount > 0 && (
+                                <p>({courseDetails.totalRatingCount})</p>
+                            )}
                         </div>
 
                         <p>40 lessons • {courseDetails.level}</p>
