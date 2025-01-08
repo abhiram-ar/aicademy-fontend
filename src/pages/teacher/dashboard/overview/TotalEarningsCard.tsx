@@ -2,7 +2,6 @@ import { useGetLifetimeEarningQuery } from "./OverviewPageApiSlice";
 
 const TotalEarningsCard = () => {
     const { data } = useGetLifetimeEarningQuery({});
-
     return (
         <div className="border bg-white p-8 font-publicSans rounded-base">
             <h3>Total Earnings</h3>

@@ -21,6 +21,13 @@ const teacherOverviewPageApiSlice = apiSlice.injectEndpoints({
             },
             providesTags: ["teacherDashboard"],
         }),
+        getCourseSalesList: builder.query({
+            query: (data) => {
+                const query = new URLSearchParams(data);
+                return `/api/teacher/dashboard/sales-list?${query}`;
+            },
+            providesTags: ["teacherDashboard"],
+        }),
     }),
 });
 
@@ -29,4 +36,5 @@ export const {
     useGetPurchaselastTwoMonthQuery,
     useGetLifetimeEarningQuery,
     useGetEarningsByMonthQuery,
+    useGetCourseSalesListQuery,
 } = teacherOverviewPageApiSlice;

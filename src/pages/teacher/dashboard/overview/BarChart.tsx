@@ -42,7 +42,6 @@ const chartConfig = {
 
 const Saleschart = () => {
     const { data } = useGetEarningsByMonthQuery({ months: 6 });
-    console.log(data);
 
     const map = new Map();
     const set = new Set();
@@ -66,20 +65,27 @@ const Saleschart = () => {
         }
     }
 
-    console.log(Array.from(set));
-
     if (map) chartData = Array.from(map.values());
 
     return (
         <Card>
             <CardHeader>
                 <CardTitle>Monthly Earning by Course</CardTitle>
-                <CardDescription>from {new Date(Date.now() - 6 *  30 *  24 *  60 * 60 * 1000 ).toDateString()} - {new Date(Date.now()).toDateString()}</CardDescription>
+                <CardDescription>
+                    from{" "}
+                    {new Date(
+                        Date.now() - 6 * 30 * 24 * 60 * 60 * 1000
+                    ).toDateString()}{" "}
+                    - {new Date(Date.now()).toDateString()}
+                </CardDescription>
             </CardHeader>
             <CardContent>
                 <ChartContainer config={chartConfig} className="h-96 w-full">
                     <BarChart accessibilityLayer data={chartData}>
-                        <CartesianGrid vertical={false}  className="opacity-25" />
+                        <CartesianGrid
+                            vertical={false}
+                            className="opacity-25"
+                        />
                         <XAxis
                             dataKey="time"
                             tickLine={false}
