@@ -74,7 +74,7 @@ const Saleschart = () => {
         <Card>
             <CardHeader>
                 <CardTitle>Monthly Earning by Course</CardTitle>
-                <CardDescription>January - June 2024</CardDescription>
+                <CardDescription>from {new Date(Date.now() - 6 *  30 *  24 *  60 * 60 * 1000 ).toDateString()} - {new Date(Date.now()).toDateString()}</CardDescription>
             </CardHeader>
             <CardContent>
                 <ChartContainer config={chartConfig} className="h-96 w-full">
