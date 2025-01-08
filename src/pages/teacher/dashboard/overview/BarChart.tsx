@@ -9,15 +9,14 @@ import {
 import {
     ChartConfig,
     ChartContainer,
-    ChartLegend,
-    ChartLegendContent,
     ChartTooltip,
     ChartTooltipContent,
 } from "@/components/ui/chart";
 import { useGetEarningsByMonthQuery } from "./OverviewPageApiSlice";
-const chartData = [
-    { year: 2025, month: "January", desktop: 186, mobile: 80 },
-    { year: 2024, month: "February", desktop: 305, mobile: 200 },
+import { getRandomColor } from "@/utils/randomColorGenerator";
+let chartData = [
+    { month: "January", desktop: 186, mobile: 80 },
+    { month: "February", desktop: 305, mobile: 200 },
     { month: "March", desktop: 237, mobile: 120 },
     { month: "April", desktop: 73, mobile: 190 },
     { month: "May", desktop: 209, mobile: 130 },
@@ -44,6 +43,33 @@ const chartConfig = {
 const Saleschart = () => {
     const { data } = useGetEarningsByMonthQuery({ months: 6 });
     console.log(data);
+
+    const map = new Map();
+    const set = new Set();
+    if (data)
+        for (const item of data.result) {
+            if (map.has(item.time)) {
+                const existingObj = map.get(item.time);
+                existingObj[item.courseName] = item.revenue;
+                map.set(item.time, existingObj);
+            } else {
+                map.set(item.time, {
+                    time: item.time,
+                    [item.courseName]: item.revenue,
+                });
+            }
+        }
+
+    for (const item of data.result) {
+        if (!set.has(item.courseName)) {
+            set.add(item.courseName);
+        }
+    }
+
+    console.log(Array.from(set));
+
+    if (map) chartData = Array.from(map.values());
+
     return (
         <Card>
             <CardHeader>
@@ -55,28 +81,26 @@ const Saleschart = () => {
                     <BarChart accessibilityLayer data={chartData}>
                         <CartesianGrid vertical={false} />
                         <XAxis
-                            dataKey="month"
+                            dataKey="time"
                             tickLine={false}
                             tickMargin={10}
                             axisLine={false}
-                            tickFormatter={(value) => value.slice(0, 3)}
+                            tickFormatter={(value) => value.slice(0, 8)}
                         />
                         <ChartTooltip
                             content={<ChartTooltipContent hideLabel />}
                         />
-                        <ChartLegend content={<ChartLegendContent />} />
-                        <Bar
-                            dataKey="desktop"
-                            stackId="a"
-                            fill="var(--color-desktop)"
-                            radius={[0, 0, 4, 4]}
-                        />
-                        <Bar
-                            dataKey="mobile"
-                            stackId="a"
-                            fill="var(--color-mobile)"
-                            radius={[4, 4, 0, 0]}
-                        />
+                        {data &&
+                            set &&
+                            Array.from(set).map((value) => (
+                                <Bar
+                                    key={value as string}
+                                    dataKey={value as string}
+                                    stackId="a"
+                                    fill={getRandomColor()}
+                                    radius={[0, 0, 5, 5]}
+                                />
+                            ))}
                     </BarChart>
                 </ChartContainer>
             </CardContent>
