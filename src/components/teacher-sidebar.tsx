@@ -5,11 +5,11 @@ import {
     Bot,
     Command,
     GalleryVerticalEnd,
+    HandCoins,
+    LayoutDashboard,
     Settings2,
     SquareTerminal,
 } from "lucide-react";
-
-import { NavMain } from "@/components/nav-main";
 import { NavCourse } from "@/components/nav-course";
 import { NavUser } from "@/components/nav-user";
 import { TeamSwitcher } from "@/components/team-switcher";
@@ -17,9 +17,15 @@ import {
     Sidebar,
     SidebarContent,
     SidebarFooter,
+    SidebarGroup,
+    SidebarGroupLabel,
     SidebarHeader,
+    SidebarMenu,
+    SidebarMenuButton,
+    SidebarMenuItem,
     SidebarRail,
 } from "@/components/ui/sidebar";
+import { Link } from "react-router-dom";
 
 // This is sample data.
 const data = {
@@ -142,6 +148,30 @@ export function AppSidebar({ ...props }: React.ComponentProps<typeof Sidebar>) {
             </SidebarHeader>
             <SidebarContent>
                 {/* <NavMain items={data.navMain} /> */}
+
+                <SidebarGroup className="group-data-[collapsible=icon]:hidden">
+                    <SidebarGroupLabel>Dashboard</SidebarGroupLabel>
+
+                    <SidebarMenu>
+                        <SidebarMenuItem>
+                            <Link to="/teach">
+                                <SidebarMenuButton>
+                                    <LayoutDashboard />
+                                    <span>Overview</span>
+                                </SidebarMenuButton>
+                            </Link>
+                        </SidebarMenuItem>
+                        <SidebarMenuItem>
+                            <Link to="/teach">
+                                <SidebarMenuButton>
+                                    <HandCoins />
+                                    <span>Checkout</span>
+                                </SidebarMenuButton>
+                            </Link>
+                        </SidebarMenuItem>
+                    </SidebarMenu>
+                </SidebarGroup>
+
                 <NavCourse />
             </SidebarContent>
             <SidebarFooter>
