@@ -15,7 +15,7 @@ const PurchasesCard = () => {
                     </span>
                 )}
             </h2>
-            <p>
+            <div>
                 {" "}
                 {data ? (
                     data.purchases.currentMonth - data.purchases.prevMonth >
@@ -47,7 +47,7 @@ const PurchasesCard = () => {
                         .
                     </span>
                 )}
-            </p>
+            </div>
         </div>
     );
 };

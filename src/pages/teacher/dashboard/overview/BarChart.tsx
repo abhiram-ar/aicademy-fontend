@@ -14,9 +14,10 @@ import {
     ChartTooltip,
     ChartTooltipContent,
 } from "@/components/ui/chart";
+import { useGetEarningsByMonthQuery } from "./OverviewPageApiSlice";
 const chartData = [
-    { month: "January", desktop: 186, mobile: 80 },
-    { month: "February", desktop: 305, mobile: 200 },
+    { year: 2025, month: "January", desktop: 186, mobile: 80 },
+    { year: 2024, month: "February", desktop: 305, mobile: 200 },
     { month: "March", desktop: 237, mobile: 120 },
     { month: "April", desktop: 73, mobile: 190 },
     { month: "May", desktop: 209, mobile: 130 },
@@ -41,6 +42,8 @@ const chartConfig = {
 } satisfies ChartConfig;
 
 const Saleschart = () => {
+    const { data } = useGetEarningsByMonthQuery({ months: 6 });
+    console.log(data);
     return (
         <Card>
             <CardHeader>

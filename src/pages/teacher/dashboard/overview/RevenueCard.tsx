@@ -17,7 +17,7 @@ const RevenueCard = () => {
                     </span>
                 )}
             </h2>
-            <p>
+            <div>
                 {" "}
                 {data ? (
                     data.revenue.currentMonth - data.revenue.prevMonth > 0 ? (
@@ -48,7 +48,7 @@ const RevenueCard = () => {
                         .
                     </span>
                 )}
-            </p>
+            </div>
         </div>
     );
 };
