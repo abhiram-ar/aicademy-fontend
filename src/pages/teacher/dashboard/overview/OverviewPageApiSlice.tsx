@@ -10,10 +10,15 @@ const teacherOverviewPageApiSlice = apiSlice.injectEndpoints({
             query: () => "/api/teacher/dashboard/purchase",
             providesTags: ["teacherDashboard"],
         }),
+        getLifetimeEarning: builder.query({
+            query: () => "/api/teacher/dashboard/lifetime-earning",
+            providesTags: ["teacherDashboard"],
+        }),
     }),
 });
 
 export const {
     useGetRevenuelastTwoMonthQuery,
     useGetPurchaselastTwoMonthQuery,
+    useGetLifetimeEarningQuery,
 } = teacherOverviewPageApiSlice;
