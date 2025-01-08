@@ -46,7 +46,7 @@ const Saleschart = () => {
 
     const map = new Map();
     const set = new Set();
-    if (data)
+    if (data) {
         for (const item of data.result) {
             if (map.has(item.time)) {
                 const existingObj = map.get(item.time);
@@ -59,10 +59,10 @@ const Saleschart = () => {
                 });
             }
         }
-
-    for (const item of data.result) {
-        if (!set.has(item.courseName)) {
-            set.add(item.courseName);
+        for (const item of data.result) {
+            if (!set.has(item.courseName)) {
+                set.add(item.courseName);
+            }
         }
     }
 
@@ -79,7 +79,7 @@ const Saleschart = () => {
             <CardContent>
                 <ChartContainer config={chartConfig} className="h-96 w-full">
                     <BarChart accessibilityLayer data={chartData}>
-                        <CartesianGrid vertical={false} />
+                        <CartesianGrid vertical={false}  className="opacity-25" />
                         <XAxis
                             dataKey="time"
                             tickLine={false}
