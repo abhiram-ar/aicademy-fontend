@@ -8,9 +8,20 @@ import {
     TableHeader,
     TableRow,
 } from "@/components/ui/table";
+import {
+    Pagination,
+    PaginationContent,
+    PaginationItem,
+    PaginationLink,
+    PaginationNext,
+    PaginationPrevious,
+} from "@/components/ui/pagination";
+import { useState } from "react";
 
 const CourseSalesTables = () => {
-    const { data } = useGetCourseSalesListQuery({});
+    const [page, setPage] = useState<number>(1);
+    const { data } = useGetCourseSalesListQuery({ page });
+
     console.log(data);
     return (
         <div className="border  rounded-base overflow-hidden">
@@ -95,6 +106,50 @@ const CourseSalesTables = () => {
                         )}
                 </TableBody>
             </Table>
+
+            {/* pagination */}
+            {data && (
+                <Pagination className="mt-5">
+                    <PaginationContent>
+                        {page > 1 && (
+                            <PaginationItem className="cursor-pointer">
+                                <PaginationPrevious
+                                    className="bg-zinc-200"
+                                    onClick={() => setPage(page - 1)}
+                                />
+                            </PaginationItem>
+                        )}
+
+                        {Array.from({
+                            length: data.pages,
+                        }).map((_, index) => (
+                            <PaginationItem
+                                key={index + 1}
+                                className="cursor-pointer"
+                            >
+                                <PaginationLink
+                                    className={`bg-zinc-200  ${
+                                        index + 1 === page &&
+                                        "bg-black text-white"
+                                    }`}
+                                    onClick={() => setPage(index + 1)}
+                                >
+                                    {index + 1}
+                                </PaginationLink>
+                            </PaginationItem>
+                        ))}
+
+                        {page < data.pages && (
+                            <PaginationItem className="cursor-pointer">
+                                <PaginationNext
+                                    className="bg-zinc-200"
+                                    onClick={() => setPage(page + 1)}
+                                />
+                            </PaginationItem>
+                        )}
+                    </PaginationContent>
+                </Pagination>
+            )}
         </div>
     );
 };
