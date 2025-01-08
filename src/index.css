@@ -69,12 +69,30 @@
     }
 }
 
+@layer base {
+    :root {
+        --chart-1: 12 76% 61%;
+        --chart-2: 173 58% 39%;
+        --chart-3: 197 37% 24%;
+        --chart-4: 43 74% 66%;
+        --chart-5: 27 87% 67%;
+    }
+
+    .dark {
+        --chart-1: 220 70% 50%;
+        --chart-2: 160 60% 45%;
+        --chart-3: 30 80% 55%;
+        --chart-4: 280 65% 60%;
+        --chart-5: 340 75% 55%;
+    }
+}
+
 @layer components {
     .input-neo {
         @apply bg-white border-2 border-black rounded-base px-3 py-2 focus:outline-none focus:outline-blue-300 mt-1;
     }
-    .explore-nav{
-        @apply px-5 py-0.5 font-publicSans font-semibold
+    .explore-nav {
+        @apply px-5 py-0.5 font-publicSans font-semibold;
     }
     .validation-error {
         @apply text-[#ff5a5a] text-sm;
@@ -82,13 +100,13 @@
 }
 
 @layer utilities {
-  input[type="number"]::-webkit-inner-spin-button,
-  input[type="number"]::-webkit-outer-spin-button {
-    -webkit-appearance: none;
-    margin: 0;
-  }
+    input[type="number"]::-webkit-inner-spin-button,
+    input[type="number"]::-webkit-outer-spin-button {
+        -webkit-appearance: none;
+        margin: 0;
+    }
 
-  input[type="number"] {
-    -moz-appearance: textfield;
-  }
+    input[type="number"] {
+        -moz-appearance: textfield;
+    }
 }
