@@ -49,33 +49,50 @@ const CourseSalesTables = () => {
                     )}
 
                     {data &&
-                        data.salesList.map((sale, index: number) => (
-                            <TableRow
-                                key={index}
-                                className="hover:bg-zinc-300 bg-white"
-                            >
-                                <TableCell>{sale.course[0]?.title}</TableCell>
-                                <TableCell>
-                                    {new Date(sale.createdAt).toUTCString()}
-                                </TableCell>
-                                <TableCell>
-                                    {sale.soldPrice.toLocaleString("en-IN", {
-                                        style: "currency",
-                                        currency: "INR",
-                                    })}
-                                </TableCell>
-                                <TableCell className="text-green-600">
-                                    {"+" +
-                                        (sale.techerEarnings?.toLocaleString(
+                        data.salesList.map(
+                            (
+                                sale: {
+                                    course: {
+                                        title: string;
+                                    }[];
+                                    createdAt: string | number | Date;
+                                    soldPrice: number;
+                                    techerEarnings: number;
+                                },
+                                index: number
+                            ) => (
+                                <TableRow
+                                    key={index}
+                                    className="hover:bg-zinc-300 bg-white"
+                                >
+                                    <TableCell>
+                                        {sale.course[0]?.title}
+                                    </TableCell>
+                                    <TableCell>
+                                        {new Date(sale.createdAt).toUTCString()}
+                                    </TableCell>
+                                    <TableCell>
+                                        {sale.soldPrice.toLocaleString(
                                             "en-IN",
                                             {
                                                 style: "currency",
                                                 currency: "INR",
                                             }
-                                        ) || 0)}
-                                </TableCell>
-                            </TableRow>
-                        ))}
+                                        )}
+                                    </TableCell>
+                                    <TableCell className="text-green-600">
+                                        {"+" +
+                                            (sale.techerEarnings?.toLocaleString(
+                                                "en-IN",
+                                                {
+                                                    style: "currency",
+                                                    currency: "INR",
+                                                }
+                                            ) || 0)}
+                                    </TableCell>
+                                </TableRow>
+                            )
+                        )}
                 </TableBody>
             </Table>
         </div>
