@@ -1,4 +1,12 @@
-import { Table, TableHead, TableHeader, TableRow } from "@/components/ui/table";
+import { ShieldAlert } from "lucide-react";
+import {
+    Table,
+    TableBody,
+    TableCell,
+    TableHead,
+    TableHeader,
+    TableRow,
+} from "@/components/ui/table";
 const CourseSalesTables = () => {
     return (
         <Table>
@@ -16,6 +24,28 @@ const CourseSalesTables = () => {
                     </TableHead>
                 </TableRow>
             </TableHeader>
+            <TableBody>
+                {/* no course */}
+                {true && (
+                    <TableRow>
+                        <TableCell></TableCell>
+                        <TableCell>
+                            <p className="flex justify-center items-center gap-3 p-5 -ms-96 ">
+                                <ShieldAlert />
+                                No purchases
+                            </p>
+                        </TableCell>
+
+                        <TableCell></TableCell>
+                    </TableRow>
+                )}
+
+                <TableRow>
+                    <TableCell></TableCell>
+                    <TableCell></TableCell>
+                    <TableCell></TableCell>
+                </TableRow>
+            </TableBody>
         </Table>
     );
 };
