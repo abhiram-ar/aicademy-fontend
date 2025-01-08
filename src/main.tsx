@@ -40,6 +40,7 @@ import MyLearning from "./pages/user/myLearning/MyLearning";
 import ReportCourseIssue from "./pages/user/Help/ReportCourseIssue";
 import UserCourseReportPage from "./pages/admin/user/course-reports/UserCourseReportPage";
 import OrdersPage from "./pages/user/Orders/OrdersPage";
+import TeacherDashboardOverview from "./pages/teacher/dashboard/overview/TeacherDashboardOverviewPage";
 
 fetchAccessTokenOnload();
 const appRouter = createBrowserRouter([
@@ -129,6 +130,10 @@ const appRouter = createBrowserRouter([
                         hydrateFallbackElement: <p>loading...</p>,
                         element: <TeacherDashboard />,
                         children: [
+                            {
+                                index: true,
+                                element: <TeacherDashboardOverview />,
+                            },
                             {
                                 path: "/teach/course/create",
                                 element: <CreateCoursePage />,
