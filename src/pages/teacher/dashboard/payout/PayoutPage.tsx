@@ -1,8 +1,10 @@
 import PayoutTransactionsTable from "./PayoutHistoryTable";
 import Withdraw from "./Withdraw";
 import BankVerification from "./BankVerification";
+import { useIsTeacherBankAccountVerifiedQuery } from "./PayoutPageApiSlice";
 
 const PayoutPage = () => {
+    const { currentData: data } = useIsTeacherBankAccountVerifiedQuery({});
     return (
         <div className="font-publicSans">
             <h2 className="bg-zinc-300 w-fit text-xl font-semibold rounded-base px-2 -mt-11 ms-12">
@@ -17,7 +19,15 @@ const PayoutPage = () => {
                         <p>Earnings</p>
                         <div className="flex justify-between items-center mt-1">
                             <h2 className="text-2xl font-semibold">5200</h2>
-                            {false ? <Withdraw /> : <BankVerification />}
+                            {!data && (
+                                <div className="animate-pulse w-36 h-11 bg-zinc-300 rounded-base"></div>
+                            )}
+                            {data &&
+                                (data.isVerified ? (
+                                    <Withdraw />
+                                ) : (
+                                    <BankVerification />
+                                ))}
                         </div>
                         <p className="text-zinc-400 text-sm text-right mt-1">
                             (min. withdraw amount should be 1000)

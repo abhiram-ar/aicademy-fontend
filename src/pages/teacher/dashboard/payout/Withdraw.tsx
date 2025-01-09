@@ -1,4 +1,5 @@
 import React from "react";
+import { Button } from "@/components/ui/button";
 import {
     Dialog,
     DialogContent,
@@ -7,7 +8,8 @@ import {
     DialogTitle,
     DialogTrigger,
 } from "@/components/ui/dialog";
-import { Button } from "@/components/ui/button";
+
+
 
 const Withdraw = () => {
     return (
@@ -19,13 +21,14 @@ const Withdraw = () => {
             </DialogTrigger>
             <DialogContent>
                 <DialogHeader>
-                    <DialogTitle>Are you absolutely sure?</DialogTitle>
+                    <DialogTitle>Withdraw earning?</DialogTitle>
                     <DialogDescription>
-                        This action cannot be undone. This will permanently
-                        delete your account and remove your data from our
-                        servers.
+                        min. Withdraw amount is ₹1000
                     </DialogDescription>
                 </DialogHeader>
+                <div>
+
+                </div>
             </DialogContent>
         </Dialog>
     );

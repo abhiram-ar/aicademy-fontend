@@ -1,7 +1,10 @@
 import { Button } from "@/components/ui/button";
 import { loadScript } from "@/utils/loadscript";
 import React, { useEffect } from "react";
-import { useCreateBankVerificationOrderMutation } from "./PayoutPageApiSlice";
+import {
+    useCreateBankVerificationOrderMutation,
+    useVerifyTeacherBankAccountMutation,
+} from "./PayoutPageApiSlice";
 
 const BankVerification = () => {
     useEffect(() => {
@@ -9,6 +12,7 @@ const BankVerification = () => {
     }, []);
     const [createBankVerificationOrder] =
         useCreateBankVerificationOrderMutation();
+    const [verifyBankAccount] = useVerifyTeacherBankAccountMutation();
 
     const handleBankVerification = async () => {
         try {
@@ -52,6 +56,10 @@ const BankVerification = () => {
                     razorpay_order_id: string;
                     razorpay_signature: string;
                 }) {
+                    await verifyBankAccount({
+                        ...response,
+                        order_id: createOrderResponse.order.id,
+                    });
                     console.log(response);
                 },
             };

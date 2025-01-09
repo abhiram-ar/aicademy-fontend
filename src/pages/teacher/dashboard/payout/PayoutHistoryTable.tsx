@@ -32,6 +32,9 @@ const PayoutTransactionsTable = () => {
                         <TableHead className="w-60 font-semibold">
                             Status
                         </TableHead>
+                        <TableHead className="w-60 font-semibold">
+                            Remark
+                        </TableHead>
                         <TableHead className="w-32 font-semibold">
                             Amount
                         </TableHead>

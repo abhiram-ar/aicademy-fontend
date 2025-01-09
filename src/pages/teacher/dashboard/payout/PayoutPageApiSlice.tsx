@@ -2,9 +2,9 @@ import apiSlice from "@/redux/features/api/apiSlice";
 
 const teacherPayoutPageApiSlice = apiSlice.injectEndpoints({
     endpoints: (builder) => ({
-        getRevenuelastTwoMonth: builder.query({
-            query: () => "/api/teacher/dashboard/revenue",
-            providesTags: ["teacherDashboard"],
+        isTeacherBankAccountVerified: builder.query({
+            query: () => "/api/teacher/payout/verification",
+            providesTags: ["teacherBankAccount"],
         }),
         createBankVerificationOrder: builder.mutation({
             query: () => ({
@@ -12,8 +12,19 @@ const teacherPayoutPageApiSlice = apiSlice.injectEndpoints({
                 method: "POST",
             }),
         }),
+        verifyTeacherBankAccount: builder.mutation({
+            query: (data) => ({
+                url: "/api/teacher/payout/verification/verify",
+                method: "POST",
+                body: data,
+            }),
+            invalidatesTags: ["teacherBankAccount"],
+        }),
     }),
 });
 
-export const { useCreateBankVerificationOrderMutation } =
-    teacherPayoutPageApiSlice;
+export const {
+    useCreateBankVerificationOrderMutation,
+    useIsTeacherBankAccountVerifiedQuery,
+    useVerifyTeacherBankAccountMutation,
+} = teacherPayoutPageApiSlice;

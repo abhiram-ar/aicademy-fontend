@@ -73,6 +73,8 @@ const apiSlice = createApi({
         "courseReportList",
         "courseReview",
         "teacherDashboard",
+        "teacherBankAccount",
+        "teacherPayout",
     ],
     endpoints: (builder) => ({
         refresh: builder.query({
