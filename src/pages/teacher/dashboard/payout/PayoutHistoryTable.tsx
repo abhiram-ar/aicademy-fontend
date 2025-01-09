@@ -20,75 +20,91 @@ import {
 
 const PayoutTransactionsTable = () => {
     const [page, setPage] = useState<number>(1);
-    const { data } = useTeacherPayoutHistoryListQuery({});
+    const { data } = useTeacherPayoutHistoryListQuery({ page, limit: 8 });
 
     return (
-        <div className="border  rounded-base overflow-hidden">
-            <Table className="border-0 rounded-base overflow-hidden ">
-                <TableHeader>
-                    <TableRow className="bg-slate-400 ">
-                        <TableHead className="w-80 font-semibold">
-                            Time
-                        </TableHead>
-                        <TableHead className="w-60 font-semibold">
-                            Status
-                        </TableHead>
-                        <TableHead className="w-60 font-semibold">
-                            Remark
-                        </TableHead>
-                        <TableHead className="w-32 font-semibold">
-                            Amount
-                        </TableHead>
-                    </TableRow>
-                </TableHeader>
-                <TableBody>
-                    {/* no course */}
-                    {data && data.payoutHistroy.length === 0 && (
-                        <TableRow>
-                            <TableCell></TableCell>
-                            <TableCell colSpan={2}>
-                                <p className="flex justify-center items-center gap-3 p-5 -ms-60 ">
-                                    <ShieldAlert />
-                                    No payout Histroy
-                                </p>
-                            </TableCell>
-
-                            <TableCell></TableCell>
+        <>
+            <div className="border-2  rounded-base overflow-hidden">
+                <Table className="border-0 rounded-base overflow-hidden ">
+                    <TableHeader>
+                        <TableRow className="bg-slate-400 ">
+                            <TableHead className="w-80 font-semibold">
+                                Time
+                            </TableHead>
+                            <TableHead className="w-32 font-semibold">
+                                Status
+                            </TableHead>
+                            <TableHead className="w-60 font-semibold">
+                                Remark
+                            </TableHead>
+                            <TableHead className="w-32 font-semibold">
+                                Amount
+                            </TableHead>
                         </TableRow>
-                    )}
+                    </TableHeader>
+                    <TableBody>
+                        {/* no course */}
+                        {data && data.payoutHistroy.length === 0 && (
+                            <TableRow>
+                                <TableCell></TableCell>
+                                <TableCell colSpan={2}>
+                                    <p className="flex justify-center items-center gap-3 p-5 -ms-60 ">
+                                        <ShieldAlert />
+                                        No payout Histroy
+                                    </p>
+                                </TableCell>
 
-                    {data &&
-                        data.payoutHistroy.map(
-                            (payout: {
-                                _id: string;
-                                createdAt: string;
-                                status: string;
-                                message?: string;
-                                amount: number;
-                            }) => (
-                                <TableRow
-                                    key={payout._id}
-                                    className="hover:bg-zinc-300 bg-white"
-                                >
-                                    <TableCell>
-                                        {new Date(
-                                            payout.createdAt
-                                        ).toUTCString()}
-                                    </TableCell>
-                                    <TableCell>{payout.status}</TableCell>
-                                    <TableCell>{payout.message}</TableCell>
-                                    <TableCell className="text-green-600">
-                                        {payout.amount.toLocaleString("en-IN", {
-                                            style: "currency",
-                                            currency: "INR",
-                                        })}
-                                    </TableCell>
-                                </TableRow>
-                            )
+                                <TableCell></TableCell>
+                            </TableRow>
                         )}
-                </TableBody>
-            </Table>
 
+                        {data &&
+                            data.payoutHistroy.map(
+                                (payout: {
+                                    _id: string;
+                                    createdAt: string;
+                                    status: string;
+                                    message?: string;
+                                    amount: number;
+                                }) => (
+                                    <TableRow
+                                        key={payout._id}
+                                        className="hover:bg-zinc-300 bg-white"
+                                    >
+                                        <TableCell>
+                                            {new Date(
+                                                payout.createdAt
+                                            ).toUTCString()}
+                                        </TableCell>
+                                        <TableCell>{payout.status}</TableCell>
+                                        <TableCell>{payout.message}</TableCell>
+                                        <TableCell
+                                            className={`font-semibold ${
+                                                payout.status ===
+                                                    "processing" &&
+                                                " text-yellow-600  "
+                                            } ${
+                                                payout.status === "deposited" &&
+                                                "text-green-600"
+                                            } ${
+                                                payout.status === "failed" &&
+                                                "text-red-600"
+                                            }`}
+                                        >
+                                            {payout.amount.toLocaleString(
+                                                "en-IN",
+                                                {
+                                                    style: "currency",
+                                                    currency: "INR",
+                                                }
+                                            )}
+                                        </TableCell>
+                                    </TableRow>
+                                )
+                            )}
+                    </TableBody>
+                </Table>
+            </div>
             {/* pagination */}
             {data && (
                 <Pagination className="mt-5">
@@ -132,7 +148,7 @@ const PayoutTransactionsTable = () => {
                     </PaginationContent>
                 </Pagination>
             )}
-        </div>
+        </>
     );
 };
 

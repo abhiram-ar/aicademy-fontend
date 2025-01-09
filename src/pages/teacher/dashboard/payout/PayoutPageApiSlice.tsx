@@ -7,7 +7,10 @@ const teacherPayoutPageApiSlice = apiSlice.injectEndpoints({
             providesTags: ["teacherPayout"],
         }),
         teacherPayoutHistoryList: builder.query({
-            query: () => "/api/teacher/payout/history",
+            query: (data) => {
+                const query = new URLSearchParams(data).toString();
+                return `/api/teacher/payout/history?${query}`;
+            },
             providesTags: ["teacherPayout"],
         }),
         requestForPayout: builder.mutation({

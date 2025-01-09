@@ -16,10 +16,10 @@ const PayoutPage = () => {
             </h2>
 
             {/* contnnt */}
-            <div className="mx-20 border mt-10">
+            <div className="mx-20 mt-10">
                 {/* cards grid */}
                 <div className="grid grid-cols-2 gap-5">
-                    <div className="bg-white rounded-base border p-8">
+                    <div className="bg-white rounded-base border-2 p-8">
                         <p>Earnings</p>
                         <div className="flex justify-between items-center mt-1">
                             {amounts ? (
@@ -56,7 +56,7 @@ const PayoutPage = () => {
                         </p>
                     </div>
 
-                    <div className="bg-white rounded-base border p-8">
+                    <div className="bg-white rounded-base border-2 p-8">
                         <p>Total Cashedout</p>
                         {amounts ? (
                             <h2 className="text-3xl font-semibold mt-3">
@@ -75,7 +75,7 @@ const PayoutPage = () => {
                 </div>
 
                 {/* table */}
-                <div className="border mt-5">
+                <div className="mt-5">
                     <PayoutTransactionsTable />
                 </div>
             </div>
