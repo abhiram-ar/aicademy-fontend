@@ -8,7 +8,7 @@ const teacherPayoutPageApiSlice = apiSlice.injectEndpoints({
         }),
 
         isTeacherBankAccountVerified: builder.query({
-            query: () => "/api/teacher/payout/verification",
+            query: () => "/api/teacher/payout/verification/isVerified",
             providesTags: ["teacherBankAccount"],
         }),
         createBankVerificationOrder: builder.mutation({
