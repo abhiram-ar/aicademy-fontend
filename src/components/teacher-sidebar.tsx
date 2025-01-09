@@ -162,10 +162,10 @@ export function AppSidebar({ ...props }: React.ComponentProps<typeof Sidebar>) {
                             </Link>
                         </SidebarMenuItem>
                         <SidebarMenuItem>
-                            <Link to="/teach">
+                            <Link to="/teach/payout">
                                 <SidebarMenuButton>
                                     <HandCoins />
-                                    <span>Checkout</span>
+                                    <span>Payout</span>
                                 </SidebarMenuButton>
                             </Link>
                         </SidebarMenuItem>

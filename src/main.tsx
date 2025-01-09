@@ -41,6 +41,7 @@ import ReportCourseIssue from "./pages/user/Help/ReportCourseIssue";
 import UserCourseReportPage from "./pages/admin/user/course-reports/UserCourseReportPage";
 import OrdersPage from "./pages/user/Orders/OrdersPage";
 import TeacherDashboardOverview from "./pages/teacher/dashboard/overview/TeacherDashboardOverviewPage";
+import PayoutPage from "./pages/teacher/dashboard/payout/PayoutPage";
 
 fetchAccessTokenOnload();
 const appRouter = createBrowserRouter([
@@ -133,6 +134,10 @@ const appRouter = createBrowserRouter([
                             {
                                 index: true,
                                 element: <TeacherDashboardOverview />,
+                            },
+                            {
+                                path: "/teach/payout",
+                                element: <PayoutPage />,
                             },
                             {
                                 path: "/teach/course/create",
