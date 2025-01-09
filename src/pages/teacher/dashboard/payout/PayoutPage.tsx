@@ -37,13 +37,15 @@ const PayoutPage = () => {
                                     .
                                 </h2>
                             )}
-                            {!data && (
-                                <div className="animate-pulse w-36 h-11 bg-zinc-200 rounded-base"></div>
-                            )}
+                            {!data ||
+                                (!amounts && (
+                                    <div className="animate-pulse w-36 h-11 bg-zinc-200 rounded-base"></div>
+                                ))}
                             {data &&
+                                amounts &&
                                 (data.isVerified ? (
                                     <Withdraw
-                                        withdrawable={amounts?.withdrawable}
+                                        withdrawable={amounts.withdrawable}
                                     />
                                 ) : (
                                     <BankVerification />
