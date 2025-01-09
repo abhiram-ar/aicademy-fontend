@@ -20,6 +20,10 @@ const teacherPayoutPageApiSlice = apiSlice.injectEndpoints({
             }),
             invalidatesTags: ["teacherBankAccount"],
         }),
+        teacherPayoutHistoryList: builder.query({
+            query: () => "/api/teacher/payout/history",
+            providesTags: ["teacherPayoutHistory"],
+        }),
     }),
 });
 
@@ -27,4 +31,5 @@ export const {
     useCreateBankVerificationOrderMutation,
     useIsTeacherBankAccountVerifiedQuery,
     useVerifyTeacherBankAccountMutation,
+    useTeacherPayoutHistoryListQuery,
 } = teacherPayoutPageApiSlice;
