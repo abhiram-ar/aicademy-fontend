@@ -1,5 +1,3 @@
-import { Button } from "@/components/ui/button";
-import React from "react";
 import PayoutTransactionsTable from "./PayoutHistoryTable";
 import Withdraw from "./Withdraw";
 import BankVerification from "./BankVerification";
