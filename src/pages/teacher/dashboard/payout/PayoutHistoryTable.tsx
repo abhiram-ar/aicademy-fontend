@@ -1,4 +1,5 @@
-import { useGetCourseSalesListQuery } from "./OverviewPageApiSlice";
+import { useState } from "react";
+import { useTeacherPayoutHistoryListQuery } from "./PayoutPageApiSlice";
 import { ShieldAlert } from "lucide-react";
 import {
     Table,
@@ -16,13 +17,11 @@ import {
     PaginationNext,
     PaginationPrevious,
 } from "@/components/ui/pagination";
-import { useState } from "react";
 
-const CourseSalesTables = () => {
+const PayoutTransactionsTable = () => {
     const [page, setPage] = useState<number>(1);
-    const { data } = useGetCourseSalesListQuery({ page });
+    const { data } = useTeacherPayoutHistoryListQuery({ page, limit: 8 });
 
-    console.log(data);
     return (
         <>
             <div className="border-2  rounded-base overflow-hidden">
@@ -30,29 +29,28 @@ const CourseSalesTables = () => {
                     <TableHeader>
                         <TableRow className="bg-slate-400 ">
                             <TableHead className="w-80 font-semibold">
-                                Course Name
+                                Time
+                            </TableHead>
+                            <TableHead className="w-32 font-semibold">
+                                Status
                             </TableHead>
                             <TableHead className="w-60 font-semibold">
-                                Bought At
+                                Remark
                             </TableHead>
-                            <TableHead className="w-24 font-semibold">
-                                Sold Price
-                            </TableHead>
-
-                            <TableHead className="w-20 font-semibold">
-                                Revenue
+                            <TableHead className="w-32 font-semibold">
+                                Amount
                             </TableHead>
                         </TableRow>
                     </TableHeader>
                     <TableBody>
                         {/* no course */}
-                        {data && data.salesList.length === 0 && (
+                        {data && data.payoutHistroy.length === 0 && (
                             <TableRow>
                                 <TableCell></TableCell>
-                                <TableCell>
-                                    <p className="flex justify-center items-center gap-3 p-5 -ms-96 ">
+                                <TableCell colSpan={2}>
+                                    <p className="flex justify-center items-center gap-3 p-5 -ms-60 ">
                                         <ShieldAlert />
-                                        No purchases
+                                        No payout Histroy
                                     </p>
                                 </TableCell>
 
@@ -61,48 +59,45 @@ const CourseSalesTables = () => {
                         )}
 
                         {data &&
-                            data.salesList.map(
-                                (
-                                    sale: {
-                                        course: {
-                                            title: string;
-                                        }[];
-                                        createdAt: string | number | Date;
-                                        soldPrice: number;
-                                        techerEarnings: number;
-                                    },
-                                    index: number
-                                ) => (
+                            data.payoutHistroy.map(
+                                (payout: {
+                                    _id: string;
+                                    createdAt: string;
+                                    status: string;
+                                    message?: string;
+                                    amount: number;
+                                }) => (
                                     <TableRow
-                                        key={index}
+                                        key={payout._id}
                                         className="hover:bg-zinc-300 bg-white"
                                     >
                                         <TableCell>
-                                            {sale.course[0]?.title}
-                                        </TableCell>
-                                        <TableCell>
                                             {new Date(
-                                                sale.createdAt
+                                                payout.createdAt
                                             ).toUTCString()}
                                         </TableCell>
-                                        <TableCell>
-                                            {sale.soldPrice.toLocaleString(
+                                        <TableCell>{payout.status}</TableCell>
+                                        <TableCell>{payout.message}</TableCell>
+                                        <TableCell
+                                            className={`font-semibold ${
+                                                payout.status ===
+                                                    "processing" &&
+                                                " text-yellow-600  "
+                                            } ${
+                                                payout.status === "deposited" &&
+                                                "text-green-600"
+                                            } ${
+                                                payout.status === "failed" &&
+                                                "text-red-600"
+                                            }`}
+                                        >
+                                            {payout.amount.toLocaleString(
                                                 "en-IN",
                                                 {
                                                     style: "currency",
                                                     currency: "INR",
                                                 }
                                             )}
-                                        </TableCell>
-                                        <TableCell className="text-green-600">
-                                            {"+" +
-                                                (sale.techerEarnings?.toLocaleString(
-                                                    "en-IN",
-                                                    {
-                                                        style: "currency",
-                                                        currency: "INR",
-                                                    }
-                                                ) || 0)}
                                         </TableCell>
                                     </TableRow>
                                 )
@@ -112,7 +107,7 @@ const CourseSalesTables = () => {
             </div>
             {/* pagination */}
             {data && (
-                <Pagination className="mt-3">
+                <Pagination className="mt-5">
                     <PaginationContent>
                         {page > 1 && (
                             <PaginationItem className="cursor-pointer">
@@ -157,4 +152,4 @@ const CourseSalesTables = () => {
     );
 };
 
-export default CourseSalesTables;
+export default PayoutTransactionsTable;

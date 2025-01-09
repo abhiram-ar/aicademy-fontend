@@ -3,7 +3,7 @@ import { useGetRevenuelastTwoMonthQuery } from "./OverviewPageApiSlice";
 const RevenueCard = () => {
     const { data } = useGetRevenuelastTwoMonthQuery({});
     return (
-        <div className="border bg-white p-8 font-publicSans rounded-base">
+        <div className="border-2 bg-white p-8 font-publicSans rounded-base">
             <h3>Revenue</h3>
             <h2 className="text-xl font-semibold mt-3">
                 {data ? (
