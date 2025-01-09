@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useRef } from "react";
 import { Button } from "@/components/ui/button";
 import {
     Dialog,
@@ -9,13 +9,35 @@ import {
     DialogTrigger,
 } from "@/components/ui/dialog";
 import { useForm } from "react-hook-form";
+import { DialogClose } from "@radix-ui/react-dialog";
+import { useRequestForPayoutMutation } from "./PayoutPageApiSlice";
 
 const Withdraw: React.FC<{ withdrawable: number }> = ({ withdrawable }) => {
     const {
         register,
         formState: { errors },
         handleSubmit,
+        reset,
     } = useForm<{ withdrawAmount: number }>();
+    const closeDialogRef = useRef<HTMLButtonElement>(null);
+    const withdrawButtonRef = useRef<HTMLButtonElement>(null);
+    const [requestPayout] = useRequestForPayoutMutation();
+
+    const handleWithdrawRequest = async (data: { withdrawAmount: number }) => {
+        if (withdrawButtonRef.current)
+            withdrawButtonRef.current.disabled = true;
+        try {
+            await requestPayout(data).unwrap();
+            reset();
+            closeDialogRef.current?.click();
+        } catch (error) {
+            console.error("errro while requesting for payout", error);
+        } finally {
+            if (withdrawButtonRef.current)
+                withdrawButtonRef.current.disabled = false;
+        }
+    };
+
     return (
         <Dialog>
             <DialogTrigger asChild>
@@ -31,7 +53,11 @@ const Withdraw: React.FC<{ withdrawable: number }> = ({ withdrawable }) => {
                     </DialogDescription>
                 </DialogHeader>
                 <div>
-                    <form onSubmit={handleSubmit((data) => console.log(data))}>
+                    <form
+                        onSubmit={handleSubmit((data) =>
+                            handleWithdrawRequest(data)
+                        )}
+                    >
                         <label
                             className="font-medium font-publicSans"
                             htmlFor="withdraw"
@@ -47,6 +73,7 @@ const Withdraw: React.FC<{ withdrawable: number }> = ({ withdrawable }) => {
                         <input
                             type="number"
                             {...register("withdrawAmount", {
+                                valueAsNumber: true,
                                 required: { value: true, message: "required" },
                                 min: {
                                     value: 1000,
@@ -63,6 +90,7 @@ const Withdraw: React.FC<{ withdrawable: number }> = ({ withdrawable }) => {
                             placeholder="amount to withdraw"
                         />
                         <button
+                            ref={withdrawButtonRef}
                             disabled={errors && Object.keys(errors).length > 0}
                             type="submit"
                             className="bg-green-400 px-3 py-1.5 border-2 border-black rounded-base block mt-3 ms-auto hover:bg-green-500 disabled:bg-zinc-400"
@@ -71,6 +99,7 @@ const Withdraw: React.FC<{ withdrawable: number }> = ({ withdrawable }) => {
                         </button>
                     </form>
                 </div>
+                <DialogClose ref={closeDialogRef} />
             </DialogContent>
         </Dialog>
     );

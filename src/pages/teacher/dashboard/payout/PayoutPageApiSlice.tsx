@@ -6,6 +6,18 @@ const teacherPayoutPageApiSlice = apiSlice.injectEndpoints({
             query: () => "/api/teacher/withdrawable-amount",
             providesTags: ["teacherPayout"],
         }),
+        teacherPayoutHistoryList: builder.query({
+            query: () => "/api/teacher/payout/history",
+            providesTags: ["teacherPayout"],
+        }),
+        requestForPayout: builder.mutation({
+            query: (data) => ({
+                url: "/api/teacher/payout/withdraw",
+                method: "POST",
+                body: data,
+            }),
+            invalidatesTags: ["teacherPayout"],
+        }),
 
         isTeacherBankAccountVerified: builder.query({
             query: () => "/api/teacher/payout/verification/isVerified",
@@ -25,16 +37,13 @@ const teacherPayoutPageApiSlice = apiSlice.injectEndpoints({
             }),
             invalidatesTags: ["teacherBankAccount"],
         }),
-        teacherPayoutHistoryList: builder.query({
-            query: () => "/api/teacher/payout/history",
-            providesTags: ["teacherPayout"],
-        }),
     }),
 });
 
 export const {
     useGetWithdawableAmountandTotalCashedoutQuery,
     useCreateBankVerificationOrderMutation,
+    useRequestForPayoutMutation,
     useIsTeacherBankAccountVerifiedQuery,
     useVerifyTeacherBankAccountMutation,
     useTeacherPayoutHistoryListQuery,
