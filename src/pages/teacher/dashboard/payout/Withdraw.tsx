@@ -9,9 +9,9 @@ import {
     DialogTrigger,
 } from "@/components/ui/dialog";
 
-
-
-const Withdraw = () => {
+const Withdraw: React.FC<{ withdrawable: number | undefined }> = ({
+    withdrawable,
+}) => {
     return (
         <Dialog>
             <DialogTrigger asChild>
@@ -26,9 +26,7 @@ const Withdraw = () => {
                         min. Withdraw amount is ₹1000
                     </DialogDescription>
                 </DialogHeader>
-                <div>
-
-                </div>
+                <div></div>
             </DialogContent>
         </Dialog>
     );

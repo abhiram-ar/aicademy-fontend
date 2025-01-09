@@ -2,6 +2,11 @@ import apiSlice from "@/redux/features/api/apiSlice";
 
 const teacherPayoutPageApiSlice = apiSlice.injectEndpoints({
     endpoints: (builder) => ({
+        getWithdawableAmountandTotalCashedout: builder.query({
+            query: () => "/api/teacher/withdrawable-amount",
+            providesTags: ["teacherPayout"],
+        }),
+
         isTeacherBankAccountVerified: builder.query({
             query: () => "/api/teacher/payout/verification",
             providesTags: ["teacherBankAccount"],
@@ -22,12 +27,13 @@ const teacherPayoutPageApiSlice = apiSlice.injectEndpoints({
         }),
         teacherPayoutHistoryList: builder.query({
             query: () => "/api/teacher/payout/history",
-            providesTags: ["teacherPayoutHistory"],
+            providesTags: ["teacherPayout"],
         }),
     }),
 });
 
 export const {
+    useGetWithdawableAmountandTotalCashedoutQuery,
     useCreateBankVerificationOrderMutation,
     useIsTeacherBankAccountVerifiedQuery,
     useVerifyTeacherBankAccountMutation,

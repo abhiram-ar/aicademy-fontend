@@ -1,13 +1,17 @@
 import PayoutTransactionsTable from "./PayoutHistoryTable";
 import Withdraw from "./Withdraw";
 import BankVerification from "./BankVerification";
-import { useIsTeacherBankAccountVerifiedQuery } from "./PayoutPageApiSlice";
+import {
+    useGetWithdawableAmountandTotalCashedoutQuery,
+    useIsTeacherBankAccountVerifiedQuery,
+} from "./PayoutPageApiSlice";
 
 const PayoutPage = () => {
     const { currentData: data } = useIsTeacherBankAccountVerifiedQuery({});
+    const { data: amounts } = useGetWithdawableAmountandTotalCashedoutQuery({});
     return (
         <div className="font-publicSans">
-            <h2 className="bg-zinc-300 w-fit text-xl font-semibold rounded-base px-2 -mt-11 ms-12">
+            <h2 className="bg-zinc-200 w-fit text-xl font-semibold rounded-base px-2 -mt-11 ms-12">
                 Payout{" "}
             </h2>
 
@@ -18,13 +22,29 @@ const PayoutPage = () => {
                     <div className="bg-white rounded-base border p-8">
                         <p>Earnings</p>
                         <div className="flex justify-between items-center mt-1">
-                            <h2 className="text-2xl font-semibold">5200</h2>
+                            {amounts ? (
+                                <h2 className="text-2xl font-semibold">
+                                    {amounts.withdrawable.toLocaleString(
+                                        "en-IN",
+                                        {
+                                            style: "currency",
+                                            currency: "INR",
+                                        }
+                                    )}
+                                </h2>
+                            ) : (
+                                <h2 className="text-2xl bg-zinc-300 w-32 rounded-base text-transparent animate-pulse">
+                                    .
+                                </h2>
+                            )}
                             {!data && (
-                                <div className="animate-pulse w-36 h-11 bg-zinc-300 rounded-base"></div>
+                                <div className="animate-pulse w-36 h-11 bg-zinc-200 rounded-base"></div>
                             )}
                             {data &&
                                 (data.isVerified ? (
-                                    <Withdraw />
+                                    <Withdraw
+                                        withdrawable={amounts?.withdrawable}
+                                    />
                                 ) : (
                                     <BankVerification />
                                 ))}
@@ -35,8 +55,20 @@ const PayoutPage = () => {
                     </div>
 
                     <div className="bg-white rounded-base border p-8">
-                        <p>Total cashedout</p>
-                        <h2 className="text-3xl font-semibold mt-3">5200</h2>
+                        <p>Total Cashedout</p>
+                        {amounts ? (
+                            <h2 className="text-3xl font-semibold mt-3">
+                                {amounts &&
+                                    amounts.totalAmountCheckedout.toLocaleString(
+                                        "en-IN",
+                                        { style: "currency", currency: "INR" }
+                                    )}
+                            </h2>
+                        ) : (
+                            <h2 className="text-3xl mt-3 bg-zinc-300 w-40 rounded-base text-transparent animate-pulse">
+                                .
+                            </h2>
+                        )}
                     </div>
                 </div>
 

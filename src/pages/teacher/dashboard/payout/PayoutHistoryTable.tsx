@@ -1,3 +1,5 @@
+import { useState } from "react";
+import { useTeacherPayoutHistoryListQuery } from "./PayoutPageApiSlice";
 import { ShieldAlert } from "lucide-react";
 import {
     Table,
@@ -15,8 +17,6 @@ import {
     PaginationNext,
     PaginationPrevious,
 } from "@/components/ui/pagination";
-import { useState } from "react";
-import { useTeacherPayoutHistoryListQuery } from "./PayoutPageApiSlice";
 
 const PayoutTransactionsTable = () => {
     const [page, setPage] = useState<number>(1);
@@ -46,10 +46,10 @@ const PayoutTransactionsTable = () => {
                     {data && data.payoutHistroy.length === 0 && (
                         <TableRow>
                             <TableCell></TableCell>
-                            <TableCell>
-                                <p className="flex justify-center items-center gap-3 p-5 -ms-96 ">
+                            <TableCell colSpan={2}>
+                                <p className="flex justify-center items-center gap-3 p-5 -ms-60 ">
                                     <ShieldAlert />
-                                    No purchases
+                                    No payout Histroy
                                 </p>
                             </TableCell>
 
@@ -58,24 +58,34 @@ const PayoutTransactionsTable = () => {
                     )}
 
                     {data &&
-                        data.payoutHistroy.map((payout) => (
-                            <TableRow
-                                key={payout._id}
-                                className="hover:bg-zinc-300 bg-white"
-                            >
-                                <TableCell>
-                                    {new Date(payout.createdAt).toUTCString()}
-                                </TableCell>
-                                <TableCell>{payout.status}</TableCell>
-                                <TableCell>{payout.message}</TableCell>
-                                <TableCell className="text-green-600">
-                                    {payout.amount.toLocaleString("en-IN", {
-                                        style: "currency",
-                                        currency: "INR",
-                                    })}
-                                </TableCell>
-                            </TableRow>
-                        ))}
+                        data.payoutHistroy.map(
+                            (payout: {
+                                _id: string;
+                                createdAt: string;
+                                status: string;
+                                message?: string;
+                                amount: number;
+                            }) => (
+                                <TableRow
+                                    key={payout._id}
+                                    className="hover:bg-zinc-300 bg-white"
+                                >
+                                    <TableCell>
+                                        {new Date(
+                                            payout.createdAt
+                                        ).toUTCString()}
+                                    </TableCell>
+                                    <TableCell>{payout.status}</TableCell>
+                                    <TableCell>{payout.message}</TableCell>
+                                    <TableCell className="text-green-600">
+                                        {payout.amount.toLocaleString("en-IN", {
+                                            style: "currency",
+                                            currency: "INR",
+                                        })}
+                                    </TableCell>
+                                </TableRow>
+                            )
+                        )}
                 </TableBody>
             </Table>
 
