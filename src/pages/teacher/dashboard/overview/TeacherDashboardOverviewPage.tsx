@@ -10,7 +10,7 @@ const TeacherDashboardOverview = () => {
             <h2 className="bg-zinc-300 w-fit text-xl font-semibold rounded-base px-2 -mt-11 ms-12">
                 Overview{" "}
             </h2>
-            <div className="mx-20 border mt-10">
+            <div className="mx-20  mt-10">
                 <div className="grid grid-cols-3 gap-5">
                     <RevenueCard />
                     <PurchasesCard />

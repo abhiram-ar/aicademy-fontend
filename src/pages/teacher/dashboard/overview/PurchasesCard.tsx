@@ -4,7 +4,7 @@ const PurchasesCard = () => {
     const { data } = useGetPurchaselastTwoMonthQuery({});
     console.log(data);
     return (
-        <div className="border bg-white p-8 font-publicSans rounded-base">
+        <div className="border-2 bg-white p-8 font-publicSans rounded-base">
             <h3>Purchases</h3>
             <h2 className="text-xl font-semibold mt-3">
                 {data ? (
