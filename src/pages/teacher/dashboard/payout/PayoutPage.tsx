@@ -1,9 +1,44 @@
-import React from 'react'
+import { Button } from "@/components/ui/button";
+import React from "react";
+import PayoutTransactionsTable from "./PayoutHistoryTable";
+import Withdraw from "./Withdraw";
+import BankVerification from "./BankVerification";
 
 const PayoutPage = () => {
-  return (
-    <div>PayoutPage</div>
-  )
-}
+    return (
+        <div className="font-publicSans">
+            <h2 className="bg-zinc-300 w-fit text-xl font-semibold rounded-base px-2 -mt-11 ms-12">
+                Payout{" "}
+            </h2>
 
-export default PayoutPage
+            {/* contnnt */}
+            <div className="mx-20 border mt-10">
+                {/* cards grid */}
+                <div className="grid grid-cols-2 gap-5">
+                    <div className="bg-white rounded-base border p-8">
+                        <p>Earnings</p>
+                        <div className="flex justify-between items-center mt-1">
+                            <h2 className="text-2xl font-semibold">5200</h2>
+                            {false ? <Withdraw /> : <BankVerification />}
+                        </div>
+                        <p className="text-zinc-400 text-sm text-right mt-1">
+                            (min. withdraw amount should be 1000)
+                        </p>
+                    </div>
+
+                    <div className="bg-white rounded-base border p-8">
+                        <p>Total cashedout</p>
+                        <h2 className="text-3xl font-semibold mt-3">5200</h2>
+                    </div>
+                </div>
+
+                {/* table */}
+                <div className="border mt-5">
+                    <PayoutTransactionsTable />
+                </div>
+            </div>
+        </div>
+    );
+};
+
+export default PayoutPage;
