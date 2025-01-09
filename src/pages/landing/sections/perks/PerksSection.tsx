@@ -12,13 +12,13 @@ const PerksSection = () => {
         heading: string;
         description: string;
     }[] = [
-        {
-            color: "#a388ee",
-            icon: quizesArt,
-            heading: "Quizzes",
-            description:
-                "Interactive quizzes to test your knowledge and track progress.",
-        },
+        // {
+        //     color: "#a388ee",
+        //     icon: quizesArt,
+        //     heading: "Quizzes",
+        //     description:
+        //         "Interactive quizzes to test your knowledge and track progress.",
+        // },
         {
             color: "#88aaee",
             icon: communityArt,
@@ -50,6 +50,19 @@ const PerksSection = () => {
 
             {/* primary perks */}
             <div className=" grid gid-cols-1 md:grid-cols-3 gap-5 mt-10">
+                <div
+                    className={` border-4 border-black h-full rounded-base  p-8 px-5 lg:px-12 text-center bg-[#a388ee]`}
+                >
+                    <div className="size-20 mx-auto">
+                        <img src={quizesArt} alt="quiz" />
+                    </div>
+                    <h5 className="font-semibold mt-2">Quizzes</h5>
+                    <p className="mt-3">
+                        Interactive quizzes to test your knowledge and track
+                        progress.
+                    </p>
+                </div>
+
                 {primaryPerks &&
                     primaryPerks.map((perk, index) => (
                         <div
@@ -132,7 +145,12 @@ const PerksSection = () => {
                         <br /> Unlock unlimited learning without breaking the
                         bank
                     </p>
-                    <Button size="lg" className="text-darkText bg-[#2c312b] mt-5">Explore Pricing</Button>
+                    <Button
+                        size="lg"
+                        className="text-darkText bg-[#2c312b] mt-5"
+                    >
+                        Explore Pricing
+                    </Button>
                 </div>
             </div>
         </div>
