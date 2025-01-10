@@ -1,23 +1,11 @@
-import React from "react";
-import { MonthlyOverview } from "./AdminOverviewPage";
-
-
-
-type Props = {
-    currentMonthReport?: MonthlyOverview;
-    prevMonthReport?: MonthlyOverview;
-};
-
-const RevenueCard: React.FC<Props> = ({
-    currentMonthReport,
-    prevMonthReport,
-}) => {
+const ProfitCard = () => {
+    const data = false;
     return (
         <div className="border-2 bg-white p-8 font-publicSans rounded-base">
-            <h3>Revenue</h3>
+            <h3>Profit</h3>
             <h2 className="text-xl font-semibold mt-3">
-                {currentMonthReport ? (
-                    currentMonthReport.totalRevenue.toLocaleString("en-IN", {
+                {data ? (
+                    data.revenue.currentMonth.toLocaleString("en-IN", {
                         style: "currency",
                         currency: "INR",
                     })
@@ -29,16 +17,14 @@ const RevenueCard: React.FC<Props> = ({
             </h2>
             <div>
                 {" "}
-                {currentMonthReport && prevMonthReport ? (
-                    currentMonthReport.totalRevenue -
-                        prevMonthReport.totalRevenue >
-                    0 ? (
+                {data ? (
+                    data.revenue.currentMonth - data.revenue.prevMonth > 0 ? (
                         <p className="text-green-600">
                             {" "}
                             {(
-                                ((currentMonthReport.totalRevenue -
-                                    prevMonthReport.totalRevenue) /
-                                    prevMonthReport.totalRevenue) *
+                                ((data.revenue.currentMonth -
+                                    data.revenue.prevMonth) /
+                                    data.revenue.prevMonth) *
                                 100
                             ).toFixed(2)}
                             % up from last month
@@ -47,9 +33,9 @@ const RevenueCard: React.FC<Props> = ({
                         <p className="text-red-600">
                             {" "}
                             {(
-                                ((prevMonthReport.totalRevenue -
-                                    currentMonthReport.totalRevenue) /
-                                    prevMonthReport.totalRevenue) *
+                                ((data.revenue.prevMonth -
+                                    data.revenue.currentMonth) /
+                                    data.revenue.prevMonth) *
                                 100
                             ).toFixed(2)}
                             % down from last month
@@ -65,4 +51,4 @@ const RevenueCard: React.FC<Props> = ({
     );
 };
 
-export default RevenueCard;
+export default ProfitCard;
