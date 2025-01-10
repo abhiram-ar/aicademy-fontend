@@ -1,11 +1,20 @@
-const ProfitCard = () => {
-    const data = false;
+import { MonthlyOverview } from "./AdminOverviewPage";
+
+type Props = {
+    currentMonthReport: MonthlyOverview;
+    prevMonthReport: MonthlyOverview;
+};
+
+const ProfitCard: React.FC<Props> = ({
+    currentMonthReport,
+    prevMonthReport,
+}) => {
     return (
         <div className="border-2 bg-white p-8 font-publicSans rounded-base">
             <h3>Profit</h3>
             <h2 className="text-xl font-semibold mt-3">
-                {data ? (
-                    data.revenue.currentMonth.toLocaleString("en-IN", {
+                {currentMonthReport ? (
+                    currentMonthReport.totalProfit.toLocaleString("en-IN", {
                         style: "currency",
                         currency: "INR",
                     })
@@ -17,14 +26,16 @@ const ProfitCard = () => {
             </h2>
             <div>
                 {" "}
-                {data ? (
-                    data.revenue.currentMonth - data.revenue.prevMonth > 0 ? (
+                {currentMonthReport && prevMonthReport ? (
+                    currentMonthReport.totalProfit -
+                        prevMonthReport.totalProfit >
+                    0 ? (
                         <p className="text-green-600">
                             {" "}
                             {(
-                                ((data.revenue.currentMonth -
-                                    data.revenue.prevMonth) /
-                                    data.revenue.prevMonth) *
+                                ((currentMonthReport.totalProfit -
+                                    prevMonthReport.totalProfit) /
+                                    prevMonthReport.totalProfit) *
                                 100
                             ).toFixed(2)}
                             % up from last month
@@ -33,9 +44,9 @@ const ProfitCard = () => {
                         <p className="text-red-600">
                             {" "}
                             {(
-                                ((data.revenue.prevMonth -
-                                    data.revenue.currentMonth) /
-                                    data.revenue.prevMonth) *
+                                ((prevMonthReport.totalProfit -
+                                    prevMonthReport.totalProfit) /
+                                    prevMonthReport.totalProfit) *
                                 100
                             ).toFixed(2)}
                             % down from last month
