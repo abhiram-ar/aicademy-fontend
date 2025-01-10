@@ -1,7 +1,7 @@
 import { useGetRevenueAndProfitDataQuery } from "./AdminOverviewApiSlice";
 import FilterRangeDropDown from "./FilterRangeDropDown";
 import { useState } from "react";
-import { Bar, BarChart, CartesianGrid, XAxis } from "recharts";
+import { Bar, BarChart, XAxis } from "recharts";
 import {
     Card,
     CardContent,
@@ -21,9 +21,11 @@ import {
 const chartConfig = {
     revenue: {
         label: "revenue",
+        color: "black",
     },
     profit: {
         label: "profit",
+        color: "abcece",
     },
 } satisfies ChartConfig;
 
@@ -37,25 +39,33 @@ const Saleschart = () => {
     return (
         <Card>
             <CardHeader className="relative">
-                <CardTitle>Monthly Earning by Course</CardTitle>
+                <CardTitle>
+                    Revenue and profit for last{" "}
+                    {filter === "monthly" ? "6 months" : "28 days"}
+                </CardTitle>
                 <CardDescription>
-                    from{" "}
-                    {new Date(
-                        Date.now() - 6 * 30 * 24 * 60 * 60 * 1000
-                    ).toDateString()}{" "}
-                    - {new Date(Date.now()).toDateString()}
+                    <CardDescription>
+                        from{" "}
+                        {filter === "monthly"
+                            ? new Date(
+                                  Date.now() - 6 * 30 * 24 * 60 * 60 * 1000
+                              ).toDateString()
+                            : new Date(
+                                  Date.now() - 1000 * 60 * 60 * 24 * 28
+                              ).toDateString()}
+                        - {new Date(Date.now()).toDateString()}
+                    </CardDescription>
                 </CardDescription>
                 <div className="absolute right-14">
                     <FilterRangeDropDown setFilter={setFilter} />
                 </div>
             </CardHeader>
             <CardContent>
-                <ChartContainer config={chartConfig} className="h-96 w-full">
+                <ChartContainer
+                    config={chartConfig}
+                    className="h-[25rem] w-full"
+                >
                     <BarChart accessibilityLayer data={query?.data}>
-                        <CartesianGrid
-                            vertical={false}
-                            className="opacity-25"
-                        />
                         <XAxis
                             dataKey="period"
                             tickLine={false}
@@ -63,25 +73,25 @@ const Saleschart = () => {
                             axisLine={false}
                             tickFormatter={(value) => value.slice(0, 8)}
                         />
-                        <ChartTooltip
-                            content={<ChartTooltipContent hideLabel />}
+                        <Bar
+                            dataKey="revenue"
+                            stackId="a"
+                            fill="#292828"
+                            radius={[0, 0, 4, 4]}
+                            animationDuration={0}
                         />
-                        {query && (
-                            <>
-                                <Bar
-                                    dataKey="revenue"
-                                    stackId="a"
-                                    fill="#555"
-                                    radius={[0, 0, 0, 0]}
-                                />
-                                <Bar
-                                    dataKey="profit"
-                                    stackId="a"
-                                    fill="#7ade80"
-                                    radius={[5, 5, 0, 0]}
-                                />
-                            </>
-                        )}
+                        <Bar
+                            dataKey="profit"
+                            stackId="a"
+                            fill="#005a31"
+                            radius={[4, 4, 0, 0]}
+                            animationEasing="ease-in-out"
+                        />
+                        <ChartTooltip
+                            content={<ChartTooltipContent />}
+                            cursor={false}
+                            defaultIndex={1}
+                        />
                         <ChartLegend
                             className="bg-gree"
                             content={<ChartLegendContent />}
