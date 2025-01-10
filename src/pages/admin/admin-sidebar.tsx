@@ -1,5 +1,7 @@
 import {
     ChevronUp,
+    CircleDollarSign,
+    LayoutDashboard,
     MessageSquareWarning,
     Tag,
     User2,
@@ -53,6 +55,31 @@ export function AppSidebar() {
     return (
         <Sidebar className="border-none border-e-2  border-black">
             <SidebarContent className="bg-zinc-800 text-white">
+                <SidebarGroup>
+                    <SidebarGroupLabel className="text-zinc-400">
+                        Dashboard
+                    </SidebarGroupLabel>
+                    <SidebarGroupContent>
+                        <SidebarMenu>
+                            <SidebarMenuItem>
+                                <SidebarMenuButton asChild>
+                                    <Link to="/admin/dashboard">
+                                        <LayoutDashboard />
+                                        <span>Overview</span>
+                                    </Link>
+                                </SidebarMenuButton>
+                            </SidebarMenuItem>
+                            <SidebarMenuItem>
+                                <SidebarMenuButton asChild>
+                                    <Link to="/admin/dashboard">
+                                        <CircleDollarSign />
+                                        <span>Revenue</span>
+                                    </Link>
+                                </SidebarMenuButton>
+                            </SidebarMenuItem>
+                        </SidebarMenu>
+                    </SidebarGroupContent>
+                </SidebarGroup>
                 <SidebarGroup>
                     <SidebarGroupLabel className="text-zinc-400">
                         Teacher
