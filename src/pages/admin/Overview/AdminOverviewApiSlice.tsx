@@ -5,16 +5,16 @@ const adminOverviewApiSlice = apiSlice.injectEndpoints({
         getLastTwoMonthOverviewAdmin: builder.query({
             query: () => "/api/admin/dashboard/overview",
         }),
-        updateCourseReportStateAdmin: builder.mutation({
-            query: (data) => ({
-                url: "/api/admin/user/course/report/status",
-                method: "PATCH",
-                body: data,
-                // keepalive: false,
-            }),
-            invalidatesTags: ["courseReportList"],
+        getRevenueAndProfitData: builder.query({
+            query: (data) => {
+                const query = new URLSearchParams(data).toString();
+                return `/api/admin/dashboard/revenue-profit?${query}`;
+            },
         }),
     }),
 });
 
-export const { useGetLastTwoMonthOverviewAdminQuery } = adminOverviewApiSlice;
+export const {
+    useGetLastTwoMonthOverviewAdminQuery,
+    useGetRevenueAndProfitDataQuery,
+} = adminOverviewApiSlice;

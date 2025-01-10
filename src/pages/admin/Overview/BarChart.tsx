@@ -1,3 +1,6 @@
+import { useGetRevenueAndProfitDataQuery } from "./AdminOverviewApiSlice";
+import FilterRangeDropDown from "./FilterRangeDropDown";
+import { useState } from "react";
 import { Bar, BarChart, CartesianGrid, XAxis } from "recharts";
 import {
     Card,
@@ -9,66 +12,31 @@ import {
 import {
     ChartConfig,
     ChartContainer,
+    ChartLegend,
+    ChartLegendContent,
     ChartTooltip,
     ChartTooltipContent,
 } from "@/components/ui/chart";
-import { getRandomColor } from "@/utils/randomColorGenerator";
-let chartData = [
-    { month: "January", desktop: 186, mobile: 80 },
-    { month: "February", desktop: 305, mobile: 200 },
-    { month: "March", desktop: 237, mobile: 120 },
-    { month: "April", desktop: 73, mobile: 190 },
-    { month: "May", desktop: 209, mobile: 130 },
-    { month: "June", desktop: 214, mobile: 140 },
-    { month: "July", desktop: 305, mobile: 200 },
-    { month: "Augest ", desktop: 237, mobile: 120 },
-    { month: "September", desktop: 73, mobile: 190 },
-    { month: "October", desktop: 209, mobile: 130 },
-    { month: "November", desktop: 214, mobile: 140 },
-    { month: "December", desktop: 214, mobile: 140 },
-];
 
 const chartConfig = {
-    desktop: {
-        label: "Desktop",
-        color: "hsl(var(--chart-1))",
+    revenue: {
+        label: "revenue",
     },
-    mobile: {
-        label: "Mobile",
-        color: "hsl(var(--chart-2))",
+    profit: {
+        label: "profit",
     },
 } satisfies ChartConfig;
 
 const Saleschart = () => {
-    // const { data } = useGetEarningsByMonthQuery({ months: 6 });
-    const data = false;
-    const map = new Map();
-    const set = new Set();
-    if (data) {
-        for (const item of data.result) {
-            if (map.has(item.time)) {
-                const existingObj = map.get(item.time);
-                existingObj[item.courseName] = item.revenue;
-                map.set(item.time, existingObj);
-            } else {
-                map.set(item.time, {
-                    time: item.time,
-                    [item.courseName]: item.revenue,
-                });
-            }
-        }
-        for (const item of data.result) {
-            if (!set.has(item.courseName)) {
-                set.add(item.courseName);
-            }
-        }
-    }
-
-    if (map) chartData = Array.from(map.values());
+    const [filter, setFilter] = useState<"monthly" | "daily">("monthly");
+    const { data: query } = useGetRevenueAndProfitDataQuery({
+        interval: filter,
+    });
+    console.log(query);
 
     return (
         <Card>
-            <CardHeader>
+            <CardHeader className="relative">
                 <CardTitle>Monthly Earning by Course</CardTitle>
                 <CardDescription>
                     from{" "}
@@ -77,16 +45,19 @@ const Saleschart = () => {
                     ).toDateString()}{" "}
                     - {new Date(Date.now()).toDateString()}
                 </CardDescription>
+                <div className="absolute right-14">
+                    <FilterRangeDropDown setFilter={setFilter} />
+                </div>
             </CardHeader>
             <CardContent>
                 <ChartContainer config={chartConfig} className="h-96 w-full">
-                    <BarChart accessibilityLayer data={chartData}>
+                    <BarChart accessibilityLayer data={query?.data}>
                         <CartesianGrid
                             vertical={false}
                             className="opacity-25"
                         />
                         <XAxis
-                            dataKey="time"
+                            dataKey="period"
                             tickLine={false}
                             tickMargin={10}
                             axisLine={false}
@@ -95,17 +66,26 @@ const Saleschart = () => {
                         <ChartTooltip
                             content={<ChartTooltipContent hideLabel />}
                         />
-                        {data &&
-                            set &&
-                            Array.from(set).map((value) => (
+                        {query && (
+                            <>
                                 <Bar
-                                    key={value as string}
-                                    dataKey={value as string}
+                                    dataKey="revenue"
                                     stackId="a"
-                                    fill={getRandomColor()}
-                                    radius={[0, 0, 5, 5]}
+                                    fill="#555"
+                                    radius={[0, 0, 0, 0]}
                                 />
-                            ))}
+                                <Bar
+                                    dataKey="profit"
+                                    stackId="a"
+                                    fill="#7ade80"
+                                    radius={[5, 5, 0, 0]}
+                                />
+                            </>
+                        )}
+                        <ChartLegend
+                            className="bg-gree"
+                            content={<ChartLegendContent />}
+                        />
                     </BarChart>
                 </ChartContainer>
             </CardContent>
