@@ -42,6 +42,7 @@ import UserCourseReportPage from "./pages/admin/user/course-reports/UserCourseRe
 import OrdersPage from "./pages/user/Orders/OrdersPage";
 import TeacherDashboardOverview from "./pages/teacher/dashboard/overview/TeacherDashboardOverviewPage";
 import PayoutPage from "./pages/teacher/dashboard/payout/PayoutPage";
+import AdminOverviewPage from "./pages/admin/Overview/AdminOverviewPage";
 
 fetchAccessTokenOnload();
 const appRouter = createBrowserRouter([
@@ -200,6 +201,10 @@ const appRouter = createBrowserRouter([
                         hydrateFallbackElement: <p>loading...</p>,
                         element: <AdminDashBoardHomePage />,
                         children: [
+                            {
+                                index: true,
+                                element: <AdminOverviewPage />,
+                            },
                             {
                                 path: "/admin/dashboard/onboard",
                                 element: <TeacherOnboadingPage />,

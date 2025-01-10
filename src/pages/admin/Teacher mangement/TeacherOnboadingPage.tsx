@@ -55,7 +55,7 @@ const TeacherOnboadingPage = () => {
     console.log(data);
 
     return (
-        <div className="absolute ms-20 w-2/3 ">
+        <div className="">
             {selectedTeacher &&
                 createPortal(
                     <TeacherInfoModal
@@ -64,52 +64,61 @@ const TeacherOnboadingPage = () => {
                     />,
                     document.body
                 )}
-            <h2 className="text-2xl font-semibold my-5 bg-zinc-300 rounded-base px-2 py-1 w-fit">
+            <h2 className="font-medium text-2xl bg-zinc-300 px-2 rounded-base w-fit -mt-12 ms-12">
                 Teacher Onboarding
             </h2>
-            <Table>
-                <TableHeader>
-                    <TableRow className="bg-zinc-700 ">
-                        <TableHead className="w-52 max-w-80 text-darkText">
-                            Legal name
-                        </TableHead>
-                        <TableHead className="text-darkText">
-                            Requested time
-                        </TableHead>
-                        <TableHead className="text-darkText">Email</TableHead>
-                        <TableHead className="text-center text-darkText">
-                            Qualification
-                        </TableHead>
-                    </TableRow>
-                </TableHeader>
-                <TableBody>
-                    {data &&
-                        data.onboardingTeacherList.map((teacher: ITeacher) => (
-                            <TableRow
-                                key={teacher._id}
-                                className="hover:bg-green-100"
-                                onClick={() => setSelectedTeacher(teacher)}
-                            >
-                                <TableCell className="font-base">
-                                    {teacher.legalName}
-                                </TableCell>
+            <div className="w-fit mx-auto mt-5">
+                <Table>
+                    <TableHeader>
+                        <TableRow className="bg-zinc-700 ">
+                            <TableHead className="w-60 max-w-80 text-darkText">
+                                Legal name
+                            </TableHead>
+                            <TableHead className="w-60 text-darkText">
+                                Requested time
+                            </TableHead>
+                            <TableHead className="w-80 text-darkText">
+                                Email
+                            </TableHead>
+                            <TableHead className=" w-80 text-center text-darkText">
+                                Qualification
+                            </TableHead>
+                        </TableRow>
+                    </TableHeader>
+                    <TableBody>
+                        {data &&
+                            data.onboardingTeacherList.map(
+                                (teacher: ITeacher) => (
+                                    <TableRow
+                                        key={teacher._id}
+                                        className="hover:bg-green-100"
+                                        onClick={() =>
+                                            setSelectedTeacher(teacher)
+                                        }
+                                    >
+                                        <TableCell className="font-base">
+                                            {teacher.legalName}
+                                        </TableCell>
 
-                                <TableCell>{teacher.email}</TableCell>
+                                        <TableCell>{teacher.email}</TableCell>
 
-                                <TableCell>
-                                    {new Date(teacher.updatedAt).toLocaleString(
-                                        "en-GB",
-                                        { timeZone: "UTC" }
-                                    )}
-                                </TableCell>
+                                        <TableCell>
+                                            {new Date(
+                                                teacher.updatedAt
+                                            ).toLocaleString("en-GB", {
+                                                timeZone: "UTC",
+                                            })}
+                                        </TableCell>
 
-                                <TableCell className="w-60 max-w-80 truncate">
-                                    {teacher.education}
-                                </TableCell>
-                            </TableRow>
-                        ))}
-                </TableBody>
-            </Table>
+                                        <TableCell className="w-60 max-w-80 truncate">
+                                            {teacher.education}
+                                        </TableCell>
+                                    </TableRow>
+                                )
+                            )}
+                    </TableBody>
+                </Table>
+            </div>
         </div>
     );
 };
