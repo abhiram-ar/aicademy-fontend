@@ -1,4 +1,3 @@
-import React from "react";
 import PayoutTransactionsTable from "./PayoutHistoryTable";
 
 const TeacherPayoutApprovalPage = () => {
