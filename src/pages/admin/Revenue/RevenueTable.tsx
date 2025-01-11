@@ -1,6 +1,7 @@
-import React from "react";
+import { useGetAdminRevenueListQuery } from "./RevenuePageApiSlice";
+import { useState } from "react";
+import RevenueTableBody from "./RevenueTableBody";
 import { Table, TableHead, TableHeader, TableRow } from "@/components/ui/table";
-import ReportsTableBody from "./RevenueTableBody";
 import {
     Pagination,
     PaginationContent,
@@ -9,9 +10,10 @@ import {
     PaginationNext,
     PaginationPrevious,
 } from "@/components/ui/pagination";
-import RevenueTableBody from "./RevenueTableBody";
 
 const RevenueTable = () => {
+    const [page, setPage] = useState(1);
+    const { data: query } = useGetAdminRevenueListQuery({ limit: 10, page });
     return (
         <>
             <Table>
@@ -27,15 +29,15 @@ const RevenueTable = () => {
                             Revenue
                         </TableHead>
                         <TableHead className="w-32 text-darkText">
-                            Profit
+                            Profit/loss
                         </TableHead>
                     </TableRow>
                 </TableHeader>
-                <RevenueTableBody />
+                <RevenueTableBody data={query?.data} />
             </Table>
 
             {/* pagination */}
-            {data && (
+            {query && (
                 <Pagination className="mt-5">
                     <PaginationContent>
                         {page > 1 && (
@@ -48,7 +50,7 @@ const RevenueTable = () => {
                         )}
 
                         {Array.from({
-                            length: data.pages,
+                            length: query.pages,
                         }).map((_, index) => (
                             <PaginationItem
                                 key={index + 1}
@@ -66,7 +68,7 @@ const RevenueTable = () => {
                             </PaginationItem>
                         ))}
 
-                        {page < data.pages && (
+                        {page < query.pages && (
                             <PaginationItem className="cursor-pointer">
                                 <PaginationNext
                                     className="bg-zinc-200"

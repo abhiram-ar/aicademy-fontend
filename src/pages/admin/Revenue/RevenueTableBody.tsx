@@ -1,16 +1,23 @@
 import { TableBody, TableCell, TableRow } from "@/components/ui/table";
-import { Ellipsis, ShieldAlert } from "lucide-react";
+import { ShieldAlert } from "lucide-react";
 import React from "react";
 
-const RevenueTableBody: React.FC<Props> = ({}) => {
-    const data = false;
-    const currentData = data;
+type Props = {
+    data: {
+        createdBy: string;
+        _id: string;
+        orderValue: number;
+        platformFee: number;
+        createdAt: Date;
+    }[];
+};
 
+const RevenueTableBody: React.FC<Props> = ({ data }) => {
     return (
         <>
             <TableBody>
                 {/* no course */}
-                {currentData && currentData.length <= 0 && (
+                {data && data.length <= 0 && (
                     <TableRow>
                         <TableCell></TableCell>
                         <TableCell className="">
@@ -23,29 +30,28 @@ const RevenueTableBody: React.FC<Props> = ({}) => {
                     </TableRow>
                 )}
 
-                {currentData &&
-                    currentData.reportList &&
-                    currentData.reportList.map(
-                        (report: {
-                            createdBy: string;
-                            courseId: { _id: string; title: string };
-                            status: "pending" | "resolved";
-                            title: string;
-                            _id: string;
-                        }) => (
-                            <TableRow
-                                key={report._id} //change to Live data id
-                                className={`hover:bg-slate-300 ${
-                                    report.status === "resolved" &&
-                                    "bg-zinc-400 hover:bg-zinc-400"
-                                }`}
+                {data &&
+                    data.map((report) => (
+                        <TableRow
+                            key={report._id} //change to Live data id
+                            className="hover:bg-slate-300"
+                        >
+                            <TableCell>
+                                {new Date(report.createdAt).toUTCString()}
+                            </TableCell>
+                            <TableCell>{report._id}</TableCell>
+                            <TableCell>{report.orderValue}</TableCell>
+                            <TableCell
+                                className={
+                                    report.platformFee >= 0
+                                        ? "text-green-600"
+                                        : " text-red-600 "
+                                }
                             >
-                                <TableCell>{report.courseId.title}</TableCell>
-                                <TableCell>{report.title}</TableCell>
-                                <TableCell>{report.createdBy}</TableCell>
-                            </TableRow>
-                        )
-                    )}
+                                +{report.platformFee.toFixed(2)}
+                            </TableCell>
+                        </TableRow>
+                    ))}
             </TableBody>
         </>
     );
