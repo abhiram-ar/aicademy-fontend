@@ -9,16 +9,19 @@ const courseManagementApiSlice = apiSlice.injectEndpoints({
             },
             providesTags: ["courseOverviewReportList"],
         }),
-        // updateCourseReportStateAdmin: builder.mutation({
-        //     query: (data) => ({
-        //         url: "/api/admin/user/course/report/status",
-        //         method: "PATCH",
-        //         body: data,
-        //         // keepalive: false,
-        //     }),
-        //     invalidatesTags: ["courseReportList"],
-        // }),
+        takedonwCousreAdmin: builder.mutation({
+            query: (data) => ({
+                url: "/api/admin/course/takedown",
+                method: "PATCH",
+                body: data,
+                // keepalive: false,
+            }),
+            invalidatesTags: ["courseOverviewReportList"],
+        }),
     }),
 });
 
-export const { useGetAllCourseOverviewReportQuery } = courseManagementApiSlice;
+export const {
+    useGetAllCourseOverviewReportQuery,
+    useTakedonwCousreAdminMutation,
+} = courseManagementApiSlice;

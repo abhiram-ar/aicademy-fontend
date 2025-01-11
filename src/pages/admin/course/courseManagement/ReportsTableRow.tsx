@@ -8,6 +8,7 @@ import {
     DropdownMenuLabel,
     DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
+import { useTakedonwCousreAdminMutation } from "./CourseManagementApiSlice";
 
 export interface ICoupon {
     _id: string;
@@ -26,7 +27,7 @@ type Props = {
     data?: {
         _id: string;
         courseName: string;
-        status: "draft" | "pubblished";
+        status: "draft" | "published" | "unpublished";
         teacherName: string;
         unitsSold: number;
         totalRevenue: number;
@@ -35,6 +36,16 @@ type Props = {
 };
 
 const CoureManagementTableBody: React.FC<Props> = ({ data }) => {
+    const [takedownCourse] = useTakedonwCousreAdminMutation();
+
+    const handleCourseTakedown = async (courseId: string) => {
+        try {
+            await takedownCourse({ courseId });
+        } catch (error) {
+            console.error("error while cousre takedown", error);
+        }
+    };
+
     return (
         <TableBody>
             {/* no course */}
@@ -55,7 +66,10 @@ const CoureManagementTableBody: React.FC<Props> = ({ data }) => {
                 data.map((report) => (
                     <TableRow
                         key={report._id}
-                        className="w-full hover:bg-slate-300"
+                        className={`w-full hover:bg-slate-300 ${
+                            report.status === "unpublished" &&
+                            "bg-red-300 hover:bg-red-400"
+                        }`}
                     >
                         <TableCell>{report.courseName}</TableCell>
                         <TableCell>{report.teacherName}</TableCell>
@@ -85,9 +99,20 @@ const CoureManagementTableBody: React.FC<Props> = ({ data }) => {
                                         Actions
                                     </DropdownMenuLabel>
                                     <DropdownMenuItem className="bg-white hover:bg-slate-400 border-0 py-0">
-                                        <button className=" py-1 px-2">
-                                            Mark as Resolved
-                                        </button>
+                                        {report.status === "published" ? (
+                                            <button
+                                                onClick={() =>
+                                                    handleCourseTakedown(
+                                                        report._id
+                                                    )
+                                                }
+                                                className=" py-1 px-2"
+                                            >
+                                                Take down
+                                            </button>
+                                        ) : (
+                                            <></>
+                                        )}
                                     </DropdownMenuItem>
                                 </DropdownMenuContent>
                             </DropdownMenu>
