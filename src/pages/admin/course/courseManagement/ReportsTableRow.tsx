@@ -111,7 +111,7 @@ const CoureManagementTableBody: React.FC<Props> = ({ data }) => {
                                                 Take down
                                             </button>
                                         ) : (
-                                            <></>
+                                            <></> // add conntroller to publish
                                         )}
                                     </DropdownMenuItem>
                                 </DropdownMenuContent>
