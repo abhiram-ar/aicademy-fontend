@@ -19,7 +19,7 @@ const orderPageApiSlice = apiSlice.injectEndpoints({
                 method: "POST",
                 body: data,
             }),
-            invalidatesTags: ["courseReview"],
+            invalidatesTags: ["courseReview", "fullCourseList"],
         }),
         editCourseReview: builder.mutation({
             query: (data) => ({
@@ -27,7 +27,7 @@ const orderPageApiSlice = apiSlice.injectEndpoints({
                 method: "PATCH",
                 body: data,
             }),
-            invalidatesTags: ["courseReview"],
+            invalidatesTags: ["courseReview", "fullCourseList"],
         }),
     }),
 });

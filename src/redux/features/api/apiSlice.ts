@@ -66,6 +66,7 @@ const apiSlice = createApi({
         "cart",
         "userDetails",
         "userList",
+        "fullCourseList",
         "fullcourseDetailsPublic",
         "couponList",
         "couponDetails",

@@ -4,11 +4,11 @@ const explorePageApiSlice = apiSlice.injectEndpoints({
     endpoints: (builder) => ({
         getCoursesCardDetails: builder.query({
             query: (params) => {
-                const queryParams = new URLSearchParams(params).toString()
+                const queryParams = new URLSearchParams(params).toString();
                 console.log(queryParams);
                 return `/api/course/list?${queryParams}`;
             },
-            //Invalidate cache If necessary
+            providesTags: ["fullCourseList"],
         }),
     }),
 });
