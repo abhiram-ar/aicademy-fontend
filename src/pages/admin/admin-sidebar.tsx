@@ -1,6 +1,7 @@
 import {
     ChevronUp,
     CircleDollarSign,
+    HandCoins,
     LayoutDashboard,
     MessageSquareWarning,
     Tag,
@@ -34,8 +35,13 @@ import { useDispatch } from "react-redux";
 const items = [
     {
         title: "Teacher onboarding",
-        url: "/admin/dashboard/onboard",
+        url: "/admin/dashboard/teacher/onboard",
         icon: UserPenIcon,
+    },
+    {
+        title: "Payout",
+        url: "/admin/dashboard/teacher/payout",
+        icon: HandCoins,
     },
 ];
 
