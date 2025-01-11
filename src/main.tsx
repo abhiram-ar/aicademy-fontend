@@ -17,7 +17,7 @@ import {
 } from "./utils/fetchAccessTokenOnLoad";
 import AdminLoginPage from "./pages/admin/AminLoginPage";
 import AdminDashBoardHomePage from "./pages/admin/AdminDashBoardHomePage";
-import TeacherOnboadingPage from "./pages/admin/Teacher mangement/TeacherOnboadingPage";
+import TeacherOnboadingPage from "./pages/admin/Teacher mangement/TeacherOnboarding/TeacherOnboadingPage";
 import Page from "./pages/teacher/dashboard/Layout";
 import TeacherDashboard from "./pages/teacher/dashboard/Layout";
 import CreateCoursePage from "./pages/teacher/dashboard/create-course/CreateDraftPage";
@@ -44,6 +44,7 @@ import TeacherDashboardOverview from "./pages/teacher/dashboard/overview/Teacher
 import PayoutPage from "./pages/teacher/dashboard/payout/PayoutPage";
 import AdminOverviewPage from "./pages/admin/Overview/AdminOverviewPage";
 import AdminRevenuePage from "./pages/admin/Revenue/RevenuePage";
+import TeacherPayoutApprovalPage from "./pages/admin/Teacher mangement/Payout/TeacherPayoutApprovalPage";
 
 fetchAccessTokenOnload();
 const appRouter = createBrowserRouter([
@@ -211,8 +212,12 @@ const appRouter = createBrowserRouter([
                                 element: <AdminRevenuePage />,
                             },
                             {
-                                path: "/admin/dashboard/onboard",
+                                path: "/admin/dashboard/teacher/onboard",
                                 element: <TeacherOnboadingPage />,
+                            },
+                            {
+                                path: "/admin/dashboard/teacher/payout",
+                                element: <TeacherPayoutApprovalPage />,
                             },
                             {
                                 path: "/admin/dashboard/user/management",

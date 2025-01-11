@@ -1,18 +1,17 @@
-import RevenueTable from "./RevenueTable";
+import PayoutTransactionsTable from "./PayoutHistoryTable";
 
-const AdminRevenuePage = () => {
+const TeacherPayoutApprovalPage = () => {
     return (
         <div className="mx-10">
             <h2 className="font-medium text-2xl bg-zinc-300 px-2 rounded-base w-fit -mt-12 ms-2">
-               Revenue 
+                Payout Requests
             </h2>
+            {/* table */}
             <div className="w-10/12 mx-auto mt-5">
-                <div>
-                    <RevenueTable />
-                </div>
+                <PayoutTransactionsTable />
             </div>
         </div>
     );
 };
 
-export default AdminRevenuePage;
+export default TeacherPayoutApprovalPage;
