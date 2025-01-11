@@ -71,7 +71,7 @@ export function AppSidebar() {
                             </SidebarMenuItem>
                             <SidebarMenuItem>
                                 <SidebarMenuButton asChild>
-                                    <Link to="/admin/dashboard">
+                                    <Link to="/admin/dashboard/revenue">
                                         <CircleDollarSign />
                                         <span>Revenue</span>
                                     </Link>

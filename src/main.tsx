@@ -43,6 +43,7 @@ import OrdersPage from "./pages/user/Orders/OrdersPage";
 import TeacherDashboardOverview from "./pages/teacher/dashboard/overview/TeacherDashboardOverviewPage";
 import PayoutPage from "./pages/teacher/dashboard/payout/PayoutPage";
 import AdminOverviewPage from "./pages/admin/Overview/AdminOverviewPage";
+import AdminRevenuePage from "./pages/admin/Revenue/RevenuePage";
 
 fetchAccessTokenOnload();
 const appRouter = createBrowserRouter([
@@ -204,6 +205,10 @@ const appRouter = createBrowserRouter([
                             {
                                 index: true,
                                 element: <AdminOverviewPage />,
+                            },
+                            {
+                                path: "/admin/dashboard/revenue",
+                                element: <AdminRevenuePage />,
                             },
                             {
                                 path: "/admin/dashboard/onboard",
