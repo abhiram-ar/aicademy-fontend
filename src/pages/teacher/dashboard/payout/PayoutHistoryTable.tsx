@@ -76,7 +76,11 @@ const PayoutTransactionsTable = () => {
                                                 payout.createdAt
                                             ).toUTCString()}
                                         </TableCell>
-                                        <TableCell>{payout.status}</TableCell>
+                                        <TableCell>
+                                            {payout.status === "cancelled"
+                                                ? "failed"
+                                                : payout.status}
+                                        </TableCell>
                                         <TableCell>{payout.message}</TableCell>
                                         <TableCell
                                             className={`font-semibold ${
@@ -87,8 +91,10 @@ const PayoutTransactionsTable = () => {
                                                 payout.status === "deposited" &&
                                                 "text-green-600"
                                             } ${
-                                                payout.status === "failed" &&
-                                                "text-red-600"
+                                                payout.status === "failed" ||
+                                                (payout.status ===
+                                                    "cancelled" &&
+                                                    "text-red-600")
                                             }`}
                                         >
                                             {payout.amount.toLocaleString(
