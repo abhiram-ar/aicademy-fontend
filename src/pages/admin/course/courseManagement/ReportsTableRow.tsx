@@ -1,6 +1,6 @@
 import { TableBody, TableCell, TableRow } from "@/components/ui/table";
 import { Ellipsis, ShieldAlert } from "lucide-react";
-import React, { useEffect } from "react";
+import React from "react";
 import {
     DropdownMenu,
     DropdownMenuContent,
@@ -23,24 +23,6 @@ export interface ICoupon {
 }
 
 type Props = {
-    // filter: {
-    //     search: string;
-    //     page: number;
-    //     limit: number;
-    // };
-    // setFilter: React.Dispatch<
-    //     React.SetStateAction<{
-    //         search: string;
-    //         page: number;
-    //         limit: number;
-    //     }>
-    // >;
-    // setMetadata: React.Dispatch<
-    //     React.SetStateAction<{
-    //         data: boolean;
-    //         totalPages: number;
-    //     }>
-    // >;
     data?: {
         _id: string;
         courseName: string;
@@ -80,7 +62,12 @@ const CoureManagementTableBody: React.FC<Props> = ({ data }) => {
                         <TableCell>{report.status}</TableCell>
                         <TableCell>{report.unitsSold}</TableCell>
 
-                        <TableCell>{report.totalRevenue}</TableCell>
+                        <TableCell>
+                            {report.totalRevenue.toLocaleString("en-IN", {
+                                style: "currency",
+                                currency: "INR",
+                            })}
+                        </TableCell>
                         <TableCell>{report.issuesCount}</TableCell>
 
                         <TableCell>
@@ -98,15 +85,7 @@ const CoureManagementTableBody: React.FC<Props> = ({ data }) => {
                                         Actions
                                     </DropdownMenuLabel>
                                     <DropdownMenuItem className="bg-white hover:bg-slate-400 border-0 py-0">
-                                        <button
-                                            onClick={() =>
-                                                handleReportStateUpdate(
-                                                    report._id,
-                                                    "resolved"
-                                                )
-                                            }
-                                            className=" py-1 px-2"
-                                        >
+                                        <button className=" py-1 px-2">
                                             Mark as Resolved
                                         </button>
                                     </DropdownMenuItem>
