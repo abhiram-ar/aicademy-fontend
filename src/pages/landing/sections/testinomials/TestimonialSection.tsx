@@ -1,4 +1,3 @@
-import React from "react";
 import testimoryUser1 from "@/assets/t1.png";
 import testimoryUser2 from "@/assets/t2.png";
 import testimoryUser3 from "@/assets/t3.png";
@@ -47,7 +46,7 @@ const testimonials: { message: string; profileImg: string; user: string }[] = [
 
 const TestimonialSection = () => {
     return (
-        <div className=" mx-10 lg:mx-60   py-16 font-publicSans border border-red-400">
+        <div className=" mx-10 lg:mx-60  py-16 font-publicSans">
             {" "}
             <div className="w-fit mx-auto">
                 <h3 className="text-4xl text-center font-bold">

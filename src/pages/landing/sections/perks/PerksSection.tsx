@@ -4,6 +4,7 @@ import certificationArt from "./../../../../assets/certificationArt.png";
 import AIChatExample from "./../../../../assets/AIConvExample.png";
 import afforfablePricingArt from "./../../../../assets/AffrodablePricingArt.png";
 import { Button } from "@/components/ui/button";
+import { Link } from "react-router-dom";
 
 const PerksSection = () => {
     const primaryPerks: {
@@ -36,7 +37,7 @@ const PerksSection = () => {
     ];
 
     return (
-        <div className=" mx-10 lg:mx-60   py-16 font-publicSans border border-red-400">
+        <div className=" mx-10 lg:mx-60   py-16 font-publicSans ">
             <div className="w-fit mx-auto">
                 <h3 className="text-4xl text-center font-bold">
                     Your Gateway to Smarter Learning
@@ -145,12 +146,14 @@ const PerksSection = () => {
                         <br /> Unlock unlimited learning without breaking the
                         bank
                     </p>
-                    <Button
-                        size="lg"
-                        className="text-darkText bg-[#2c312b] mt-5"
-                    >
-                        Explore Pricing
-                    </Button>
+                    <Link to="/explore">
+                        <Button
+                            size="lg"
+                            className="text-darkText bg-[#2c312b] mt-5"
+                        >
+                            Explore course
+                        </Button>
+                    </Link>
                 </div>
             </div>
         </div>
