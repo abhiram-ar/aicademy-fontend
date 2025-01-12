@@ -14,6 +14,7 @@ import {
     useGetCartQuery,
     useRemoveFromCartMutation,
 } from "../cart/cartApiSlice";
+import { useGetUserBoughtCourseListQuery } from "../myLearning/myLearningApiSlice";
 
 export interface IChapter {
     chapterTitle: string;
@@ -59,6 +60,11 @@ const FullCouseDetalsPage = () => {
     const { data } = useGetFullCoursePublicDetailsQuery({
         courseId: id,
     });
+
+    const { data: userBoughtList } = useGetUserBoughtCourseListQuery(
+        {},
+        { skip: !user }
+    );
 
     const { data: cartInfo } = useGetCartQuery(undefined, { skip: !user });
     const [addToCart] = useAddToCartMutation();
@@ -109,7 +115,7 @@ const FullCouseDetalsPage = () => {
             <div className="w-full h-screen flex justify-center items-center">
                 <HashLoader color="#fde047" />
             </div>
-        )
+        );
 
     return (
         <div>
@@ -287,33 +293,49 @@ const FullCouseDetalsPage = () => {
                             {/* add to cart and wishlist */}
                             <div className="flex gap-5 my-5">
                                 {user &&
-                                cartInfo &&
-                                cartInfo.cart.find(
+                                userBoughtList &&
+                                userBoughtList.boughtCourseList.find(
                                     (course: ICourse) => course._id === id
                                 ) ? (
                                     <Button
                                         className="bg-[#fd9745] w-full py-7 px-5 font-semibold text-xl"
                                         size="lg"
-                                        onClick={handleRemoveFromCart}
                                     >
-                                        Remove from cart
+                                        Go to course
                                     </Button>
                                 ) : (
-                                    <Button
-                                        className="bg-[#ffdc58] w-full p-7 font-semibold text-xl"
-                                        size="lg"
-                                        onClick={handleAddToCart}
-                                    >
-                                        Add to cart
-                                    </Button>
-                                )}
+                                    <>
+                                        {user &&
+                                        cartInfo &&
+                                        cartInfo.cart.find(
+                                            (course: ICourse) =>
+                                                course._id === id
+                                        ) ? (
+                                            <Button
+                                                className="bg-[#fd9745] w-full py-7 px-5 font-semibold text-xl"
+                                                size="lg"
+                                                onClick={handleRemoveFromCart}
+                                            >
+                                                Remove from cart
+                                            </Button>
+                                        ) : (
+                                            <Button
+                                                className="bg-[#ffdc58] w-full p-7 font-semibold text-xl"
+                                                size="lg"
+                                                onClick={handleAddToCart}
+                                            >
+                                                Add to cart
+                                            </Button>
+                                        )}
 
-                                <Button
-                                    size="lg"
-                                    className="bg-zinc-100 p-7 hover:bg-[#fd6182]"
-                                >
-                                    <Heart className="fill-black" />
-                                </Button>
+                                        <Button
+                                            size="lg"
+                                            className="bg-zinc-100 p-7 hover:bg-[#fd6182]"
+                                        >
+                                            <Heart className="fill-black" />
+                                        </Button>
+                                    </>
+                                )}
                             </div>
                         </div>
                     </div>
