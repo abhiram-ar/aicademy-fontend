@@ -4,6 +4,7 @@ import certificationArt from "./../../../../assets/certificationArt.png";
 import AIChatExample from "./../../../../assets/AIConvExample.png";
 import afforfablePricingArt from "./../../../../assets/AffrodablePricingArt.png";
 import { Button } from "@/components/ui/button";
+import { Link } from "react-router-dom";
 
 const PerksSection = () => {
     const primaryPerks: {
@@ -145,12 +146,14 @@ const PerksSection = () => {
                         <br /> Unlock unlimited learning without breaking the
                         bank
                     </p>
-                    <Button
-                        size="lg"
-                        className="text-darkText bg-[#2c312b] mt-5"
-                    >
-                        Explore Pricing
-                    </Button>
+                    <Link to="/explore">
+                        <Button
+                            size="lg"
+                            className="text-darkText bg-[#2c312b] mt-5"
+                        >
+                            Explore course
+                        </Button>
+                    </Link>
                 </div>
             </div>
         </div>
