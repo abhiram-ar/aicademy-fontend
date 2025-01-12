@@ -49,6 +49,7 @@ const baseQuerywithReauth: BaseQueryFn<
             result = await basequery(args, api, extraOptions);
         } else {
             //logout if refresh fails
+            console.warn("jwt refresh expired/invalid. Loggging out....");
             api.dispatch(logout());
         }
     }
