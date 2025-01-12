@@ -52,6 +52,14 @@ const cartApiSlice = apiSlice.injectEndpoints({
             }),
             invalidatesTags: ["cart"],
         }),
+        moveToWishlist: builder.mutation({
+            query: (data) => ({
+                url: "/api/user/cart/move-to-wishlist",
+                method: "POST",
+                body: data,
+            }),
+            invalidatesTags: ["cart", "wishlist"],
+        }),
     }),
 });
 
@@ -63,4 +71,5 @@ export const {
     useVerifyPaymentandCheckoutMutation,
     useApplyCouponMutation,
     useRemoveCouponFromCartMutation,
+    useMoveToWishlistMutation,
 } = cartApiSlice;

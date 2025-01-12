@@ -1,5 +1,9 @@
 import MainNavbar from "@/layout/MainNavbar";
-import { useGetCartQuery, useRemoveFromCartMutation } from "./cartApiSlice";
+import {
+    useGetCartQuery,
+    useMoveToWishlistMutation,
+    useRemoveFromCartMutation,
+} from "./cartApiSlice";
 import CourseCardLong from "../explore/CourseCardLong";
 import { useSelector } from "react-redux";
 import { RootState } from "@/redux/store";
@@ -16,6 +20,7 @@ const CartPage = () => {
         skip: !user,
     });
     const [removeFromCart] = useRemoveFromCartMutation();
+    const [moveToWishlist] = useMoveToWishlistMutation();
 
     const handleRemoveFromCart = async (courseId: string) => {
         try {
@@ -24,6 +29,16 @@ const CartPage = () => {
             }).unwrap();
         } catch (error) {
             console.error(`error while removing cart`, error);
+        }
+    };
+
+    const handleMoveToWishList = async (courseId: string) => {
+        try {
+            await moveToWishlist({
+                courseId,
+            }).unwrap();
+        } catch (error) {
+            console.error(`error while moving cart`, error);
         }
     };
 
@@ -66,7 +81,14 @@ const CartPage = () => {
                                             </div>
                                         </Link>
                                         <div className="flex justify-end gap-5 -mt-3 p-2 border border-t-0 border-slate-300 rounded-b-base text-zinc-600 px-5 font-medium relative z-10">
-                                            <button className="hover:underline hover:text-zinc-800">
+                                            <button
+                                                onClick={() =>
+                                                    handleMoveToWishList(
+                                                        course._id
+                                                    )
+                                                }
+                                                className="hover:underline hover:text-zinc-800"
+                                            >
                                                 Move to wishlist
                                             </button>
                                             <button
