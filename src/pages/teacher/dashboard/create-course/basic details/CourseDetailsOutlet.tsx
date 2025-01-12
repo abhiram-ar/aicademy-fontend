@@ -29,6 +29,41 @@ type FormData = {
     demoVideoKey: string;
 };
 
+const categories: { displayName: string; value: string }[] = [
+    {
+        displayName: "Web development",
+        value: "webDevelopment",
+    },
+    {
+        displayName: "AI/ML",
+        value: "aiml",
+    },
+    {
+        displayName: "Data science",
+        value: "datascience",
+    },
+    {
+        displayName: "Database",
+        value: "database",
+    },
+    {
+        displayName: "Personal deveopment",
+        value: "personalDevelopment",
+    },
+    {
+        displayName: "Health and Fitness",
+        value: "healthAndWellness",
+    },
+    {
+        displayName: "Editing",
+        value: "editing",
+    },
+    {
+        displayName: "other",
+        value: "other",
+    },
+];
+
 const CourseDetailsOutlet: React.FC = () => {
     const courseDetails: ICourse = useOutletContext();
     const { id } = useParams();
@@ -353,19 +388,11 @@ const CourseDetailsOutlet: React.FC = () => {
                             <option value="" disabled>
                                 Select a category
                             </option>
-                            <option value="softwareDevelopment">
-                                Sofware Development
-                            </option>
-                            <option value="AIandMachineLearning">
-                                AI and Machine Learning
-                            </option>
-                            <option value="Pychology">Pychology</option>
-                            <option value="healthAndWellness">
-                                Health and Wellness
-                            </option>
-                            <option value="personalDevelopment">
-                                Personal Development
-                            </option>
+                            {categories.map((category) => (
+                                <option value={category.value}>
+                                    {category.displayName}
+                                </option>
+                            ))}
                         </select>
                     </div>
 
