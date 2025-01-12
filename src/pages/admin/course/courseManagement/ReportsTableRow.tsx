@@ -9,6 +9,7 @@ import {
     DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
 import { useUpdateCourseStateAdminMutation } from "./CourseManagementApiSlice";
+import { Link } from "react-router-dom";
 
 export interface ICoupon {
     _id: string;
@@ -74,7 +75,14 @@ const CoureManagementTableBody: React.FC<Props> = ({ data }) => {
                             "bg-red-300 hover:bg-red-400"
                         }`}
                     >
-                        <TableCell>{report.courseName}</TableCell>
+                        <TableCell className="underline">
+                            <Link
+                                to={`/explore/course/${report._id}`}
+                                target="_blank"
+                            >
+                                {report.courseName}
+                            </Link>
+                        </TableCell>
                         <TableCell>{report.teacherName}</TableCell>
                         <TableCell>{report.status}</TableCell>
                         <TableCell>{report.unitsSold}</TableCell>
@@ -127,6 +135,15 @@ const CoureManagementTableBody: React.FC<Props> = ({ data }) => {
                                                 Unblock
                                             </button>
                                         )}
+                                    </DropdownMenuItem>
+                                    <DropdownMenuItem className="bg-white hover:bg-slate-400 border-0 py-0">
+                                        <Link
+                                            to={`/explore/course/${report._id}`}
+                                            target="_blank"
+                                            className=" py-1 px-2"
+                                        >
+                                            View Course
+                                        </Link>
                                     </DropdownMenuItem>
                                 </DropdownMenuContent>
                             </DropdownMenu>
