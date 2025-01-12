@@ -1,4 +1,5 @@
 import {
+    Book,
     ChevronUp,
     CircleDollarSign,
     HandCoins,
@@ -136,6 +137,14 @@ export function AppSidebar() {
                     </SidebarGroupLabel>
                     <SidebarGroupContent>
                         <SidebarMenu>
+                            <SidebarMenuItem>
+                                <SidebarMenuButton asChild>
+                                    <Link to="/admin/dashboard/course/management">
+                                        <Book />
+                                        <span>Course Management</span>
+                                    </Link>
+                                </SidebarMenuButton>
+                            </SidebarMenuItem>
                             <SidebarMenuItem>
                                 <SidebarMenuButton asChild>
                                     <Link to="/admin/dashboard/course/coupon">

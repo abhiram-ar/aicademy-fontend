@@ -45,6 +45,7 @@ import PayoutPage from "./pages/teacher/dashboard/payout/PayoutPage";
 import AdminOverviewPage from "./pages/admin/Overview/AdminOverviewPage";
 import AdminRevenuePage from "./pages/admin/Revenue/RevenuePage";
 import TeacherPayoutApprovalPage from "./pages/admin/Teacher mangement/Payout/TeacherPayoutApprovalPage";
+import CourseManagementPage from "./pages/admin/course/courseManagement/CourseManagementPage";
 
 fetchAccessTokenOnload();
 const appRouter = createBrowserRouter([
@@ -230,6 +231,10 @@ const appRouter = createBrowserRouter([
                             {
                                 path: "/admin/dashboard/course/coupon",
                                 element: <CouponManagementPage />,
+                            },
+                            {
+                                path: "/admin/dashboard/course/management",
+                                element: <CourseManagementPage />,
                             },
                         ],
                     },
