@@ -15,6 +15,11 @@ import {
     useRemoveFromCartMutation,
 } from "../cart/cartApiSlice";
 import { useGetUserBoughtCourseListQuery } from "../myLearning/myLearningApiSlice";
+import {
+    useAddToWishlistMutation,
+    useGetWishlistQuery,
+    useRemoveFromWishlistMutation,
+} from "../wishlist/wishlistApiSlice";
 
 export interface IChapter {
     chapterTitle: string;
@@ -67,8 +72,15 @@ const FullCouseDetalsPage = () => {
     );
 
     const { data: cartInfo } = useGetCartQuery(undefined, { skip: !user });
+    const { data: wislistInfo } = useGetWishlistQuery(undefined, {
+        skip: !user,
+    });
+    console.log("wishlist", wislistInfo);
+
     const [addToCart] = useAddToCartMutation();
     const [removeFromCart] = useRemoveFromCartMutation();
+    const [addToWishlist] = useAddToWishlistMutation();
+    const [removeFromWishlist] = useRemoveFromWishlistMutation();
 
     const fullCourseData: IFullCourseData = data?.fullCourseData;
     const formatDateToYYYYMM = (dateString: string) => {
@@ -107,6 +119,21 @@ const FullCouseDetalsPage = () => {
             console.log(`response`, addTocartResult);
         } catch (error) {
             console.error(`error while removing cart`, error);
+        }
+    };
+
+    const handleAddToWishList = async () => {
+        try {
+            await addToWishlist({ courseId: id }).unwrap();
+        } catch (error) {
+            console.error("error  while adddign to wishlist", error);
+        }
+    };
+    const handleRemoveFromWishlist = async () => {
+        try {
+            await removeFromWishlist({ courseId: id });
+        } catch (error) {
+            console.error("error while removing from wishlist", error);
         }
     };
 
@@ -328,12 +355,42 @@ const FullCouseDetalsPage = () => {
                                             </Button>
                                         )}
 
-                                        <Button
-                                            size="lg"
-                                            className="bg-zinc-100 p-7 hover:bg-[#fd6182]"
-                                        >
-                                            <Heart className="fill-black" />
-                                        </Button>
+                                        {user ? (
+                                            wislistInfo &&
+                                            wislistInfo.wishlist.find(
+                                                (course: ICourse) =>
+                                                    course._id === id
+                                            ) ? (
+                                                <Button
+                                                    onClick={
+                                                        handleRemoveFromWishlist
+                                                    }
+                                                    size="lg"
+                                                    variant="reverse"
+                                                    className="p-7 bg-[#fd6182]"
+                                                >
+                                                    <Heart className="fill-black" />
+                                                </Button>
+                                            ) : (
+                                                <Button
+                                                    onClick={
+                                                        handleAddToWishList
+                                                    }
+                                                    size="lg"
+                                                    className="bg-zinc-100 p-7 hover:bg-[#fd6182]"
+                                                >
+                                                    <Heart className="fill-black" />
+                                                </Button>
+                                            )
+                                        ) : (
+                                            <Button
+                                                onClick={handleAddToWishList}
+                                                size="lg"
+                                                className="bg-zinc-100 p-7 hover:bg-[#fd6182]"
+                                            >
+                                                <Heart className="fill-black" />
+                                            </Button>
+                                        )}
                                     </>
                                 )}
                             </div>

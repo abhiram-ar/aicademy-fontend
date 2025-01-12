@@ -65,6 +65,7 @@ const apiSlice = createApi({
         "draftCourseDetails",
         "draftCourseContent",
         "cart",
+        "wishlist",
         "userDetails",
         "userList",
         "fullCourseList",

@@ -8,6 +8,7 @@ import AddShoppingCartOutlinedIcon from "@mui/icons-material/AddShoppingCartOutl
 import { Link } from "react-router-dom";
 import Checkout from "./Checkout";
 import { Toaster } from "react-hot-toast";
+import Wishlist from "./WishList";
 
 const CartPage = () => {
     const user = useSelector((state: RootState) => state.auth.user);
@@ -104,7 +105,10 @@ const CartPage = () => {
                     </div>
 
                     {/* wishlist container */}
-                    <div></div>
+                    <hr className="my-10" />
+                    <div>
+                        <Wishlist />
+                    </div>
                 </div>
             </div>
         </div>
