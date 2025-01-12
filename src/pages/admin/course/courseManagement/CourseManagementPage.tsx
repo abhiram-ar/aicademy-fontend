@@ -16,7 +16,7 @@ const CourseManagementPage = () => {
     const [filter, setFilter] = useState({
         search: "",
         page: 1,
-        limit: 5,
+        limit: 10,
     });
     const { data: query } = useGetAllCourseOverviewReportQuery(filter);
     return (

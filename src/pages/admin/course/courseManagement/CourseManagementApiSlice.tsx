@@ -9,9 +9,9 @@ const courseManagementApiSlice = apiSlice.injectEndpoints({
             },
             providesTags: ["courseOverviewReportList"],
         }),
-        takedonwCousreAdmin: builder.mutation({
+        updateCourseStateAdmin: builder.mutation({
             query: (data) => ({
-                url: "/api/admin/course/takedown",
+                url: "/api/admin/course/state",
                 method: "PATCH",
                 body: data,
                 // keepalive: false,
@@ -23,5 +23,5 @@ const courseManagementApiSlice = apiSlice.injectEndpoints({
 
 export const {
     useGetAllCourseOverviewReportQuery,
-    useTakedonwCousreAdminMutation,
+    useUpdateCourseStateAdminMutation,
 } = courseManagementApiSlice;

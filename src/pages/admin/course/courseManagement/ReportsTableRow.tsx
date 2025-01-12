@@ -8,7 +8,7 @@ import {
     DropdownMenuLabel,
     DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
-import { useTakedonwCousreAdminMutation } from "./CourseManagementApiSlice";
+import { useUpdateCourseStateAdminMutation } from "./CourseManagementApiSlice";
 
 export interface ICoupon {
     _id: string;
@@ -27,7 +27,7 @@ type Props = {
     data?: {
         _id: string;
         courseName: string;
-        status: "draft" | "published" | "unpublished";
+        status: "draft" | "published" | "blocked";
         teacherName: string;
         unitsSold: number;
         totalRevenue: number;
@@ -36,11 +36,14 @@ type Props = {
 };
 
 const CoureManagementTableBody: React.FC<Props> = ({ data }) => {
-    const [takedownCourse] = useTakedonwCousreAdminMutation();
+    const [updateCourseState] = useUpdateCourseStateAdminMutation();
 
-    const handleCourseTakedown = async (courseId: string) => {
+    const handleCourseStateUpdate = async (
+        courseId: string,
+        newState: string
+    ) => {
         try {
-            await takedownCourse({ courseId });
+            await updateCourseState({ courseId, newState });
         } catch (error) {
             console.error("error while cousre takedown", error);
         }
@@ -67,7 +70,7 @@ const CoureManagementTableBody: React.FC<Props> = ({ data }) => {
                     <TableRow
                         key={report._id}
                         className={`w-full hover:bg-slate-300 ${
-                            report.status === "unpublished" &&
+                            report.status === "blocked" &&
                             "bg-red-300 hover:bg-red-400"
                         }`}
                     >
@@ -102,8 +105,9 @@ const CoureManagementTableBody: React.FC<Props> = ({ data }) => {
                                         {report.status === "published" ? (
                                             <button
                                                 onClick={() =>
-                                                    handleCourseTakedown(
-                                                        report._id
+                                                    handleCourseStateUpdate(
+                                                        report._id,
+                                                        "blocked"
                                                     )
                                                 }
                                                 className=" py-1 px-2"
@@ -111,7 +115,17 @@ const CoureManagementTableBody: React.FC<Props> = ({ data }) => {
                                                 Take down
                                             </button>
                                         ) : (
-                                            <></> // add conntroller to publish
+                                            <button
+                                                onClick={() =>
+                                                    handleCourseStateUpdate(
+                                                        report._id,
+                                                        "published"
+                                                    )
+                                                }
+                                                className=" py-1 px-2"
+                                            >
+                                                Unblock
+                                            </button>
                                         )}
                                     </DropdownMenuItem>
                                 </DropdownMenuContent>
