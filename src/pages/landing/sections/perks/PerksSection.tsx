@@ -36,7 +36,7 @@ const PerksSection = () => {
     ];
 
     return (
-        <div className=" mx-10 lg:mx-60   py-16 font-publicSans border border-red-400">
+        <div className=" mx-10 lg:mx-60   py-16 font-publicSans ">
             <div className="w-fit mx-auto">
                 <h3 className="text-4xl text-center font-bold">
                     Your Gateway to Smarter Learning

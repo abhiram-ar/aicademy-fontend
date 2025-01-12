@@ -1,4 +1,3 @@
-import React from "react";
 import facebook from "@/assets/socials/facebook.png";
 import instagram from "@/assets/socials/instagram.png";
 import twitter from "@/assets/socials/twitter.png";
