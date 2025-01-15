@@ -20,6 +20,20 @@ type IReview = {
 };
 
 const ReviewCard: React.FC<{ review: IReview }> = ({ review }) => {
+    const formatDate = (dateString: string) => {
+        const now = Date.now();
+        const date = new Date(dateString);
+        if (now - date.getTime() < 1000 * 60 * 60 * 24) return "today";
+        if (now - date.getTime() < 1000 * 60 * 60 * 24 * 2) return "yesterday";
+        if (now - date.getTime() < 1000 * 60 * 60 * 24 * 7) return "this week";
+        if (now - date.getTime() < 2592000000) return "this month";
+        if (now - date.getMilliseconds() < 216000000) return "a month ago";
+
+        const year = date.getFullYear();
+        const month = String(date.getMonth() + 1);
+        return `${month}/${year}`;
+    };
+
     return (
         <div className="border-2 border-black p-5 font-publicSans rounded-base bg-white/90 min-w-60">
             {/* header */}
@@ -38,7 +52,7 @@ const ReviewCard: React.FC<{ review: IReview }> = ({ review }) => {
                             " " +
                             review.createdBy.lastName}
                     </p>
-                    <div className="flex">
+                    <div className="flex items-center">
                         {Array.from({
                             length: 5,
                         }).map((_, index) => (
@@ -49,9 +63,12 @@ const ReviewCard: React.FC<{ review: IReview }> = ({ review }) => {
                                         "fill-yellow-300"
                                     }`}
                                 />{" "}
-                                <span></span>
                             </p>
                         ))}
+
+                        <p className="text-zinc-500 font-publicSans text-sm ms-1">
+                            {formatDate(review.updatedAt)}
+                        </p>
                     </div>
                 </div>
             </div>
