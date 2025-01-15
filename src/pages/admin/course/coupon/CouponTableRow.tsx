@@ -102,7 +102,7 @@ const CouponTableBody: React.FC<Props> = ({ filter, setFilter }) => {
                         className={`${
                             couponDetails.isActive
                                 ? "hover:bg-slate-300 "
-                                : "bg-red-300 hover:bg-red-400 text-black/80 hover:text-black "
+                                : "bg-red-200 hover:bg-red-300 text-black/80 hover:text-black "
                         } ${
                             new Date(couponDetails.expiryDate) <= new Date() &&
                             "bg-zinc-400 hover:bg-zinc-400"
