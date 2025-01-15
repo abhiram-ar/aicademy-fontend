@@ -78,7 +78,7 @@ export function NavCourse() {
                                           }  ${
                                               course.courseState ===
                                                   "published" &&
-                                              "bg-green-100 rounded-base hover:bg-green-300 "
+                                              ""
                                           } ${
                                               course.courseState ===
                                                   "blocked" &&
