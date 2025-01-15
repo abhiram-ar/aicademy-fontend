@@ -19,7 +19,7 @@ export interface ICoupon {
     description: string;
     isActive: boolean;
     discount: number;
-    expiryDate: Date;
+    expiryDate: string;
     usageLimit: number;
     usedBy: string[] | number[];
     maxDiscountAmount: number;
@@ -52,7 +52,7 @@ const CouponTableBody: React.FC<Props> = ({ filter, setFilter }) => {
     const [updateCouponState] = useUpdateCouponStateAdminMutation();
     const currentData = data;
 
-    console.log("renders");
+    console.log(currentData);
 
     useEffect(() => {
         if (data) {
@@ -102,70 +102,79 @@ const CouponTableBody: React.FC<Props> = ({ filter, setFilter }) => {
                         className={`${
                             couponDetails.isActive
                                 ? "hover:bg-slate-300 "
-                                : "bg-zinc-300 hover:bg-zinc-400 text-black/80 hover:text-black "
-                        } `}
+                                : "bg-red-300 hover:bg-red-400 text-black/80 hover:text-black "
+                        } ${
+                            new Date(couponDetails.expiryDate) <= new Date() &&
+                            "bg-zinc-400 hover:bg-zinc-400"
+                        }`}
                     >
                         <TableCell>{couponDetails.code}</TableCell>
                         <TableCell>{couponDetails.description}</TableCell>
                         <TableCell>
-                            {couponDetails.isActive ? (
-                                <CircleCheck className="fill-green-300" />
+                            {!(
+                                new Date(couponDetails.expiryDate) <= new Date()
+                            ) ? (
+                                <>
+                                    {couponDetails.isActive ? (
+                                        <CircleCheck className="fill-green-300" />
+                                    ) : (
+                                        <CircleX className="fill-red-300" />
+                                    )}
+                                </>
                             ) : (
-                                <CircleX className="fill-red-300" />
+                                <p>Expired</p>
                             )}
                         </TableCell>
-                        <TableCell>{couponDetails.usedBy.length}</TableCell>
+                        <TableCell>{couponDetails.usedBy?.length}</TableCell>
 
                         <TableCell>
-                            <DropdownMenu>
-                                <DropdownMenuTrigger asChild>
-                                    <button className="border border-zinc-400 h-8 w-8 p-0 bg-slate-300 flex justify-center items-center rounded-base hover:bg-slate-400 focus:outline-none">
-                                        <Ellipsis className="size-4" />
-                                    </button>
-                                </DropdownMenuTrigger>
-                                <DropdownMenuContent
-                                    align="end"
-                                    className="bg-white px-2"
-                                >
-                                    <DropdownMenuLabel>
-                                        Actions
-                                    </DropdownMenuLabel>
-                                    <DropdownMenuItem className="bg-white hover:bg-slate-400 border-0 px-3 ">
-                                        View full Details
-                                    </DropdownMenuItem>
+                            {!(
+                                new Date(couponDetails.expiryDate) <= new Date()
+                            ) && (
+                                <DropdownMenu>
+                                    <DropdownMenuTrigger asChild>
+                                        <button className="border border-zinc-400 h-8 w-8 p-0 bg-slate-300 flex justify-center items-center rounded-base hover:bg-slate-400 focus:outline-none">
+                                            <Ellipsis className="size-4" />
+                                        </button>
+                                    </DropdownMenuTrigger>
+                                    <DropdownMenuContent
+                                        align="end"
+                                        className="bg-white px-2"
+                                    >
+                                        <DropdownMenuLabel>
+                                            Actions
+                                        </DropdownMenuLabel>
 
-                                    <DropdownMenuItem className="bg-white hover:bg-slate-400 border-0 px-3 ">
-                                        Edit
-                                    </DropdownMenuItem>
-                                    <DropdownMenuItem className="bg-white hover:bg-slate-400 border-0 py-0">
-                                        {couponDetails.isActive ? (
-                                            <button
-                                                className="w-full h-full text-left py-1"
-                                                onClick={() =>
-                                                    handleCouponStateUpdate(
-                                                        couponDetails._id,
-                                                        false
-                                                    )
-                                                }
-                                            >
-                                                Deactivate
-                                            </button>
-                                        ) : (
-                                            <button
-                                                className=" w-full h-full text-left py-1"
-                                                onClick={() =>
-                                                    handleCouponStateUpdate(
-                                                        couponDetails._id,
-                                                        true
-                                                    )
-                                                }
-                                            >
-                                                Activate
-                                            </button>
-                                        )}
-                                    </DropdownMenuItem>
-                                </DropdownMenuContent>
-                            </DropdownMenu>
+                                        <DropdownMenuItem className="bg-white hover:bg-slate-400 border-0 py-0">
+                                            {couponDetails.isActive ? (
+                                                <button
+                                                    className="w-full h-full text-left py-1"
+                                                    onClick={() =>
+                                                        handleCouponStateUpdate(
+                                                            couponDetails._id,
+                                                            false
+                                                        )
+                                                    }
+                                                >
+                                                    Deactivate
+                                                </button>
+                                            ) : (
+                                                <button
+                                                    className=" w-full h-full text-left py-1"
+                                                    onClick={() =>
+                                                        handleCouponStateUpdate(
+                                                            couponDetails._id,
+                                                            true
+                                                        )
+                                                    }
+                                                >
+                                                    Activate
+                                                </button>
+                                            )}
+                                        </DropdownMenuItem>
+                                    </DropdownMenuContent>
+                                </DropdownMenu>
+                            )}
                         </TableCell>
                     </TableRow>
                 ))}
