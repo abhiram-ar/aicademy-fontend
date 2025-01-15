@@ -9,6 +9,7 @@ import {
     // PaginationNext,
     // PaginationPrevious,
 } from "@/components/ui/pagination";
+import { MessageCircleWarning } from "lucide-react";
 
 type IReview = {
     _id: string;
@@ -31,12 +32,13 @@ const Reviews: React.FC<{ courseId: string }> = ({ courseId }) => {
     const [page, setPage] = useState(1);
     const { data } = useGetCourseReviewListQuery({ page, limit: 8, courseId });
     return (
-        <div>
-            <h3 className="bg-zinc-300 w-fit px-2 rounded-base font-publicSans font-medium">
+        <div className="bg-zinc-100 px-6 py-6 border border-black rounded-base">
+            <h3 className=" w-fit px-2 rounded-base font-publicSans font-semibold">
                 Reviews
             </h3>
             {data && data.length === 0 && (
-                <div className="bg-zinc-200 p-5 text-center font-publicSans mt-2 rounded-base">
+                <div className="bg-zinc-200 p-5 text-center font-publicSans mt-2 flex justify-center gap-2 text-zinc-800  rounded-base">
+                    <MessageCircleWarning />
                     <p>No reviews yet!</p>
                 </div>
             )}
