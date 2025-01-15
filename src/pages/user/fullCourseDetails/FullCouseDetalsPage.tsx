@@ -21,6 +21,7 @@ import {
     useRemoveFromWishlistMutation,
 } from "../wishlist/wishlistApiSlice";
 import Reviews from "./Reviews";
+import MoreCourses from "./MoreCourses";
 
 export interface IChapter {
     chapterTitle: string;
@@ -48,7 +49,7 @@ interface IFullCourseData {
     prerequisites: string[];
     demoVideos: string;
     chapters: IChapter[];
-    category: string;
+    category?: string;
     estimatedPrice: number;
     level: string;
     price: number;
@@ -401,6 +402,12 @@ const FullCouseDetalsPage = () => {
 
                 <div className="w-9/12 mx-auto rounded-base mt-10">
                     <Reviews courseId={id as string} />
+                </div>
+                <div className="w-9/12 mx-auto rounded-base mt-10">
+                    <MoreCourses
+                        category={fullCourseData?.category}
+                        currentCourseId={fullCourseData._id}
+                    />
                 </div>
             </div>
         </div>
