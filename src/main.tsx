@@ -92,6 +92,7 @@ const appRouter = createBrowserRouter([
                 path: "/user",
                 loader: () => authLoader("user"),
                 hydrateFallbackElement: <p>loading...</p>,
+                element: <StandardLayout />,
                 children: [
                     {
                         path: "/user/cart",

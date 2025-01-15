@@ -1,4 +1,3 @@
-import MainNavbar from "@/layout/MainNavbar";
 import {
     useGetCartQuery,
     useMoveToWishlistMutation,
@@ -54,7 +53,6 @@ const CartPage = () => {
 
     return (
         <div>
-            <MainNavbar query="" />
             <Toaster />
             <div className="w-full min-h-screen bg-[#fffbee] py-10">
                 <div className="w-9/12 mx-auto">
