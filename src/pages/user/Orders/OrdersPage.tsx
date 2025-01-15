@@ -1,4 +1,3 @@
-import NavbarOnlyLogo from "@/components/extended/NavbarOnlyLogo";
 import SingleOrder from "./SingleOrder";
 import { useGetUserPurchaseHistoryQuery } from "./OrderPageApiSlice";
 import { ICourse } from "../explore/ExplorePage";
@@ -25,7 +24,7 @@ const OrdersPage = () => {
     console.log(data);
     return (
         <div>
-            <NavbarOnlyLogo />
+           
             <div className="w-full min-h-screen bg-paperYellow py-10">
                 <div className="w-9/12 mx-auto">
                     <h2 className="text-xl font-medium bg-zinc-300 w-fit px-2 rounded-base">
