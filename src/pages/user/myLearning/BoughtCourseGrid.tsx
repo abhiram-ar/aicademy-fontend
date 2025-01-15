@@ -4,7 +4,7 @@ import { useGetUserBoughtCourseListQuery } from "./myLearningApiSlice";
 const BoughtCourseGrid = () => {
     const { data } = useGetUserBoughtCourseListQuery({});
     return (
-        <div className="grid grid-cols-4 border border-red-400 gap-5">
+        <div className="grid grid-cols-4 gap-5">
             {data &&
                 data.boughtCourseList.map(
                     (course: {
