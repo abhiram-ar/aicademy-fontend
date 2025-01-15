@@ -46,6 +46,7 @@ import AdminOverviewPage from "./pages/admin/Overview/AdminOverviewPage";
 import AdminRevenuePage from "./pages/admin/Revenue/RevenuePage";
 import TeacherPayoutApprovalPage from "./pages/admin/Teacher mangement/Payout/TeacherPayoutApprovalPage";
 import CourseManagementPage from "./pages/admin/course/courseManagement/CourseManagementPage";
+import StandardLayout from "./layout/StandardLayout";
 
 fetchAccessTokenOnload();
 const appRouter = createBrowserRouter([
@@ -55,7 +56,21 @@ const appRouter = createBrowserRouter([
         children: [
             {
                 path: "/",
-                element: <LandingPage />,
+                element: <StandardLayout />,
+                children: [
+                    {
+                        index: true,
+                        element: <LandingPage />,
+                    },
+                    {
+                        path: "/explore",
+                        element: <ExplorePage />,
+                    },
+                    {
+                        path: "/explore/course/:id",
+                        element: <FullCouseDetalsPage />,
+                    },
+                ],
             },
             {
                 path: "/login",
@@ -68,14 +83,6 @@ const appRouter = createBrowserRouter([
             {
                 path: "/user/forgotPassword",
                 element: <ForgotPassowordPageUser />,
-            },
-            {
-                path: "/explore",
-                element: <ExplorePage />,
-            },
-            {
-                path: "/explore/course/:id",
-                element: <FullCouseDetalsPage />,
             },
             {
                 path: "/reset-password",

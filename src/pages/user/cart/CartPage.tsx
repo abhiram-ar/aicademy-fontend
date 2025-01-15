@@ -57,7 +57,7 @@ const CartPage = () => {
             <MainNavbar query="" />
             <Toaster />
             <div className="w-full min-h-screen bg-[#fffbee] py-10">
-                <div className="w-9/12 border mx-auto">
+                <div className="w-9/12 mx-auto">
                     <h2 className="font-semibold text-xl bg-zinc-300 rounded-base w-fit px-2">
                         cart
                     </h2>
@@ -127,7 +127,7 @@ const CartPage = () => {
                     </div>
 
                     {/* wishlist container */}
-                    <hr className="my-10" />
+                    <hr className="my-10 border border-black" />
                     <div>
                         <Wishlist />
                     </div>

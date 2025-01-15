@@ -1,4 +1,3 @@
-import MainNavbar from "@/layout/MainNavbar";
 import { Check, Heart, Plus, Star } from "lucide-react";
 import priceBanner from "./../../../assets/priceBanner.png";
 import { Button } from "@/components/ui/button";
@@ -148,8 +147,6 @@ const FullCouseDetalsPage = () => {
 
     return (
         <div>
-            <MainNavbar query="" />
-
             {/* body */}
             <div className="bg-paperYellow w-full min-h-screen py-12">
                 {/* content */}

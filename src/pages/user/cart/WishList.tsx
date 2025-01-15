@@ -6,6 +6,7 @@ import {
     useRemoveFromWishlistMutation,
 } from "../wishlist/wishlistApiSlice";
 import { ICourse } from "../explore/ExplorePage";
+import { Heart } from "lucide-react";
 
 const Wishlist = () => {
     const { data } = useGetWishlistQuery({});
@@ -72,7 +73,13 @@ const Wishlist = () => {
                             </div>
                         ))
                     ) : (
-                        <></>
+                        <div className="bg-slate-200 p-10 flex flex-col gap-2 justify-center items-center rounded-base text-zinc-800">
+                            <Heart className="fill-red-300" fontSize="large" />
+                            <p className="font-medium text-xl">
+                                Wishlist is empty!
+                            </p>{" "}
+                            {/* <p className="text-zinc-500 underline">add course to cart</p> */}
+                        </div>
                     )}
                 </div>
             </div>
