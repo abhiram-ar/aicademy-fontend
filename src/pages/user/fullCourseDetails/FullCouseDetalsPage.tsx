@@ -20,6 +20,7 @@ import {
     useGetWishlistQuery,
     useRemoveFromWishlistMutation,
 } from "../wishlist/wishlistApiSlice";
+import Reviews from "./Reviews";
 
 export interface IChapter {
     chapterTitle: string;
@@ -396,6 +397,10 @@ const FullCouseDetalsPage = () => {
                             </div>
                         </div>
                     </div>
+                </div>
+
+                <div className="w-9/12 mx-auto rounded-base mt-10">
+                    <Reviews courseId={id as string} />
                 </div>
             </div>
         </div>
