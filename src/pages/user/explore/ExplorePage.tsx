@@ -1,4 +1,3 @@
-import MainNavbar from "@/layout/MainNavbar";
 import FIlterCategoryNav from "./FIlterCategoryNav";
 import FilterSidebar from "./FilterSidebar";
 import SortDropDown from "./SortDropDown";
@@ -51,11 +50,10 @@ const ExplorePage = () => {
 
     return (
         <div>
-            <MainNavbar query={filter.search} setFilter={setFilter} />
             <FIlterCategoryNav filter={filter} setFilter={setFilter} />
 
             {/* paper bg */}
-            <div className="bg-[#fffbee] w-full min-h-screen pt-10">
+            <div className="bg-[#fffbee] w-full min-h-screen pt-10 pb-14">
                 <div className="w-9/12  mx-auto grid grid-cols-12">
                     {/* left section  */}
                     <div className="col-span-3">
@@ -88,7 +86,7 @@ const ExplorePage = () => {
                                 courseCardDetails.courses.length === 0 && (
                                     <div className="flex justify-center bg-white p-10 border border-zinc-400 rounded-base">
                                         <div className="flex flex-col justify-center items-center hue-rotate-180">
-                                            <img src={nothingFound}  />
+                                            <img src={nothingFound} />
                                             <p className="text font-medium font-publicSans text-zinc-700 mt-2">
                                                 No course found!
                                             </p>

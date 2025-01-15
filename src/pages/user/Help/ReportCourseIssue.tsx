@@ -1,4 +1,3 @@
-import NavbarOnlyLogo from "@/components/extended/NavbarOnlyLogo";
 import { useForm } from "react-hook-form";
 import { useGetUserBoughtCourseListQuery } from "../myLearning/myLearningApiSlice";
 import { useReportCourseMutation } from "./ReportPageApiSlice";
@@ -34,13 +33,12 @@ const ReportCourseIssue = () => {
 
     return (
         <div>
-            <NavbarOnlyLogo />
             <Toaster />
 
             {/* body */}
             <div className="bg-paperYellow w-full min-h-screen py-10">
                 {/* content */}
-                <div className="w-9/12 mx-auto border">
+                <div className="w-9/12 mx-auto">
                     <h2 className="text-xl font-semibold bg-zinc-300 w-fit rounded-base px-2">
                         Report an Issue
                     </h2>

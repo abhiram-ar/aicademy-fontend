@@ -1,4 +1,5 @@
 import NavbarOnlyLogo from "@/components/extended/NavbarOnlyLogo";
+import Footer from "@/components/Footer";
 import { logout } from "@/redux/features/auth/authSlice";
 import { useLogoutMutation } from "@/redux/features/auth/userAuthAPIs";
 import { useDispatch } from "react-redux";
@@ -8,7 +9,7 @@ const UserProfileLayout = () => {
     const [logoutApi] = useLogoutMutation();
     const dispatch = useDispatch();
     const navigate = useNavigate();
-    
+
     const handleLogout = async () => {
         console.log(`trying to logout`);
 
@@ -67,6 +68,7 @@ const UserProfileLayout = () => {
                     </div>
                 </div>
             </div>
+            <Footer />
         </div>
     );
 };
