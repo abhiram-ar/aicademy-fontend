@@ -73,7 +73,7 @@ const PublishOutlet = () => {
     const handlePublishCourse = async () => {
         try {
             await publishCourse({ courseId: id }).unwrap();
-            refetch()
+            refetch();
         } catch (error) {
             console.log(`error while publishing coursr`, error);
         }
@@ -82,7 +82,7 @@ const PublishOutlet = () => {
     const handleUnPublishCourse = async () => {
         try {
             await unpublishCourse({ courseId: id }).unwrap();
-            refetch()
+            refetch();
         } catch (error) {
             console.log(`error while unpublishing coursr`, error);
         }
@@ -96,19 +96,28 @@ const PublishOutlet = () => {
                 <div className="w-9/12 mx-auto rounded-base">
                     <div className="bg-slate-200 w-full border-2 border-black rounded-base flex justify-between items-center px-5 py-2 mb-3">
                         <p className="font-medium">Preview</p>
-                        {fullCourseData.courseState === "draft" ? (
+                        {fullCourseData.courseState === "draft" && (
                             <Button
                                 onClick={handlePublishCourse}
                                 className="bg-green-400"
                             >
                                 Publish
                             </Button>
-                        ) : (
+                        )}
+                        {fullCourseData.courseState === "published" && (
                             <Button
                                 onClick={handleUnPublishCourse}
                                 className="bg-red-400"
                             >
                                 unPublish
+                            </Button>
+                        )}
+                        {fullCourseData.courseState === "blocked" && (
+                            <Button
+                                className="bg-red-400 cursor-not-allowed"
+                                variant="noShadow"
+                            >
+                                Course is blocked by platform
                             </Button>
                         )}
                     </div>

@@ -66,15 +66,24 @@ export function NavCourse() {
                           (course: {
                               _id: string;
                               title: string;
-                              courseState:
-                                  | "draft"
-                                  | "published"
-                                  | "unpublished";
+                              courseState: "draft" | "published" | "blocked";
                           }) => (
                               <SidebarMenuItem key={course._id}>
                                   <SidebarMenuButton asChild>
                                       <Link
                                           to={`/teach/course/draft/${course._id}`}
+                                          className={`${
+                                              course.courseState === "draft" &&
+                                              "bg-yellow-100 rounded-base hover:bg-yellow-300"
+                                          }  ${
+                                              course.courseState ===
+                                                  "published" &&
+                                              ""
+                                          } ${
+                                              course.courseState ===
+                                                  "blocked" &&
+                                              "bg-red-100 rounded-base hover:bg-red-200"
+                                          } `}
                                       >
                                           {course.courseState === "draft" ? (
                                               <BookDashed />
