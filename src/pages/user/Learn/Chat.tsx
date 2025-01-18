@@ -80,9 +80,9 @@ const Chat = () => {
     return (
         <div
             ref={scrollRef}
-            className="font-mono bg-[#e3dff2] max-h-[79.5vh] min-h-[79.5vh] min-w-full overflow-y-auto"
+            className="flex flex-col justify-end  font-mono bg-[#e3dff2] max-h-[79.5vh] min-h-[79.5vh] min-w-full overflow-y-auto"
         >
-            <div className="mb-10 px-2">
+            <div className="borde justify-end mb-10 px-2">
                 {messages.map((message) => (
                     <div
                         className={`flex ${
