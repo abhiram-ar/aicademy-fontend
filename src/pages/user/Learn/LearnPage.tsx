@@ -1,9 +1,12 @@
-import React from 'react'
+import React from "react";
+import LearnPageNavbar from "./LearnPageNavbar";
 
 const LearnPage = () => {
-  return (
-    <div>LearnPage</div>
-  )
-}
+    return (
+        <div>
+            <LearnPageNavbar />
+        </div>
+    );
+};
 
-export default LearnPage
+export default LearnPage;
