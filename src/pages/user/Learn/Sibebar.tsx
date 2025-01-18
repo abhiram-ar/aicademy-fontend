@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import { useState } from "react";
 import CourseContents from "./CourseContents";
 import Chat from "./Chat";
 
@@ -25,7 +25,7 @@ const Sibebar = () => {
                 </button>
             </div>
 
-            <div className="bg-[#fef2e8] min-h-[79.5vh] relative">
+            <div className="bg-[#fef2e8] max-h-[79.5vh] min-h-[79.5vh] relative ">
                 {openChat ? <Chat /> : <CourseContents />}
             </div>
         </>
