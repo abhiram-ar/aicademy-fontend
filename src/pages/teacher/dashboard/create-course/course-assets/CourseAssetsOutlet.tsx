@@ -39,7 +39,7 @@ const CourseAssetsOutlet = () => {
         return () => clearInterval(interval);
     }, [content, refetchCourseList]);
 
-    console.log(content);
+    console.log("video list", content);
     return (
         <>
             <Upload />
@@ -57,7 +57,7 @@ const CourseAssetsOutlet = () => {
                         {content && content.courseVideos.length === 0 && (
                             <TableRow className="bg-white">
                                 <TableCell></TableCell>
-                                <div className="flex flex-col justify-center items-center py-10">
+                                <div className="flex flex-col relative left-14 justify-center items-center py-10">
                                     <p className="text-xl font-medium text-zinc-400">
                                         This course does not contain any assets
                                     </p>
@@ -65,7 +65,7 @@ const CourseAssetsOutlet = () => {
                                         Upload a video
                                     </p>
                                 </div>
-                                <TableCell></TableCell>
+                                <TableCell colSpan={2}></TableCell>
                             </TableRow>
                         )}
                         {content &&

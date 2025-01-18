@@ -78,8 +78,6 @@ const CourseDetailsOutlet: React.FC = () => {
         return res;
     };
 
-    console.log(courseDetails);
-
     const {
         handleSubmit,
         formState: { errors },
@@ -114,8 +112,6 @@ const CourseDetailsOutlet: React.FC = () => {
         control,
         name: "benefits" as never,
     });
-
-    console.log("b", benefitsFields);
 
     const {
         fields: prerequisitesFields,
