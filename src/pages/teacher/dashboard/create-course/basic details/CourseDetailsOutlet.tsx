@@ -1,4 +1,4 @@
-import React from "react";
+import React, { Fragment } from "react";
 import { useOutletContext, useParams } from "react-router-dom";
 import { useFieldArray, useForm } from "react-hook-form";
 import { Button } from "@/components/ui/button";
@@ -78,6 +78,8 @@ const CourseDetailsOutlet: React.FC = () => {
         return res;
     };
 
+    console.log(courseDetails);
+
     const {
         handleSubmit,
         formState: { errors },
@@ -112,6 +114,8 @@ const CourseDetailsOutlet: React.FC = () => {
         control,
         name: "benefits" as never,
     });
+
+    console.log("b", benefitsFields);
 
     const {
         fields: prerequisitesFields,
@@ -267,17 +271,14 @@ const CourseDetailsOutlet: React.FC = () => {
                         {courseDetails &&
                             content &&
                             content.courseVideos.map((video: Ivideo) => (
-                                <>
+                                <Fragment key={video._id}>
                                     {courseDetails.demoVideoKey !==
                                         video.key && (
-                                        <option
-                                            key={video._id}
-                                            value={video.key}
-                                        >
+                                        <option value={video.key}>
                                             {video.displayName}
                                         </option>
                                     )}
-                                </>
+                                </Fragment>
                             ))}
                     </select>
                 </div>
