@@ -17,9 +17,9 @@ export interface Ivideo {
     displayName: string;
     key: string;
     originalFileSize: number;
-    originalFileType: string;
-    createdAt: Date;
-    updatedAt: Date;
+    originalFileType: number;
+    aiStatus: "processing" | "ready" | "failed";
+    transcriptId?: string;
 }
 
 const CourseAssetsOutlet = () => {
@@ -36,11 +36,10 @@ const CourseAssetsOutlet = () => {
                 <Table>
                     <TableHeader>
                         <TableRow>
-                            <TableHead className="text-center">#</TableHead>
-                            <TableHead className="text-center">
-                                Video name
-                            </TableHead>
-                            <TableHead className="text-center">Size</TableHead>
+                            <TableHead>#</TableHead>
+                            <TableHead>Video name</TableHead>
+                            <TableHead className="w-20">Size</TableHead>
+                            <TableHead className="w-24">AI status</TableHead>
                         </TableRow>
                     </TableHeader>
                     <TableBody className="w-full">
@@ -66,15 +65,36 @@ const CourseAssetsOutlet = () => {
                                         className="bg-white"
                                     >
                                         <TableCell>{index + 1}</TableCell>
+
+                                        {/* display name */}
                                         <TableCell>
                                             {video.displayName}
                                         </TableCell>
+
+                                        {/* size */}
                                         <TableCell>
                                             {Math.round(
                                                 video.originalFileSize /
                                                     (1024 * 1024)
                                             )}{" "}
                                             MB
+                                        </TableCell>
+
+                                        {/* ai processing status */}
+                                        <TableCell
+                                            className={`flex ${
+                                                video.aiStatus ===
+                                                    "processing" &&
+                                                "text-amber-500"
+                                            } ${
+                                                video.aiStatus === "ready" &&
+                                                "text-green-500"
+                                            } ${
+                                                video.aiStatus === "failed" &&
+                                                "text-red-500"
+                                            }`}
+                                        >
+                                            {video.aiStatus}
                                         </TableCell>
                                     </TableRow>
                                 )
