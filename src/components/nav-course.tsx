@@ -1,4 +1,4 @@
-import { Link } from "react-router-dom";
+import { Link, useParams } from "react-router-dom";
 import { useGetDraftCourseListQuery } from "@/redux/features/teacher/courseCreationAPIs";
 
 import {
@@ -32,6 +32,7 @@ import {
 export function NavCourse() {
     const { isMobile } = useSidebar();
     const { data, isLoading } = useGetDraftCourseListQuery({});
+    const { id: activeCourseId } = useParams();
 
     const shimmer = (
         <SidebarMenu>
@@ -69,7 +70,34 @@ export function NavCourse() {
                               courseState: "draft" | "published" | "blocked";
                           }) => (
                               <SidebarMenuItem key={course._id}>
-                                  <SidebarMenuButton asChild>
+                                  <SidebarMenuButton
+                                      asChild
+                                      className={`${
+                                          course.courseState === "draft" &&
+                                          `bg-yellow-100 rounded-base hover:bg-yellow-300 ${
+                                              course._id === activeCourseId &&
+                                              "bg-yellow-200"
+                                          }`
+                                      }  
+
+                                      ${
+                                          course.courseState === "blocked" &&
+                                          `bg-red-100 rounded-base hover:bg-red-200 ${
+                                              course._id === activeCourseId &&
+                                              "bg-red-200"
+                                          }`
+                                      }
+
+                                      ${
+                                          course.courseState === "published" &&
+                                          ` ${
+                                              course._id === activeCourseId &&
+                                              "bg-zinc-200"
+                                          }`
+                                      }
+                                          
+                                          `}
+                                  >
                                       <Link
                                           to={`/teach/course/draft/${course._id}`}
                                           className={`${
@@ -77,13 +105,9 @@ export function NavCourse() {
                                               "bg-yellow-100 rounded-base hover:bg-yellow-300"
                                           }  ${
                                               course.courseState ===
-                                                  "published" &&
-                                              ""
-                                          } ${
-                                              course.courseState ===
                                                   "blocked" &&
                                               "bg-red-100 rounded-base hover:bg-red-200"
-                                          } `}
+                                          }`}
                                       >
                                           {course.courseState === "draft" ? (
                                               <BookDashed />
