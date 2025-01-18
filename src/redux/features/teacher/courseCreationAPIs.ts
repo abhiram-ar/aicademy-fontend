@@ -50,6 +50,7 @@ const courseCreationsAPI = apiSlice.injectEndpoints({
                 url: `/api/course/draft/videos?courseId=${data.courseId}`,
             }),
             providesTags: ["draftCourseContent"],
+            keepUnusedDataFor: 10,
         }),
         updateCouseStructure: builder.mutation({
             query: (data: { courseId: string; chapters: object }) => ({

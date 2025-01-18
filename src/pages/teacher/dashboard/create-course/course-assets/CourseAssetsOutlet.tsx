@@ -9,6 +9,7 @@ import {
     TableHeader,
     TableRow,
 } from "@/components/ui/table";
+import { useEffect } from "react";
 
 export interface Ivideo {
     _id: string;
@@ -24,9 +25,19 @@ export interface Ivideo {
 
 const CourseAssetsOutlet = () => {
     const { id } = useParams();
-    const { data: content } = useGetAllCourseVideosQuery({
-        courseId: id,
-    });
+    const { data: content, refetch: refetchCourseList } =
+        useGetAllCourseVideosQuery({
+            courseId: id,
+        });
+
+    // polling every 30s - average time to process a video
+    useEffect(() => {
+        let interval: string | number | NodeJS.Timeout | undefined;
+        if (content) {
+            interval = setInterval(refetchCourseList, 30000);
+        }
+        return () => clearInterval(interval);
+    }, [content, refetchCourseList]);
 
     console.log(content);
     return (
