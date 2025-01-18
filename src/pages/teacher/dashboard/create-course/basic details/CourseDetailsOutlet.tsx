@@ -1,4 +1,4 @@
-import React from "react";
+import React, { Fragment } from "react";
 import { useOutletContext, useParams } from "react-router-dom";
 import { useFieldArray, useForm } from "react-hook-form";
 import { Button } from "@/components/ui/button";
@@ -267,17 +267,14 @@ const CourseDetailsOutlet: React.FC = () => {
                         {courseDetails &&
                             content &&
                             content.courseVideos.map((video: Ivideo) => (
-                                <>
+                                <Fragment key={video._id}>
                                     {courseDetails.demoVideoKey !==
                                         video.key && (
-                                        <option
-                                            key={video._id}
-                                            value={video.key}
-                                        >
+                                        <option value={video.key}>
                                             {video.displayName}
                                         </option>
                                     )}
-                                </>
+                                </Fragment>
                             ))}
                     </select>
                 </div>
@@ -389,7 +386,10 @@ const CourseDetailsOutlet: React.FC = () => {
                                 Select a category
                             </option>
                             {categories.map((category) => (
-                                <option value={category.value}>
+                                <option
+                                    key={category.value}
+                                    value={category.value}
+                                >
                                     {category.displayName}
                                 </option>
                             ))}

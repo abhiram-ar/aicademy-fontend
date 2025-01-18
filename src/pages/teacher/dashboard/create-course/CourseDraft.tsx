@@ -58,7 +58,7 @@ const CourseDraft: React.FC = () => {
                 <NavLink
                     to={`/teach/course/draft/${id}/details`}
                     className={({ isActive }) =>
-                        `text-center p-3 transition-all duration-300 hover:bg-zinc-300 ${
+                        `text-center border-r-2 border-black p-3 transition-all duration-300 hover:bg-zinc-300 ${
                             isActive ? "bg-zinc-300 " : ""
                         }`
                     }
@@ -68,7 +68,7 @@ const CourseDraft: React.FC = () => {
                 <NavLink
                     to={`/teach/course/draft/${id}/structure`}
                     className={({ isActive }) =>
-                        `text-center p-3 transition-all duration-300 hover:bg-zinc-300 ${
+                        `text-center border-r-2 border-black p-3 transition-all duration-300 hover:bg-zinc-300 ${
                             isActive ? "bg-zinc-300 " : ""
                         }`
                     }
@@ -78,7 +78,7 @@ const CourseDraft: React.FC = () => {
                 <NavLink
                     to={`/teach/course/draft/${id}/assets`}
                     className={({ isActive }) =>
-                        `text-center p-3 transition-all duration-300 hover:bg-zinc-300 ${
+                        `text-center border-r-2 border-black p-3 transition-all duration-300 hover:bg-zinc-300 ${
                             isActive ? "bg-zinc-300 " : ""
                         }`
                     }
