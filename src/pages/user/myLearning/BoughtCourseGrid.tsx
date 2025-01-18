@@ -1,3 +1,4 @@
+import { Link } from "react-router-dom";
 import CourseCardSmall from "./CourseCardSmall";
 import { useGetUserBoughtCourseListQuery } from "./myLearningApiSlice";
 
@@ -13,10 +14,9 @@ const BoughtCourseGrid = () => {
                         title: string;
                         createdBy: { legalName: string };
                     }) => (
-                        <CourseCardSmall
-                            key={course._id}
-                            courseDetails={course}
-                        />
+                        <Link to={`/user/learn/${course._id}`} key={course._id}>
+                            <CourseCardSmall courseDetails={course} />
+                        </Link>
                     )
                 )}
         </div>
