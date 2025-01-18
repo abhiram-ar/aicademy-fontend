@@ -26,6 +26,7 @@
 
         --sidebar-ring: 217.2 91.2% 59.8%;
     }
+
     .dark {
         --sidebar-background: 240 5.9% 10%;
 
@@ -91,15 +92,18 @@
     .input-neo {
         @apply bg-white border-2 border-black rounded-base px-3 py-2 focus:outline-none focus:outline-blue-300 mt-1;
     }
+
     .explore-nav {
         @apply px-5 py-0.5 font-publicSans font-semibold;
     }
+
     .validation-error {
         @apply text-[#ff5a5a] text-sm;
     }
 }
 
 @layer utilities {
+
     input[type="number"]::-webkit-inner-spin-button,
     input[type="number"]::-webkit-outer-spin-button {
         -webkit-appearance: none;
@@ -109,4 +113,25 @@
     input[type="number"] {
         -moz-appearance: textfield;
     }
+}
+
+/* width */
+::-webkit-scrollbar {
+    width: 10px;
+}
+
+/* Track */
+::-webkit-scrollbar-track {
+    background: #f1f1f1;
+}
+
+/* Handle */
+::-webkit-scrollbar-thumb {
+    background: #888;
+    border-radius: 5px;
+}
+
+/* Handle on hover */
+::-webkit-scrollbar-thumb:hover {
+    background: #555;
 }
