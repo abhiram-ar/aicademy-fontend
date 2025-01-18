@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import CourseContents from "./CourseContents";
+import Chat from "./Chat";
 
 const Sibebar = () => {
     const [openChat, setOpenChat] = useState(false);
@@ -24,8 +25,8 @@ const Sibebar = () => {
                 </button>
             </div>
 
-            <div className="p-2 bg-[#fef2e8] min-h-[79.5vh]">
-                {openChat ? <></> : <CourseContents />}
+            <div className="bg-[#fef2e8] min-h-[79.5vh] relative">
+                {openChat ? <Chat /> : <CourseContents />}
             </div>
         </>
     );

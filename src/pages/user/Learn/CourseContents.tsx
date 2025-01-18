@@ -74,7 +74,7 @@ const chapters = [
 
 const CourseContents = () => {
     return (
-        <Accordion className="" type="multiple">
+        <Accordion className="p-2" type="multiple">
             {chapters.map((chapter, index) => (
                 <AccordionItem
                     key={index}
