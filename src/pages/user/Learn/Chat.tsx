@@ -83,8 +83,9 @@ const Chat = () => {
             className="flex flex-col justify-end  font-mono bg-[#e3dff2] max-h-[79.5vh] min-h-[79.5vh] min-w-full overflow-y-auto"
         >
             <div className="borde justify-end mb-10 px-2">
-                {messages.map((message) => (
+                {messages.map((message, index) => (
                     <div
+                        key={index}
                         className={`flex ${
                             message.role === "ai"
                                 ? "justify-start"
