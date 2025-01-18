@@ -389,7 +389,10 @@ const CourseDetailsOutlet: React.FC = () => {
                                 Select a category
                             </option>
                             {categories.map((category) => (
-                                <option value={category.value}>
+                                <option
+                                    key={category.value}
+                                    value={category.value}
+                                >
                                     {category.displayName}
                                 </option>
                             ))}
