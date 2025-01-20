@@ -49,11 +49,11 @@ const Chat = () => {
         );
         ws.onopen = () => console.log("ws connection established");
         ws.onerror = (event) => console.error("ws error", event);
-        ws.onmessage = () => {
-            console.log(messages);
+        ws.onmessage = (message) => {
+            console.log(message);
             setMessages((prevMessages) => [
                 ...prevMessages,
-                { role: "ai", message: "hello" },
+                { role: "ai", message: message.data },
             ]);
         };
         ws.onclose = (event) => console.log("closed ws connection", event);
@@ -77,7 +77,7 @@ const Chat = () => {
             textarea.addEventListener("input", resizeTextarea);
         }
         return () => textarea?.removeEventListener("input", resizeTextarea);
-    }, []);
+    }, [messages]);
 
     useEffect(() => {
         const div = scrollRef.current;
@@ -94,24 +94,31 @@ const Chat = () => {
     const handleSend = () => {
         const textarea = textareaRef.current;
         if (textarea) {
-            //-test
-            // const newMessage: IMessage = {
-            //     role: "user",
-            //     message: textarea.value,
-            // };
-            // setMessages([...messages, newMessage]);
-            
+            if (textarea.value.trim() === "") return;
+
+            const newUserMessage: IMessage = {
+                role: "user",
+                message: textarea.value,
+            };
+            setMessages([...messages, newUserMessage]);
+
+            const data = {
+                question: textarea.value,
+                title: "elon musks advise to yound people",
+                key: "6762d2e79e4e6d9d0f66202d/75b4b6dd05ddd329-elon.mp4",
+            };
+
+            if (webSocketRef.current)
+                webSocketRef.current.send(JSON.stringify(data));
 
             textarea.value = "";
+            textarea.style.height = "auto";
         }
     };
 
     return (
-        <div
-            ref={scrollRef}
-            className="flex flex-col justify-end  font-mono bg-[#e3dff2] max-h-[79.5vh] min-h-[79.5vh] min-w-full overflow-y-auto"
-        >
-            <div className="borde justify-end mb-10 px-2">
+        <div className="flex flex-col justify-end font-mono bg-[#e3dff2] max-h-[79.5vh] min-h-[79.5vh] min-w-full">
+            <div ref={scrollRef} className="mb-10 px-2 h-full overflow-auto">
                 {messages.map((message, index) => (
                     <div
                         key={index}
@@ -132,7 +139,7 @@ const Chat = () => {
                         </div>
                     </div>
                 ))}
-                <div className=" text-transparent">last</div>
+                <div className=" text-transpar">last</div>
             </div>
 
             {/* send message  */}
