@@ -139,7 +139,7 @@ const Chat = () => {
                         </div>
                     </div>
                 ))}
-                <div className=" text-transpar">last</div>
+                <div className=" text-transparent">last</div>
             </div>
 
             {/* send message  */}
