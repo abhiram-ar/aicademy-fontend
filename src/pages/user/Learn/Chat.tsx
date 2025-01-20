@@ -1,5 +1,7 @@
+import { RootState } from "@/redux/store";
 import { SendHorizontal } from "lucide-react";
 import { useEffect, useRef, useState } from "react";
+import { useSelector } from "react-redux";
 
 interface IMessage {
     role: "ai" | "user";
@@ -38,6 +40,30 @@ const Chat = () => {
     const [messages, setMessages] = useState<IMessage[]>(mockMessages);
     const textareaRef = useRef<HTMLTextAreaElement>(null);
     const scrollRef = useRef<HTMLDivElement>(null);
+    const token = useSelector((state: RootState) => state.auth.token);
+    const webSocketRef = useRef<WebSocket | null>(null);
+
+    useEffect(() => {
+        const ws = new WebSocket(
+            `ws://localhost:3000?authorization=Bearer ${token}`
+        );
+        ws.onopen = () => console.log("ws connection established");
+        ws.onerror = (event) => console.error("ws error", event);
+        ws.onmessage = () => {
+            console.log(messages);
+            setMessages((prevMessages) => [
+                ...prevMessages,
+                { role: "ai", message: "hello" },
+            ]);
+        };
+        ws.onclose = (event) => console.log("closed ws connection", event);
+
+        webSocketRef.current = ws;
+        return () => {
+            console.log("closing ws connection...");
+            ws.close();
+        };
+    }, []);
 
     useEffect(() => {
         const textarea = textareaRef.current;
@@ -68,11 +94,14 @@ const Chat = () => {
     const handleSend = () => {
         const textarea = textareaRef.current;
         if (textarea) {
-            const newMessage: IMessage = {
-                role: "user",
-                message: textarea.value,
-            };
-            setMessages([...messages, newMessage]);
+            //-test
+            // const newMessage: IMessage = {
+            //     role: "user",
+            //     message: textarea.value,
+            // };
+            // setMessages([...messages, newMessage]);
+            
+
             textarea.value = "";
         }
     };
