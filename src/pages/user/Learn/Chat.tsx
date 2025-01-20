@@ -2,6 +2,7 @@ import { RootState } from "@/redux/store";
 import { SendHorizontal } from "lucide-react";
 import { useEffect, useRef, useState } from "react";
 import { useSelector } from "react-redux";
+import NewChatButton from "./NewChatButton";
 
 interface IMessage {
     role: "ai" | "user";
@@ -118,6 +119,7 @@ const Chat = () => {
 
     return (
         <div className="flex flex-col justify-end font-mono bg-[#e3dff2] max-h-[79.5vh] min-h-[79.5vh] min-w-full">
+            <NewChatButton />
             <div ref={scrollRef} className="mb-10 px-2 h-full overflow-auto">
                 {messages.map((message, index) => (
                     <div

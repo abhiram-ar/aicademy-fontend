@@ -7,17 +7,20 @@ const Sibebar = () => {
     return (
         <>
             <div className="grid grid-cols-2 border-b-2 border-black justify-center items-center text-center font-publicSans font-semibold text-xl text-white">
+                {/* contents */}
                 <button
                     onClick={() => setOpenChat(false)}
-                    className={`p-5 hover:bg-[#374151] border-e-2 border-black ${
+                    className={`p-5 transition-colors duration-100 hover:bg-[#374151] border-e-2 border-black ${
                         !openChat ? "bg-[#374151]" : "bg-[#242a35]"
                     }`}
                 >
                     Contents
                 </button>
+
+                {/* clear.ai */}
                 <button
                     onClick={() => setOpenChat(true)}
-                    className={`p-5  hover:bg-[#a388ee] ${
+                    className={`p-5 transition-colors duration-200 hover:bg-[#a388ee] ${
                         openChat ? "bg-[#a388ee]" : "bg-[#272733]"
                     }`}
                 >
