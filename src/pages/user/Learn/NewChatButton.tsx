@@ -1,5 +1,4 @@
 import { SquarePlus } from "lucide-react";
-import React from "react";
 import {
     Tooltip,
     TooltipContent,

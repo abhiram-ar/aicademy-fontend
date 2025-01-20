@@ -37,7 +37,16 @@ const mockMessages: IMessage[] = [
             "Some other famous landmarks in France include the Louvre Museum, Mont Saint-Michel, the Palace of Versailles, and the Notre-Dame Cathedral.",
     },
 ];
-const Chat = () => {
+
+type Props = {
+    title: string;
+    key: string;
+};
+
+const Chat: React.FC<Props> = ({
+    title = "elon musks advise to yound people",
+    key = "6762d2e79e4e6d9d0f66202d/75b4b6dd05ddd329-elon.mp4",
+}) => {
     const [messages, setMessages] = useState<IMessage[]>(mockMessages);
     const textareaRef = useRef<HTMLTextAreaElement>(null);
     const scrollRef = useRef<HTMLDivElement>(null);
@@ -66,6 +75,28 @@ const Chat = () => {
         };
     }, []);
 
+    // load chat data from localstorage when component mounts
+    useEffect(() => {
+        const chatData = localStorage.getItem(`chatdata/${key}`);
+        if (chatData) {
+            try {
+                const savedMessages = JSON.parse(chatData);
+                setMessages(savedMessages);
+            } catch (error) {
+                console.error(
+                    "error while loading saved message from local storage",
+                    error
+                );
+            }
+        }
+    }, [key, setMessages]);
+
+    // save messsages to localstroage when message update
+    useEffect(() => {
+        localStorage.setItem(`chatdata/${key}`, JSON.stringify(messages));
+    }, [key, messages]);
+
+    // resize text area on input
     useEffect(() => {
         const textarea = textareaRef.current;
         let resizeTextarea: () => void;
@@ -80,6 +111,7 @@ const Chat = () => {
         return () => textarea?.removeEventListener("input", resizeTextarea);
     }, [messages]);
 
+    // scroll to last message
     useEffect(() => {
         const div = scrollRef.current;
         if (div) {
@@ -105,8 +137,8 @@ const Chat = () => {
 
             const data = {
                 question: textarea.value,
-                title: "elon musks advise to yound people",
-                key: "6762d2e79e4e6d9d0f66202d/75b4b6dd05ddd329-elon.mp4",
+                title,
+                key,
             };
 
             if (webSocketRef.current)
@@ -117,9 +149,16 @@ const Chat = () => {
         }
     };
 
+    const handleStartNewChat = () => {
+        setMessages([]);
+        localStorage.removeItem(`chatdata/${key}`);
+    };
+
     return (
         <div className="flex flex-col justify-end font-mono bg-[#e3dff2] max-h-[79.5vh] min-h-[79.5vh] min-w-full">
-            <NewChatButton />
+            <div onClick={handleStartNewChat}>
+                <NewChatButton />
+            </div>
             <div ref={scrollRef} className="mb-10 px-2 h-full overflow-auto">
                 {messages.map((message, index) => (
                     <div
