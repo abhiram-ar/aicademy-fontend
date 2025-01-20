@@ -73,7 +73,7 @@ const Chat: React.FC<Props> = ({
             console.log("closing ws connection...");
             ws.close();
         };
-    }, []);
+    }, [token]);
 
     // load chat data from localstorage when component mounts
     useEffect(() => {
