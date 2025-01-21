@@ -302,16 +302,22 @@ const LessonForm: React.FC<Props> = ({
                                         Select video for lesson
                                     </option>
                                     {content &&
-                                        content.courseVideos.map(
-                                            (video: Ivideo) => (
+                                        content.courseVideos
+                                            .filter(
+                                                (video: {
+                                                    transcodingStatus: string;
+                                                }) =>
+                                                    video.transcodingStatus ===
+                                                    "completed"
+                                            )
+                                            .map((video: Ivideo) => (
                                                 <option
                                                     key={video._id}
                                                     value={video.key}
                                                 >
                                                     {video.displayName}
                                                 </option>
-                                            )
-                                        )}
+                                            ))}
                                 </select>
                             </div>
                         </div>
