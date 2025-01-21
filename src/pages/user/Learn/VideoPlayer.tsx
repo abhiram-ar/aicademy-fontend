@@ -172,7 +172,7 @@ const VideoPlayer = ({
             <ReactPlayer
                 ref={playerRef}
                 url={url}
-                controls={true}
+                controls={false}
                 width={"100%"}
                 height={"100%"}
                 playIcon={<Play className="stroke-white size-16" />}
@@ -199,7 +199,7 @@ const VideoPlayer = ({
                         step={1}
                         value={[playerState.played]}
                         onValueChange={handleSeekChange}
-                        className="mb-3"
+                        className="mb-3 cursor-pointer"
                     />
                 </div>
 
