@@ -1,4 +1,4 @@
-import { Pause, Play } from "lucide-react";
+import { Pause, Play, Volume2, VolumeOff } from "lucide-react";
 import React, { useEffect, useRef, useState } from "react";
 import ReactPlayer from "react-player/file";
 
@@ -6,6 +6,7 @@ const VideoPlayer = () => {
     const playerRef = useRef<ReactPlayer | null>(null);
     const [playerState, setPlayerState] = useState({
         playing: true,
+        muted: false,
     });
 
     useEffect(() => {
@@ -13,6 +14,10 @@ const VideoPlayer = () => {
             playerRef.current.setState({ playing: true });
         }
     }, []);
+
+    const handlePlaying = (newState: boolean) => {
+        setPlayerState((prev) => ({ ...prev, playing: newState }));
+    };
 
     return (
         <div className="w-full h-full bg-black relative">
@@ -24,44 +29,40 @@ const VideoPlayer = () => {
                 }
                 width={"100%"}
                 height={"100%"}
+                playIcon={<Play className="stroke-white size-16" />}
                 light={true}
                 pip={true}
-                playIcon={<Play className="stroke-white size-16" />}
+                muted={playerState.muted}
                 playing={playerState.playing}
-                onPause={() =>
-                    setPlayerState((prev) => ({ ...prev, playing: false }))
-                }
-                onPlay={() =>
-                    setPlayerState((prev) => ({ ...prev, playing: true }))
-                }
+                onPause={() => handlePlaying(false)}
+                onPlay={() => handlePlaying(true)}
             />
             <div className="bg-white/80 absolute bottom-1 inset-x-0 p-3">
                 {/*seeker  */}
                 <div></div>
 
                 {/* controlss */}
-                <div>
-                    {playerState.playing ? (
-                        <Pause
-                            className="cursor-pointer"
-                            onClick={() =>
-                                setPlayerState((prev) => ({
-                                    ...prev,
-                                    playing: false,
-                                }))
-                            }
-                        />
-                    ) : (
-                        <Play
-                            className="cursor-pointer"
-                            onClick={() =>
-                                setPlayerState((prev) => ({
-                                    ...prev,
-                                    playing: true,
-                                }))
-                            }
-                        />
-                    )}
+                <div className="flex justify-between">
+                    {/* playpause */}
+                    <div>
+                        {playerState.playing ? (
+                            <Pause
+                                className="cursor-pointer"
+                                onClick={() => handlePlaying(false)}
+                            />
+                        ) : (
+                            <Play
+                                className="cursor-pointer"
+                                onClick={() => handlePlaying(true)}
+                            />
+                        )}
+                    </div>
+
+                    <div>
+                        <div>
+                            {playerState.muted ? <VolumeOff /> : <Volume2 />}
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>
