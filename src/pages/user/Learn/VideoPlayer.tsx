@@ -1,5 +1,14 @@
-import { Pause, Play, Settings, Volume2, VolumeOff } from "lucide-react";
-import React, { useRef, useState } from "react";
+import {
+    Expand,
+    Fullscreen,
+    Minimize,
+    Pause,
+    Play,
+    Settings,
+    Volume2,
+    VolumeOff,
+} from "lucide-react";
+import React, { useEffect, useRef, useState } from "react";
 import ReactPlayer from "react-player/file";
 import {
     DropdownMenu,
@@ -14,6 +23,9 @@ const VideoPlayer = ({
     url = "https://d3petuww6xgji.cloudfront.net/transcoded/678f4b56093fe2e9714bb0cc/master.m3u8",
 }) => {
     const playerRef = useRef<ReactPlayer | null>(null);
+    const playerWrapperRef = useRef<HTMLDivElement | null>(null);
+    const [showControls, setShowControls] = useState(true);
+    const controlsRef = useRef<HTMLDivElement | null>(null);
     const [selectedLevel, setSelectedLevel] = useState<number>(-1); //-1 auto
     const [qualityLevels, setQualityLevels] = useState([
         {
@@ -27,22 +39,36 @@ const VideoPlayer = ({
         volume: 0.7,
     });
 
+    useEffect(() => {
+        let timer;
+        const controls = controlsRef.current;
+        if (controls) {
+            setTimeout(() => {
+                controls.style.opacity = "0";
+            }, 3000);
+        }
+        return () => clearTimeout(timer);
+    }, []);
+
     const handleReady = () => {
         if (playerRef.current) {
             const internalPlayer = playerRef.current.getInternalPlayer("hls");
-            console.log(internalPlayer);
+
             if (internalPlayer && internalPlayer.levels) {
                 const availableQualities = internalPlayer.levels
                     .filter(
                         (level: { height: string }) => level.height //fitler only video streams
                     )
-                    .map((level) => ({
+                    .map((level: { height: number }) => ({
                         value: level.height,
                         label: `${level.height}p`,
                     }));
-                console.log(availableQualities);
+                // console.log(availableQualities);
 
-                availableQualities.sort((qA, qB) => qB.value - qA.value);
+                availableQualities.sort(
+                    (qA: { value: number }, qB: { value: number }) =>
+                        qB.value - qA.value
+                );
 
                 setQualityLevels([
                     ...availableQualities,
@@ -54,7 +80,6 @@ const VideoPlayer = ({
             }
         }
     };
-    console.log(qualityLevels);
 
     const handleQualityChange = (value: number) => {
         setSelectedLevel(value);
@@ -84,8 +109,18 @@ const VideoPlayer = ({
         else setPlayerState((prev) => ({ ...prev, muted: false }));
     };
 
+    const togglefullScreen = () => {
+        if (playerWrapperRef.current) {
+            if (!document.fullscreenElement) {
+                playerWrapperRef.current.requestFullscreen();
+            } else {
+                document.exitFullscreen();
+            }
+        }
+    };
+
     return (
-        <div className="w-full h-full bg-black relative">
+        <div ref={playerWrapperRef} className="w-full h-full bg-black relative">
             <ReactPlayer
                 ref={playerRef}
                 url={url}
@@ -102,7 +137,10 @@ const VideoPlayer = ({
                 onPause={() => handlePlaying(false)}
                 onPlay={() => handlePlaying(true)}
             />
-            <div className="bg-white/80 absolute bottom-1 inset-x-0 p-3">
+            <div
+                ref={controlsRef}
+                className="bg-black/ absolute bottom-0 inset-x-0 px-5 p-3 text-white fill-white backdrop-blur-md"
+            >
                 {/*seeker  */}
                 <div></div>
 
@@ -136,7 +174,7 @@ const VideoPlayer = ({
                             )}
                             <input
                                 type="range"
-                                className="opacity-50 hover:opacity-100 range-"
+                                className="opacity-70 hover:opacity-100 range-"
                                 min={0}
                                 max={1}
                                 step={0.01}
@@ -174,6 +212,9 @@ const VideoPlayer = ({
                                 ))}
                             </DropdownMenuContent>
                         </DropdownMenu>
+                        <div>
+                            <Fullscreen onClick={togglefullScreen} />
+                        </div>
                     </div>
                 </div>
             </div>
