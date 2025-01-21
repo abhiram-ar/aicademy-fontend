@@ -1,7 +1,5 @@
 import {
-    Expand,
     Fullscreen,
-    Minimize,
     Pause,
     Play,
     Settings,
@@ -19,12 +17,18 @@ import {
     DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
 
+type Progress = {
+    playedSeconds: number;
+    played: number;
+    loadedSeconds: number;
+    loaded: number;
+};
+
 const VideoPlayer = ({
     url = "https://d3petuww6xgji.cloudfront.net/transcoded/678f4b56093fe2e9714bb0cc/master.m3u8",
 }) => {
     const playerRef = useRef<ReactPlayer | null>(null);
     const playerWrapperRef = useRef<HTMLDivElement | null>(null);
-    const [showControls, setShowControls] = useState(true);
     const controlsRef = useRef<HTMLDivElement | null>(null);
     const [selectedLevel, setSelectedLevel] = useState<number>(-1); //-1 auto
     const [qualityLevels, setQualityLevels] = useState([
@@ -37,6 +41,10 @@ const VideoPlayer = ({
         playing: true,
         muted: false,
         volume: 0.7,
+
+        played: 0,
+        loaded: 0,
+        duration: 0,
     });
 
     useEffect(() => {
@@ -133,6 +141,19 @@ const VideoPlayer = ({
         }
     };
 
+    const handleDuration = (duration: number) => {
+        console.log(duration);
+        setPlayerState((prev) => ({ ...prev, duration }));
+    };
+
+    const handleProgress = (progress: Progress) => {
+        setPlayerState((prev) => ({
+            ...prev,
+            played: progress.playedSeconds,
+            loaded: progress.loadedSeconds,
+        }));
+    };
+
     return (
         <div ref={playerWrapperRef} className="w-full h-full bg-black relative">
             <ReactPlayer
@@ -150,10 +171,12 @@ const VideoPlayer = ({
                 playing={playerState.playing}
                 onPause={() => handlePlaying(false)}
                 onPlay={() => handlePlaying(true)}
+                onDuration={handleDuration}
+                onProgress={handleProgress}
             />
             <div
                 ref={controlsRef}
-                className="bg-black/ absolute bottom-0 inset-x-0 px-5 p-3 text-white fill-white backdrop-blur-md transition-opacity duration-300"
+                className="bg-black/70 hidden absolute bottom-0 inset-x-0 px-5 p-3 text-white fill-white backdrop-blur-md transition-opacity duration-300"
             >
                 {/*seeker  */}
                 <div></div>
@@ -161,7 +184,7 @@ const VideoPlayer = ({
                 {/* controlss */}
                 <div className="flex justify-between">
                     {/* playpause */}
-                    <div>
+                    <div className="flex gap-5">
                         {playerState.playing ? (
                             <Pause
                                 className="cursor-pointer"
@@ -173,6 +196,21 @@ const VideoPlayer = ({
                                 onClick={() => handlePlaying(true)}
                             />
                         )}
+
+                        {/* duration and played */}
+                        <div className="text-sm ">
+                            {playerState.played
+                                ? `${Math.floor(
+                                      playerState.played / 60
+                                  )}:${Math.ceil(playerState.played % 60)} `
+                                : ""}
+                            /
+                            {playerState.duration
+                                ? ` ${Math.floor(
+                                      playerState.duration / 60
+                                  )}:${Math.ceil(playerState.duration % 60)}`
+                                : ""}
+                        </div>
                     </div>
 
                     <div className="flex gap-5">
