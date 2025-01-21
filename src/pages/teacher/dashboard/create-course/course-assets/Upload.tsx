@@ -4,7 +4,6 @@ import { useRef, useState } from "react";
 import { useSelector } from "react-redux";
 import { useParams } from "react-router-dom";
 import { useSaveUploadedVideoMetadaMutation } from "@/redux/features/teacher/courseCreationAPIs";
-import React from "react";
 import { Progress } from "@/components/ui/progress";
 import { Upload as UploadIcon, X } from "lucide-react";
 
