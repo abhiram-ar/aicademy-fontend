@@ -16,6 +16,8 @@ import {
     DropdownMenuSeparator,
     DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
+import { Progress } from "@/components/ui/progress";
+import { Slider } from "@/components/ui/slider";
 
 type Progress = {
     playedSeconds: number;
@@ -154,6 +156,17 @@ const VideoPlayer = ({
         }));
     };
 
+    const handleSeekChange = (e) => {
+        setPlayerState((prev) => ({
+            ...prev,
+            played: e,
+        }));
+        const player = playerRef.current;
+        if (player) {
+            player.seekTo(parseFloat(e));
+        }
+    };
+
     return (
         <div ref={playerWrapperRef} className="w-full h-full bg-black relative">
             <ReactPlayer
@@ -176,10 +189,19 @@ const VideoPlayer = ({
             />
             <div
                 ref={controlsRef}
-                className="bg-black/70 hidden absolute bottom-0 inset-x-0 px-5 p-3 text-white fill-white backdrop-blur-md transition-opacity duration-300"
+                className="bg-black/70 absolute bottom-0 inset-x-0 px-5 pb-3 text-white fill-white backdrop-blur-md transition-opacity duration-300"
             >
                 {/*seeker  */}
-                <div></div>
+                <div>
+                    <Slider
+                        defaultValue={[0]}
+                        max={playerState.duration}
+                        step={1}
+                        value={[playerState.played]}
+                        onValueChange={handleSeekChange}
+                        className="mb-3"
+                    />
+                </div>
 
                 {/* controlss */}
                 <div className="flex justify-between">
