@@ -45,7 +45,7 @@ type Props = {
 
 const Chat: React.FC<Props> = ({
     title = "elon musks advise to yound people",
-    key = "6762d2e79e4e6d9d0f66202d/75b4b6dd05ddd329-elon.mp4",
+    key = "6762d2e79e4e6d9d0f66202d/09eba1212026862d-elon.mp4",
 }) => {
     const [messages, setMessages] = useState<IMessage[]>(mockMessages);
     const textareaRef = useRef<HTMLTextAreaElement>(null);
