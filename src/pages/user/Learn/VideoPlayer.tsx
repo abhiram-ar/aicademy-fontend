@@ -40,14 +40,28 @@ const VideoPlayer = ({
     });
 
     useEffect(() => {
-        let timer;
+        let timer: NodeJS.Timeout | undefined;
         const controls = controlsRef.current;
-        if (controls) {
-            setTimeout(() => {
-                controls.style.opacity = "0";
-            }, 3000);
+        const playerWrapper = playerWrapperRef.current;
+        let handleShowContorl: () => void;
+
+        if (controls && playerWrapper) {
+            handleShowContorl = () => {
+                clearInterval(timer);
+                controls.style.opacity = "100";
+                timer = setTimeout(() => {
+                    controls.style.opacity = "0";
+                }, 3000);
+            };
+            playerWrapper.addEventListener("mousemove", handleShowContorl);
         }
-        return () => clearTimeout(timer);
+        return () => {
+            if (playerWrapper)
+                playerWrapper.removeEventListener(
+                    "mousemove",
+                    handleShowContorl
+                );
+        };
     }, []);
 
     const handleReady = () => {
@@ -139,7 +153,7 @@ const VideoPlayer = ({
             />
             <div
                 ref={controlsRef}
-                className="bg-black/ absolute bottom-0 inset-x-0 px-5 p-3 text-white fill-white backdrop-blur-md"
+                className="bg-black/ absolute bottom-0 inset-x-0 px-5 p-3 text-white fill-white backdrop-blur-md transition-opacity duration-300"
             >
                 {/*seeker  */}
                 <div></div>
