@@ -1,5 +1,10 @@
 import { RootState } from "@/redux/store";
-import { SendHorizontal } from "lucide-react";
+import {
+    BotMessageSquare,
+    Dot,
+    MessageCircleWarning,
+    SendHorizontal,
+} from "lucide-react";
 import { useEffect, useRef, useState } from "react";
 import { useSelector } from "react-redux";
 import NewChatButton from "./NewChatButton";
@@ -19,6 +24,7 @@ type Props = {
 // key = "6762d2e79e4e6d9d0f66202d/09eba1212026862d-elon.mp4",
 
 const Chat: React.FC<Props> = ({ title, videokey, aiStatus }) => {
+    // first message if there is no chat histroy with the video, this wont be shown in new chat
     const [messages, setMessages] = useState<IMessage[]>([]);
     const textareaRef = useRef<HTMLTextAreaElement>(null);
     const scrollRef = useRef<HTMLDivElement>(null);
@@ -137,11 +143,37 @@ const Chat: React.FC<Props> = ({ title, videokey, aiStatus }) => {
         localStorage.removeItem(`chatdata/${videokey}`);
     };
 
+    if (aiStatus !== "ready") {
+        return (
+            <div className="bg-[#e3dff2] font-publicSans absolute inset-0 flex flex-col justify-center items-center gap-5 ">
+                <MessageCircleWarning className="size-14" />
+
+                <p>AI service not available for this video</p>
+            </div>
+        );
+    }
     return (
         <div className="flex flex-col justify-end font-mono bg-[#e3dff2] max-h-[79.5vh] min-h-[79.5vh] min-w-full">
+            <Dot
+                className={`absolute -top-4 -left-4 size-10 ${
+                    isOnline ? "stroke-green-400" : "stroke-red-500"
+                }`}
+            />
+
             <div onClick={handleStartNewChat}>
                 <NewChatButton />
             </div>
+
+            {messages.length === 0 && (
+                <div className="absolute inset-0 flex flex-col  justify-center items-center font-publicSans">
+                    <BotMessageSquare className="size-14" />
+                    <p className="text-xl font-semibold mt-3">New chat</p>
+                    <p className="text-sm text-zinc-500">
+                        Ask anything related to this video
+                    </p>
+                </div>
+            )}
+
             <div ref={scrollRef} className="mb-10 px-2 h-full overflow-auto">
                 {messages.map((message, index) => (
                     <div
@@ -176,11 +208,19 @@ const Chat: React.FC<Props> = ({ title, videokey, aiStatus }) => {
                     ref={textareaRef}
                     rows={1}
                     className="w-full resize-none border-none outline-none overflow-hidden bg-transparent"
-                    placeholder={`${isOnline ? "How can I help you..." : "Chat not available"}`}
+                    placeholder={`${
+                        isOnline
+                            ? "How can I help you..."
+                            : "Chat not available"
+                    }`}
                 />
                 <button disabled={!isOnline} onClick={handleSend}>
                     <SendHorizontal
-                        className={`${!isOnline ? "stroke-zinc-700" : "stroke-slate-900/80 hover:stroke-slate-900"} `}
+                        className={`${
+                            !isOnline
+                                ? "stroke-zinc-700"
+                                : "stroke-slate-900/80 hover:stroke-slate-900"
+                        } `}
                     />
                 </button>
             </div>
