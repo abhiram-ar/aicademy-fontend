@@ -156,14 +156,14 @@ const VideoPlayer = ({
         }));
     };
 
-    const handleSeekChange = (e) => {
+    const handleSeekChange = (e: number[]) => {
         setPlayerState((prev) => ({
             ...prev,
-            played: e,
+            played: e[0],
         }));
         const player = playerRef.current;
         if (player) {
-            player.seekTo(parseFloat(e));
+            player.seekTo(e[0]);
         }
     };
 
@@ -221,14 +221,12 @@ const VideoPlayer = ({
 
                         {/* duration and played */}
                         <div className="text-sm ">
-                            {playerState.played
+                            {playerState.duration && playerState.played
                                 ? `${Math.floor(
                                       playerState.played / 60
-                                  )}:${Math.ceil(playerState.played % 60)} `
-                                : ""}
-                            /
-                            {playerState.duration
-                                ? ` ${Math.floor(
+                                  )}:${Math.ceil(
+                                      playerState.played % 60
+                                  )} / ${Math.floor(
                                       playerState.duration / 60
                                   )}:${Math.ceil(playerState.duration % 60)}`
                                 : ""}
@@ -239,16 +237,18 @@ const VideoPlayer = ({
                         <div className="flex gap-2">
                             {playerState.muted ? (
                                 <VolumeOff
+                                    className="cursor-pointer"
                                     onClick={() => handleVolumeChange(0.7)}
                                 />
                             ) : (
                                 <Volume2
+                                    className="cursor-pointer"
                                     onClick={() => handleVolumeChange(0)}
                                 />
                             )}
                             <input
                                 type="range"
-                                className="opacity-70 hover:opacity-100 range-"
+                                className="opacity-70 hover:opacity-100 accent-zinc-400"
                                 min={0}
                                 max={1}
                                 step={0.01}
@@ -261,7 +261,7 @@ const VideoPlayer = ({
                             />
                         </div>
                         <DropdownMenu>
-                            <DropdownMenuTrigger>
+                            <DropdownMenuTrigger className="cursor-pointer">
                                 <Settings />
                             </DropdownMenuTrigger>
                             <DropdownMenuContent className="bg-white">
@@ -287,7 +287,10 @@ const VideoPlayer = ({
                             </DropdownMenuContent>
                         </DropdownMenu>
                         <div>
-                            <Fullscreen onClick={togglefullScreen} />
+                            <Fullscreen
+                                className="cursor-pointer"
+                                onClick={togglefullScreen}
+                            />
                         </div>
                     </div>
                 </div>
