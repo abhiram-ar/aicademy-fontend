@@ -13,6 +13,7 @@ const LearnPage = () => {
     const [currentlyPlaying, setCurrentlyPlaying] = useState<
         ILesson | undefined
     >(undefined);
+
     console.log(query);
 
     useEffect(() => {

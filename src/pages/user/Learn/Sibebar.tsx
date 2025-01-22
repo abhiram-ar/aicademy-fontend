@@ -43,7 +43,11 @@ const Sibebar: React.FC<Props> = ({
 
             <div className="bg-[#fef2e8] max-h-[79.5vh] min-h-[79.5vh] relative ">
                 {openChat ? (
-                    <Chat />
+                    <Chat
+                        title={currentlyPlaying?.lessonTitle}
+                        videokey={currentlyPlaying?.videoKey.key}
+                        aiStatus={currentlyPlaying?.videoKey.aiStatus}
+                    />
                 ) : (
                     <CourseContents
                         chapters={content?.chapters}

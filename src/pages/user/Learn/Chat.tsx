@@ -9,49 +9,23 @@ interface IMessage {
     message: string;
 }
 
-const mockMessages: IMessage[] = [
-    {
-        role: "user",
-        message: "What is the capital of France?",
-    },
-    {
-        role: "ai",
-        message: "The capital of France is Paris.",
-    },
-    {
-        role: "user",
-        message: "Can you tell me about the Eiffel Tower?",
-    },
-    {
-        role: "ai",
-        message:
-            "Sure! The Eiffel Tower is a wrought-iron lattice tower in Paris, France. It was completed in 1889 and is one of the most recognizable landmarks in the world.",
-    },
-    {
-        role: "user",
-        message: "What are some other famous landmarks in France?",
-    },
-    {
-        role: "ai",
-        message:
-            "Some other famous landmarks in France include the Louvre Museum, Mont Saint-Michel, the Palace of Versailles, and the Notre-Dame Cathedral.",
-    },
-];
-
 type Props = {
-    title: string;
-    key: string;
+    title?: string;
+    videokey?: string;
+    aiStatus?: "processing" | "ready" | "failed";
 };
 
-const Chat: React.FC<Props> = ({
-    title = "elon musks advise to yound people",
-    key = "6762d2e79e4e6d9d0f66202d/09eba1212026862d-elon.mp4",
-}) => {
-    const [messages, setMessages] = useState<IMessage[]>(mockMessages);
+// title = "elon musks advise to yound people",
+// key = "6762d2e79e4e6d9d0f66202d/09eba1212026862d-elon.mp4",
+
+const Chat: React.FC<Props> = ({ title, videokey, aiStatus }) => {
+    const [messages, setMessages] = useState<IMessage[]>([]);
     const textareaRef = useRef<HTMLTextAreaElement>(null);
     const scrollRef = useRef<HTMLDivElement>(null);
     const token = useSelector((state: RootState) => state.auth.token);
     const webSocketRef = useRef<WebSocket | null>(null);
+
+    console.log(title);
 
     useEffect(() => {
         const ws = new WebSocket(
@@ -66,7 +40,10 @@ const Chat: React.FC<Props> = ({
                 { role: "ai", message: message.data },
             ]);
         };
-        ws.onclose = (event) => console.log("closed ws connection", event);
+        ws.onclose = (event) => {
+            webSocketRef.current = null;
+            console.log("closed ws connection", event);
+        };
 
         webSocketRef.current = ws;
         return () => {
@@ -77,7 +54,7 @@ const Chat: React.FC<Props> = ({
 
     // load chat data from localstorage when component mounts
     useEffect(() => {
-        const chatData = localStorage.getItem(`chatdata/${key}`);
+        const chatData = localStorage.getItem(`chatdata/${videokey}`);
         if (chatData) {
             try {
                 const savedMessages = JSON.parse(chatData);
@@ -89,12 +66,12 @@ const Chat: React.FC<Props> = ({
                 );
             }
         }
-    }, [key, setMessages]);
+    }, [videokey, setMessages]);
 
     // save messsages to localstroage when message update
     useEffect(() => {
-        localStorage.setItem(`chatdata/${key}`, JSON.stringify(messages));
-    }, [key, messages]);
+        localStorage.setItem(`chatdata/${videokey}`, JSON.stringify(messages));
+    }, [videokey, messages]);
 
     // resize text area on input
     useEffect(() => {
@@ -138,7 +115,7 @@ const Chat: React.FC<Props> = ({
             const data = {
                 question: textarea.value,
                 title,
-                key,
+                key: videokey,
             };
 
             if (webSocketRef.current)
@@ -151,7 +128,7 @@ const Chat: React.FC<Props> = ({
 
     const handleStartNewChat = () => {
         setMessages([]);
-        localStorage.removeItem(`chatdata/${key}`);
+        localStorage.removeItem(`chatdata/${videokey}`);
     };
 
     return (
@@ -184,14 +161,21 @@ const Chat: React.FC<Props> = ({
             </div>
 
             {/* send message  */}
-            <div className="absolute inset-x-0 bottom-0 border-t border-black py-4 p-5 flex justify-between gap-5 bg-white">
+            <div
+                className={`absolute inset-x-0 bottom-0 border-t border-black py-4 p-5 flex justify-between gap-5 bg-white ${
+                    !webSocketRef && "bg-zinc-400"
+                }`}
+            >
                 <textarea
                     ref={textareaRef}
                     rows={1}
-                    className="w-full resize-none border-none outline-none overflow-hidden"
+                    className="w-full resize-none border-none outline-none overflow-hidden bg-transparent"
                     placeholder="How can I help you..."
                 />
-                <button onClick={handleSend}>
+                <button
+                    disabled={webSocketRef ? false : true}
+                    onClick={handleSend}
+                >
                     <SendHorizontal />
                 </button>
             </div>
