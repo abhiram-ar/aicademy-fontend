@@ -25,7 +25,7 @@ const ChapterAccordion: React.FC<Props> = ({ chapters }) => {
                         {chapter.chapterTitle}
                     </AccordionTrigger>
                     <AccordionContent>
-                        <p className="">
+                        <div className="">
                             {chapter.lessons.map((lesson, index) => (
                                 <p
                                     key={index}
@@ -36,7 +36,7 @@ const ChapterAccordion: React.FC<Props> = ({ chapters }) => {
                                     {lesson.lessonTitle}
                                 </p>
                             ))}
-                        </p>
+                        </div>
                     </AccordionContent>
                 </AccordionItem>
             ))}

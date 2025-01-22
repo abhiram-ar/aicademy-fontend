@@ -47,6 +47,7 @@ import AdminRevenuePage from "./pages/admin/Revenue/RevenuePage";
 import TeacherPayoutApprovalPage from "./pages/admin/Teacher mangement/Payout/TeacherPayoutApprovalPage";
 import CourseManagementPage from "./pages/admin/course/courseManagement/CourseManagementPage";
 import StandardLayout from "./layout/StandardLayout";
+import LearnPage from "./pages/user/Learn/LearnPage";
 
 fetchAccessTokenOnload();
 const appRouter = createBrowserRouter([
@@ -133,6 +134,12 @@ const appRouter = createBrowserRouter([
                         element: <MyLearning />,
                     },
                 ],
+            },
+            {
+                path: "/user/learn/:courseId",
+                loader: () => authLoader("user"),
+                hydrateFallbackElement: <p>loading...</p>,
+                element: <LearnPage />,
             },
             {
                 path: "/teach",
@@ -257,9 +264,9 @@ const appRouter = createBrowserRouter([
 ]);
 
 createRoot(document.getElementById("root")!).render(
-    <StrictMode>
+    // <StrictMode>
         <Provider store={store}>
             <RouterProvider router={appRouter} />
         </Provider>
-    </StrictMode>
+    // </StrictMode>
 );

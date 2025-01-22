@@ -21,6 +21,8 @@ export interface Ivideo {
     originalFileType: number;
     aiStatus: "processing" | "ready" | "failed";
     transcriptId?: string;
+    transcodingStatus: "processing" | "completed" | "failed";
+    transcodedVideoMasterFileKey?: string;
 }
 
 const CourseAssetsOutlet = () => {
@@ -49,6 +51,9 @@ const CourseAssetsOutlet = () => {
                         <TableRow>
                             <TableHead>#</TableHead>
                             <TableHead>Video name</TableHead>
+                            <TableHead className="w-32">
+                                preprocessing
+                            </TableHead>
                             <TableHead className="w-20">Size</TableHead>
                             <TableHead className="w-24">AI status</TableHead>
                         </TableRow>
@@ -82,6 +87,24 @@ const CourseAssetsOutlet = () => {
                                             {video.displayName}
                                         </TableCell>
 
+                                        {/* transoding status */}
+                                        <TableCell
+                                            className={`flex ${
+                                                video.transcodingStatus ===
+                                                    "processing" &&
+                                                "text-amber-600"
+                                            } ${
+                                                video.transcodingStatus ===
+                                                    "completed" &&
+                                                "text-green-600"
+                                            } ${
+                                                video.transcodingStatus ===
+                                                    "failed" && "text-red-500"
+                                            }`}
+                                        >
+                                            {video.transcodingStatus}
+                                        </TableCell>
+
                                         {/* size */}
                                         <TableCell>
                                             {Math.round(
@@ -96,10 +119,10 @@ const CourseAssetsOutlet = () => {
                                             className={`flex ${
                                                 video.aiStatus ===
                                                     "processing" &&
-                                                "text-amber-500"
+                                                "text-amber-600"
                                             } ${
                                                 video.aiStatus === "ready" &&
-                                                "text-green-500"
+                                                "text-green-600"
                                             } ${
                                                 video.aiStatus === "failed" &&
                                                 "text-red-500"

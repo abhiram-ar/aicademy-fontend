@@ -72,6 +72,8 @@ const CourseDetailsOutlet: React.FC = () => {
         courseId: id,
     });
 
+    console.log(content);
+
     const normalizeFormData = (data: string[]): { value: string }[] => {
         const res = data.map((item) => ({ value: item }));
         console.log(`transformed array`, res);
@@ -243,40 +245,45 @@ const CourseDetailsOutlet: React.FC = () => {
                     </div>
                 </label>
                 <div className="bg-white rounded-base p-2 border-2 border-black">
-                    <select
-                        {...register("demoVideoKey", {
-                            required: {
-                                value: true,
-                                message: "select a video",
-                            },
-                        })}
-                        id="demoVideo"
-                        className="w-full border-none outline-none"
-                    >
-                        <option value="" disabled>
-                            Select video for lesson
-                        </option>
-                        {courseDetails.demoVideoKey && (
-                            <option value={courseDetails.demoVideoKey}>
-                                {courseDetails.demoVideoKey
-                                    .split("-")
-                                    .slice(1)
-                                    .join("")}
+                    {courseDetails && content && (
+                        <select
+                            {...register("demoVideoKey", {
+                                required: {
+                                    value: true,
+                                    message: "select a video",
+                                },
+                            })}
+                            id="demoVideo"
+                            className="w-full border-none outline-none"
+                        >
+                            <option value="" disabled>
+                                Select video for lesson
                             </option>
-                        )}
-                        {courseDetails &&
-                            content &&
-                            content.courseVideos.map((video: Ivideo) => (
-                                <Fragment key={video._id}>
-                                    {courseDetails.demoVideoKey !==
-                                        video.key && (
-                                        <option value={video.key}>
-                                            {video.displayName}
-                                        </option>
-                                    )}
-                                </Fragment>
-                            ))}
-                    </select>
+                            {/* selected video to redner by default */}
+                            {/* {courseDetails.demoVideoKey && (
+                                <option value={courseDetails.demoVideoKey}>
+                                    {courseDetails.demoVideoKey
+                                        .split("-")
+                                        .slice(1)
+                                        .join("")}
+                                </option>
+                            )} */}
+                            {content.courseVideos
+                                .filter(
+                                    (video: { transcodingStatus: string }) =>
+                                        video.transcodingStatus === "completed"
+                                )
+                                .map((video: Ivideo) => (
+                                    <Fragment key={video._id}>
+                                        {
+                                            <option value={video._id}>
+                                                {video.displayName}
+                                            </option>
+                                        }
+                                    </Fragment>
+                                ))}
+                        </select>
+                    )}
                 </div>
 
                 {/* price group */}
