@@ -1,3 +1,7 @@
+import React, { useEffect, useRef, useState } from "react";
+import ReactPlayer from "react-player/file";
+import { Progress } from "@/components/ui/progress";
+import { Slider } from "@/components/ui/slider";
 import {
     Fullscreen,
     Pause,
@@ -6,8 +10,6 @@ import {
     Volume2,
     VolumeOff,
 } from "lucide-react";
-import React, { useEffect, useRef, useState } from "react";
-import ReactPlayer from "react-player/file";
 import {
     DropdownMenu,
     DropdownMenuContent,
@@ -16,8 +18,6 @@ import {
     DropdownMenuSeparator,
     DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
-import { Progress } from "@/components/ui/progress";
-import { Slider } from "@/components/ui/slider";
 
 type Progress = {
     playedSeconds: number;
@@ -26,7 +26,7 @@ type Progress = {
     loaded: number;
 };
 
-const VideoPlayer = ({
+const VideoPlayer: React.FC<{ url: string }> = ({
     url = "https://d3petuww6xgji.cloudfront.net/transcoded/678f4b56093fe2e9714bb0cc/master.m3u8",
 }) => {
     const playerRef = useRef<ReactPlayer | null>(null);
