@@ -18,6 +18,7 @@ import {
     DropdownMenuSeparator,
     DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
+import { ILesson } from "./Types";
 
 type Progress = {
     playedSeconds: number;
@@ -26,9 +27,12 @@ type Progress = {
     loaded: number;
 };
 
-const VideoPlayer: React.FC<{ url: string }> = ({
-    url = "https://d3petuww6xgji.cloudfront.net/transcoded/678f4b56093fe2e9714bb0cc/master.m3u8",
-}) => {
+// const url =
+//     "https://d3petuww6xgji.cloudfront.net/transcoded/678f4b56093fe2e9714bb0cc/master.m3u8";
+
+const VideoPlayer: React.FC<{ lesson?: ILesson }> = ({ lesson }) => {
+    const [url, setUrl] = useState("");
+
     const playerRef = useRef<ReactPlayer | null>(null);
     const playerWrapperRef = useRef<HTMLDivElement | null>(null);
     const controlsRef = useRef<HTMLDivElement | null>(null);
@@ -48,6 +52,26 @@ const VideoPlayer: React.FC<{ url: string }> = ({
         loaded: 0,
         duration: 0,
     });
+
+    useEffect(() => {
+        if (lesson) {
+            setUrl(
+                `https://d3petuww6xgji.cloudfront.net/${lesson.videoKey.transcodedVideoMasterFileKey}`
+            );
+        }
+        return () => {
+            setUrl("");
+            setPlayerState({
+                playing: true,
+                muted: false,
+                volume: 0.7,
+
+                played: 0,
+                loaded: 0,
+                duration: 0,
+            });
+        };
+    }, [lesson]);
 
     useEffect(() => {
         let timer: NodeJS.Timeout | undefined;

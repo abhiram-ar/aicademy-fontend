@@ -1,9 +1,16 @@
 import React, { useState } from "react";
 import CourseContents from "./CourseContents";
 import Chat from "./Chat";
-import { ICourseContent } from "./Types";
+import { ICourseContent, ILesson } from "./Types";
 
-const Sibebar: React.FC<{ content: ICourseContent }> = ({ content }) => {
+type Props = {
+    setCurrentlyPlaying: React.Dispatch<
+        React.SetStateAction<ILesson | undefined>
+    >;
+    content?: ICourseContent;
+};
+
+const Sibebar: React.FC<Props> = ({ content, setCurrentlyPlaying }) => {
     const [openChat, setOpenChat] = useState(false);
     return (
         <>
@@ -33,7 +40,10 @@ const Sibebar: React.FC<{ content: ICourseContent }> = ({ content }) => {
                 {openChat ? (
                     <Chat />
                 ) : (
-                    <CourseContents chapters={content.chapters} />
+                    <CourseContents
+                        chapters={content?.chapters}
+                        setCurrentlyPlaying={setCurrentlyPlaying}
+                    />
                 )}
             </div>
         </>

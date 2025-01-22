@@ -14,7 +14,7 @@ const learnApiSlice = apiSlice.injectEndpoints({
     endpoints: (builder) => ({
         getBoughtCourseContent: builder.query<
             GetCourseContenetRespose,
-            { courseId: string }
+            { courseId?: string }
         >({
             query: (data) => `/api/user/course/learn/${data.courseId}`,
         }),
