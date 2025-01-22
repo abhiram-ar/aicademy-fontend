@@ -2,11 +2,17 @@ import LearnPageNavbar from "./LearnPageNavbar";
 import Footer from "@/components/Footer";
 import Sibebar from "./Sibebar";
 import VideoPlayer from "./VideoPlayer";
+import { useGetBoughtCourseContentQuery } from "./LearnApiSlice";
+import { useParams } from "react-router-dom";
+import { ICourseContent } from "./Types";
 
 const LearnPage = () => {
+    const { courseId } = useParams();
+    const { data: query } = useGetBoughtCourseContentQuery({ courseId });
+    console.log(query);
     return (
         <div>
-            <LearnPageNavbar />
+            <LearnPageNavbar title={query?.content.title} />
 
             {/* main page */}
             <div className="w-full bg-paperYellow">
@@ -19,7 +25,7 @@ const LearnPage = () => {
 
                     {/* course contentes and chat */}
                     <div className="col-span-5 lg:col-span-3 border-x-2 border-b-2 border-black">
-                        <Sibebar />
+                        <Sibebar content={query?.content} />
                     </div>
                 </div>
             </div>

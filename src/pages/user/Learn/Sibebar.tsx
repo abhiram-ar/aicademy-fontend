@@ -1,8 +1,9 @@
-import { useState } from "react";
+import React, { useState } from "react";
 import CourseContents from "./CourseContents";
 import Chat from "./Chat";
+import { ICourseContent } from "./Types";
 
-const Sibebar = () => {
+const Sibebar: React.FC<{ content: ICourseContent }> = ({ content }) => {
     const [openChat, setOpenChat] = useState(false);
     return (
         <>
@@ -29,7 +30,11 @@ const Sibebar = () => {
             </div>
 
             <div className="bg-[#fef2e8] max-h-[79.5vh] min-h-[79.5vh] relative ">
-                {openChat ? <Chat /> : <CourseContents />}
+                {openChat ? (
+                    <Chat />
+                ) : (
+                    <CourseContents chapters={content.chapters} />
+                )}
             </div>
         </>
     );

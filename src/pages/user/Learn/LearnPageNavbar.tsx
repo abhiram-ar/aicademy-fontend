@@ -10,10 +10,7 @@ const LearnPageNavbar: React.FC<{ title?: string }> = ({ title }) => {
                 <Link to="/">AIcademy</Link>
             </h1>
             <p className="text-[#eeefe9] font-semibold text-4xl">|</p>
-            <p className="text-[#eeefe9] font-semibold text-3xl">
-                {title ?? "Course title goes here"}{" "}
-                {/* remove place holder when api live */}
-            </p>
+            <p className="text-[#eeefe9] font-semibold text-3xl">{title}</p>
         </div>
     );
 };
