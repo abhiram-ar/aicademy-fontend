@@ -1,7 +1,7 @@
 import React from "react";
 import { useGetCoursesCardDetailsQuery } from "../explore/exploreApiSlice";
 import CourseCardLong from "../explore/CourseCardLong";
-import { ICourse } from "../explore/ExplorePage";
+import { ICourse } from "../explore/Types";
 import { Link } from "react-router-dom";
 
 const MoreCourses: React.FC<{ category?: string; currentCourseId: string }> = ({

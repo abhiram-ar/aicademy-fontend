@@ -1,6 +1,6 @@
 import SingleOrder from "./SingleOrder";
 import { useGetUserPurchaseHistoryQuery } from "./OrderPageApiSlice";
-import { ICourse } from "../explore/ExplorePage";
+import { ICourse } from "../explore/Types";
 
 export interface IOrder {
     coupon: {

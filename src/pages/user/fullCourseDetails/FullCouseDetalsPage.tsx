@@ -6,7 +6,7 @@ import { useGetFullCoursePublicDetailsQuery } from "./CourseDetailsApiSlice";
 import { useNavigate, useParams } from "react-router-dom";
 import { useSelector } from "react-redux";
 import { RootState } from "@/redux/store";
-import { ICourse } from "../explore/ExplorePage";
+import { ICourse } from "../explore/Types";
 import { HashLoader } from "react-spinners";
 import {
     useAddToCartMutation,
@@ -21,43 +21,7 @@ import {
 } from "../wishlist/wishlistApiSlice";
 import Reviews from "./Reviews";
 import MoreCourses from "./MoreCourses";
-
-export interface IChapter {
-    chapterTitle: string;
-    lessons: {
-        lessonTitle: string;
-        _id: string;
-    }[];
-    _id: string;
-}
-
-interface IFullCourseData {
-    thumbnail: {
-        public_id: string;
-        url: string;
-    };
-    _id: string;
-    title: string;
-    description: string;
-    createdBy: {
-        _id: string;
-        legalName: string;
-    };
-    courseState: string;
-    boughtCount: number;
-    prerequisites: string[];
-    demoVideos: string;
-    chapters: IChapter[];
-    category?: string;
-    estimatedPrice: number;
-    level: string;
-    price: number;
-    benefits: string[];
-    demoVideoKey: string;
-    updatedAt: string; // ISO date string
-    rating?: number;
-    totalRatingCount: number;
-}
+import { IFullCourseData, IChapter } from "./Types";
 
 const FullCouseDetalsPage = () => {
     const user = useSelector((state: RootState) => state.auth.user);

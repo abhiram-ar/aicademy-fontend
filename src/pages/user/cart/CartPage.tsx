@@ -6,7 +6,7 @@ import {
 import CourseCardLong from "../explore/CourseCardLong";
 import { useSelector } from "react-redux";
 import { RootState } from "@/redux/store";
-import { ICourse } from "../explore/ExplorePage";
+import { ICourse } from "../explore/Types";
 import AddShoppingCartOutlinedIcon from "@mui/icons-material/AddShoppingCartOutlined";
 import { Link } from "react-router-dom";
 import Checkout from "./Checkout";

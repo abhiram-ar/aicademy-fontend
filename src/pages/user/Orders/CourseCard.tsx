@@ -1,7 +1,7 @@
 import React from "react";
 import CourseCardLong from "../explore/CourseCardLong";
 import { Link } from "react-router-dom";
-import { ICourse } from "../explore/ExplorePage";
+import { ICourse } from "../explore/Types";
 import CourseReview from "./CourseReview";
 
 const CourseCard: React.FC<{ course: ICourse }> = ({ course }) => {

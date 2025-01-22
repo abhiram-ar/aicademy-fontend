@@ -1,33 +1,7 @@
 import React, { useRef, useState } from "react";
 import { Label } from "@/components/ui/label";
 import { RadioGroup, RadioGroupItem } from "@/components/ui/radio-group";
-
-type Props = {
-    filter: {
-        search: string;
-        category: string;
-        level: string;
-        minPrice: string;
-        maxPrice: string;
-        sortBy: string;
-        sortOrder: number;
-        page: number;
-        limit: number;
-    };
-    setFilter: React.Dispatch<
-        React.SetStateAction<{
-            search: string;
-            category: string;
-            level: string;
-            minPrice: string;
-            maxPrice: string;
-            sortBy: string;
-            sortOrder: number;
-            page: number;
-            limit: number;
-        }>
-    >;
-};
+import { Props } from "./Types";
 
 const priceFilter: {
     value: string;

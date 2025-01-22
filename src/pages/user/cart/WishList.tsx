@@ -5,7 +5,7 @@ import {
     useMoveToCartMutation,
     useRemoveFromWishlistMutation,
 } from "../wishlist/wishlistApiSlice";
-import { ICourse } from "../explore/ExplorePage";
+import { ICourse } from "../explore/Types";
 import { Heart } from "lucide-react";
 
 const Wishlist = () => {
