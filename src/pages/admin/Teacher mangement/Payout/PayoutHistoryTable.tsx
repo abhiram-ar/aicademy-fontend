@@ -44,7 +44,6 @@ const PayoutTransactionsTable = () => {
         }
     };
 
-    console.log(data);
     return (
         <>
             <div className="">

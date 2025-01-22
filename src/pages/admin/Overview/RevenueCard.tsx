@@ -1,8 +1,6 @@
 import React from "react";
 import { MonthlyOverview } from "./AdminOverviewPage";
 
-
-
 type Props = {
     currentMonthReport?: MonthlyOverview;
     prevMonthReport?: MonthlyOverview;

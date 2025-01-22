@@ -11,19 +11,6 @@ import {
 import { useUpdateCourseStateAdminMutation } from "./CourseManagementApiSlice";
 import { Link } from "react-router-dom";
 
-export interface ICoupon {
-    _id: string;
-    code: string;
-    description: string;
-    isActive: boolean;
-    discount: number;
-    expiryDate: Date;
-    usageLimit: number;
-    usedBy: string[] | number[];
-    maxDiscountAmount: number;
-    minPurchaseAmount: number;
-}
-
 type Props = {
     data?: {
         _id: string;
