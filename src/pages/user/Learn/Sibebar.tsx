@@ -4,13 +4,18 @@ import Chat from "./Chat";
 import { ICourseContent, ILesson } from "./Types";
 
 type Props = {
+    currentlyPlaying: ILesson | undefined;
     setCurrentlyPlaying: React.Dispatch<
         React.SetStateAction<ILesson | undefined>
     >;
     content?: ICourseContent;
 };
 
-const Sibebar: React.FC<Props> = ({ content, setCurrentlyPlaying }) => {
+const Sibebar: React.FC<Props> = ({
+    content,
+    setCurrentlyPlaying,
+    currentlyPlaying,
+}) => {
     const [openChat, setOpenChat] = useState(false);
     return (
         <>
@@ -43,6 +48,7 @@ const Sibebar: React.FC<Props> = ({ content, setCurrentlyPlaying }) => {
                     <CourseContents
                         chapters={content?.chapters}
                         setCurrentlyPlaying={setCurrentlyPlaying}
+                        currentlyPlaying={currentlyPlaying}
                     />
                 )}
             </div>

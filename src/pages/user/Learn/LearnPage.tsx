@@ -40,6 +40,7 @@ const LearnPage = () => {
                     <div className="col-span-5 lg:col-span-3 border-x-2 border-b-2 border-black">
                         <Sibebar
                             content={query?.content}
+                            currentlyPlaying={currentlyPlaying}
                             setCurrentlyPlaying={setCurrentlyPlaying}
                         />
                     </div>
