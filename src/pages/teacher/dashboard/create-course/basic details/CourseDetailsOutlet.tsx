@@ -276,11 +276,7 @@ const CourseDetailsOutlet: React.FC = () => {
                                 .map((video: Ivideo) => (
                                     <Fragment key={video._id}>
                                         {
-                                            <option
-                                                value={
-                                                    video.transcodedVideoMasterFileKey
-                                                }
-                                            >
+                                            <option value={video._id}>
                                                 {video.displayName}
                                             </option>
                                         }

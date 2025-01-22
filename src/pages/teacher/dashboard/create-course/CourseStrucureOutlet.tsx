@@ -313,9 +313,7 @@ const LessonForm: React.FC<Props> = ({
                                             .map((video: Ivideo) => (
                                                 <option
                                                     key={video._id}
-                                                    value={
-                                                        video.transcodedVideoMasterFileKey
-                                                    }
+                                                    value={video._id}
                                                 >
                                                     {video.displayName}
                                                 </option>
