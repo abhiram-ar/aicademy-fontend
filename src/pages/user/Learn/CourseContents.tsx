@@ -29,6 +29,7 @@ const CourseContents: React.FC<Props> = ({
         );
         return chapter ? [chapter._id] : [""];
     };
+    
     return (
         <div className="w-full max-h-[79.5vh] overflow-y-auto">
             <Accordion
