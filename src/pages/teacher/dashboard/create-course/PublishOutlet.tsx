@@ -8,42 +8,7 @@ import {
     usePublishCourseMutation,
     useUnPublishCourseMutation,
 } from "@/redux/features/teacher/courseCreationAPIs";
-
-export interface IChapter {
-    chapterTitle: string;
-    lessons: {
-        lessonTitle: string;
-        _id: string;
-    }[];
-    _id: string;
-}
-
-interface IFullCourseData {
-    thumbnail: {
-        public_id: string;
-        url: string;
-    };
-    _id: string;
-    title: string;
-    description: string;
-    createdBy: {
-        _id: string;
-        legalName: string;
-    };
-    courseState: string;
-    boughtCount: number;
-    prerequisites: string[];
-    demoVideos: string;
-    chapters: IChapter[];
-    category: string;
-    estimatedPrice: number;
-    level: string;
-    price: number;
-    benefits: string[];
-    demoVideoKey: string;
-    updatedAt: string; // ISO date string
-    rating?: number;
-}
+import { IFullCourseData, IChapter } from "./Types";
 
 const PublishOutlet = () => {
     const { id } = useParams();
@@ -189,7 +154,13 @@ const PublishOutlet = () => {
                                                     />
                                                 ))}
                                             </div>
-                                            ({fullCourseData.ratingCount})
+                                            {fullCourseData.totalRatingCount && (
+                                                <>
+                                                    (
+                                                    {fullCourseData.totalRatingCount}
+                                                    )
+                                                </>
+                                            )}
                                         </>
                                     ) : (
                                         <p>No rating yet</p>

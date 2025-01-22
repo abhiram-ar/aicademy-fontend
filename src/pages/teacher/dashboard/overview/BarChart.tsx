@@ -14,20 +14,6 @@ import {
 } from "@/components/ui/chart";
 import { useGetEarningsByMonthQuery } from "./OverviewPageApiSlice";
 import { getRandomColor } from "@/utils/randomColorGenerator";
-let chartData = [
-    { month: "January", desktop: 186, mobile: 80 },
-    { month: "February", desktop: 305, mobile: 200 },
-    { month: "March", desktop: 237, mobile: 120 },
-    { month: "April", desktop: 73, mobile: 190 },
-    { month: "May", desktop: 209, mobile: 130 },
-    { month: "June", desktop: 214, mobile: 140 },
-    { month: "July", desktop: 305, mobile: 200 },
-    { month: "Augest ", desktop: 237, mobile: 120 },
-    { month: "September", desktop: 73, mobile: 190 },
-    { month: "October", desktop: 209, mobile: 130 },
-    { month: "November", desktop: 214, mobile: 140 },
-    { month: "December", desktop: 214, mobile: 140 },
-];
 
 const chartConfig = {
     desktop: {
@@ -42,7 +28,7 @@ const chartConfig = {
 
 const Saleschart = () => {
     const { data } = useGetEarningsByMonthQuery({ months: 6 });
-
+    let chartData;
     const map = new Map();
     const set = new Set();
     if (data) {

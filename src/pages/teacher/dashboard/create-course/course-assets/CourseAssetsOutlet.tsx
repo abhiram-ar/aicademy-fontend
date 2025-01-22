@@ -1,6 +1,8 @@
 import { useGetAllCourseVideosQuery } from "@/redux/features/teacher/courseCreationAPIs";
 import Upload from "./Upload";
 import { useParams } from "react-router-dom";
+import { useEffect } from "react";
+import { Ivideo } from "./Types";
 import {
     Table,
     TableBody,
@@ -9,21 +11,6 @@ import {
     TableHeader,
     TableRow,
 } from "@/components/ui/table";
-import { useEffect } from "react";
-
-export interface Ivideo {
-    _id: string;
-    uploadedBy: string;
-    courseId: string;
-    displayName: string;
-    key: string;
-    originalFileSize: number;
-    originalFileType: number;
-    aiStatus: "processing" | "ready" | "failed";
-    transcriptId?: string;
-    transcodingStatus: "processing" | "completed" | "failed";
-    transcodedVideoMasterFileKey?: string;
-}
 
 const CourseAssetsOutlet = () => {
     const { id } = useParams();

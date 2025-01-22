@@ -7,62 +7,11 @@ import {
     useUpdateBasisCourseDetailsMutation,
 } from "@/redux/features/teacher/courseCreationAPIs";
 import Thumbnail from "./Thumbnail";
-import { ICourse } from "../CourseDraft";
+import { ICourse } from "../course-assets/Types";
 import { Plus, X } from "lucide-react";
-import { Ivideo } from "../course-assets/CourseAssetsOutlet";
-
-type FormData = {
-    title: string;
-    description: string;
-    createdBy: string;
-    courseState: "draft" | "published" | "unpublished";
-    price?: number;
-    estimatedPrice?: number;
-    thumbnail?: {
-        public_id: string;
-        url: string;
-    };
-    category?: string;
-    level?: "beginner" | "intermediate" | "advanced";
-    benefits: { value: string }[];
-    prerequisites: { value: string }[];
-    demoVideoKey: string;
-};
-
-const categories: { displayName: string; value: string }[] = [
-    {
-        displayName: "Web development",
-        value: "webDevelopment",
-    },
-    {
-        displayName: "AI/ML",
-        value: "aiml",
-    },
-    {
-        displayName: "Data science",
-        value: "datascience",
-    },
-    {
-        displayName: "Database",
-        value: "database",
-    },
-    {
-        displayName: "Personal deveopment",
-        value: "personalDevelopment",
-    },
-    {
-        displayName: "Health and Fitness",
-        value: "healthAndWellness",
-    },
-    {
-        displayName: "Editing",
-        value: "editing",
-    },
-    {
-        displayName: "other",
-        value: "other",
-    },
-];
+import { Ivideo } from "../course-assets/Types";
+import { categories } from "./categories";
+import { FormData } from "./Types";
 
 const CourseDetailsOutlet: React.FC = () => {
     const courseDetails: ICourse = useOutletContext();
