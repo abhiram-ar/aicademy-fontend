@@ -72,6 +72,8 @@ const CourseDetailsOutlet: React.FC = () => {
         courseId: id,
     });
 
+    console.log(content);
+
     const normalizeFormData = (data: string[]): { value: string }[] => {
         const res = data.map((item) => ({ value: item }));
         console.log(`transformed array`, res);
@@ -274,7 +276,11 @@ const CourseDetailsOutlet: React.FC = () => {
                                 .map((video: Ivideo) => (
                                     <Fragment key={video._id}>
                                         {
-                                            <option value={video.key}>
+                                            <option
+                                                value={
+                                                    video.transcodedVideoMasterFileKey
+                                                }
+                                            >
                                                 {video.displayName}
                                             </option>
                                         }
