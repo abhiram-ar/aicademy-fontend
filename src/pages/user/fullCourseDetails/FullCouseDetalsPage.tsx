@@ -290,6 +290,9 @@ const FullCouseDetalsPage = () => {
                                     <Button
                                         className="bg-[#fd9745] w-full py-7 px-5 font-semibold text-xl"
                                         size="lg"
+                                        onClick={() =>
+                                            navigate(`/user/learn/${id}`)
+                                        }
                                     >
                                         Go to course
                                     </Button>
