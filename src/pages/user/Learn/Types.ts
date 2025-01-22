@@ -22,3 +22,7 @@ export interface ICourseContent {
     title: string;
     description: string;
 }
+export interface IMessage {
+    role: "ai" | "user";
+    message: string;
+}

@@ -33,5 +33,5 @@
   },
   "include": [
     "src"
-  ]
+, "src/pages/admin/course/coupon/.tsx"  ]
 }

@@ -1,5 +1,6 @@
 import { Button } from "@/components/ui/button";
 import React from "react";
+import { categories } from "./categories";
 
 type Props = {
     filter: {
@@ -29,44 +30,6 @@ type Props = {
 };
 
 const FIlterCategoryNav: React.FC<Props> = ({ filter, setFilter }) => {
-    const categories: { displayName: string; value: string }[] = [
-        {
-            displayName: "All",
-            value: "",
-        },
-        {
-            displayName: "Web development",
-            value: "webDevelopment",
-        },
-        {
-            displayName: "AI/ML",
-            value: "aiml",
-        },
-        {
-            displayName: "Data science",
-            value: "datascience",
-        },
-        {
-            displayName: "Database",
-            value: "database",
-        },
-        {
-            displayName: "Personal deveopment",
-            value: "personalDevelopment",
-        },
-        {
-            displayName: "Health and Fitness",
-            value: "healthAndWellness",
-        },
-        {
-            displayName: "Editing",
-            value: "editing",
-        },
-        {
-            displayName: "other",
-            value: "other",
-        },
-    ];
 
     return (
         <div className="bg-white flex justify-center items-center gap-2 p-5 border-b-4 border-black -mt-1 relative z-30 ">

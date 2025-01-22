@@ -8,11 +8,7 @@ import {
 import { useEffect, useRef, useState } from "react";
 import { useSelector } from "react-redux";
 import NewChatButton from "./NewChatButton";
-
-interface IMessage {
-    role: "ai" | "user";
-    message: string;
-}
+import { IMessage } from "./Types";
 
 type Props = {
     title?: string;

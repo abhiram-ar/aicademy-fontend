@@ -1,8 +1,9 @@
 import { Button } from "@/components/ui/button";
 import { FilePlus2, FileX2, PackageMinus, PackagePlus } from "lucide-react";
 import React from "react";
-import { Ivideo } from "./course-assets/CourseAssetsOutlet";
-import { ICourse } from "./CourseDraft";
+import { Ivideo } from "./course-assets/Types";
+import { ICourse } from "./course-assets/Types";
+import { useOutletContext, useParams } from "react-router-dom";
 import {
     useGetAllCourseVideosQuery,
     useUpdateCouseStructureMutation,
@@ -14,9 +15,8 @@ import {
     UseFormRegister,
     FieldErrors,
 } from "react-hook-form";
-import { useOutletContext, useParams } from "react-router-dom";
 
-interface formValue {
+type formValue = {
     chapters: {
         chapterTitle: string;
         lessons: {
@@ -24,7 +24,7 @@ interface formValue {
             videoKey: string;
         }[];
     }[];
-}
+};
 
 const CourseStrucureOutlet = () => {
     const courseDetails: ICourse = useOutletContext();

@@ -7,26 +7,7 @@ import { useState } from "react";
 import { Link, useLocation } from "react-router-dom";
 import PaginationExplore from "./Pagination.tsx";
 import nothingFound from "./../../../assets/NothingFoundSearch.png";
-
-export interface ICourse {
-    _id: string;
-    title: string;
-    description: string;
-    createdBy: {
-        firstName: string;
-        lastName: string;
-        legalName: string;
-    };
-    price: number;
-    estimatedPrice: number;
-    thumbnail: { public_id: string; url: string };
-    rating?: number;
-    boughtCount: number;
-    category: string;
-    level: "beginner" | "intermediate" | "advanced";
-    pages: number;
-    totalRatingCount: number;
-}
+import { ICourse } from "./Types.tsx";
 
 const ExplorePage = () => {
     //if redirected from somewhere else

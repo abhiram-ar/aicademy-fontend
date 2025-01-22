@@ -1,7 +1,7 @@
 import React from "react";
 import priceBanner from "./../../../assets/priceBanner.png";
 import { Star } from "lucide-react";
-import { ICourse } from "./ExplorePage";
+import { ICourse } from "./Types";
 import ImageWithShimer from "./ImageWithShimer";
 
 const CourseCardLong: React.FC<{ courseDetails: ICourse }> = ({

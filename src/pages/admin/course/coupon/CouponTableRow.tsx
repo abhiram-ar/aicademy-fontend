@@ -1,3 +1,11 @@
+import { TableBody, TableCell, TableRow } from "@/components/ui/table";
+import { CircleCheck, CircleX, Ellipsis, ShieldAlert } from "lucide-react";
+import React, { useEffect } from "react";
+import { ICoupon } from "./Types";
+import {
+    useGetCouponListQuery,
+    useUpdateCouponStateAdminMutation,
+} from "./CouponManagementApiSlice";
 import {
     DropdownMenu,
     DropdownMenuContent,
@@ -5,26 +13,6 @@ import {
     DropdownMenuLabel,
     DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
-import { TableBody, TableCell, TableRow } from "@/components/ui/table";
-import { CircleCheck, CircleX, Ellipsis, ShieldAlert } from "lucide-react";
-import React, { useEffect } from "react";
-import {
-    useGetCouponListQuery,
-    useUpdateCouponStateAdminMutation,
-} from "./CouponManagementApiSlice";
-
-export interface ICoupon {
-    _id: string;
-    code: string;
-    description: string;
-    isActive: boolean;
-    discount: number;
-    expiryDate: string;
-    usageLimit: number;
-    usedBy: string[] | number[];
-    maxDiscountAmount: number;
-    minPurchaseAmount: number;
-}
 
 type Props = {
     filter: {

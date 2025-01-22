@@ -1,32 +1,14 @@
 import React, { useState } from "react";
 import ReviewCard from "./ReviewCard";
 import { useGetCourseReviewListQuery } from "./CourseDetailsApiSlice";
+import { IReview } from "./Types";
+import { MessageCircleWarning } from "lucide-react";
 import {
     Pagination,
     PaginationContent,
     PaginationItem,
     PaginationLink,
-    // PaginationNext,
-    // PaginationPrevious,
 } from "@/components/ui/pagination";
-import { MessageCircleWarning } from "lucide-react";
-
-type IReview = {
-    _id: string;
-    courseId: string;
-    createdBy: {
-        profilePicture: {
-            url: string;
-        };
-
-        firstName: string;
-        lastName?: string;
-    };
-    createdAt: string;
-    rating: number;
-    review: string;
-    updatedAt: string;
-};
 
 const Reviews: React.FC<{ courseId: string }> = ({ courseId }) => {
     const [page, setPage] = useState(1);

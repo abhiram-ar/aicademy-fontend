@@ -2,7 +2,7 @@ import { useUpdateThumnailMutation } from "@/redux/features/teacher/courseCreati
 import { Pencil, Upload } from "lucide-react";
 import React, { useRef } from "react";
 import toast from "react-hot-toast";
-import { ICourse } from "../CourseDraft";
+import { ICourse } from "../course-assets/Types";
 import ImgCrop from "./Crop";
 import {
     Dialog,

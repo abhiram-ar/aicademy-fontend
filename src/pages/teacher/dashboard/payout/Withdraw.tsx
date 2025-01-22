@@ -19,6 +19,7 @@ const Withdraw: React.FC<{ withdrawable: number }> = ({ withdrawable }) => {
         handleSubmit,
         reset,
     } = useForm<{ withdrawAmount: number }>();
+
     const closeDialogRef = useRef<HTMLButtonElement>(null);
     const withdrawButtonRef = useRef<HTMLButtonElement>(null);
     const [requestPayout] = useRequestForPayoutMutation();

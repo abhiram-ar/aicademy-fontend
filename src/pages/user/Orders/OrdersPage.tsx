@@ -1,23 +1,6 @@
 import SingleOrder from "./SingleOrder";
 import { useGetUserPurchaseHistoryQuery } from "./OrderPageApiSlice";
-import { ICourse } from "../explore/ExplorePage";
-
-export interface IOrder {
-    coupon: {
-        couponApplied: boolean;
-        couponCode: string;
-        couponDiscountAmount: number;
-    };
-    _id: string;
-    coursesBought: {
-        courseId: ICourse;
-        soldPrice: number;
-    }[];
-
-    orderValue: number;
-    totalDiscount: number;
-    createdAt: Date;
-}
+import { IOrder } from "./Types";
 
 const OrdersPage = () => {
     const { data } = useGetUserPurchaseHistoryQuery({});

@@ -2,36 +2,7 @@ import { useGetFullCourseDetailsQuery } from "@/redux/features/teacher/courseCre
 import React from "react";
 import { NavLink, Outlet, useParams } from "react-router-dom";
 import { Toaster } from "react-hot-toast";
-
-export interface ICourse {
-    _id: string;
-    title: string;
-    description: string;
-    createdBy: string; // Reference to the Teacher model
-    courseState?: "draft" | "published" | "unpublished";
-    price?: number;
-    estimatedPrice?: number;
-    thumbnail?: {
-        public_id: string;
-        url: string;
-    };
-    demoVideoKey: string;
-    rating?: number;
-    boughtCount?: number;
-    category?: string;
-    level?: "beginner" | "intermediate" | "advanced";
-    benefits?: string[];
-    prerequisites?: string[];
-    chapters?: Array<{
-        chapterTitle: string;
-        lessons?: Array<{
-            lessonTitle?: string;
-            videoKey?: string;
-            videoURL?: string;
-            videoDuration?: number;
-        }>;
-    }>;
-}
+import { ICourse } from "./course-assets/Types";
 
 const CourseDraft: React.FC = () => {
     const { id } = useParams();
