@@ -4,7 +4,7 @@ import Sibebar from "./Sibebar";
 import VideoPlayer from "./VideoPlayer";
 import { useGetBoughtCourseContentQuery } from "./LearnApiSlice";
 import { useParams } from "react-router-dom";
-import { ICourseContent, ILesson } from "./Types";
+import { ILesson } from "./Types";
 import { useEffect, useState } from "react";
 
 const LearnPage = () => {

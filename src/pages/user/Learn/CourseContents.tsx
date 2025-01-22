@@ -29,16 +29,18 @@ const CourseContents: React.FC<Props> = ({
         );
         return chapter ? [chapter._id] : [""];
     };
-    
+
     return (
         <div className="w-full max-h-[79.5vh] overflow-y-auto">
-            <Accordion
-                className="p-2"
-                type="multiple"
-                defaultValue={[`item-${currentchapter(currentlyPlaying?._id)}`]}
-            >
-                {chapters &&
-                    chapters.map((chapter) => (
+            {chapters && (
+                <Accordion
+                    className="p-2"
+                    type="multiple"
+                    defaultValue={[
+                        `item-${currentchapter(currentlyPlaying?._id)}`,
+                    ]}
+                >
+                    {chapters.map((chapter) => (
                         <AccordionItem
                             key={chapter._id}
                             className="shadow-none border-2 mt-2"
@@ -78,7 +80,8 @@ const CourseContents: React.FC<Props> = ({
                             </AccordionContent>
                         </AccordionItem>
                     ))}
-            </Accordion>
+                </Accordion>
+            )}
         </div>
     );
 };
