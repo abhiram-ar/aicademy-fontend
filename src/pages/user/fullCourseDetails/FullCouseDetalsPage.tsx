@@ -8,20 +8,20 @@ import { useSelector } from "react-redux";
 import { RootState } from "@/redux/store";
 import { ICourse } from "../explore/Types";
 import { HashLoader } from "react-spinners";
+import Reviews from "./Reviews";
+import MoreCourses from "./MoreCourses";
+import { useGetUserBoughtCourseListQuery } from "../myLearning/myLearningApiSlice";
+import { IFullCourseData, IChapter } from "./Types";
 import {
     useAddToCartMutation,
     useGetCartQuery,
     useRemoveFromCartMutation,
 } from "../cart/cartApiSlice";
-import { useGetUserBoughtCourseListQuery } from "../myLearning/myLearningApiSlice";
 import {
     useAddToWishlistMutation,
     useGetWishlistQuery,
     useRemoveFromWishlistMutation,
 } from "../wishlist/wishlistApiSlice";
-import Reviews from "./Reviews";
-import MoreCourses from "./MoreCourses";
-import { IFullCourseData, IChapter } from "./Types";
 
 const FullCouseDetalsPage = () => {
     const user = useSelector((state: RootState) => state.auth.user);
