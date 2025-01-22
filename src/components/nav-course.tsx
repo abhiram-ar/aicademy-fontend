@@ -1,36 +1,17 @@
 import { Link, useParams } from "react-router-dom";
 import { useGetDraftCourseListQuery } from "@/redux/features/teacher/courseCreationAPIs";
-
-import {
-    Book,
-    BookDashed,
-    CirclePlus,
-    Folder,
-    Forward,
-    MoreHorizontal,
-    Trash2,
-} from "lucide-react";
-
-import {
-    DropdownMenu,
-    DropdownMenuContent,
-    DropdownMenuItem,
-    DropdownMenuSeparator,
-    DropdownMenuTrigger,
-} from "@/components/ui/dropdown-menu";
-
+import { Book, BookDashed, CirclePlus } from "lucide-react";
 import {
     SidebarGroup,
     SidebarGroupLabel,
     SidebarMenu,
-    SidebarMenuAction,
     SidebarMenuButton,
     SidebarMenuItem,
-    useSidebar,
 } from "@/components/ui/sidebar";
 
+
+
 export function NavCourse() {
-    const { isMobile } = useSidebar();
     const { data, isLoading } = useGetDraftCourseListQuery({});
     const { id: activeCourseId } = useParams();
 
