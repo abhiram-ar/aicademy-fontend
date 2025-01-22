@@ -114,11 +114,11 @@ const FullCouseDetalsPage = () => {
             {/* body */}
             <div className="bg-paperYellow w-full min-h-screen py-12">
                 {/* content */}
-                <div className="w-9/12 mx-auto rounded-base">
+                <div className="w-11/12 md:10/12 xl:w-9/12 mx-auto rounded-base">
                     {/* banner */}
-                    <div className="bg-[#212121] border border-black  w-full h-80 grid grid-cols-12 py-10 ps-20 pe-10 gap-5 rounded-t-base">
+                    <div className="bg-[#212121] border border-black  w-full grid grid-cols-12 py-10 ps-20 pe-10 gap-5 rounded-t-base">
                         {/* banner text */}
-                        <div className="text-darkText col-span-7 font-publicSans flex flex-col gap-5 ">
+                        <div className="text-darkText col-span-12 md:col-span-6 xl:col-span-7 font-publicSans flex flex-col gap-5 ">
                             <p className="text-zinc-300">
                                 #{fullCourseData.category}
                             </p>
@@ -137,8 +137,8 @@ const FullCouseDetalsPage = () => {
                         </div>
 
                         {/* banner thumnail and demo */}
-                        <div className="col-span-5">
-                            <div className="w-[26rem] h-[14.625rem] border-2 border-zinc-500 rounded-base overflow-hidden mx-auto">
+                        <div className="col-span-12 md:col-span-6 xl:col-span-5">
+                            <div className="w-full  border-2 border-zinc-500 rounded-base overflow-hidden mx-auto">
                                 <img
                                     src={fullCourseData.thumbnail.url}
                                     className="object-cover w-full h-full"
