@@ -1,5 +1,5 @@
 import CourseCard from "./CourseCard";
-import { IOrder } from "./OrdersPage";
+import { IOrder } from "./Types";
 
 type Props = {
     orderDetails: IOrder;
