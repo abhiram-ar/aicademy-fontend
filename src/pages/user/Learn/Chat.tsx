@@ -24,15 +24,21 @@ const Chat: React.FC<Props> = ({ title, videokey, aiStatus }) => {
     const scrollRef = useRef<HTMLDivElement>(null);
     const token = useSelector((state: RootState) => state.auth.token);
     const webSocketRef = useRef<WebSocket | null>(null);
-
-    console.log(title);
+    const [isOnline, setIsOnline] = useState(false);
 
     useEffect(() => {
         const ws = new WebSocket(
             `ws://localhost:3000?authorization=Bearer ${token}`
         );
-        ws.onopen = () => console.log("ws connection established");
+
+        ws.onopen = () => {
+            setIsOnline(true);
+            console.log("ws connection established");
+            webSocketRef.current = ws;
+        };
+
         ws.onerror = (event) => console.error("ws error", event);
+
         ws.onmessage = (message) => {
             console.log(message);
             setMessages((prevMessages) => [
@@ -40,12 +46,12 @@ const Chat: React.FC<Props> = ({ title, videokey, aiStatus }) => {
                 { role: "ai", message: message.data },
             ]);
         };
+
         ws.onclose = (event) => {
             webSocketRef.current = null;
+            setIsOnline(false);
             console.log("closed ws connection", event);
         };
-
-        webSocketRef.current = ws;
         return () => {
             console.log("closing ws connection...");
             ws.close();
@@ -163,20 +169,19 @@ const Chat: React.FC<Props> = ({ title, videokey, aiStatus }) => {
             {/* send message  */}
             <div
                 className={`absolute inset-x-0 bottom-0 border-t border-black py-4 p-5 flex justify-between gap-5 bg-white ${
-                    !webSocketRef && "bg-zinc-400"
+                    !isOnline && "bg-zinc-600"
                 }`}
             >
                 <textarea
                     ref={textareaRef}
                     rows={1}
                     className="w-full resize-none border-none outline-none overflow-hidden bg-transparent"
-                    placeholder="How can I help you..."
+                    placeholder={`${isOnline ? "How can I help you..." : "Chat not available"}`}
                 />
-                <button
-                    disabled={webSocketRef ? false : true}
-                    onClick={handleSend}
-                >
-                    <SendHorizontal />
+                <button disabled={!isOnline} onClick={handleSend}>
+                    <SendHorizontal
+                        className={`${!isOnline ? "stroke-zinc-700" : "stroke-slate-900/80 hover:stroke-slate-900"} `}
+                    />
                 </button>
             </div>
         </div>
