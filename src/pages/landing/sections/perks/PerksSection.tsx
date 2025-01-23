@@ -37,7 +37,7 @@ const PerksSection = () => {
     ];
 
     return (
-        <div className=" mx-10 lg:mx-60   py-16 font-publicSans ">
+        <div className="w-11/12 lg:w-10/12 xl:w-8/12 mx-auto   py-16 font-publicSans ">
             <div className="w-fit mx-auto">
                 <h3 className="text-4xl text-center font-bold">
                     Your Gateway to Smarter Learning
@@ -83,7 +83,7 @@ const PerksSection = () => {
 
             {/* ai feature */}
             <div
-                className="border-4 border-black mt-5 rounded-base bg-[#212121] text-darkText px-5 md:px-20 py-5 font-publicSans grid grid-col-3 lg:grid-cols-5 gap-10
+                className="border-4 border-black mt-5 rounded-base bg-[#212121] text-darkText px-5 xl:px-20 py-5 font-publicSans grid grid-col-3 lg:grid-cols-5 gap-10
             "
             >
                 {/* content */}
