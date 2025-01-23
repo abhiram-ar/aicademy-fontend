@@ -47,7 +47,7 @@ const ExplorePage = () => {
                         <FilterSidebar filter={filter} setFilter={setFilter} />
                     </div>
                     {/* rigt seciotn - main */}
-                    <div className="relative col-span-12 lg:col-span-9 border border-red-400">
+                    <div className="relative col-span-12 lg:col-span-9">
                         <div className="absolute right-0">
                             <SortDropDown setFilter={setFilter} />
                         </div>
