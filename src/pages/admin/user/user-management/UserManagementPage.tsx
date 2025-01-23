@@ -159,9 +159,7 @@ const UserManagementPage = () => {
                                                         <DropdownMenuLabel>
                                                             Actions
                                                         </DropdownMenuLabel>
-                                                        <DropdownMenuItem className="bg-white hover:bg-slate-400 border-0 px-3 ">
-                                                            View full profile
-                                                        </DropdownMenuItem>
+
                                                         <DropdownMenuItem
                                                             onClick={() => {
                                                                 return userDetails.isBlocked
