@@ -1,4 +1,4 @@
-import { Check, Heart, Plus, Star } from "lucide-react";
+import { Check, Heart, Play, Plus, Star } from "lucide-react";
 import priceBanner from "./../../../assets/priceBanner.png";
 import { Button } from "@/components/ui/button";
 import ChapterAccordion from "./ChapterAccordian";
@@ -12,6 +12,8 @@ import Reviews from "./Reviews";
 import MoreCourses from "./MoreCourses";
 import { useGetUserBoughtCourseListQuery } from "../myLearning/myLearningApiSlice";
 import { IFullCourseData, IChapter } from "./Types";
+import DemoVideoModal from "./DemoVideoModal";
+import { useState } from "react";
 import {
     useAddToCartMutation,
     useGetCartQuery,
@@ -24,6 +26,7 @@ import {
 } from "../wishlist/wishlistApiSlice";
 
 const FullCouseDetalsPage = () => {
+    const [showDemoVideo, setShowDemoVideo] = useState(false);
     const user = useSelector((state: RootState) => state.auth.user);
     const navigate = useNavigate();
     const { id } = useParams();
@@ -102,6 +105,11 @@ const FullCouseDetalsPage = () => {
         }
     };
 
+    const handleShowDemoVideo = () => {
+        setShowDemoVideo(true);
+        document.body.style.overflow = "hidden";
+    };
+
     if (!fullCourseData)
         return (
             <div className="w-full h-screen flex justify-center items-center">
@@ -112,11 +120,15 @@ const FullCouseDetalsPage = () => {
     return (
         <div>
             {/* body */}
+            <DemoVideoModal
+                showDemoVideo={showDemoVideo}
+                setShowDemoVideo={setShowDemoVideo}
+            />
             <div className="bg-paperYellow w-full min-h-screen py-12">
                 {/* content */}
                 <div className="w-11/12 md:10/12 xl:w-9/12 mx-auto rounded-base">
                     {/* banner */}
-                    <div className="bg-[#212121] border border-black  w-full grid grid-cols-12 py-10 ps-20 pe-10 gap-5 rounded-t-base">
+                    <div className="bg-[#212121] border border-black  w-full grid grid-cols-12 gap-5 py-10 px-10 md:ps-20  rounded-t-base">
                         {/* banner text */}
                         <div className="text-darkText col-span-12 md:col-span-6 xl:col-span-7 font-publicSans flex flex-col gap-5 ">
                             <p className="text-zinc-300">
@@ -138,11 +150,17 @@ const FullCouseDetalsPage = () => {
 
                         {/* banner thumnail and demo */}
                         <div className="col-span-12 md:col-span-6 xl:col-span-5">
-                            <div className="w-full  border-2 border-zinc-500 rounded-base overflow-hidden mx-auto">
+                            <div className="w-full  border-2 border-zinc-500 rounded-base overflow-hidden mx-auto relative">
                                 <img
                                     src={fullCourseData.thumbnail.url}
                                     className="object-cover w-full h-full"
                                 />
+                                <div className="absolute inset-0 flex justify-center items-center">
+                                    <Play
+                                        className=" stroke-zinc-800 fill-amber-100 size-20 hover:stroke-black hover:fill-amber-200 cursor-pointer hover:scale-105 transition-all duration-150"
+                                        onClick={handleShowDemoVideo}
+                                    />
+                                </div>
                             </div>
                         </div>
                     </div>
@@ -150,7 +168,7 @@ const FullCouseDetalsPage = () => {
                     {/* detals and buy section */}
                     <div className="grid grid-cols-12">
                         {/* cosurse more detasils section */}
-                        <div className="border col-span-7 font-publicSans">
+                        <div className="border col-span-12 md:col-span-7 font-publicSans">
                             {/* mdeta data */}
                             <div className="border-x border-black grid grid-cols-3 justify-center text-center bg-white">
                                 <div className="py-5">
@@ -250,7 +268,7 @@ const FullCouseDetalsPage = () => {
                         </div>
 
                         {/* buy and add to cart */}
-                        <div className="border-e border-b rounded-br-base h-fit border-black bg-white col-span-5 py-7 px-12 font-publicSans">
+                        <div className="border-e border-b rounded-br-base h-fit border-black bg-white col-span-12 md:col-span-5 py-7 px-12 font-publicSans">
                             {/* perice and off */}
                             <div className="flex gap-5 items-center">
                                 <div className="relative w-32 min-h-12">
