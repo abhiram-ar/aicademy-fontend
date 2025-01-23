@@ -43,7 +43,7 @@ const Wishlist = () => {
                         data.wishlist.map((course: ICourse) => (
                             <div
                                 key={course._id}
-                                className="bg-slate-100 mb-5 rounded-base font-publicSans w-fit h-fit"
+                                className="bg-slate-100 mb-5 rounded-base font-publicSans w-full h-fit"
                             >
                                 <Link to={`/explore/course/${course._id}`}>
                                     <div className="relative z-20">
