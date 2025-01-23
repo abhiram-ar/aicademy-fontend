@@ -83,7 +83,7 @@ const PerksSection = () => {
 
             {/* ai feature */}
             <div
-                className="border-4 border-black mt-5 rounded-base bg-[#212121] text-darkText px-20 py-5 font-publicSans grid grid-col-3 lg:grid-cols-5 gap-10
+                className="border-4 border-black mt-5 rounded-base bg-[#212121] text-darkText px-5 md:px-20 py-5 font-publicSans grid grid-col-3 lg:grid-cols-5 gap-10
             "
             >
                 {/* content */}
