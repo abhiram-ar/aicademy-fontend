@@ -1,4 +1,3 @@
-import NavbarOnlyLogo from "@/components/extended/NavbarOnlyLogo";
 import { useForgotUserPaswordMutation } from "@/redux/features/auth/userAuthAPIs";
 import { useState } from "react";
 import toast, { Toaster } from "react-hot-toast";
@@ -26,8 +25,7 @@ const ForgotPassowordPageUser = () => {
     return (
         <div className="bg-slate-400 min-h-screen">
             <Toaster position="bottom-right" />
-            <NavbarOnlyLogo />
-            <div className="mt-20">
+            <div className="pt-20">
                 <div className="flex flex-col w-fit mx-auto border-2 border-black bg-slate-200 rounded-base p-5">
                     <div>
                         <label className="font-medium" htmlFor="email">

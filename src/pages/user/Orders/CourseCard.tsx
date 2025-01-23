@@ -8,10 +8,10 @@ const CourseCard: React.FC<{ course: ICourse }> = ({ course }) => {
     return (
         <div
             key={course._id}
-            className="bg-zinc-200 mt-5 rounded-base font-publicSans "
+            className="bg-zinc-200 mt-5 rounded-base font-publicSans pt-2 lg:pt-0"
         >
             <Link to={`/explore/course/${course._id}`}>
-                <div className="relative z-20">
+                <div className="relative z-20 flex justify-center">
                     <CourseCardLong courseDetails={course} />
                 </div>
             </Link>

@@ -62,7 +62,7 @@ const ChangePasswordOutlet = () => {
     };
 
     return (
-        <div className="border border-black rounded-base py-10 bg-zinc-50">
+        <div className="w-full  border border-black rounded-base py-10 bg-zinc-50">
             <Toaster position="bottom-right" />
 
             {!forgetPasswordState ? (
@@ -71,7 +71,7 @@ const ChangePasswordOutlet = () => {
                         onSubmit={handleSubmit((data) =>
                             handlePasswordChange(data)
                         )}
-                        className="w-fit mx-auto"
+                        className="w-80 md:w-96 px-2 mx-auto"
                     >
                         {/*old password */}
                         <div>
@@ -100,7 +100,7 @@ const ChangePasswordOutlet = () => {
                                 })}
                                 placeholder="current password"
                                 id="oldPassword"
-                                className="input-neo w-96"
+                                className="input-neo w-full"
                             />
                         </div>
 
@@ -131,7 +131,7 @@ const ChangePasswordOutlet = () => {
                                 })}
                                 placeholder="new password"
                                 id="newPassword"
-                                className="input-neo w-96"
+                                className="input-neo w-full"
                             />
                         </div>
 
@@ -165,7 +165,7 @@ const ChangePasswordOutlet = () => {
                                 })}
                                 placeholder="confirm new password"
                                 id="newPassword2"
-                                className="input-neo w-96"
+                                className="input-neo w-full"
                             />
                         </div>
                         <div className="flex justify-center mt-3">

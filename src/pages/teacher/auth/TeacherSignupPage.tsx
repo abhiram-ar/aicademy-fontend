@@ -1,5 +1,4 @@
 import Signup from "@/components/auth/Signup";
-import BodyBlock from "@/components/base/BodyBlock";
 import NavbarOnlyLogo from "@/components/extended/NavbarOnlyLogo";
 import SignupArt from "./../../../assets/teacherDoogle.png";
 import { Link, useNavigate } from "react-router-dom";
@@ -12,6 +11,7 @@ import Otp from "@/components/auth/Otp";
 import { newUser } from "@/components/auth/Signup";
 import { Toaster } from "@/components/ui/toaster";
 import { toast } from "@/hooks/use-toast";
+import Footer from "@/components/Footer";
 
 const TeacherSignupPage = () => {
     const [verifyEmail, { isLoading: isVerifyLoading }] =
@@ -82,7 +82,7 @@ const TeacherSignupPage = () => {
     return (
         <>
             <NavbarOnlyLogo />
-            <BodyBlock>
+            <div className="bg-[#e3dff2]">
                 <div className="w-full lg:w-2/3 mx-auto flex flex-col-reverse min-h-fit h-[90vh] lg:flex lg:flex-row justify-center items-center gap-24">
                     <Toaster />
                     <div className="w-1/2 flex justify-center items-center mix-blend-multiply">
@@ -120,7 +120,8 @@ const TeacherSignupPage = () => {
                         )}
                     </div>
                 </div>
-            </BodyBlock>
+            </div>
+            <Footer />
         </>
     );
 };

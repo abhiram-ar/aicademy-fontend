@@ -1,5 +1,4 @@
 import Login from "@/components/auth/Login";
-import BodyBlock from "@/components/base/BodyBlock";
 import NavbarOnlyLogo from "@/components/extended/NavbarOnlyLogo";
 import loginArt from "./../../../assets/teacherDoogle.png";
 import { Link, useNavigate } from "react-router-dom";
@@ -9,6 +8,7 @@ import { useDispatch } from "react-redux";
 import { useToast } from "../../../hooks/use-toast";
 import { Toaster } from "@/components/ui/toaster";
 import { jwtDecode } from "jwt-decode";
+import Footer from "@/components/Footer";
 
 const TeacherLoginPage = () => {
     const dispatch = useDispatch();
@@ -20,7 +20,7 @@ const TeacherLoginPage = () => {
         console.log(data);
         try {
             const payload = await login(data).unwrap();
-            const decoded = jwtDecode(payload.token)
+            const decoded = jwtDecode(payload.token);
             dispatch(
                 setCredentials({
                     accessToken: payload.token,
@@ -42,7 +42,7 @@ const TeacherLoginPage = () => {
     return (
         <>
             <NavbarOnlyLogo />
-            <BodyBlock>
+            <div className="bg-[#e3dff2]">
                 <Toaster />
                 <div className="w-full lg:w-2/3  mx-auto flex flex-col min-h-fit h-[90vh] lg:flex lg:flex-row justify-between items-center gap-10">
                     <div className="m-auto mt-20 w-fit">
@@ -65,7 +65,8 @@ const TeacherLoginPage = () => {
                         <img src={loginArt} alt="" />
                     </div>
                 </div>
-            </BodyBlock>
+            </div>
+            <Footer />
         </>
     );
 };

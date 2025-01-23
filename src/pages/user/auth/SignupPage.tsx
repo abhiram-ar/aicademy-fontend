@@ -1,6 +1,5 @@
 import Signup from "@/components/auth/Signup";
 import BodyBlock from "@/components/base/BodyBlock";
-import NavbarOnlyLogo from "@/components/extended/NavbarOnlyLogo";
 import SignupArt from "./../../../assets/SignupArt.png";
 import { Link, useNavigate } from "react-router-dom";
 import { useState } from "react";
@@ -82,7 +81,6 @@ const SignupPage = () => {
 
     return (
         <>
-            <NavbarOnlyLogo />
             <BodyBlock>
                 <Toaster />
                 <div className="w-full  lg:w-2/3 mx-auto flex flex-col-reverse gap-16  min-h-fit h-[90vh] lg:flex lg:flex-row justify-center items-center ">

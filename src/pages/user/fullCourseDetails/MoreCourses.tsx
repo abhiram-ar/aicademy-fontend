@@ -17,7 +17,7 @@ const MoreCourses: React.FC<{ category?: string; currentCourseId: string }> = ({
             <h3 className=" w-fit px-2 rounded-base font-publicSans font-semibold">
                 You might also like
             </h3>
-            <div className="mt-2">
+            <div className="grid grid-cols-1 gap-5 md:gap-5 md:grid-cols-2 lg:grid-cols-1 lg:gap-0 mt-2">
                 {data &&
                     data.courses.map((courseDetails: ICourse) => {
                         if (courseDetails._id === currentCourseId) return null; // resusing explore page api, will contrain duplicate of same course

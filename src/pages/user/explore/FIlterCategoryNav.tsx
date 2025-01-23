@@ -32,7 +32,7 @@ type Props = {
 const FIlterCategoryNav: React.FC<Props> = ({ filter, setFilter }) => {
 
     return (
-        <div className="bg-white flex justify-center items-center gap-2 p-5 border-b-4 border-black -mt-1 relative z-30 ">
+        <div className="bg-white flex justify-center flex-wrap items-center gap-2 p-5 border-b-4 border-black -mt-1 relative z-30 ">
             {categories.map((category, index) => (
                 <Button
                     key={index}

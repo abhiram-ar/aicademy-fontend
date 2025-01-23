@@ -48,6 +48,7 @@ import TeacherPayoutApprovalPage from "./pages/admin/Teacher mangement/Payout/Te
 import CourseManagementPage from "./pages/admin/course/courseManagement/CourseManagementPage";
 import StandardLayout from "./layout/StandardLayout";
 import LearnPage from "./pages/user/Learn/LearnPage";
+import LayoutWithMinimalNav from "./layout/LayoutWithMinimalNav";
 
 fetchAccessTokenOnload();
 const appRouter = createBrowserRouter([
@@ -74,20 +75,26 @@ const appRouter = createBrowserRouter([
                 ],
             },
             {
-                path: "/login",
-                element: <LoginPage />,
-            },
-            {
-                path: "/signup",
-                element: <SignupPage />,
-            },
-            {
-                path: "/user/forgotPassword",
-                element: <ForgotPassowordPageUser />,
-            },
-            {
-                path: "/reset-password",
-                element: <ResetPasswordPage />,
+                path: "/",
+                element: <LayoutWithMinimalNav />,
+                children: [
+                    {
+                        path: "/login",
+                        element: <LoginPage />,
+                    },
+                    {
+                        path: "/signup",
+                        element: <SignupPage />,
+                    },
+                    {
+                        path: "/user/forgotPassword",
+                        element: <ForgotPassowordPageUser />,
+                    },
+                    {
+                        path: "/reset-password",
+                        element: <ResetPasswordPage />,
+                    },
+                ],
             },
             {
                 path: "/user",
@@ -265,8 +272,8 @@ const appRouter = createBrowserRouter([
 
 createRoot(document.getElementById("root")!).render(
     // <StrictMode>
-        <Provider store={store}>
-            <RouterProvider router={appRouter} />
-        </Provider>
+    <Provider store={store}>
+        <RouterProvider router={appRouter} />
+    </Provider>
     // </StrictMode>
 );

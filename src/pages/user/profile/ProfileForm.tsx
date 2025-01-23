@@ -24,15 +24,14 @@ const ProfileForm: React.FC<IUserProfileDetails> = ({ userDetails }) => {
     }) => {
         try {
             await updateUserProfile(data).unwrap();
-            toast.success("profile updated")
+            toast.success("profile updated");
         } catch (error) {
             console.error("error while updating user profie", error);
         }
     };
 
     return (
-        <div className="w-96 mx-auto mt-3">
-            
+        <div className="w-80 md:w-96 mx-auto mt-3">
             <form
                 onSubmit={handleSubmit((data) => handleUpdateProfile(data))}
                 className="flex flex-col gap-4"

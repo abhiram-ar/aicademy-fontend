@@ -9,13 +9,13 @@ const OrdersPage = () => {
         <div>
            
             <div className="w-full min-h-screen bg-paperYellow py-10">
-                <div className="w-9/12 mx-auto">
+                <div className="w-11/12 xl:w-9/12 mx-auto">
                     <h2 className="text-xl font-medium bg-zinc-300 w-fit px-2 rounded-base">
                         My Purchases
                     </h2>
 
                     {/* purchases grid */}
-                    <div className="mx-10 mt-5">
+                    <div className="xl:mx-10 mt-5">
                         {data &&
                             data.orderHistory.map((order: IOrder) => (
                                 <SingleOrder
