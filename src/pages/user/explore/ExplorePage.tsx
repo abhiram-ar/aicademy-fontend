@@ -51,7 +51,7 @@ const ExplorePage = () => {
                         <div className="absolute right-0">
                             <SortDropDown setFilter={setFilter} />
                         </div>
-                        <div className="mt-12 grid grid-cols-1 gap-0 md:gap-5 md:grid-cols-2 lg:grid-cols-1 lg:gap-0">
+                        <div className="mt-12 grid grid-cols-1 gap-5 md:gap-5 md:grid-cols-2 lg:grid-cols-1 lg:gap-0">
                             {courseCardDetails &&
                                 courseCardDetails.courses.map(
                                     (courseDetails: ICourse) => (

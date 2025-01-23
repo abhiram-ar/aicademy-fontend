@@ -51,7 +51,7 @@ const FilterSidebar: React.FC<Props> = ({ filter, setFilter }) => {
     };
 
     return (
-        <div className="bg-white border border-black rounded-base w-96 md:w-full lg:w-52 xl:w-64 my-5">
+        <div className="bg-white border border-black rounded-base md:w-full lg:w-52 xl:w-64 my-5">
             <h3 className="text-text  font-publicSans font-medium px-5 pt-3 pb-2">
                 Filter
             </h3>
