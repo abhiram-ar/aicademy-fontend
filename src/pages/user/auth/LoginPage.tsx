@@ -1,6 +1,5 @@
 import Login from "@/components/auth/Login";
 import BodyBlock from "@/components/base/BodyBlock";
-import NavbarOnlyLogo from "@/components/extended/NavbarOnlyLogo";
 import loginArt from "./../../../assets/loginArt.png";
 import { Link, useLocation, useNavigate } from "react-router-dom";
 import { useLoginMutation } from "@/redux/features/auth/userAuthAPIs";
@@ -48,7 +47,6 @@ const LoginPage = () => {
     const [login] = useLoginMutation();
     return (
         <>
-            <NavbarOnlyLogo />
             <BodyBlock>
                 <Toaster />
                 <div className="w-full lg:w-2/3  mx-auto  flex flex-col gap-10 min-h-fit h-[90vh] lg:flex lg:flex-row justify-between items-center">
