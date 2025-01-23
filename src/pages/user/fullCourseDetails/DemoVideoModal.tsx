@@ -49,7 +49,7 @@ const DemoVideoModal: React.FC<Props> = ({
                     <div
                         onClick={handleModalClick}
                         id="modal"
-                        className="absolute inset-0 w-full h-full z-50 pt-14 bg-black/60"
+                        className="fixed inset-0 w-full h-full z-50 pt-14 bg-black/60"
                     >
                         <div className="relative w-[80rem] h-[45rem] mx-auto">
                             <VideoPlayer lesson={lesson} />
