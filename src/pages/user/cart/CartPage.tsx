@@ -55,19 +55,19 @@ const CartPage = () => {
         <div>
             <Toaster />
             <div className="w-full min-h-screen bg-[#fffbee] py-10">
-                <div className="w-9/12 mx-auto">
+                <div className="w-11/12 md:w-10/12 xl:w-9/12 mx-auto">
                     <h2 className="font-semibold text-xl bg-zinc-300 rounded-base w-fit px-2">
                         cart
                     </h2>
 
                     {/* cart and checkout contaner */}
                     <div className="grid grid-cols-12 mt-3 gap-10">
-                        <div className="col-span-8">
+                        <div className="col-span-12 lg:col-span-8 grid grid-cols-1 md:gap-5 md:grid-cols-2 lg:grid-cols-1 gap-0">
                             {cartData && cartData.length > 0 ? (
                                 cartData.cart.map((course: ICourse) => (
                                     <div
                                         key={course._id}
-                                        className="bg-slate-100 mb-5 rounded-base font-publicSans"
+                                        className="bg-slate-100 mb-5 rounded-base font-publicSans w-fit"
                                     >
                                         <Link
                                             to={`/explore/course/${course._id}`}
