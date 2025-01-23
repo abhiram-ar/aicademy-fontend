@@ -9,7 +9,7 @@ import {
 } from "@reduxjs/toolkit/query/react";
 
 const basequery = fetchBaseQuery({
-    baseUrl: "http://localhost:3000",
+    baseUrl: import.meta.env.VITE_BACKEND_BASE_URL,
     credentials: "include",
     prepareHeaders: (headers, { getState }) => {
         const token = (getState() as RootState).auth.token;

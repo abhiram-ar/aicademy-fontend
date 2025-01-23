@@ -22,7 +22,9 @@ const Upload = () => {
             setUploadProgress(0);
 
             const { data } = await axios.post(
-                "http://localhost:3000/api/course/upload/presignedurl",
+                `${
+                    import.meta.env.VITE_BACKEND_BASE_URL
+                }/api/course/upload/presignedurl`,
                 {
                     fileName: file.name,
                     fileType: file.type,
