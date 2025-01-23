@@ -56,7 +56,7 @@ const PublishOutlet = () => {
     return (
         <div>
             {/* body */}
-            <div className="bg-paperYellow w-full min-h-screen py-12">
+            <div className="w-full min-h-screen py-12 mt-5">
                 {/* content */}
                 <div className="w-9/12 mx-auto rounded-base">
                     <div className="bg-slate-200 w-full border-2 border-black rounded-base flex justify-between items-center px-5 py-2 mb-3">
