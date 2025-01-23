@@ -75,7 +75,7 @@ const SortDropDown: React.FC<Props> = ({ setFilter }) => {
             defaultValue=""
             onValueChange={(value) => handleSortSelectChange(value)}
         >
-            <SelectTrigger className="w-[180px] bg-white">
+            <SelectTrigger className="w-full md:w-[180px] bg-white">
                 <SelectValue placeholder="sort by" />
             </SelectTrigger>
             <SelectContent className="bg-white">

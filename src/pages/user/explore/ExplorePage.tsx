@@ -31,13 +31,15 @@ const ExplorePage = () => {
 
     return (
         <div>
-            <FIlterCategoryNav filter={filter} setFilter={setFilter} />
+            <div className="hidden md:block">
+                <FIlterCategoryNav filter={filter} setFilter={setFilter} />
+            </div>
 
             {/* paper bg */}
             <div className="bg-[#fffbee] w-full min-h-screen pt-10 pb-14">
-                <div className="w-9/12  mx-auto grid grid-cols-12">
+                <div className="w-11/12 md:w-10/12 lg:w-11/12 xl:w-9/12  mx-auto grid grid-cols-12">
                     {/* left section  */}
-                    <div className="col-span-3">
+                    <div className="col-span-12 lg:col-span-3">
                         <h2 className="font-publicSans text-2xl font-semibold">
                             Showing all Courses
                         </h2>
@@ -45,11 +47,11 @@ const ExplorePage = () => {
                         <FilterSidebar filter={filter} setFilter={setFilter} />
                     </div>
                     {/* rigt seciotn - main */}
-                    <div className=" relative col-span-9">
+                    <div className="relative col-span-12 lg:col-span-9 border border-red-400">
                         <div className="absolute right-0">
                             <SortDropDown setFilter={setFilter} />
                         </div>
-                        <div className="mt-12">
+                        <div className="mt-12 grid grid-cols-1 gap-0 md:gap-5 md:grid-cols-2 lg:grid-cols-1 lg:gap-0">
                             {courseCardDetails &&
                                 courseCardDetails.courses.map(
                                     (courseDetails: ICourse) => (

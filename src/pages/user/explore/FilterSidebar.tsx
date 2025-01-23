@@ -51,136 +51,140 @@ const FilterSidebar: React.FC<Props> = ({ filter, setFilter }) => {
     };
 
     return (
-        <div className="bg-white border border-black rounded-base w-64 mt-5">
+        <div className="bg-white border border-black rounded-base w-96 md:w-full lg:w-52 xl:w-64 my-5">
             <h3 className="text-text  font-publicSans font-medium px-5 pt-3 pb-2">
                 Filter
             </h3>
 
-            <hr className="border-black" />
+            <hr className="border-black " />
 
             {/* price filter */}
-            <div className="px-5 py-2">
-                <h4 className="text-text  font-publicSans font-medium">
-                    Price
-                </h4>
-                <RadioGroup
-                    onValueChange={(value) => {
-                        const filter = priceFilter.find(
-                            (filter) => filter.value === value
-                        );
+            <div className="grid grid-cols-2 lg:grid-cols-1">
+                <div className="px-5 py-2">
+                    <h4 className="text-text  font-publicSans font-medium">
+                        Price
+                    </h4>
+                    <RadioGroup
+                        onValueChange={(value) => {
+                            const filter = priceFilter.find(
+                                (filter) => filter.value === value
+                            );
 
-                        setFilter((prev) => ({
-                            ...prev,
-                            minPrice: String(filter?.minPrice),
-                            maxPrice: String(filter?.maxPrice),
-                            page: 1,
-                        }));
-                    }}
-                    defaultValue=""
-                    className="font-normal ps-3 my-2"
-                >
-                    <div className="flex items-center space-x-2">
-                        <RadioGroupItem value="" id="p0" />
-                        <Label htmlFor="p0">none</Label>
-                    </div>
-                    <div className="flex items-center space-x-2">
-                        <RadioGroupItem value="free" id="p1" />
-                        <Label htmlFor="p1">Free</Label>
-                    </div>
-                    <div className="flex items-center space-x-2">
-                        <RadioGroupItem value="under500" id="p2" />
-                        <Label htmlFor="p2">Under 500 ₹</Label>
-                    </div>
-                    <div className="flex items-center space-x-2">
-                        <RadioGroupItem value="under1000" id="p3" />
-                        <Label htmlFor="p3">Under 1000 ₹</Label>
-                    </div>
-
-                    <div>
-                        <div
-                            className="flex items-center space-x-2"
-                            ref={customPriceRef}
-                        >
-                            <RadioGroupItem value="custom" id="p4" />
-                            <Label htmlFor="p4">Custom</Label>
+                            setFilter((prev) => ({
+                                ...prev,
+                                minPrice: String(filter?.minPrice),
+                                maxPrice: String(filter?.maxPrice),
+                                page: 1,
+                            }));
+                        }}
+                        defaultValue=""
+                        className="font-normal ps-3 my-2"
+                    >
+                        <div className="flex items-center space-x-2">
+                            <RadioGroupItem value="" id="p0" />
+                            <Label htmlFor="p0">none</Label>
                         </div>
-                        {(
-                            customPriceRef.current
-                                ?.firstChild as HTMLButtonElement
-                        )?.dataset?.state === "checked" && (
-                            <form
-                                className="ps-7"
-                                onSubmit={(e) => handleCustomPriceSubmit(e)}
+                        <div className="flex items-center space-x-2">
+                            <RadioGroupItem value="free" id="p1" />
+                            <Label htmlFor="p1">Free</Label>
+                        </div>
+                        <div className="flex items-center space-x-2">
+                            <RadioGroupItem value="under500" id="p2" />
+                            <Label htmlFor="p2">Under 500 ₹</Label>
+                        </div>
+                        <div className="flex items-center space-x-2">
+                            <RadioGroupItem value="under1000" id="p3" />
+                            <Label htmlFor="p3">Under 1000 ₹</Label>
+                        </div>
+
+                        <div>
+                            <div
+                                className="flex items-center space-x-2"
+                                ref={customPriceRef}
                             >
-                                <input
-                                    type="number"
-                                    min={0}
-                                    max={100000}
-                                    name="minPrice"
-                                    value={customMinPrice}
-                                    onChange={(e) =>
-                                        setCustomMinPrice(e.target.value)
-                                    }
-                                    placeholder="min"
-                                    className="input-neo w-full border bg-slate-100 h-8 "
-                                />
-                                <input
-                                    type="number"
-                                    min={0}
-                                    max={100000}
-                                    name="maxPrice"
-                                    value={customMaxPrice}
-                                    onChange={(e) =>
-                                        setCustomMaxPrice(e.target.value)
-                                    }
-                                    placeholder="max"
-                                    className="input-neo w-full border bg-slate-100 h-8"
-                                />
-                                <button
-                                    type="submit"
-                                    className="border border-slate-500 bg-blue-200 px-5 py-1 block mt-1 rounded-base mx-auto hover:bg-blue-300"
+                                <RadioGroupItem value="custom" id="p4" />
+                                <Label htmlFor="p4">Custom</Label>
+                            </div>
+                            {(
+                                customPriceRef.current
+                                    ?.firstChild as HTMLButtonElement
+                            )?.dataset?.state === "checked" && (
+                                <form
+                                    className="ps-7"
+                                    onSubmit={(e) => handleCustomPriceSubmit(e)}
                                 >
-                                    Go
-                                </button>
-                            </form>
-                        )}
-                    </div>
-                </RadioGroup>
-            </div>
+                                    <input
+                                        type="number"
+                                        min={0}
+                                        max={100000}
+                                        name="minPrice"
+                                        value={customMinPrice}
+                                        onChange={(e) =>
+                                            setCustomMinPrice(e.target.value)
+                                        }
+                                        placeholder="min"
+                                        className="input-neo w-full border bg-slate-100 h-8 "
+                                    />
+                                    <input
+                                        type="number"
+                                        min={0}
+                                        max={100000}
+                                        name="maxPrice"
+                                        value={customMaxPrice}
+                                        onChange={(e) =>
+                                            setCustomMaxPrice(e.target.value)
+                                        }
+                                        placeholder="max"
+                                        className="input-neo w-full border bg-slate-100 h-8"
+                                    />
+                                    <button
+                                        type="submit"
+                                        className="border border-slate-500 bg-blue-200 px-5 py-1 block mt-1 rounded-base mx-auto hover:bg-blue-300"
+                                    >
+                                        Go
+                                    </button>
+                                </form>
+                            )}
+                        </div>
+                    </RadioGroup>
+                </div>
 
-            <hr className="border-black" />
+                <hr className="border-black hidden lg:block" />
 
-            {/* level filter */}
-            <div className="px-5 py-3 pb-5">
-                <h4 className="text-text font-medium font-publicSans">Level</h4>
-                <RadioGroup
-                    defaultValue={filter.level}
-                    className="font-normal ps-3 mt-2"
-                    onValueChange={(value) =>
-                        setFilter((prev) => ({
-                            ...prev,
-                            level: value,
-                            page: 1,
-                        }))
-                    }
-                >
-                    <div className="flex items-center space-x-2">
-                        <RadioGroupItem value="" id="l1" />
-                        <Label htmlFor="l1">All</Label>
-                    </div>
-                    <div className="flex items-center space-x-2">
-                        <RadioGroupItem value="beginner" id="l2" />
-                        <Label htmlFor="l2">Beginner</Label>
-                    </div>
-                    <div className="flex items-center space-x-2">
-                        <RadioGroupItem value="intermediate" id="l3" />
-                        <Label htmlFor="l3">Intermediate</Label>
-                    </div>
-                    <div className="flex items-center space-x-2">
-                        <RadioGroupItem value="advanced" id="l4" />
-                        <Label htmlFor="l4">Advanced</Label>
-                    </div>
-                </RadioGroup>
+                {/* level filter */}
+                <div className="px-5 py-3 pb-5">
+                    <h4 className="text-text font-medium font-publicSans">
+                        Level
+                    </h4>
+                    <RadioGroup
+                        defaultValue={filter.level}
+                        className="font-normal ps-3 mt-2"
+                        onValueChange={(value) =>
+                            setFilter((prev) => ({
+                                ...prev,
+                                level: value,
+                                page: 1,
+                            }))
+                        }
+                    >
+                        <div className="flex items-center space-x-2">
+                            <RadioGroupItem value="" id="l1" />
+                            <Label htmlFor="l1">All</Label>
+                        </div>
+                        <div className="flex items-center space-x-2">
+                            <RadioGroupItem value="beginner" id="l2" />
+                            <Label htmlFor="l2">Beginner</Label>
+                        </div>
+                        <div className="flex items-center space-x-2">
+                            <RadioGroupItem value="intermediate" id="l3" />
+                            <Label htmlFor="l3">Intermediate</Label>
+                        </div>
+                        <div className="flex items-center space-x-2">
+                            <RadioGroupItem value="advanced" id="l4" />
+                            <Label htmlFor="l4">Advanced</Label>
+                        </div>
+                    </RadioGroup>
+                </div>
             </div>
         </div>
     );
