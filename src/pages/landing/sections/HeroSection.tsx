@@ -4,14 +4,14 @@ import { Link } from "react-router-dom";
 
 const HeroSection = () => {
     return (
-        <div className="w-8/12 mx-auto grid grid-2 lg:grid-cols-10 gap-10 py-16 mb-4">
-            <div className=" col-span-7 lg:col-span-6 mt-10 ">
+        <div className="w-10/12 md:w-8/12 mx-auto grid grid-2 lg:grid-cols-10 gap-10 py-16 mb-4">
+            <div className=" col-span-7 lg:col-span-6 mt-2 md:mt-10 ">
                 <div>
-                    <h1 className="font-RedHat text-[3rem] leading-none font-extrabold">
+                    <h1 className="font-RedHat text-2xl md:text-[3rem] leading-none font-extrabold">
                         Revolutionize Learning
                         <br /> with Adaptive Intelligence.
                     </h1>
-                    <p className="font-publicSans text mt-5 font-medium w-[30rem]">
+                    <p className="font-publicSans text mt-5 font-medium w-80 md:w-[30rem]">
                         Experience a powerful LMS that blends advanced Al with{" "}
                         robust tools for seamless leaming. Whether you're a
                         student aiming for mastery, an educator designing
@@ -35,7 +35,7 @@ const HeroSection = () => {
                 </div>
             </div>
 
-            <div className="w-[35rem] col-span-3 lg:col-span-4">
+            <div className="w-80 md:w-[35rem] col-span-3 lg:col-span-4">
                 <img src={heroart} className="object-fill" alt="" />
             </div>
         </div>

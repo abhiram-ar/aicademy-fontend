@@ -37,10 +37,10 @@ const MainNavbar: React.FC<Props> = ({ query, setFilter }) => {
         <>
             <Navbar>
                 <AIcademyLogo />
-                <div className="w-full mx-10 ms-16">
+                <div className="hidden md:block w-full mx-10 ms-16">
                     <SearchBar query={query} setFilter={setFilter} />
                 </div>
-                <div className="flex gap-3">
+                <div className="hidden md:visible md:flex gap-3">
                     {isLoggedIn ? (
                         <>
                             <MylearningButton />
