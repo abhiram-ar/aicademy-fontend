@@ -389,10 +389,10 @@ const FullCouseDetalsPage = () => {
                     </div>
                 </div>
 
-                <div className="w-9/12 mx-auto rounded-base mt-10">
+                <div className="w-11/12 md:10/12 xl:w-9/12 mx-auto rounded-base mt-10">
                     <Reviews courseId={id as string} />
                 </div>
-                <div className="w-9/12 mx-auto rounded-base mt-10">
+                <div className="w-11/12 md:10/12 xl:w-9/12 mx-auto rounded-base mt-10">
                     <MoreCourses
                         category={fullCourseData?.category}
                         currentCourseId={fullCourseData._id}
