@@ -29,9 +29,9 @@ const UserProfileLayout = () => {
             {/* body */}
             <div className="bg-paperYellow w-full min-h-screen py-10">
                 {/* content */}
-                <div className="w-9/12 mx-auto grid grid-cols-4">
+                <div className="w-11/12  xl:w-9/12 mx-auto grid grid-cols-4 gap-5">
                     {/* sidebar */}
-                    <div className="bg-white grid  border-2 border-black w-fit h-fit rounded-base overflow-hidden">
+                    <div className="bg-white col-span-4 grid md:col-span-1  border-2 border-black w-fit h-fit rounded-base overflow-hidden">
                         <p className="font-medium px-10 py-2 border-b-2 border-black bg-zinc-600 text-darkText">
                             Account
                         </p>
@@ -63,7 +63,7 @@ const UserProfileLayout = () => {
                         </button>
                     </div>
 
-                    <div className="col-span-3 border">
+                    <div className="col-span-4 md:col-span-3 border  w-full mx-auto">
                         <Outlet />
                     </div>
                 </div>

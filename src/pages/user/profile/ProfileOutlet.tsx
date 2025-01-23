@@ -8,7 +8,7 @@ const ProfileOutlet = () => {
     console.log(currentData);
 
     return (
-        <div className="border border-black rounded-base py-10 bg-zinc-50">
+        <div className="w-full border border-black rounded-base px-5 md:px-10 py-10 bg-zinc-50">
             <Toaster position="bottom-right" />
             {currentData && (
                 <div>
