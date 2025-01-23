@@ -1,4 +1,3 @@
-
 export interface IChapter {
     chapterTitle: string;
     lessons: {
@@ -22,18 +21,18 @@ export interface IFullCourseData {
     courseState: string;
     boughtCount: number;
     prerequisites: string[];
-    demoVideos: string;
+    demoVideoKey: { _id: string; transcodedVideoMasterFileKey: string };
     chapters: IChapter[];
     category?: string;
     estimatedPrice: number;
     level: string;
     price: number;
     benefits: string[];
-    demoVideoKey: string;
     updatedAt: string; // ISO date string
     rating?: number;
     totalRatingCount: number;
-}export type IReview = {
+}
+export type IReview = {
     _id: string;
     courseId: string;
     createdBy: {
@@ -49,4 +48,3 @@ export interface IFullCourseData {
     review: string;
     updatedAt: string;
 };
-
