@@ -1,6 +1,5 @@
 import { useForm } from "react-hook-form";
 import toast, { Toaster } from "react-hot-toast";
-import NavbarOnlyLogo from "@/components/extended/NavbarOnlyLogo";
 import { jwtDecode } from "jwt-decode";
 import { useNavigate, useSearchParams } from "react-router-dom";
 import { useResetUserPaswordMutation } from "@/redux/features/auth/userAuthAPIs";
@@ -70,7 +69,6 @@ const ResetPasswordPage = () => {
     return (
         <div className="h-screen">
             <div className="absolute w-full">
-                <NavbarOnlyLogo />
                 <Toaster position="bottom-right" />
             </div>
             <div className="py-32 bg-slate-600 h-full">
