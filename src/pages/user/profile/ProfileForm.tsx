@@ -31,7 +31,7 @@ const ProfileForm: React.FC<IUserProfileDetails> = ({ userDetails }) => {
     };
 
     return (
-        <div className="w-80  md:w-96 mx-auto mt-3">
+        <div className="w-80 md:w-96 mx-auto mt-3">
             <form
                 onSubmit={handleSubmit((data) => handleUpdateProfile(data))}
                 className="flex flex-col gap-4"
