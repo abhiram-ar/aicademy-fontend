@@ -84,13 +84,16 @@ const Saleschart = () => {
                         />
                         {data &&
                             set &&
-                            Array.from(set).map((value) => (
+                            Array.from(set).map((value,index) => (
                                 <Bar
                                     key={value as string}
                                     dataKey={value as string}
                                     stackId="a"
                                     fill={getRandomColor()}
-                                    radius={[0, 0, 5, 5]}
+                                    radius={[0, 0, 0, 0]}
+                                    animationEasing="ease-in-out"
+                                    animationBegin={index*300}
+                                    animationDuration={300}
                                 />
                             ))}
                     </BarChart>
