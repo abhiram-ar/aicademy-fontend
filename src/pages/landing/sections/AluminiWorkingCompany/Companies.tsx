@@ -18,7 +18,7 @@ const Companies = () => {
             <p className="text-center font-publicSans my-2">
                 OUR STUDENTS ARE WORKING AT
             </p>
-            <div className="grid grid-cols-3 md:grid-cols-9 justify-center items-center  gap-20 md:gap-10 lg:gap-20 px-10 py-10 md:y-5 bg-white border-y-4 border-black">
+            <div className="grid grid-cols-3 md:grid-cols-9 justify-center items-center gap-20 md:gap-10 xl:gap-20 px-5 xl:px-10 py-5 xl:py-8 md:y-5 bg-white border-y-4 border-black">
                 {imgs}
             </div>
         </div>
