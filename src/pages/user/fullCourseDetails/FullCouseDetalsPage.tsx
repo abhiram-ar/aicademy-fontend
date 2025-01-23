@@ -34,6 +34,8 @@ const FullCouseDetalsPage = () => {
         courseId: id,
     });
 
+    console.log(data);
+
     const { data: userBoughtList } = useGetUserBoughtCourseListQuery(
         {},
         { skip: !user }
@@ -43,7 +45,6 @@ const FullCouseDetalsPage = () => {
     const { data: wislistInfo } = useGetWishlistQuery(undefined, {
         skip: !user,
     });
-    console.log("wishlist", wislistInfo);
 
     const [addToCart] = useAddToCartMutation();
     const [removeFromCart] = useRemoveFromCartMutation();
@@ -121,6 +122,12 @@ const FullCouseDetalsPage = () => {
         <div>
             {/* body */}
             <DemoVideoModal
+                url={
+                    fullCourseData
+                        ? fullCourseData.demoVideoKey
+                              .transcodedVideoMasterFileKey
+                        : undefined
+                }
                 showDemoVideo={showDemoVideo}
                 setShowDemoVideo={setShowDemoVideo}
             />
