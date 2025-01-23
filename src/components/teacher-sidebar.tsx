@@ -143,10 +143,10 @@ const data = {
 export function AppSidebar({ ...props }: React.ComponentProps<typeof Sidebar>) {
     return (
         <Sidebar collapsible="icon" {...props}>
-            <SidebarHeader>
+            <SidebarHeader className="bg-[#d7d3e1]" >
                 <TeamSwitcher teams={data.teams} />
             </SidebarHeader>
-            <SidebarContent>
+            <SidebarContent className="bg-[#d7d3e1]">
                 {/* <NavMain items={data.navMain} /> */}
 
                 <SidebarGroup className="group-data-[collapsible=icon]:hidden">
@@ -174,7 +174,7 @@ export function AppSidebar({ ...props }: React.ComponentProps<typeof Sidebar>) {
 
                 <NavCourse />
             </SidebarContent>
-            <SidebarFooter>
+            <SidebarFooter className="bg-[#d7d3e1]">
                 <NavUser />
             </SidebarFooter>
             <SidebarRail />
