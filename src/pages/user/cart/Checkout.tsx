@@ -83,7 +83,7 @@ const Checkout: React.FC<Props> = ({
         }
     };
     return (
-        <div className="col-span-4 bg-white border-2 border-black shadow-light rounded-base p-8 h-fit font-publicSans w-fit relative">
+        <div className="bg-white border-2 border-black shadow-light rounded-base p-8 h-fit font-publicSans w-fit relative">
             {!totalCourses && (
                 <div className="absolute inset-0 bg-zinc-400/80 z-50"></div>
             )}

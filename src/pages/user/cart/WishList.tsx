@@ -38,12 +38,12 @@ const Wishlist = () => {
                 wishlist
             </h2>
             <div className="grid grid-cols-12 mt-3 gap-10">
-                <div className="col-span-12 lg:col-span-8 grid grid-cols-1 md:gap-5 md:grid-cols-2 lg:grid-cols-1 gap-0">
+                <div className="col-span-12 lg:col-col-span-6 xl:col-span-8 grid grid-cols-1 md:gap-5 md:grid-cols-2 lg:grid-cols-1 gap-0">
                     {data && data.length > 0 ? (
                         data.wishlist.map((course: ICourse) => (
                             <div
                                 key={course._id}
-                                className="bg-slate-100 mb-5 rounded-base font-publicSans w-fit"
+                                className="bg-slate-100 mb-5 rounded-base font-publicSans w-fit h-fit"
                             >
                                 <Link to={`/explore/course/${course._id}`}>
                                     <div className="relative z-20">
