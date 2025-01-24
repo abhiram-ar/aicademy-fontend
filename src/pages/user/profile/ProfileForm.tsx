@@ -1,6 +1,6 @@
 import React from "react";
 import { useForm } from "react-hook-form";
-import { IUserProfileDetails } from "./profilePic/ProfilePicture";
+import { IUserProfileDetails } from "./profilePic/Tyeps";
 import { useUpdateUserProfileMutation } from "./profileApiSlice";
 import toast from "react-hot-toast";
 

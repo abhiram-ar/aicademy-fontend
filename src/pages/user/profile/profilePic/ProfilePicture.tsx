@@ -13,19 +13,7 @@ import {
     DialogTrigger,
 } from "@/components/ui/dialog";
 import { useUpdateUserProfilePictureMutation } from "../profileApiSlice";
-
-export interface IUserProfileDetails {
-    userDetails: {
-        firstName: string;
-        lastName: string;
-        _id: string;
-        profilePicture?: {
-            s3Key?: string;
-            url?: string;
-            public_id: string;
-        };
-    };
-}
+import { IUserProfileDetails } from "./Tyeps";
 
 const ProfilePicture: React.FC<IUserProfileDetails> = ({ userDetails }) => {
     const [updateProfilePic] = useUpdateUserProfilePictureMutation();
