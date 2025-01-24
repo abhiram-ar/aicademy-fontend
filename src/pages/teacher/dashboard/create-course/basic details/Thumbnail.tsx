@@ -85,6 +85,8 @@ const Thumbnail: React.FC<{ courseDetails: ICourse }> = ({ courseDetails }) => {
         }
     };
 
+    console.log("c", courseDetails);
+
     return (
         <div className="mx-auto w-[50rem]  mt-10 ">
             <Dialog>
@@ -125,10 +127,10 @@ const Thumbnail: React.FC<{ courseDetails: ICourse }> = ({ courseDetails }) => {
                     onChange={handleFileChnage}
                 />
 
-                {courseDetails.thumbnail && courseDetails.thumbnail?.url ? (
+                {courseDetails.thumbnail && courseDetails.thumbnail?.s3Key ? (
                     <div className="min-h-5 w-full">
                         <img
-                            src={courseDetails.thumbnail.url}
+                            src={`https://d3petuww6xgji.cloudfront.net/${courseDetails.thumbnail.s3Key}`}
                             className="w-full h-full object-cover"
                         />
                         <div

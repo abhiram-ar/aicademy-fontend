@@ -20,6 +20,7 @@ export interface Ivideo {
     price?: number;
     estimatedPrice?: number;
     thumbnail?: {
+        s3Key: { public_id: string; url: string; } | undefined;
         public_id: string;
         url: string;
     };
