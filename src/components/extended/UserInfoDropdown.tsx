@@ -51,7 +51,7 @@ const UserInfoDropdown = () => {
                                       }`
                                     : demopic
                             }
-                            className="w-fill origin-top border-0 focus:outline-0"
+                            className="w-full h-full object-contain border-0 focus:outline-0"
                         />
                     </div>
                 </DropdownMenuTrigger>
