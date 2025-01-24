@@ -67,7 +67,7 @@ const CartPage = () => {
                                 cartData.cart.map((course: ICourse) => (
                                     <div
                                         key={course._id}
-                                        className="bg-slate-100 mb-5 rounded-base font-publicSans w-full h-fit"
+                                        className="bg-slate-100 mb-5 rounded-base font-publicSans w-fit lg:w-full h-fit"
                                     >
                                         <Link
                                             to={`/explore/course/${course._id}`}
