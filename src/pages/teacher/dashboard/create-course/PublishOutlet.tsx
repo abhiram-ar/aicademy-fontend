@@ -109,11 +109,17 @@ const PublishOutlet = () => {
 
                         {/* banner thumnail and demo */}
                         <div className="col-span-5">
-                            <div className="w-[26rem] h-[14.625rem] border-2 border-zinc-500 rounded-base overflow-hidden mx-auto">
-                                <img
-                                    src={fullCourseData.thumbnail.url}
-                                    className="object-cover w-full h-full"
-                                />
+                            <div className="w-[26rem] h-[14.625rem] border-2 border-zinc-500 rounded-base overflow-hidden mx-auto bg-slate-500">
+                                {fullCourseData.thumbnail?.s3Key ? (
+                                    <img
+                                        src={`https://d3petuww6xgji.cloudfront.net/${fullCourseData.thumbnail.s3Key}`}
+                                        className="object-cover w-full h-full"
+                                    />
+                                ) : (
+                                    <p className="text-center mt-24 text-darkText">
+                                        No Thumbnail
+                                    </p>
+                                )}
                             </div>
                         </div>
                     </div>
@@ -157,7 +163,9 @@ const PublishOutlet = () => {
                                             {fullCourseData.totalRatingCount && (
                                                 <>
                                                     (
-                                                    {fullCourseData.totalRatingCount}
+                                                    {
+                                                        fullCourseData.totalRatingCount
+                                                    }
                                                     )
                                                 </>
                                             )}

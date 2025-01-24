@@ -9,8 +9,7 @@ export interface IChapter {
 export interface IFullCourseData {
     totalRatingCount: number | undefined;
     thumbnail: {
-        public_id: string;
-        url: string;
+        s3Key: string;
     };
     _id: string;
     title: string;
