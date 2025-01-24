@@ -3,27 +3,40 @@ import FilterSidebar from "./FilterSidebar";
 import SortDropDown from "./SortDropDown";
 import CourseCardLong from "./CourseCardLong";
 import { useGetCoursesCardDetailsQuery } from "./exploreApiSlice.ts";
-import { useState } from "react";
-import { Link, useLocation } from "react-router-dom";
+import { Link, useOutletContext } from "react-router-dom";
 import PaginationExplore from "./Pagination.tsx";
 import nothingFound from "./../../../assets/NothingFoundSearch.png";
 import { ICourse } from "./Types.tsx";
 
-const ExplorePage = () => {
-    //if redirected from somewhere else
-    const { state } = useLocation();
+type OutletContext = {
+    filter: {
+        search: string;
+        category: string;
+        level: string;
+        minPrice: string;
+        maxPrice: string;
+        sortBy: string;
+        sortOrder: number;
+        page: number;
+        limit: number;
+    };
+    setFilter: React.Dispatch<
+        React.SetStateAction<{
+            search: string;
+            category: string;
+            level: string;
+            minPrice: string;
+            maxPrice: string;
+            sortBy: string;
+            sortOrder: number;
+            page: number;
+            limit: number;
+        }>
+    >;
+};
 
-    const [filter, setFilter] = useState({
-        search: state?.searchQuery || "",
-        category: "",
-        level: "",
-        minPrice: "",
-        maxPrice: "",
-        sortBy: "price",
-        sortOrder: -1,
-        page: 1,
-        limit: 5,
-    });
+const ExplorePage = () => {
+    const { filter, setFilter } = useOutletContext<OutletContext>();
 
     const { currentData: courseCardDetails, isLoading } =
         useGetCoursesCardDetailsQuery(filter);

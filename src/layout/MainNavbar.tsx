@@ -14,7 +14,7 @@ import AIcademyLogo from "@/components/base/AIcademyLogo";
 
 type Props = {
     query: string;
-    setFilter?: React.Dispatch<
+    setFilter: React.Dispatch<
         React.SetStateAction<{
             search: string;
             category: string;
@@ -33,6 +33,7 @@ const MainNavbar: React.FC<Props> = ({ query, setFilter }) => {
     const isLoggedIn = useSelector<RootState>((state) =>
         state.auth.user?.role === "user" ? true : false
     );
+
     return (
         <>
             <Navbar>
