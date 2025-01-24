@@ -61,11 +61,8 @@ const Thumbnail: React.FC<{ courseDetails: ICourse }> = ({ courseDetails }) => {
         const formData = new FormData();
         formData.append("newThumbnail", file);
         formData.append("courseId", courseDetails._id);
-        if (courseDetails.thumbnail?.public_id) {
-            formData.append(
-                "thumbnailPublic_id",
-                courseDetails.thumbnail.public_id
-            );
+        if (courseDetails.thumbnail?.s3Key) {
+            formData.append("thumbnailS3Key", courseDetails.thumbnail.s3Key);
         }
 
         console.log(formData);

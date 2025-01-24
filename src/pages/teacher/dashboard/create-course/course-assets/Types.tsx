@@ -1,4 +1,3 @@
-
 export interface Ivideo {
     _id: string;
     uploadedBy: string;
@@ -11,7 +10,8 @@ export interface Ivideo {
     transcriptId?: string;
     transcodingStatus: "processing" | "completed" | "failed";
     transcodedVideoMasterFileKey?: string;
-}export interface ICourse {
+}
+export interface ICourse {
     _id: string;
     title: string;
     description: string;
@@ -20,7 +20,7 @@ export interface Ivideo {
     price?: number;
     estimatedPrice?: number;
     thumbnail?: {
-        s3Key: { public_id: string; url: string; } | undefined;
+        s3Key: string;
         public_id: string;
         url: string;
     };
@@ -41,4 +41,3 @@ export interface Ivideo {
         }>;
     }>;
 }
-
