@@ -19,7 +19,11 @@ export interface IUserProfileDetails {
         firstName: string;
         lastName: string;
         _id: string;
-        profilePicture: { url: string; public_id: string };
+        profilePicture?: {
+            s3Key?: string;
+            url?: string;
+            public_id: string;
+        };
     };
 }
 
@@ -36,10 +40,10 @@ const ProfilePicture: React.FC<IUserProfileDetails> = ({ userDetails }) => {
         console.log(`file`, file);
         const formData = new FormData();
         formData.append("newProfilePic", file);
-        if (userDetails.profilePicture?.public_id) {
+        if (userDetails.profilePicture?.s3Key) {
             formData.append(
-                "profilePicPublic_id",
-                userDetails.profilePicture.public_id
+                "profilePicS3Key",
+                userDetails.profilePicture.s3Key
             );
         }
 
