@@ -40,6 +40,7 @@ const SearchBar: React.FC<Props> = ({ query, setFilter }) => {
     //reset the filter to default state when going to another page
     useEffect(() => {
         if (pathname !== "/explore") {
+            setSearchValue("");
             setFilter({
                 search: "",
                 category: "",
