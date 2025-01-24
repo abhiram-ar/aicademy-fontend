@@ -1,10 +1,10 @@
 import { Search } from "lucide-react";
-import React, { useEffect, useRef, useState } from "react";
+import React, { useEffect, useState } from "react";
 import { useLocation, useNavigate } from "react-router-dom";
 
 type Props = {
     query: string;
-    setFilter?: React.Dispatch<
+    setFilter: React.Dispatch<
         React.SetStateAction<{
             search: string;
             category: string;
@@ -19,11 +19,10 @@ type Props = {
     >;
 };
 
-const SearchBar: React.FC<Props> = ({ query, setFilter = null }) => {
+const SearchBar: React.FC<Props> = ({ query, setFilter }) => {
     const [searchValue, setSearchValue] = useState(query);
     const { pathname } = useLocation();
     const navigate = useNavigate();
-    const searchRef = useRef<HTMLInputElement>(null);
 
     useEffect(() => {
         const timer = setTimeout(() => {
@@ -38,11 +37,23 @@ const SearchBar: React.FC<Props> = ({ query, setFilter = null }) => {
         return () => clearTimeout(timer);
     }, [searchValue, setFilter]);
 
-    // if navigated form explore focus on searrch elemenet
+    //reset the filter to default state when going to another page
     useEffect(() => {
-        if (pathname === "/explore" && searchRef.current)
-            searchRef.current?.focus();
-    }, [pathname]);
+        if (pathname !== "/explore") {
+            setSearchValue("");
+            setFilter({
+                search: "",
+                category: "",
+                level: "",
+                minPrice: "",
+                maxPrice: "",
+                sortBy: "price",
+                sortOrder: -1,
+                page: 1,
+                limit: 5,
+            });
+        }
+    }, [pathname, setFilter]);
 
     return (
         <div className="flex border-2 border-black p-3 rounded-base w-full xlg:w-3/5 gap-2">
@@ -50,7 +61,6 @@ const SearchBar: React.FC<Props> = ({ query, setFilter = null }) => {
             <input
                 type="text"
                 value={searchValue}
-                ref={searchRef}
                 onClick={() => {
                     if (pathname !== "/explore") {
                         navigate("/explore");
