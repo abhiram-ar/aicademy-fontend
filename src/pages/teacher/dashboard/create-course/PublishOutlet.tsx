@@ -112,7 +112,7 @@ const PublishOutlet = () => {
                             <div className="w-[26rem] h-[14.625rem] border-2 border-zinc-500 rounded-base overflow-hidden mx-auto bg-slate-500">
                                 {fullCourseData.thumbnail?.s3Key ? (
                                     <img
-                                        src={`https://d3petuww6xgji.cloudfront.net/${fullCourseData.thumbnail.s3Key}`}
+                                        src={fullCourseData.thumbnail.url}
                                         className="object-cover w-full h-full"
                                     />
                                 ) : (
