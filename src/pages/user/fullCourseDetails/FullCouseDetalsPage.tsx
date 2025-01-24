@@ -313,7 +313,7 @@ const FullCouseDetalsPage = () => {
                                     (course: ICourse) => course._id === id
                                 ) ? (
                                     <Button
-                                        className="bg-[#fd9745] col-span-3 py-7 px-5 font-semibold text-xl"
+                                        className="bg-[#fd9745] col-span-4 py-7 px-5 font-semibold text-xl"
                                         size="lg"
                                         onClick={() =>
                                             navigate(`/user/learn/${id}`)
