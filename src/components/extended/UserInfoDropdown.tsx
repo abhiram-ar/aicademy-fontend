@@ -1,5 +1,5 @@
 import { useDispatch, useSelector } from "react-redux";
-import demopic from "./../../assets/studentDemo.png";
+import demopic from "./../../assets/NoUserProfile.png";
 import { RootState } from "@/redux/store";
 import { useLogoutMutation } from "@/redux/features/auth/userAuthAPIs";
 import { logout } from "./../../redux/features/auth/authSlice";
@@ -12,12 +12,15 @@ import {
     DropdownMenuSeparator,
     DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
+import { useGetUserProfileQuery } from "@/pages/user/profile/profileApiSlice";
 
 const UserInfoDropdown = () => {
     const username = useSelector<RootState, string | undefined>(
         (state) => state.auth.user?.username
     );
     const navigate = useNavigate();
+
+    const { data } = useGetUserProfileQuery({});
 
     const [logoutApi] = useLogoutMutation();
     const dispatch = useDispatch();
@@ -39,8 +42,16 @@ const UserInfoDropdown = () => {
                 <DropdownMenuTrigger className="focus:outline-none">
                     <div className="bg-main overflow-hidden outline-none size-12 rounded-base shadow-light border-2 border-border hover:translate-x-boxShadowX hover:translate-y-boxShadowY hover:shadow-none  ">
                         <img
-                            src={demopic}
-                            className="w-fill origin-top scale-150 border-0 focus:outline-0"
+                            src={
+                                data
+                                    ? `${
+                                          data.userDetails.avatarURL ||
+                                          data.userDetails.profilePicture.url ||
+                                          demopic
+                                      }`
+                                    : demopic
+                            }
+                            className="w-full h-full object-contain border-0 focus:outline-0"
                         />
                     </div>
                 </DropdownMenuTrigger>

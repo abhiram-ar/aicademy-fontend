@@ -53,7 +53,10 @@ const CourseCardLong: React.FC<{ courseDetails: ICourse }> = ({
                             )}
                         </div>
 
-                        <p>40 lessons • {courseDetails.level}</p>
+                        <p>
+                            {`${courseDetails.lessonCount ?? 0} Lessons`} •{" "}
+                            {courseDetails.level}
+                        </p>
                     </div>
 
                     {/* right section - price */}

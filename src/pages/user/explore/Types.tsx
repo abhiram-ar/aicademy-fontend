@@ -1,6 +1,7 @@
 import React from "react";
 
 export interface ICourse {
+    lessonCount: number;
     _id: string;
     title: string;
     description: string;

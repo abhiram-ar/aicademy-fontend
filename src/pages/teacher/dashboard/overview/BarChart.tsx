@@ -91,6 +91,7 @@ const Saleschart = () => {
                                     stackId="a"
                                     fill={getRandomColor()}
                                     radius={[0, 0, 0, 0]}
+                                    direction="top"
                                     animationEasing="ease-in-out"
                                     animationBegin={index*300}
                                     animationDuration={300}

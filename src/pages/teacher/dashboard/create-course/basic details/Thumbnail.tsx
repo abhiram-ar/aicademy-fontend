@@ -33,10 +33,10 @@ const Thumbnail: React.FC<{ courseDetails: ICourse }> = ({ courseDetails }) => {
             const formData = new FormData();
             formData.append("newThumbnail", file);
             formData.append("courseId", courseDetails._id);
-            if (courseDetails.thumbnail?.public_id) {
+            if (courseDetails.thumbnail?.s3Key) {
                 formData.append(
-                    "thumbnailPublic_id",
-                    courseDetails.thumbnail.public_id
+                    "thumbnailS3Key",
+                    courseDetails.thumbnail.s3Key
                 );
             }
 
@@ -61,11 +61,8 @@ const Thumbnail: React.FC<{ courseDetails: ICourse }> = ({ courseDetails }) => {
         const formData = new FormData();
         formData.append("newThumbnail", file);
         formData.append("courseId", courseDetails._id);
-        if (courseDetails.thumbnail?.public_id) {
-            formData.append(
-                "thumbnailPublic_id",
-                courseDetails.thumbnail.public_id
-            );
+        if (courseDetails.thumbnail?.s3Key) {
+            formData.append("thumbnailS3Key", courseDetails.thumbnail.s3Key);
         }
 
         console.log(formData);
@@ -84,6 +81,8 @@ const Thumbnail: React.FC<{ courseDetails: ICourse }> = ({ courseDetails }) => {
             toast("Error while updating thumbnail");
         }
     };
+
+    console.log("c", courseDetails);
 
     return (
         <div className="mx-auto w-[50rem]  mt-10 ">
@@ -125,7 +124,7 @@ const Thumbnail: React.FC<{ courseDetails: ICourse }> = ({ courseDetails }) => {
                     onChange={handleFileChnage}
                 />
 
-                {courseDetails.thumbnail && courseDetails.thumbnail?.url ? (
+                {courseDetails.thumbnail && courseDetails.thumbnail?.s3Key ? (
                     <div className="min-h-5 w-full">
                         <img
                             src={courseDetails.thumbnail.url}

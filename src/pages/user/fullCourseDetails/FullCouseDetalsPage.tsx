@@ -306,14 +306,14 @@ const FullCouseDetalsPage = () => {
                             </div>
 
                             {/* add to cart and wishlist */}
-                            <div className="flex gap-5 my-5">
+                            <div className="grid grid-cols-4 gap-5 my-5 border border-red-300">
                                 {user &&
                                 userBoughtList &&
                                 userBoughtList.boughtCourseList.find(
                                     (course: ICourse) => course._id === id
                                 ) ? (
                                     <Button
-                                        className="bg-[#fd9745] w-full py-7 px-5 font-semibold text-xl"
+                                        className="bg-[#fd9745] col-span-4 py-7 px-5 font-semibold text-xl"
                                         size="lg"
                                         onClick={() =>
                                             navigate(`/user/learn/${id}`)
@@ -330,7 +330,7 @@ const FullCouseDetalsPage = () => {
                                                 course._id === id
                                         ) ? (
                                             <Button
-                                                className="bg-[#fd9745] w-full py-7 px-5 font-semibold text-xl"
+                                                className="bg-[#fd9745] col-span-3 py-7 px-5 font-semibold text-xl"
                                                 size="lg"
                                                 onClick={handleRemoveFromCart}
                                             >
@@ -338,7 +338,7 @@ const FullCouseDetalsPage = () => {
                                             </Button>
                                         ) : (
                                             <Button
-                                                className="bg-[#ffdc58] w-full p-7 font-semibold text-xl"
+                                                className="bg-[#ffdc58] col-span-3 p-7 font-semibold text-xl"
                                                 size="lg"
                                                 onClick={handleAddToCart}
                                             >
@@ -358,9 +358,9 @@ const FullCouseDetalsPage = () => {
                                                     }
                                                     size="lg"
                                                     variant="reverse"
-                                                    className="p-7 bg-[#fd6182]"
+                                                    className="col-span-1 w-20 p-7 bg-[#fd6182]"
                                                 >
-                                                    <Heart className="fill-black" />
+                                                    <Heart className="fill-black size-12" />
                                                 </Button>
                                             ) : (
                                                 <Button
@@ -368,18 +368,18 @@ const FullCouseDetalsPage = () => {
                                                         handleAddToWishList
                                                     }
                                                     size="lg"
-                                                    className="bg-zinc-100 p-7 hover:bg-[#fd6182]"
+                                                className="col-span-1 w-20  bg-zinc-100 p-7 hover:bg-[#fd6182]"
                                                 >
-                                                    <Heart className="fill-black" />
+                                                    <Heart className="fill-black size-12" />
                                                 </Button>
                                             )
                                         ) : (
                                             <Button
                                                 onClick={handleAddToWishList}
                                                 size="lg"
-                                                className="bg-zinc-100 p-7 hover:bg-[#fd6182]"
+                                                className="col-span-1 w-20 bg-zinc-100 p-7 hover:bg-[#fd6182]"
                                             >
-                                                <Heart className="fill-black" />
+                                                <Heart className="fill-black size-12" />
                                             </Button>
                                         )}
                                     </>

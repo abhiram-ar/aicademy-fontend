@@ -13,15 +13,7 @@ import {
     DialogTrigger,
 } from "@/components/ui/dialog";
 import { useUpdateUserProfilePictureMutation } from "../profileApiSlice";
-
-export interface IUserProfileDetails {
-    userDetails: {
-        firstName: string;
-        lastName: string;
-        _id: string;
-        profilePicture: { url: string; public_id: string };
-    };
-}
+import { IUserProfileDetails } from "./Tyeps";
 
 const ProfilePicture: React.FC<IUserProfileDetails> = ({ userDetails }) => {
     const [updateProfilePic] = useUpdateUserProfilePictureMutation();
@@ -36,10 +28,10 @@ const ProfilePicture: React.FC<IUserProfileDetails> = ({ userDetails }) => {
         console.log(`file`, file);
         const formData = new FormData();
         formData.append("newProfilePic", file);
-        if (userDetails.profilePicture?.public_id) {
+        if (userDetails.profilePicture?.s3Key) {
             formData.append(
-                "profilePicPublic_id",
-                userDetails.profilePicture.public_id
+                "profilePicS3Key",
+                userDetails.profilePicture.s3Key
             );
         }
 
