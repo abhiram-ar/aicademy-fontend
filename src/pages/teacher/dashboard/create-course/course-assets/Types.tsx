@@ -21,7 +21,6 @@ export interface ICourse {
     estimatedPrice?: number;
     thumbnail?: {
         s3Key: string;
-        public_id: string;
         url: string;
     };
     demoVideoKey: string;

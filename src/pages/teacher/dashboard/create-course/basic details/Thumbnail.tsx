@@ -33,10 +33,10 @@ const Thumbnail: React.FC<{ courseDetails: ICourse }> = ({ courseDetails }) => {
             const formData = new FormData();
             formData.append("newThumbnail", file);
             formData.append("courseId", courseDetails._id);
-            if (courseDetails.thumbnail?.public_id) {
+            if (courseDetails.thumbnail?.s3Key) {
                 formData.append(
-                    "thumbnailPublic_id",
-                    courseDetails.thumbnail.public_id
+                    "thumbnailS3Key",
+                    courseDetails.thumbnail.s3Key
                 );
             }
 
@@ -127,7 +127,7 @@ const Thumbnail: React.FC<{ courseDetails: ICourse }> = ({ courseDetails }) => {
                 {courseDetails.thumbnail && courseDetails.thumbnail?.s3Key ? (
                     <div className="min-h-5 w-full">
                         <img
-                            src={`https://d3petuww6xgji.cloudfront.net/${courseDetails.thumbnail.s3Key}`}
+                            src={courseDetails.thumbnail.url}
                             className="w-full h-full object-cover"
                         />
                         <div
