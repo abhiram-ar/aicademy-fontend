@@ -306,7 +306,7 @@ const FullCouseDetalsPage = () => {
                             </div>
 
                             {/* add to cart and wishlist */}
-                            <div className="grid grid-cols-4 gap-5 my-5 border border-red-300">
+                            <div className="grid grid-cols-4 gap-5 my-5">
                                 {user &&
                                 userBoughtList &&
                                 userBoughtList.boughtCourseList.find(
