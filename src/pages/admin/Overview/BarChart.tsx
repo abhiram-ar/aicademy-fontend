@@ -76,14 +76,14 @@ const Saleschart = () => {
                         <Bar
                             dataKey="revenue"
                             stackId="a"
-                            fill="#292828"
+                            fill="#004141"
                             radius={[0, 0, 4, 4]}
                             animationDuration={0}
                         />
                         <Bar
                             dataKey="profit"
                             stackId="a"
-                            fill="#005a31"
+                            fill="#007a41"
                             radius={[4, 4, 0, 0]}
                             animationDuration={0}
                             animationEasing="ease-out"
