@@ -1,50 +1,61 @@
-# React + TypeScript + Vite
+# AIcademy Frontend
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+AIcademy is an LMS platform similar to Udemy, where students can access high-quality courses at affordable rates, and teachers can earn by selling their courses. AIcademy acts as a bridge between teachers and students, offering unique AI features to enhance the learning experience.
 
-Currently, two official plugins are available:
+## Overview
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react/README.md) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+### Project Specification
+AIcademy leverages Retrieval Augmented Generation (RAG) to address students' doubts by referring to the context of the video, ensuring that answers are contextually relevant to the course content.
 
-## Expanding the ESLint configuration
+### Project Requirements
+- **Frontend**: React with Vite for tooling
+- **State Management**: Redux Toolkit, RTK Query for fetching and caching
+- **Backend**: Express.js, Node.js, Nginx
+- **Database**: MongoDB with Mongoose as ODM, Qdrant as Vector Database
+- **Storage**: AWS S3 (V3 SDK for Node.js) with Adaptive Bitrate streaming for videos
+- **Tech Stack**: MERN (MongoDB, Express.js, React, Node.js), Rabbitmq, Langchain
 
-If you are developing a production application, we recommend updating the configuration to enable type aware lint rules:
+### Features
+- AI-powered doubt resolution using RAG
+- High-quality courses from world-class teachers
+- Affordable pricing for students
+- Secure video storage and Adaptive Bitrate streaming
+- Efficient course upload process reducing server load
 
-- Configure the top-level `parserOptions` property like this:
+## Repository Structure
+The repository primarily consists of TypeScript code along with some CSS, HTML, and JavaScript files.
 
-```js
-export default tseslint.config({
-  languageOptions: {
-    // other options...
-    parserOptions: {
-      project: ['./tsconfig.node.json', './tsconfig.app.json'],
-      tsconfigRootDir: import.meta.dirname,
-    },
-  },
-})
-```
+### Languages Used
+- TypeScript: 98.9%
+- CSS
+- HTML
+- JavaScript
 
-- Replace `tseslint.configs.recommended` to `tseslint.configs.recommendedTypeChecked` or `tseslint.configs.strictTypeChecked`
-- Optionally add `...tseslint.configs.stylisticTypeChecked`
-- Install [eslint-plugin-react](https://github.com/jsx-eslint/eslint-plugin-react) and update the config:
+## Getting Started
 
-```js
-// eslint.config.js
-import react from 'eslint-plugin-react'
+To get started with the project, follow these steps:
 
-export default tseslint.config({
-  // Set the react version
-  settings: { react: { version: '18.3' } },
-  plugins: {
-    // Add the react plugin
-    react,
-  },
-  rules: {
-    // other rules...
-    // Enable its recommended rules
-    ...react.configs.recommended.rules,
-    ...react.configs['jsx-runtime'].rules,
-  },
-})
-```
+1. Clone the repository:
+   ```bash
+   git clone https://github.com/abhiram-ar/aicademy-fontend.git
+   ```
+2. Install dependencies:
+   ```bash
+   npm install
+   ```
+3. Start the development server:
+   ```bash
+   npm run dev
+   ```
+
+## Contributing
+We welcome contributions to the AIcademy Backend project. To contribute:
+
+1. Fork the repository.
+2. Create a new branch for your feature or bugfix.
+3. Make your changes and commit them with a clear message.
+4. Push your changes to your fork.
+5. ubmit a pull request detailing your changes.
+
+## License
+This project is licensed under the MIT License.
