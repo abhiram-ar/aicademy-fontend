@@ -30,7 +30,7 @@ const chartConfig = {
 } satisfies ChartConfig;
 
 const Saleschart = () => {
-    const [filter, setFilter] = useState<"monthly" | "daily">("monthly");
+    const [filter, setFilter] = useState<"monthly" | "daily">("daily");
     const { data: query } = useGetRevenueAndProfitDataQuery({
         interval: filter,
     });
@@ -71,7 +71,7 @@ const Saleschart = () => {
                             tickLine={false}
                             tickMargin={10}
                             axisLine={false}
-                            tickFormatter={(value) => value.slice(0, 8)}
+                            tickFormatter={(value) => value.slice(0, 10)}
                         />
                         <Bar
                             dataKey="revenue"
@@ -85,7 +85,7 @@ const Saleschart = () => {
                             stackId="a"
                             fill="#005a31"
                             radius={[4, 4, 0, 0]}
-                            animationEasing="ease-in-out"
+                            animationEasing="ease-out"
                         />
                         <ChartTooltip
                             content={<ChartTooltipContent />}

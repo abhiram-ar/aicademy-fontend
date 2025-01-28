@@ -18,10 +18,10 @@ const FilterRangeDropDown = ({
                 onValueChange={(value: "monthly" | "daily") => setFilter(value)}
             >
                 <SelectTrigger
-                    defaultValue="monthly"
+                    defaultValue="daily"
                     className="w-[180px] bg-slate-100 border-slate-200"
                 >
-                    <SelectValue placeholder="monthly" />
+                    <SelectValue placeholder="daily" />
                 </SelectTrigger>
                 <SelectContent className="bg-zinc-100 border-slate-200">
                     <SelectGroup>
