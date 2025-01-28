@@ -50,6 +50,7 @@ const chartConfig = {
 export function NoOfUsersChart() {
     const { data } = useGetUserCountQuery({});
 
+    // live data - user in production
     // let chartData;
     // if (data) {
     //     chartData = data.result;
