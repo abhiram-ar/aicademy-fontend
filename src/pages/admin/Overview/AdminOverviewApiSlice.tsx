@@ -11,10 +11,14 @@ const adminOverviewApiSlice = apiSlice.injectEndpoints({
                 return `/api/admin/dashboard/revenue-profit?${query}`;
             },
         }),
+        getUserCount: builder.query({
+            query: () => "/api/admin/dashboard/user-count",
+        }),
     }),
 });
 
 export const {
     useGetLastTwoMonthOverviewAdminQuery,
     useGetRevenueAndProfitDataQuery,
+    useGetUserCountQuery,
 } = adminOverviewApiSlice;

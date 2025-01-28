@@ -12,8 +12,8 @@ const UserCourseReportPage = () => {
     });
     const [metadata, setMetadata] = useState({ totalPages: 0, data: false });
     return (
-        <div className="mx-10">
-            <h2 className="font-medium text-2xl bg-zinc-300 px-2 rounded-base w-fit -mt-12 ms-2">
+        <div className="">
+            <h2 className="font-medium text-2xl bg-zinc-300 px-2 rounded-base w-fit -mt-12 ms-12">
                 User Reports
             </h2>
             <div className="w-10/12 mx-auto mt-5">
@@ -25,11 +25,14 @@ const UserCourseReportPage = () => {
                                 <TableHead className="w-80 text-darkText">
                                     Course Name
                                 </TableHead>
-                                <TableHead className="w-80 text-darkText">
+                                <TableHead className="w text-darkText">
                                     Issue
                                 </TableHead>
-                                <TableHead className="w-32 text-darkText">
-                                    User UID
+                                <TableHead className="w-44 text-darkText">
+                                    User name
+                                </TableHead>
+                                <TableHead className="w-44 text-darkText">
+                                    User email
                                 </TableHead>
                                 <TableHead className="w-20 text-center text-darkText">
                                     Options

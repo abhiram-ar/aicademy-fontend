@@ -63,28 +63,29 @@ const Saleschart = () => {
             <CardContent>
                 <ChartContainer
                     config={chartConfig}
-                    className="h-[25rem] w-full"
+                    className="h-[28rem] w-full"
                 >
                     <BarChart accessibilityLayer data={query?.data}>
                         <XAxis
                             dataKey="period"
-                            tickLine={false}
+                            tickLine={true}
                             tickMargin={10}
-                            axisLine={false}
+                            axisLine={true}
                             tickFormatter={(value) => value.slice(0, 10)}
                         />
                         <Bar
                             dataKey="revenue"
                             stackId="a"
-                            fill="#292828"
+                            fill="#004141"
                             radius={[0, 0, 4, 4]}
                             animationDuration={0}
                         />
                         <Bar
                             dataKey="profit"
                             stackId="a"
-                            fill="#005a31"
+                            fill="#007a41"
                             radius={[4, 4, 0, 0]}
+                            animationDuration={0}
                             animationEasing="ease-out"
                         />
                         <ChartTooltip

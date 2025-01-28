@@ -38,7 +38,7 @@ const ReportsTableBody: React.FC<Props> = ({ filter, setMetadata }) => {
     const { data } = useGetCourseReportListQuery(filter);
     const [updateReportState] = useUpdateCourseReportStateAdminMutation();
     const currentData = data;
-
+    console.log("d", currentData);
     useEffect(() => {
         if (data)
             setMetadata({
@@ -79,7 +79,11 @@ const ReportsTableBody: React.FC<Props> = ({ filter, setMetadata }) => {
                     currentData.reportList &&
                     currentData.reportList.map(
                         (report: {
-                            createdBy: string;
+                            createdBy: {
+                                firstName: string;
+                                lastName: string;
+                                email: string;
+                            };
                             courseId: { _id: string; title: string };
                             status: "pending" | "resolved";
                             title: string;
@@ -94,7 +98,8 @@ const ReportsTableBody: React.FC<Props> = ({ filter, setMetadata }) => {
                             >
                                 <TableCell>{report.courseId.title}</TableCell>
                                 <TableCell>{report.title}</TableCell>
-                                <TableCell>{report.createdBy}</TableCell>
+                                <TableCell>{report.createdBy.firstName + " "  + report.createdBy.lastName}</TableCell>
+                                <TableCell>{report.createdBy.email}</TableCell>
 
                                 <TableCell>
                                     <DropdownMenu>
