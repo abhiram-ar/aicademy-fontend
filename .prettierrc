@@ -1,0 +1,11 @@
+{
+  "printWidth": 80,
+  "overrides": [
+    {
+      "files": "main.tsx",
+      "options": {
+        "printWidth": 100
+      }
+    }
+  ]
+}
