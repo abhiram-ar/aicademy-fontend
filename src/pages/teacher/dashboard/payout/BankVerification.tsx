@@ -1,6 +1,6 @@
 import { Button } from "@/components/ui/button";
 import { loadScript } from "@/utils/loadscript";
-import React, { useEffect } from "react";
+import { useEffect } from "react";
 import {
     useCreateBankVerificationOrderMutation,
     useVerifyTeacherBankAccountMutation,
