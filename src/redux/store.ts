@@ -7,7 +7,7 @@ const store = configureStore({
         [apiSlice.reducerPath]: apiSlice.reducer,
         auth: authReducer,
     },
-    devTools: true, //turn off in production
+    devTools: false, //turn off in production
     middleware: (getDefaultMiddleware) =>
         getDefaultMiddleware().concat(apiSlice.middleware),
 });
