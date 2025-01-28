@@ -18,7 +18,6 @@ import {
 import AdminLoginPage from "./pages/admin/AminLoginPage";
 import AdminDashBoardHomePage from "./pages/admin/AdminDashBoardHomePage";
 import TeacherOnboadingPage from "./pages/admin/Teacher mangement/TeacherOnboarding/TeacherOnboadingPage";
-import Page from "./pages/teacher/dashboard/Layout";
 import TeacherDashboard from "./pages/teacher/dashboard/Layout";
 import CreateCoursePage from "./pages/teacher/dashboard/create-course/CreateDraftPage";
 import CourseDraft from "./pages/teacher/dashboard/create-course/CourseDraft";
@@ -264,10 +263,7 @@ const appRouter = createBrowserRouter([
             },
         ],
     },
-    {
-        path: "/test",
-        element: <Page />,
-    },
+    
 ]);
 
 createRoot(document.getElementById("root")!).render(

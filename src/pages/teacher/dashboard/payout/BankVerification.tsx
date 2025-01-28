@@ -63,7 +63,8 @@ const BankVerification = () => {
                     console.log(response);
                 },
             };
-
+            /* eslint-disable @typescript-eslint/ban-ts-comment */
+            // @ts-ignore
             const rzp1 = new Razorpay(options);
             rzp1.open();
         } catch (error) {
