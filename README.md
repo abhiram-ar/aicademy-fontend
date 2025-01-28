@@ -59,7 +59,7 @@ We welcome contributions to the AIcademy Backend project. To contribute:
 2. Create a new branch for your feature or bugfix.
 3. Make your changes and commit them with a clear message.
 4. Push your changes to your fork.
-5. ubmit a pull request detailing your changes.
+5. Submit a pull request detailing your changes.
 
 ## License
 This project is licensed under the MIT License.
