@@ -61,7 +61,7 @@ const courseCreationsAPI = apiSlice.injectEndpoints({
             invalidatesTags: ["draftCourseDetails"],
         }),
         publishCourse: builder.mutation({
-            query: (data: { courseId: string; chapters: object }) => ({
+            query: (data) => ({
                 url: "/api/course/publish",
                 method: "PATCH",
                 body: data,
@@ -69,7 +69,7 @@ const courseCreationsAPI = apiSlice.injectEndpoints({
             invalidatesTags: ["draftCourseList", "fullcourseDetailsPublic"],
         }),
         unPublishCourse: builder.mutation({
-            query: (data: { courseId: string; chapters: object }) => ({
+            query: (data) => ({
                 url: "/api/course/unpublish",
                 method: "PATCH",
                 body: data,

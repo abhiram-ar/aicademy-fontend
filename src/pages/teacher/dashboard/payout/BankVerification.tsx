@@ -1,6 +1,6 @@
 import { Button } from "@/components/ui/button";
 import { loadScript } from "@/utils/loadscript";
-import React, { useEffect } from "react";
+import { useEffect } from "react";
 import {
     useCreateBankVerificationOrderMutation,
     useVerifyTeacherBankAccountMutation,
@@ -63,7 +63,8 @@ const BankVerification = () => {
                     console.log(response);
                 },
             };
-
+            /* eslint-disable @typescript-eslint/ban-ts-comment */
+            // @ts-ignore
             const rzp1 = new Razorpay(options);
             rzp1.open();
         } catch (error) {

@@ -38,7 +38,7 @@ const Checkout: React.FC<Props> = ({
             console.log(createOrderResponse);
 
             const options = {
-                key: "rzp_test_nzVid1xtKEuRtN",
+                key: import.meta.env.VITE_RAZORPAY_KEY,
                 amount: createOrderResponse.orderDetails.amount,
                 currency: "INR",
                 name: "AICademy",
@@ -64,6 +64,8 @@ const Checkout: React.FC<Props> = ({
                 },
             };
 
+            /* eslint-disable @typescript-eslint/ban-ts-comment */
+            // @ts-ignore
             const rzp1 = new Razorpay(options);
             rzp1.open();
         } catch (error) {
