@@ -1,8 +1,8 @@
-import React, { lazy, ReactNode, Suspense } from "react";
+import { lazy } from "react";
 // import { StrictMode } from "react";
 import { createRoot } from "react-dom/client";
-import "./index.css";
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
+import "./index.css";
 import { Provider } from "react-redux";
 import store from "./redux/store";
 import App from "./App";
@@ -10,14 +10,14 @@ import StandardLayout from "./layout/StandardLayout";
 import LayoutWithMinimalNav from "./layout/LayoutWithMinimalNav";
 import { authLoader, fetchAccessTokenOnload } from "./utils/fetchAccessTokenOnLoad";
 import LandingPage from "./pages/landing/LandingPage";
+import { HashLoader } from "react-spinners";
+import { WrappinSuspense } from "./wrapinSuspense";
 
 // lazy load
 const LoginPage = lazy(() => import("./pages/user/auth/LoginPage"));
 const SignupPage = lazy(() => import("./pages/user/auth/SignupPage"));
 const ExplorePage = lazy(() => import("./pages/user/explore/ExplorePage"));
-const FullCouseDetalsPage = lazy(
-  () => import("./pages/user/fullCourseDetails/FullCouseDetalsPage")
-);
+const FullCouseDetalsPage = lazy(() => import("./pages/user/fullCourseDetails/FullCouseDetalsPage"));
 const CartPage = lazy(() => import("./pages/user/cart/CartPage"));
 const LearnPage = lazy(() => import("./pages/user/Learn/LearnPage"));
 const UserProfileLayout = lazy(() => import("./pages/user/profile/UserProfileLayout"));
@@ -29,44 +29,29 @@ const MyLearning = lazy(() => import("./pages/user/myLearning/MyLearning"));
 const ReportCourseIssue = lazy(() => import("./pages/user/Help/ReportCourseIssue"));
 const OrdersPage = lazy(() => import("./pages/user/Orders/OrdersPage"));
 
-import TeacherSignupPage from "./pages/teacher/auth/TeacherSignupPage";
-import TeacherLoginPage from "./pages/teacher/auth/TeacherLoginPage";
-import OnboardingPage from "./pages/teacher/onboarding/OnboardingPage";
-import TeacherOnboadingPage from "./pages/admin/Teacher mangement/TeacherOnboarding/TeacherOnboadingPage";
-import CreateCoursePage from "./pages/teacher/dashboard/create-course/CreateDraftPage";
-import CourseDetailsOutlet from "./pages/teacher/dashboard/create-course/basic details/CourseDetailsOutlet";
-import CourseStrucureOutlet from "./pages/teacher/dashboard/create-course/CourseStrucureOutlet";
-import CourseAssetsOutlet from "./pages/teacher/dashboard/create-course/course-assets/CourseAssetsOutlet";
-import PublishOutlet from "./pages/teacher/dashboard/create-course/PublishOutlet";
-import TeacherDashboard from "./pages/teacher/dashboard/Layout";
-import CourseDraft from "./pages/teacher/dashboard/create-course/CourseDraft";
-import TeacherDashboardOverview from "./pages/teacher/dashboard/overview/TeacherDashboardOverviewPage";
-import PayoutPage from "./pages/teacher/dashboard/payout/PayoutPage";
+const TeacherSignupPage = lazy(() => import("./pages/teacher/auth/TeacherSignupPage"));
+const TeacherLoginPage = lazy(() => import("./pages/teacher/auth/TeacherLoginPage"));
+const OnboardingPage = lazy(() => import("./pages/teacher/onboarding/OnboardingPage"));
+const TeacherOnboadingPage = lazy(() => import("./pages/admin/Teacher mangement/TeacherOnboarding/TeacherOnboadingPage"));
+const CreateCoursePage = lazy(() => import("./pages/teacher/dashboard/create-course/CreateDraftPage"));
+const CourseDetailsOutlet = lazy(() => import("./pages/teacher/dashboard/create-course/basic details/CourseDetailsOutlet"));
+const CourseStrucureOutlet = lazy(() => import("./pages/teacher/dashboard/create-course/CourseStrucureOutlet"));
+const CourseAssetsOutlet = lazy(() => import("./pages/teacher/dashboard/create-course/course-assets/CourseAssetsOutlet"));
+const PublishOutlet = lazy(() => import("./pages/teacher/dashboard/create-course/PublishOutlet"));
+const TeacherDashboard = lazy(() => import("./pages/teacher/dashboard/Layout"));
+const CourseDraft = lazy(() => import("./pages/teacher/dashboard/create-course/CourseDraft"));
+const TeacherDashboardOverview = lazy(() => import("./pages/teacher/dashboard/overview/TeacherDashboardOverviewPage"));
+const PayoutPage = lazy(() => import("./pages/teacher/dashboard/payout/PayoutPage"));
 
-import AdminLoginPage from "./pages/admin/AminLoginPage";
-import AdminDashBoardHomePage from "./pages/admin/AdminDashBoardHomePage";
-import UserManagementPage from "./pages/admin/user/user-management/UserManagementPage";
-import CouponManagementPage from "./pages/admin/course/coupon/CouponManagementPage";
-import UserCourseReportPage from "./pages/admin/user/course-reports/UserCourseReportPage";
-import AdminOverviewPage from "./pages/admin/Overview/AdminOverviewPage";
-import AdminRevenuePage from "./pages/admin/Revenue/RevenuePage";
-import TeacherPayoutApprovalPage from "./pages/admin/Teacher mangement/Payout/TeacherPayoutApprovalPage";
-import CourseManagementPage from "./pages/admin/course/courseManagement/CourseManagementPage";
-import { HashLoader } from "react-spinners";
-
-const WrappinSuspense = (component: ReactNode) => {
-  return (
-    <Suspense
-      fallback={
-        <div className="w-full h-screen flex justify-center items-center">
-          <HashLoader></HashLoader>
-        </div>
-      }
-    >
-      {component}
-    </Suspense>
-  );
-};
+const AdminLoginPage = lazy(() => import("./pages/admin/AminLoginPage"));
+const AdminDashBoardHomePage = lazy(() => import("./pages/admin/AdminDashBoardHomePage"));
+const UserManagementPage = lazy(() => import("./pages/admin/user/user-management/UserManagementPage"));
+const CouponManagementPage = lazy(() => import("./pages/admin/course/coupon/CouponManagementPage"));
+const UserCourseReportPage = lazy(() => import("./pages/admin/user/course-reports/UserCourseReportPage"));
+const AdminOverviewPage = lazy(() => import("./pages/admin/Overview/AdminOverviewPage"));
+const AdminRevenuePage = lazy(() => import("./pages/admin/Revenue/RevenuePage"));
+const TeacherPayoutApprovalPage = lazy(() => import("./pages/admin/Teacher mangement/Payout/TeacherPayoutApprovalPage"));
+const CourseManagementPage = lazy(() => import("./pages/admin/course/courseManagement/CourseManagementPage"));
 
 fetchAccessTokenOnload();
 const appRouter = createBrowserRouter([
@@ -117,7 +102,11 @@ const appRouter = createBrowserRouter([
       {
         path: "/user",
         loader: () => authLoader("user"),
-        hydrateFallbackElement: <p>loading...</p>,
+        hydrateFallbackElement: (
+          <div className="w-full h-screen flex justify-center items-center">
+            <HashLoader></HashLoader>
+          </div>
+        ),
         element: <StandardLayout />,
         children: [
           {
@@ -141,7 +130,11 @@ const appRouter = createBrowserRouter([
       {
         path: "/user",
         loader: () => authLoader("user"),
-        hydrateFallbackElement: <p>loading...</p>,
+        hydrateFallbackElement: (
+          <div className="w-full h-screen flex justify-center items-center">
+            <HashLoader></HashLoader>
+          </div>
+        ),
         element: WrappinSuspense(<UserProfileLayout />),
         children: [
           { index: true, element: <ProfileOutlet /> },
@@ -166,7 +159,11 @@ const appRouter = createBrowserRouter([
       {
         path: "/user/learn/:courseId",
         loader: () => authLoader("user"),
-        hydrateFallbackElement: <p>loading...</p>,
+        hydrateFallbackElement: (
+          <div className="w-full h-screen flex justify-center items-center">
+            <HashLoader></HashLoader>
+          </div>
+        ),
         element: WrappinSuspense(<LearnPage />),
       },
       {
@@ -175,44 +172,48 @@ const appRouter = createBrowserRouter([
           {
             path: "/teach",
             loader: () => authLoader("teacher"),
-            hydrateFallbackElement: <p>loading...</p>,
-            element: <TeacherDashboard />,
+            hydrateFallbackElement: (
+              <div className="w-full h-screen flex justify-center items-center">
+                <HashLoader></HashLoader>
+              </div>
+            ),
+            element: WrappinSuspense(<TeacherDashboard />),
             children: [
               {
                 index: true,
-                element: <TeacherDashboardOverview />,
+                element: WrappinSuspense(<TeacherDashboardOverview />),
               },
               {
                 path: "/teach/payout",
-                element: <PayoutPage />,
+                element: WrappinSuspense(<PayoutPage />),
               },
               {
                 path: "/teach/course/create",
-                element: <CreateCoursePage />,
+                element: WrappinSuspense(<CreateCoursePage />),
               },
               {
                 path: "/teach/course/draft/:id",
-                element: <CourseDraft />,
+                element: WrappinSuspense(<CourseDraft />),
                 children: [
                   {
                     index: true,
-                    element: <CourseDetailsOutlet />,
+                    element: WrappinSuspense(<CourseDetailsOutlet />),
                   },
                   {
                     path: "details",
-                    element: <CourseDetailsOutlet />,
+                    element: WrappinSuspense(<CourseDetailsOutlet />),
                   },
                   {
                     path: "structure",
-                    element: <CourseStrucureOutlet />,
+                    element: WrappinSuspense(<CourseStrucureOutlet />),
                   },
                   {
                     path: "assets",
-                    element: <CourseAssetsOutlet />,
+                    element: WrappinSuspense(<CourseAssetsOutlet />),
                   },
                   {
                     path: "publish",
-                    element: <PublishOutlet />,
+                    element: WrappinSuspense(<PublishOutlet />),
                   },
                 ],
               },
@@ -220,17 +221,21 @@ const appRouter = createBrowserRouter([
           },
           {
             path: "/teach/login",
-            element: <TeacherLoginPage />,
+            element: WrappinSuspense(<TeacherLoginPage />),
           },
           {
             path: "/teach/signup",
-            element: <TeacherSignupPage />,
+            element: WrappinSuspense(<TeacherSignupPage />),
           },
           {
             path: "/teach/onboard",
             loader: () => authLoader("teacher"),
-            hydrateFallbackElement: <p>loading...</p>,
-            element: <OnboardingPage />,
+            hydrateFallbackElement: (
+              <div className="w-full h-screen flex justify-center items-center">
+                <HashLoader></HashLoader>
+              </div>
+            ),
+            element: WrappinSuspense(<OnboardingPage />),
           },
         ],
       },
@@ -239,45 +244,45 @@ const appRouter = createBrowserRouter([
         children: [
           {
             path: "/admin/login",
-            element: <AdminLoginPage />,
+            element: WrappinSuspense(<AdminLoginPage />),
           },
           {
             path: "/admin/dashboard",
             loader: () => authLoader("admin"),
             hydrateFallbackElement: <p>loading...</p>,
-            element: <AdminDashBoardHomePage />,
+            element: WrappinSuspense(<AdminDashBoardHomePage />),
             children: [
               {
                 index: true,
-                element: <AdminOverviewPage />,
+                element: WrappinSuspense(<AdminOverviewPage />),
               },
               {
                 path: "/admin/dashboard/revenue",
-                element: <AdminRevenuePage />,
+                element: WrappinSuspense(<AdminRevenuePage />),
               },
               {
                 path: "/admin/dashboard/teacher/onboard",
-                element: <TeacherOnboadingPage />,
+                element: WrappinSuspense(<TeacherOnboadingPage />),
               },
               {
                 path: "/admin/dashboard/teacher/payout",
-                element: <TeacherPayoutApprovalPage />,
+                element: WrappinSuspense(<TeacherPayoutApprovalPage />),
               },
               {
                 path: "/admin/dashboard/user/management",
-                element: <UserManagementPage />,
+                element: WrappinSuspense(<UserManagementPage />),
               },
               {
                 path: "/admin/dashboard/user/reports",
-                element: <UserCourseReportPage />,
+                element: WrappinSuspense(<UserCourseReportPage />),
               },
               {
                 path: "/admin/dashboard/course/coupon",
-                element: <CouponManagementPage />,
+                element: WrappinSuspense(<CouponManagementPage />),
               },
               {
                 path: "/admin/dashboard/course/management",
-                element: <CourseManagementPage />,
+                element: WrappinSuspense(<CourseManagementPage />),
               },
             ],
           },
