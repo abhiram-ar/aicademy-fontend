@@ -21,7 +21,7 @@ const CouponManagementPage = () => {
             <h2 className="text-2xl font-semibold bg-zinc-300 w-fit mx-10 px-2 rounded-base -mt-12 ms-12">
                 Coupons
             </h2>
-            <div className="w-2/3 mx-auto font-publicSans">
+            <div className="w-10/12 mx-auto font-publicSans  mt-5">
                 <div className="flex justify-center items-center gap-2">
                     <SearchField search={filter.search} setFilter={setFilter} />
                     <CreateNewCoupon />
@@ -32,16 +32,16 @@ const CouponManagementPage = () => {
                     <Table>
                         <TableHeader>
                             <TableRow className="bg-zinc-700 ">
-                                <TableHead className="w-64 text-darkText">
+                                <TableHead className="w-80 text-darkText">
                                     CODE
                                 </TableHead>
-                                <TableHead className="w-80 text-darkText">
+                                <TableHead className=" text-darkText">
                                     Description
                                 </TableHead>
-                                <TableHead className="text-darkText">
+                                <TableHead className="w-32 text-darkText">
                                     Status
                                 </TableHead>
-                                <TableHead className=" text-darkText">
+                                <TableHead className="w-32 text-darkText">
                                     Usage
                                 </TableHead>
                                 <TableHead className="w-20  text-darkText">

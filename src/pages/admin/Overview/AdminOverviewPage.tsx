@@ -3,6 +3,7 @@ import PurchaseCard from "./PurchasesCard";
 import BarChart from "./BarChart";
 import ProfitCard from "./ProfitCard";
 import { useGetLastTwoMonthOverviewAdminQuery } from "./AdminOverviewApiSlice";
+import { NoOfusersChart } from "./NoOfUsersChart";
 
 export type MonthlyOverview = {
     _id: {
@@ -17,8 +18,8 @@ export type MonthlyOverview = {
 const AdminOverviewPage = () => {
     const { data } = useGetLastTwoMonthOverviewAdminQuery({});
     return (
-        <div className="mx-10">
-            <h2 className="font-medium text-2xl bg-zinc-300 px-2 rounded-base w-fit -mt-12 ms-2">
+        <div className="">
+            <h2 className="font-medium text-2xl bg-zinc-300 px-2 rounded-base w-fit -mt-12 ms-12">
                 Overview
             </h2>
             <div className="w-10/12 mx-auto mt-5">
@@ -38,6 +39,9 @@ const AdminOverviewPage = () => {
                 </div>
                 <div className="mt-5">
                     <BarChart />
+                </div>
+                <div className="mt-5">
+                    <NoOfusersChart />
                 </div>
             </div>
         </div>

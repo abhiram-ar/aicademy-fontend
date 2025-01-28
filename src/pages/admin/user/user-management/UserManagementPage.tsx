@@ -66,32 +66,30 @@ const UserManagementPage = () => {
     };
 
     return (
-        <div className="mx-10">
-            <h2 className="font-medium text-2xl bg-zinc-300 px-2 rounded-base w-fit -mt-12 ms-2">
+        <div className="">
+            <h2 className="font-medium text-2xl bg-zinc-300 px-2 rounded-base w-fit -mt-12 ms-12">
                 User Management
             </h2>
-            <div className="w-fit mx-auto">
+            <div className="w-10/12 mx-auto mt-5">
                 <SearchUser search={filter.search} setFilter={setFilter} />
                 <div>
                     <Table>
                         <TableHeader>
                             <TableRow className="bg-zinc-700 ">
-                                <TableHead className="w-32 text-darkText">
+                                <TableHead className="w-60 text-darkText">
                                     First name
                                 </TableHead>
-                                <TableHead className="w-32 text-darkText">
+                                <TableHead className="w-60 text-darkText">
                                     Last name
                                 </TableHead>
-                                <TableHead className="w-52 text-darkText">
+                                <TableHead className=" text-darkText">
                                     Email
                                 </TableHead>
-                                <TableHead className="w-52 text-center text-darkText">
-                                    UID
-                                </TableHead>
-                                <TableHead className="w-30 text-center text-darkText">
+
+                                <TableHead className="w-32  text-darkText">
                                     isBlocked
                                 </TableHead>
-                                <TableHead className="w-20 text-center text-darkText">
+                                <TableHead className="w-20  text-darkText">
                                     option
                                 </TableHead>
                             </TableRow>
@@ -135,9 +133,7 @@ const UserManagementPage = () => {
                                             <TableCell>
                                                 {userDetails.email}
                                             </TableCell>
-                                            <TableCell>
-                                                {userDetails._id}
-                                            </TableCell>
+
                                             <TableCell>
                                                 {userDetails.isBlocked
                                                     ? "True"
