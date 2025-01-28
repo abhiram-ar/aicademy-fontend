@@ -11,7 +11,7 @@ import LayoutWithMinimalNav from "./layout/LayoutWithMinimalNav";
 import { authLoader, fetchAccessTokenOnload } from "./utils/fetchAccessTokenOnLoad";
 import LandingPage from "./pages/landing/LandingPage";
 import { HashLoader } from "react-spinners";
-import { WrappinSuspense } from "./wrapinSuspense";
+import { WrappinSuspense } from "./utils/wrapinSuspense";
 
 // lazy load
 const LoginPage = lazy(() => import("./pages/user/auth/LoginPage"));
