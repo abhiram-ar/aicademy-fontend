@@ -40,7 +40,7 @@ const AdminOverviewPage = () => {
                 <div className="mt-5">
                     <NoOfUsersChart />
                 </div>
-                <div className="mt-5">
+                <div className="mt-5 mb-10">
                     <BarChart />
                 </div>
             </div>
