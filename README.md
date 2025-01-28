@@ -44,7 +44,10 @@ To get started with the project, follow these steps:
    ```bash
    npm install
    ```
-3. Start the development server:
+3. Set up environment variables:
+Create a .env file in the root directory and add the necessary environment variables as specified in the .env.example file.
+
+4. Start the development server:
    ```bash
    npm run dev
    ```
