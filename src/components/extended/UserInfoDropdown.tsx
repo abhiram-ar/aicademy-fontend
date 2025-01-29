@@ -31,6 +31,7 @@ const UserInfoDropdown = () => {
         try {
             await logoutApi({}).unwrap();
             dispatch(logout());
+            window.location.pathname = "/"
         } catch (error) {
             console.log(`error while logging out`, error);
         }
