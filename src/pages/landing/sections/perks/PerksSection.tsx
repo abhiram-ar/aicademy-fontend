@@ -83,17 +83,17 @@ const PerksSection = () => {
 
             {/* ai feature */}
             <div
-                className="border-4 border-black mt-5 rounded-base bg-[#212121] text-darkText px-5 xl:px-20 py-5 font-publicSans grid grid-col-3 lg:grid-cols-6 gap-5 xl:gap-10
+                className="border-4 border-black mt-5 rounded-base bg-[#212121] text-darkText px-5 md:px-10 xl:px-20 py-5 font-publicSans grid grid-col-3 lg:grid-cols-12 gap-5 xl:gap-10
             "
             >
                 {/* content */}
-                <div className="col-span-3 xl:col-span-3 py-12">
+                <div className="col-span-3 lg:col-span-6 xl:col-span-7 py-12">
                     {/* info */}
                     <div>
                         <h3 className="text-2xl font-bold">
                             Get Instant Answers, Right from the Source!
                         </h3>
-                        <p className="text-zinc-300 lg:w-10/12">
+                        <p className="text-zinc-300 w-full lg:w-10/12">
                             Our advanced AI helps you ask questions directly
                             related to a video’s content. Whether it's a
                             lecture, tutorial, or presentation, the AI analyzes
@@ -108,7 +108,7 @@ const PerksSection = () => {
                             Simply type your question, and the AI will refer to
                             the teacher's statements in the video
                         </p>
-                        <p className="text-left mt-2 w-4/5 xl:w-3/5 text-[#FFDC58]">
+                        <p className="text-left mt-2 w-4/5 lg:w-3/5 text-[#FFDC58]">
                             Get reliable and clear responses, saving you time
                             and boosting your understanding.
                         </p>
@@ -116,7 +116,7 @@ const PerksSection = () => {
                 </div>
 
                 {/* ai example image */}
-                <div className="col-span-3 xl:col-span-3">
+                <div className="col-span-3 lg:col-span-6 xl:col-span-5">
                     <img
                         src={AIChatExample}
                         className="w-full h-full object-contain"
