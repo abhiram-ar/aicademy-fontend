@@ -49,7 +49,7 @@ const CourseSalesTables = () => {
                         {data && data.salesList.length === 0 && (
                             <TableRow>
                                 <TableCell></TableCell>
-                                <TableCell>
+                                <TableCell colSpan={2}>
                                     <p className="flex justify-center items-center gap-3 p-5 -ms-96 ">
                                         <ShieldAlert />
                                         No purchases
