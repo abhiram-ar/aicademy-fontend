@@ -46,8 +46,8 @@ const UserInfoDropdown = () => {
                             src={
                                 data
                                     ? `${
-                                          data.userDetails.avatarURL ||
-                                          data.userDetails.profilePicture.url ||
+                                          data.userDetails?.avatarURL ||
+                                          data.userDetails?.profilePicture?.url ||
                                           demopic
                                       }`
                                     : demopic
