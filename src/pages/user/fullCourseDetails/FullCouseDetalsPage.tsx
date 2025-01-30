@@ -34,8 +34,6 @@ const FullCouseDetalsPage = () => {
         courseId: id,
     });
 
-    console.log(data);
-
     const { data: userBoughtList } = useGetUserBoughtCourseListQuery(
         {},
         { skip: !user }
