@@ -4,9 +4,23 @@ import {
     SidebarProvider,
     SidebarTrigger,
 } from "@/components/ui/sidebar";
-import { Outlet } from "react-router-dom";
+import { RootState } from "@/redux/store";
+import { useEffect } from "react";
+import { useSelector } from "react-redux";
+import { Outlet, useNavigate } from "react-router-dom";
 
 export default function TeacherDashboard() {
+    const navigate = useNavigate();
+    useEffect(() => {
+        //need improvement - to many rerenders
+        if (!(isApproved === "success")) {
+            navigate("/teach/onboard");
+        }
+    });
+
+    const isApproved = useSelector(
+        (state: RootState) => state.auth.user?.isApproved
+    );
     return (
         <SidebarProvider>
             <AppSidebar className="border-e-2 border-zinc-400" />

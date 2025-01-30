@@ -288,7 +288,12 @@ const VideoPlayer: React.FC<{ lesson?: ILesson }> = ({ lesson }) => {
                             <DropdownMenuTrigger className="cursor-pointer">
                                 <Settings />
                             </DropdownMenuTrigger>
-                            <DropdownMenuContent className="bg-white">
+                            <DropdownMenuContent
+                                // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+                                // @ts-expect-error
+                                port={false}
+                                className="bg-white"
+                            >
                                 <DropdownMenuLabel>Quality</DropdownMenuLabel>
                                 <DropdownMenuSeparator />
                                 {qualityLevels.map((quality, index) => (
