@@ -13,13 +13,18 @@ import {
     SidebarMenuItem,
     useSidebar,
 } from "@/components/ui/sidebar";
-import { useTeacherLogoutMutation } from "@/redux/features/auth/teacherAuthAPI";
+import {
+    useTeacherLogoutMutation,
+    useTeacherProfileQuery,
+} from "@/redux/features/auth/teacherAuthAPI";
 import { useDispatch } from "react-redux";
 import { logout } from "@/redux/features/auth/authSlice";
 import { useNavigate } from "react-router-dom";
 
 export function NavUser() {
     const { isMobile } = useSidebar();
+
+    const { data } = useTeacherProfileQuery({});
 
     const [logoutAPI] = useTeacherLogoutMutation();
     const dispatch = useDispatch();
@@ -45,16 +50,21 @@ export function NavUser() {
                             className="data-[state=open]:bg-sidebar-accent data-[state=open]:text-sidebar-accent-foreground"
                         >
                             <Avatar className="h-8 w-8 rounded-lg">
-                                <AvatarImage src="" alt="" />
+                                <AvatarImage
+                                    src={data?.teacherDetails?.profilePic?.url}
+                                    alt=""
+                                    className="w-full h-h-full object-cover"
+                                />
                                 <AvatarFallback className="rounded-lg">
                                     <User />
                                 </AvatarFallback>
                             </Avatar>
                             <div className="grid flex-1 text-left text-sm leading-tight">
                                 <span className="truncate font-semibold">
-                                    Abhiram
+                                    {data &&
+                                        data?.teacherDetails?.firstName + " " +
+                                            data?.teacherDetails?.lastName || ""}
                                 </span>
-                                <span className="truncate text-xs">emil</span>
                             </div>
                             <ChevronUp className="ml-auto" />
                         </SidebarMenuButton>
