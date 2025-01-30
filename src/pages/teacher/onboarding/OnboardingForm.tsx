@@ -83,7 +83,7 @@ const OnboardingForm: React.FC = () => {
                                         validate: fileValidation,
                                     })}
                                     id="profilePic"
-                                    className="input-neo w-full"
+                                    className="input-neo w-full file:rounded-base file:bg-blue-200 file:border file:border-zinc-200"
                                 />
                             </div>
 
@@ -149,7 +149,7 @@ const OnboardingForm: React.FC = () => {
                                             validate: fileValidation,
                                         })}
                                         id="legalNameProof"
-                                        className="input-neo w-full"
+                                        className="input-neo w-full file:rounded-base file:bg-blue-200 file:border file:border-zinc-200"
                                     />
                                 </div>
                             </div>
@@ -337,7 +337,7 @@ const OnboardingForm: React.FC = () => {
                                             validate: fileValidation,
                                         })}
                                         id="qualificationProof"
-                                        className="input-neo w-full"
+                                        className="input-neo w-full file:rounded-base file:bg-blue-200 file:border file:border-zinc-200"
                                     />
                                 </div>
                             </div>
