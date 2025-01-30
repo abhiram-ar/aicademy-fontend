@@ -67,7 +67,9 @@ const Saleschart = () => {
                     ).toDateString()}{" "}
                     - {new Date(Date.now()).toDateString()}
                     {chartData && chartData.length === 0 && (
-                        <p className="text-red-600">No enough data to chart !</p>
+                        <p className="text-red-600">
+                            No enough data to chart !
+                        </p>
                     )}
                 </CardDescription>
             </CardHeader>
@@ -90,8 +92,7 @@ const Saleschart = () => {
                         />
 
                         {data &&
-                            chartData &&
-                            chartData.length > 0 &&
+                            set &&
                             Array.from(set).map((value, index) => (
                                 <Bar
                                     key={value as string}
