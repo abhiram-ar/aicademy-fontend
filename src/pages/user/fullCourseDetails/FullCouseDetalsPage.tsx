@@ -92,6 +92,12 @@ const FullCouseDetalsPage = () => {
     };
 
     const handleAddToWishList = async () => {
+        if (!user || !user.userId) {
+            return navigate("/login", {
+                state: { from: window.location.pathname },
+            });
+        }
+
         try {
             await addToWishlist({ courseId: id }).unwrap();
         } catch (error) {
@@ -368,7 +374,7 @@ const FullCouseDetalsPage = () => {
                                                         handleAddToWishList
                                                     }
                                                     size="lg"
-                                                className="col-span-1 w-20  bg-zinc-100 p-7 hover:bg-[#fd6182]"
+                                                    className="col-span-1 w-20  bg-zinc-100 p-7 hover:bg-[#fd6182]"
                                                 >
                                                     <Heart className="fill-black size-12" />
                                                 </Button>
