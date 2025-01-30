@@ -31,6 +31,7 @@ const Saleschart = () => {
     let chartData;
     const map = new Map();
     const set = new Set();
+
     if (data) {
         for (const item of data.result) {
             if (map.has(item.time)) {
@@ -53,6 +54,8 @@ const Saleschart = () => {
 
     if (map) chartData = Array.from(map.values());
 
+    console.log("cd", chartData);
+
     return (
         <Card>
             <CardHeader>
@@ -63,6 +66,9 @@ const Saleschart = () => {
                         Date.now() - 6 * 30 * 24 * 60 * 60 * 1000
                     ).toDateString()}{" "}
                     - {new Date(Date.now()).toDateString()}
+                    {chartData && chartData.length === 0 && (
+                        <p className="text-red-600">No enough data to chart !</p>
+                    )}
                 </CardDescription>
             </CardHeader>
             <CardContent>
@@ -82,9 +88,11 @@ const Saleschart = () => {
                         <ChartTooltip
                             content={<ChartTooltipContent hideLabel />}
                         />
+
                         {data &&
-                            set &&
-                            Array.from(set).map((value,index) => (
+                            chartData &&
+                            chartData.length > 0 &&
+                            Array.from(set).map((value, index) => (
                                 <Bar
                                     key={value as string}
                                     dataKey={value as string}
@@ -93,7 +101,7 @@ const Saleschart = () => {
                                     radius={[0, 0, 0, 0]}
                                     direction="top"
                                     animationEasing="ease-in-out"
-                                    animationBegin={index*300}
+                                    animationBegin={index * 300}
                                     animationDuration={300}
                                 />
                             ))}

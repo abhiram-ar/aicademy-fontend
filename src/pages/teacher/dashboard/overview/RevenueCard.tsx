@@ -32,7 +32,7 @@ const RevenueCard = () => {
                             % up from last month
                         </p>
                     ) : (
-                        <p className="text-red-600">
+                        <div className="text-red-600">
                             {" "}
                             {data.revenue.prevMonth === 0 &&
                             data.revenue.currentMonth === 0 ? (
@@ -44,7 +44,7 @@ const RevenueCard = () => {
                                         data.revenue.prevMonth || 1) * 100
                                 ).toFixed(2) + "% down from last month"
                             )}
-                        </p>
+                        </div>
                     )
                 ) : (
                     <span className="min-w-20 inline-block rounded-base bg-slate-200  ms-2 animate-pulse text-transparent">

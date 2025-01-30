@@ -33,7 +33,7 @@ const PurchasesCard = () => {
                             % up from last month
                         </p>
                     ) : (
-                        <p className="text-red-600">
+                        <div className="text-red-600">
                             {" "}
                             {Array.from(Object.keys(data.purchases)).length ===
                             0 ? (
@@ -45,7 +45,7 @@ const PurchasesCard = () => {
                                         data.purchases.prevMonth || 1) * 100
                                 ).toFixed(2) + "% down from last month"
                             )}
-                        </p>
+                        </div>
                     )
                 ) : (
                     <span className="min-w-20 inline-block rounded-base bg-slate-200 animate-pulse text-transparent">
