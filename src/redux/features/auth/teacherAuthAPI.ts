@@ -36,6 +36,9 @@ const teacherAuthApi = apiSlice.injectEndpoints({
                 body: data,
             }),
         }),
+        teacherProfile: builder.query({
+            query: () => "/api/teacher/profile",
+        }),
     }),
 });
 
@@ -44,5 +47,6 @@ export const {
     useTeacherVerifyMutation,
     useTeacherLoginMutation,
     useTeacherOnboardingMutation,
-    useTeacherLogoutMutation
+    useTeacherLogoutMutation,
+    useTeacherProfileQuery,
 } = teacherAuthApi;
