@@ -11,11 +11,12 @@ import OnboardingPendingCard from "./OnboardingPendingCard.tsx";
 import OnboardingRejectedCard from "./OnboardingRejectedCard.tsx";
 import { logout } from "@/redux/features/auth/authSlice.ts";
 import OnboardingSuccessCard from "./OnboardingSuccessCard.tsx";
+import Footer from "@/components/Footer.tsx";
 
 const OnboardingPage = () => {
     const [logoutTeacher] = useTeacherLogoutMutation();
     const navigate = useNavigate();
-    const dispatch = useDispatch()
+    const dispatch = useDispatch();
     const isApproved = useSelector(
         (state: RootState) => state.auth.user?.isApproved
     );
@@ -23,7 +24,7 @@ const OnboardingPage = () => {
         try {
             const res = await logoutTeacher({}).unwrap();
             console.log("logout response", res);
-            dispatch(logout())
+            dispatch(logout());
             navigate("/teach/login", { replace: true });
         } catch (error) {
             console.error("error while logging out teacher", error);
@@ -33,11 +34,11 @@ const OnboardingPage = () => {
     let onboardingElement;
 
     if (isApproved === "rejected") {
-        onboardingElement = <OnboardingRejectedCard/>;
+        onboardingElement = <OnboardingRejectedCard />;
     } else if (isApproved === "pending") {
-        onboardingElement = <OnboardingPendingCard/>;
+        onboardingElement = <OnboardingPendingCard />;
     } else if (isApproved === "success") {
-        onboardingElement = <OnboardingSuccessCard/>;
+        onboardingElement = <OnboardingSuccessCard />;
     } else {
         onboardingElement = <OnboardingForm />;
     }
@@ -50,7 +51,10 @@ const OnboardingPage = () => {
                     logout
                 </Button>
             </Navbar>
-            <BodyBlock>{onboardingElement}</BodyBlock>
+            <div className="w-full h-screen bg-paperYellow">
+                {onboardingElement}
+            </div>
+            <Footer />
         </>
     );
 };
