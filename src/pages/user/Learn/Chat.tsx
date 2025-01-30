@@ -29,8 +29,9 @@ const Chat: React.FC<Props> = ({ title, videokey, aiStatus }) => {
     const [isOnline, setIsOnline] = useState(false);
 
     useEffect(() => {
+        // dev uri = `ws://localhost:3000?authorization=Bearer ${token}`
         const ws = new WebSocket(
-            `ws://localhost:3000?authorization=Bearer ${token}`
+            `${import.meta.env.WS_URI}?authorization=Bearer ${token}`
         );
 
         ws.onopen = () => {
