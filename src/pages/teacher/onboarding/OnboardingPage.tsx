@@ -1,5 +1,4 @@
 import AIcademyLogo from "@/components/base/AIcademyLogo";
-import BodyBlock from "@/components/base/BodyBlock";
 import Navbar from "@/components/base/Navbar";
 import { Button } from "@/components/ui/button";
 import OnboardingForm from "./OnboardingForm";
