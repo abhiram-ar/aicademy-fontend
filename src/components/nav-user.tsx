@@ -62,8 +62,10 @@ export function NavUser() {
                             <div className="grid flex-1 text-left text-sm leading-tight">
                                 <span className="truncate font-semibold">
                                     {data &&
-                                        data?.teacherDetails?.firstName + " " +
-                                            data?.teacherDetails?.lastName || ""}
+                                        data?.teacherDetails?.firstName +
+                                            " " +
+                                            (data?.teacherDetails?.lastName ??
+                                                "")}
                                 </span>
                             </div>
                             <ChevronUp className="ml-auto" />
