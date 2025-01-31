@@ -265,8 +265,8 @@ const CourseDetailsOutlet: React.FC = () => {
                                     message: "Price cannot be more than 10,000",
                                 },
                                 min: {
-                                    value: 0,
-                                    message: "Price cannot be less than 0",
+                                    value: 1,
+                                    message: "Price cannot be less than 1",
                                 },
                             })}
                             id="price"
@@ -302,8 +302,8 @@ const CourseDetailsOutlet: React.FC = () => {
                                     message: "Price cannot be more than 10,000",
                                 },
                                 min: {
-                                    value: 0,
-                                    message: "Price cannot be less than 0",
+                                    value: 1,
+                                    message: "Price cannot be less than 1",
                                 },
                             })}
                             id="estimatedPrice"
