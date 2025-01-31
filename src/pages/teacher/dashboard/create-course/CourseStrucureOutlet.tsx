@@ -15,6 +15,7 @@ import {
     UseFormRegister,
     FieldErrors,
 } from "react-hook-form";
+import toast from "react-hot-toast";
 
 type formValue = {
     chapters: {
@@ -69,6 +70,7 @@ const CourseStrucureOutlet = () => {
                 chapters: data.chapters,
             });
             console.log("update res", res);
+            toast.success("Updated course structure");
         } catch (error) {
             console.error(`error while updating course sturucture`, error);
         }

@@ -12,6 +12,7 @@ import { Plus, X } from "lucide-react";
 import { Ivideo } from "../course-assets/Types";
 import { categories } from "./categories";
 import { FormData } from "./Types";
+import toast from "react-hot-toast";
 
 const CourseDetailsOutlet: React.FC = () => {
     const courseDetails: ICourse = useOutletContext();
@@ -92,6 +93,7 @@ const CourseDetailsOutlet: React.FC = () => {
                 courseId: courseDetails._id,
             });
             console.log(res);
+            toast.success("Details updated successfully")
         } catch (error) {
             console.log("error while updating course basic detals", error);
         }
