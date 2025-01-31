@@ -29,7 +29,7 @@ export interface IFullCourseData {
     level: string;
     price: number;
     benefits: string[];
-    demoVideoKey: string;
     updatedAt: string; // ISO date string
     rating?: number;
+    demoVideoKey: { transcodedVideoMasterFileKey: string };
 }

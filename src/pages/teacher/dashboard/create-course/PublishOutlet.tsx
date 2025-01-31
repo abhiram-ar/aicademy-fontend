@@ -1,4 +1,4 @@
-import { Check, Heart, Plus, Star } from "lucide-react";
+import { Check, Heart, Play, Plus, Star } from "lucide-react";
 import priceBanner from "./../../../../assets/priceBanner.png";
 import { Button } from "@/components/ui/button";
 import ChapterAccordion from "./../../../user/fullCourseDetails/ChapterAccordian";
@@ -9,6 +9,8 @@ import {
     useUnPublishCourseMutation,
 } from "@/redux/features/teacher/courseCreationAPIs";
 import { IFullCourseData, IChapter } from "./Types";
+import { useState } from "react";
+import DemoVideoModal from "@/pages/user/fullCourseDetails/DemoVideoModal";
 
 const PublishOutlet = () => {
     const { id } = useParams();
@@ -17,6 +19,7 @@ const PublishOutlet = () => {
     });
     const [publishCourse] = usePublishCourseMutation();
     const [unpublishCourse] = useUnPublishCourseMutation();
+    const [showDemoVideo, setShowDemoVideo] = useState(false);
 
     const fullCourseData: IFullCourseData = data?.fullCourseData;
     const formatDateToYYYYMM = (dateString: string) => {
@@ -53,9 +56,24 @@ const PublishOutlet = () => {
         }
     };
 
+    const handleShowDemoVideo = () => {
+        setShowDemoVideo(true);
+        document.body.style.overflow = "hidden";
+    };
+
     return (
         <div>
             {/* body */}
+            <DemoVideoModal
+                url={
+                    fullCourseData
+                        ? fullCourseData.demoVideoKey
+                              .transcodedVideoMasterFileKey
+                        : undefined
+                }
+                showDemoVideo={showDemoVideo}
+                setShowDemoVideo={setShowDemoVideo}
+            />
             <div className="w-full min-h-screen py-12 mt-5">
                 {/* content */}
                 <div className="w-9/12 mx-auto rounded-base">
@@ -87,9 +105,9 @@ const PublishOutlet = () => {
                         )}
                     </div>
                     {/* banner */}
-                    <div className="bg-[#212121] border border-black  w-full h-80 grid grid-cols-12 py-10 ps-20 pe-10 gap-5 rounded-t-base">
+                    <div className="bg-[#212121] border border-black  w-full grid grid-cols-12 gap-5 py-10 px-10 md:ps-20  rounded-t-base">
                         {/* banner text */}
-                        <div className="text-darkText col-span-7 font-publicSans flex flex-col gap-5 ">
+                        <div className="text-darkText col-span-12 md:col-span-6 xl:col-span-7 font-publicSans flex flex-col gap-5 ">
                             <p className="text-zinc-300">
                                 #{fullCourseData.category}
                             </p>
@@ -108,18 +126,18 @@ const PublishOutlet = () => {
                         </div>
 
                         {/* banner thumnail and demo */}
-                        <div className="col-span-5">
-                            <div className="w-[26rem] h-[14.625rem] border-2 border-zinc-500 rounded-base overflow-hidden mx-auto bg-slate-500">
-                                {fullCourseData.thumbnail?.s3Key ? (
-                                    <img
-                                        src={fullCourseData.thumbnail.url}
-                                        className="object-cover w-full h-full"
+                        <div className="col-span-12 md:col-span-6 xl:col-span-5">
+                            <div className="w-full  border-2 border-zinc-500 rounded-base overflow-hidden mx-auto relative">
+                                <img
+                                    src={fullCourseData?.thumbnail?.url}
+                                    className="object-cover w-full h-full"
+                                />
+                                <div className="absolute inset-0 flex justify-center items-center">
+                                    <Play
+                                        className=" stroke-zinc-800 fill-amber-100 size-20 hover:stroke-black hover:fill-amber-200 cursor-pointer hover:scale-105 transition-all duration-150"
+                                        onClick={handleShowDemoVideo}
                                     />
-                                ) : (
-                                    <p className="text-center mt-24 text-darkText">
-                                        No Thumbnail
-                                    </p>
-                                )}
+                                </div>
                             </div>
                         </div>
                     </div>
