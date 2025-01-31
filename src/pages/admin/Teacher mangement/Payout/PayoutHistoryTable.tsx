@@ -50,11 +50,8 @@ const PayoutTransactionsTable = () => {
                 <Table className="">
                     <TableHeader>
                         <TableRow className="bg-zinc-700 text-white">
-                            <TableHead className="w-60 text-darkText">
+                            <TableHead className="w-80 text-darkText">
                                 Name
-                            </TableHead>
-                            <TableHead className="w-60 text-darkText">
-                                TeacherID
                             </TableHead>
                             <TableHead className="w-60 text-darkText">
                                 Requested Time
@@ -75,7 +72,7 @@ const PayoutTransactionsTable = () => {
                         {data && data.payout?.length === 0 && (
                             <TableRow>
                                 <TableCell></TableCell>
-                                <TableCell colSpan={2}>
+                                <TableCell colSpan={3}>
                                     <p className="flex justify-center items-center gap-3 p-5 -ms-60 ">
                                         <ShieldAlert />
                                         No payout Histroy
@@ -110,7 +107,6 @@ const PayoutTransactionsTable = () => {
                                         <TableCell>
                                             {payout.to.legalName}
                                         </TableCell>
-                                        <TableCell>{payout.to._id}</TableCell>
                                         <TableCell>
                                             {new Date(
                                                 payout.createdAt
