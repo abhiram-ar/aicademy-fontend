@@ -71,6 +71,12 @@ const ExplorePage = () => {
                                         <Link
                                             key={courseDetails._id}
                                             to={`/explore/course/${courseDetails._id}`}
+                                            onClick={() =>
+                                                window.scrollTo({
+                                                    top: 0,
+                                                    behavior: "instant",
+                                                })
+                                            }
                                         >
                                             <CourseCardLong
                                                 courseDetails={courseDetails}
