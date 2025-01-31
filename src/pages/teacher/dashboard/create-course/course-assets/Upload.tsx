@@ -6,6 +6,7 @@ import { useParams } from "react-router-dom";
 import { useSaveUploadedVideoMetadaMutation } from "@/redux/features/teacher/courseCreationAPIs";
 import { Progress } from "@/components/ui/progress";
 import { Upload as UploadIcon, X } from "lucide-react";
+import toast from "react-hot-toast";
 
 const Upload = () => {
     const token = useSelector((state: RootState) => state.auth.token);
@@ -17,6 +18,11 @@ const Upload = () => {
     const uploadRef = useRef<HTMLInputElement | null>(null);
 
     const handleUpload = async (file: File) => {
+        if (file.type.split("/")[0] !== "video") {
+            console.log("invalid file");
+            toast.error("Please upload only video");
+            return;
+        }
         try {
             setIsUploading(true);
             setUploadProgress(0);
@@ -57,6 +63,7 @@ const Upload = () => {
                 originalFileType: file.type,
             }).unwrap();
             console.log(`video metadata added to DB`);
+            toast.success("video uploaded successfully");
         } catch (error) {
             if (axios.isCancel(error)) {
                 console.log(`upload cancelled`);
