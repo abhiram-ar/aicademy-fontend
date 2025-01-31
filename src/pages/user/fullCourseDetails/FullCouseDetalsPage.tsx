@@ -279,7 +279,7 @@ const FullCouseDetalsPage = () => {
                         </div>
 
                         {/* buy and add to cart */}
-                        <div className="border-e border-b rounded-br-base h-fit border-black bg-white col-span-12 md:col-span-5 py-7 px-12 font-publicSans">
+                        <div className="border-e border-b rounded-br-base h-fit border-black bg-white col-span-12 md:col-span-5 py-7 px-5 lg:px-12 font-publicSans">
                             {/* perice and off */}
                             <div className="flex gap-5 items-center">
                                 <div className="relative w-32 min-h-12">
@@ -310,7 +310,7 @@ const FullCouseDetalsPage = () => {
                             </div>
 
                             {/* add to cart and wishlist */}
-                            <div className="grid grid-cols-4 gap-5 my-5">
+                            <div className="grid grid-cols-4 gap-2 lg:gap-5 my-5">
                                 {user &&
                                 userBoughtList &&
                                 userBoughtList.boughtCourseList.find(

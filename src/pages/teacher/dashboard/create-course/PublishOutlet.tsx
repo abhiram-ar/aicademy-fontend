@@ -76,7 +76,7 @@ const PublishOutlet = () => {
             />
             <div className="w-full min-h-screen py-12 mt-5">
                 {/* content */}
-                <div className="w-9/12 mx-auto rounded-base">
+                <div className="w-11/12 md:w-10/12 lg:w-9/12 mx-auto rounded-base">
                     <div className="bg-slate-200 w-full border-2 border-black rounded-base flex justify-between items-center px-5 py-2 mb-3">
                         <p className="font-medium">Preview</p>
                         {fullCourseData.courseState === "draft" && (
@@ -145,7 +145,7 @@ const PublishOutlet = () => {
                     {/* detals and buy section */}
                     <div className="grid grid-cols-12">
                         {/* cosurse more detasils section */}
-                        <div className="border col-span-7 font-publicSans">
+                        <div className="border col-span-12 md:col-span-7 font-publicSans">
                             {/* mdeta data */}
                             <div className="border-x border-black grid grid-cols-3 justify-center text-center bg-white">
                                 <div className="py-5">
@@ -253,7 +253,7 @@ const PublishOutlet = () => {
                         </div>
 
                         {/* buy and add to cart */}
-                        <div className="border-e border-b rounded-br-base h-fit border-black bg-white col-span-5 py-7 px-12 font-publicSans">
+                        <div className="border-e border-b rounded-br-base h-fit border-black bg-white col-span-12 md:col-span-5 py-7 px-5 md:px-12 font-publicSans">
                             {/* perice and off */}
                             <div className="flex gap-5 items-center">
                                 <div className="relative w-32 min-h-12">
@@ -284,9 +284,9 @@ const PublishOutlet = () => {
                             </div>
 
                             {/* add to cart and wishlist */}
-                            <div className="flex gap-5 my-5">
+                            <div className="grid grid-cols-4 gap-2 md:gap-5 my-5">
                                 <Button
-                                    className="bg-[#ffdc58] w-full p-7 font-semibold text-xl"
+                                    className="bg-[#ffdc58] col-span-3 p-7 font-semibold text-xl"
                                     size="lg"
                                 >
                                     Add to cart
@@ -294,7 +294,7 @@ const PublishOutlet = () => {
 
                                 <Button
                                     size="lg"
-                                    className="bg-zinc-100 p-7 hover:bg-[#fd6182]"
+                                    className="col-span-1 w-20 p-7 bg-zinc-100 hover:bg-[#fd6182]"
                                 >
                                     <Heart className="fill-black" />
                                 </Button>
