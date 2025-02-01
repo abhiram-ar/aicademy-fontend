@@ -29,6 +29,13 @@ const cartApiSlice = apiSlice.injectEndpoints({
                 method: "POST",
             }),
         }),
+        removeCartLock: builder.mutation({
+            query: () => ({
+                url: "/api/user/checkout/clear-cart-state",
+                method: "POST",
+            }),
+            invalidatesTags: ["cart"],
+        }),
         verifyPaymentandCheckout: builder.mutation({
             query: (data) => ({
                 url: "/api/user/checkout/verify-payment",
@@ -72,4 +79,5 @@ export const {
     useApplyCouponMutation,
     useRemoveCouponFromCartMutation,
     useMoveToWishlistMutation,
+    useRemoveCartLockMutation,
 } = cartApiSlice;
