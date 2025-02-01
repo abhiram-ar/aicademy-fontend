@@ -13,6 +13,7 @@ type Props = {
     totalWithoutCouponDiscount: number;
     totalAmounts?: { totalPrice: number; estimatedTotal: number };
     totalCourses?: number;
+    cartStatus?: string;
     couponDetails?: { code: string; couponDiscount: number };
     refetchCart: () => unknown;
 };
@@ -20,6 +21,7 @@ type Props = {
 const Checkout: React.FC<Props> = ({
     totalWithoutCouponDiscount,
     totalAmounts,
+    cartStatus,
     totalCourses,
     couponDetails,
     refetchCart,
@@ -132,10 +134,14 @@ const Checkout: React.FC<Props> = ({
 
             <Button
                 onClick={handleCheckout}
+                disabled={cartStatus && cartStatus === "active" ? false : true}
                 size="lg"
                 className="w-full mt-3 font-medium text-lg py-6 z-10"
             >
-                Checkout
+                Checkout{" "}
+                {cartStatus && cartStatus === "processing" && (
+                    " (processing)"
+                )}
             </Button>
         </div>
     );

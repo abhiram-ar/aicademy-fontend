@@ -117,6 +117,7 @@ const CartPage = () => {
                             <Checkout
                                 totalAmounts={cartData?.totalAmount}
                                 totalCourses={cartData?.length}
+                                cartStatus={cartData?.cartStatus}
                                 couponDetails={cartData?.coupon}
                                 totalWithoutCouponDiscount={
                                     totalWithoutCouponDiscount
