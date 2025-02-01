@@ -86,6 +86,12 @@ const CreateNewCoupon = () => {
                                         value: 20,
                                         message: "Max 20 characters",
                                     },
+                                    validate: (value) => {
+                                        return (
+                                            value.trim() !== "" ||
+                                            "Cannot be empty"
+                                        );
+                                    },
                                 })}
                                 className="input-neo w-full"
                                 placeholder="eg: NEWYEAR100"
@@ -109,6 +115,12 @@ const CreateNewCoupon = () => {
                                     required: {
                                         value: true,
                                         message: "required",
+                                    },
+                                    validate: (value) => {
+                                        return (
+                                            value.trim() !== "" ||
+                                            "Cannot be empty"
+                                        );
                                     },
                                 })}
                                 className="input-neo w-full"

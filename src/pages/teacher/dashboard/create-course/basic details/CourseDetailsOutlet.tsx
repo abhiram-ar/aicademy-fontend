@@ -93,7 +93,7 @@ const CourseDetailsOutlet: React.FC = () => {
                 courseId: courseDetails._id,
             });
             console.log(res);
-            toast.success("Details updated successfully")
+            toast.success("Details updated successfully");
         } catch (error) {
             console.log("error while updating course basic detals", error);
         }
@@ -118,8 +118,9 @@ const CourseDetailsOutlet: React.FC = () => {
                         <div className="flex gap-2 items-baseline">
                             Course Title
                             <span className="validation-error">
-                                {errors.title?.type === "required" &&
-                                    "(required)"}
+                                {errors.title &&
+                                    errors.title.message &&
+                                    String(errors.title.message)}
                             </span>
                         </div>
                         <p
@@ -135,8 +136,11 @@ const CourseDetailsOutlet: React.FC = () => {
                     <input
                         type="text"
                         {...register("title", {
-                            required: "is required",
+                            required: { value: true, message: "required" },
                             maxLength: 100,
+                            validate: (value) => {
+                                return value.trim() !== "" || "Cannot be empty";
+                            },
                         })}
                         className="input-neo w-[50rem]"
                         id="title"
