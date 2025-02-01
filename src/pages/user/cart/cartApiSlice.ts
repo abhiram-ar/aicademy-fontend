@@ -79,4 +79,5 @@ export const {
     useApplyCouponMutation,
     useRemoveCouponFromCartMutation,
     useMoveToWishlistMutation,
+    useRemoveCartLockMutation,
 } = cartApiSlice;
