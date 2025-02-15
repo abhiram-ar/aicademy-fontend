@@ -25,8 +25,8 @@ const Footer = () => {
                     <h2 className="font-semibold text-darkText mb-2">
                         Contact
                     </h2>
-                    <p>Email: support@yourplatform.com</p>
-                    <p>Phone: +123-456-7890</p>
+                    <p>Email: support@aicademy.com</p>
+                    <p>Phone: +913-456-7890</p>
                     <p>
                         Address:123 Learning Lane, EdTech City, Knowledge State
                     </p>
