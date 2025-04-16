@@ -13,7 +13,7 @@ AIcademy leverages Retrieval Augmented Generation (RAG) to address students' dou
 - **State Management**: Redux Toolkit, RTK Query for fetching and caching
 - **Backend**: Express.js, Node.js, Nginx
 - **Database**: MongoDB with Mongoose as ODM, Qdrant as Vector Database
-- **Storage**: AWS S3 (V3 SDK for Node.js) with Adaptive Bitrate streaming for videos
+- **Storage**: AWS S3 (V3 SDK for Node.js) for Adaptive Bitrate streaming for videos
 - **Tech Stack**: MERN (MongoDB, Express.js, React, Node.js), Rabbitmq, Langchain
 
 ### Features
@@ -23,14 +23,6 @@ AIcademy leverages Retrieval Augmented Generation (RAG) to address students' dou
 - Secure video storage and Adaptive Bitrate streaming
 - Efficient course upload process reducing server load
 
-## Repository Structure
-The repository primarily consists of TypeScript code along with some CSS, HTML, and JavaScript files.
-
-### Languages Used
-- TypeScript: 98.9%
-- CSS
-- HTML
-- JavaScript
 
 ## Getting Started
 
