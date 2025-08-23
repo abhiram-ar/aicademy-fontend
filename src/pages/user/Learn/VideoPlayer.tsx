@@ -74,7 +74,7 @@ const VideoPlayer: React.FC<{ lesson?: ILesson }> = ({ lesson }) => {
     }, [lesson]);
 
     useEffect(() => {
-        let timer: NodeJS.Timeout | undefined;
+        let timer: ReturnType<typeof setTimeout>;
         const controls = controlsRef.current;
         const playerWrapper = playerWrapperRef.current;
         let handleShowContorl: () => void;

@@ -21,7 +21,7 @@ const CourseAssetsOutlet = () => {
 
     // polling every 30s - average time to process a video
     useEffect(() => {
-        let interval: string | number | NodeJS.Timeout | undefined;
+        let interval: ReturnType<typeof setInterval>;
         if (content) {
             interval = setInterval(refetchCourseList, 30000);
         }
