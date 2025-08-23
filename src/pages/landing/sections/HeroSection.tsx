@@ -1,5 +1,4 @@
 import { Button } from "@/components/ui/button";
-import heroart from "./../../../assets/hero-art-optimized.png";
 import { Link } from "react-router-dom";
 
 const HeroSection = () => {
@@ -36,7 +35,11 @@ const HeroSection = () => {
             </div>
 
             <div className="col-span-10 md:col-span-4 lg:col-span-4  xl:w-[35rem] ">
-                <img src={heroart} className="object-fill" alt="" />
+                <img
+                    src="/hero-art-optimized.png"
+                    className="object-fill"
+                    alt=""
+                />
             </div>
         </div>
     );

@@ -1,13 +1,36 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>AIcademy</title>
-  </head>
-  <body>
-    <div id="root"></div>
-    <script type="module" src="/src/main.tsx"></script>
-  </body>
+    <head>
+        <meta charset="UTF-8" />
+        <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>AIcademy</title>
+
+        <link rel="preconnect" href="https://fonts.googleapis.com" />
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+        <!-- Preload critical font weight (replace href with actual font URL) -->
+        <link
+            rel="preload"
+            as="font"
+            type="font/woff2"
+            crossorigin
+            href="https://fonts.gstatic.com/s/publicsans/v20/ijwRs572Xtc6ZYQws9YVwnNGfJ4.woff2"
+        />
+        <link
+            rel="preload"
+            as="font"
+            type="font/woff2"
+            crossorigin
+            href="https://fonts.gstatic.com/s/redhatdisplay/v20/8vIQ7wUr0m80wwYf0QCXZzYzUoTg_T6h.woff2"
+        />
+        <!-- Consolidated Google Fonts request -->
+        <link
+            href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600&family=Public+Sans:wght@400;700&family=Red+Hat+Display:wght@500;700&display=swap"
+            rel="stylesheet"
+        />
+    </head>
+    <body style="background-color: #fffbee;">
+        <div id="root"></div>
+        <script type="module" src="/src/main.tsx"></script>
+    </body>
 </html>
