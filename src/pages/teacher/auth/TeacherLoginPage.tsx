@@ -1,6 +1,6 @@
 import Login from "@/components/auth/Login";
 import NavbarOnlyLogo from "@/components/extended/NavbarOnlyLogo";
-import loginArt from "./../../../assets/teacherDoogle.png";
+import loginArt from "./../../../assets/teacherDoogle.webp";
 import { Link, useNavigate } from "react-router-dom";
 import { useTeacherLoginMutation } from "@/redux/features/auth/teacherAuthAPI";
 import { setCredentials } from "@/redux/features/auth/authSlice";

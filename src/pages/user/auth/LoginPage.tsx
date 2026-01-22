@@ -1,6 +1,6 @@
 import Login from "@/components/auth/Login";
 import BodyBlock from "@/components/base/BodyBlock";
-import loginArt from "./../../../assets/loginArt.png";
+import loginArt from "./../../../assets/userAuthArt.webp";
 import { Link, useLocation, useNavigate } from "react-router-dom";
 import { useLoginMutation } from "@/redux/features/auth/userAuthAPIs";
 import { setCredentials } from "@/redux/features/auth/authSlice";

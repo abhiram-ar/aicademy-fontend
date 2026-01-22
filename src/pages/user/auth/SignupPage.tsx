@@ -1,6 +1,6 @@
 import Signup from "@/components/auth/Signup";
 import BodyBlock from "@/components/base/BodyBlock";
-import SignupArt from "./../../../assets/SignupArt.png";
+import SignupArt from "./../../../assets/userAuthArt.webp";
 import { Link, useNavigate } from "react-router-dom";
 import { useState } from "react";
 import Otp from "@/components/auth/Otp";

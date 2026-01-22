@@ -1,6 +1,6 @@
 import Signup from "@/components/auth/Signup";
 import NavbarOnlyLogo from "@/components/extended/NavbarOnlyLogo";
-import SignupArt from "./../../../assets/teacherDoogle.png";
+import SignupArt from "./../../../assets/teacherDoogle.webp";
 import { Link, useNavigate } from "react-router-dom";
 import {
     useTeacherRegisterMutation,
