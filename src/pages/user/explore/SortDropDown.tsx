@@ -81,7 +81,7 @@ const SortDropDown: React.FC<Props> = ({ setFilter }) => {
             <SelectContent className="bg-white">
                 <SelectGroup>
                     {sortOptions.map((sortOption, index) => (
-                        <SelectItem key={index} value={sortOption.value}>
+                        <SelectItem className="cursor-pointer hover:bg-paperYellow" key={index} value={sortOption.value}>
                             {sortOption.displayName}
                         </SelectItem>
                     ))}

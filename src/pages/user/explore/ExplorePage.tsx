@@ -7,6 +7,7 @@ import { Link, useOutletContext } from "react-router-dom";
 import PaginationExplore from "./Pagination.tsx";
 import nothingFound from "./../../../assets/NothingFoundSearch.png";
 import { ICourse } from "./Types.tsx";
+import { Button } from "@/components/ui/button.tsx";
 
 type OutletContext = {
     filter: {
@@ -38,7 +39,7 @@ type OutletContext = {
 const ExplorePage = () => {
     const { filter, setFilter } = useOutletContext<OutletContext>();
 
-    const { currentData: courseCardDetails, isLoading } =
+    const { currentData: courseCardDetails, isLoading, isFetching, isError, refetch } =
         useGetCoursesCardDetailsQuery(filter);
     console.log(courseCardDetails);
 
@@ -86,7 +87,7 @@ const ExplorePage = () => {
                                 )}
                             {courseCardDetails &&
                                 courseCardDetails.courses.length === 0 && (
-                                    <div className="flex justify-center bg-white p-10 border border-zinc-400 rounded-base">
+                                    <div className="flex justify-center bg-white p-10 border border-black rounded-base">
                                         <div className="flex flex-col justify-center items-center hue-rotate-180">
                                             <img src={nothingFound} />
                                             <p className="text font-medium font-publicSans text-zinc-700 mt-2">
@@ -95,10 +96,29 @@ const ExplorePage = () => {
                                         </div>
                                     </div>
                                 )}
+
+                            {isError && (
+                                <div className="flex justify-center bg-white p-10 border border-black rounded-base h-[30rem] ">
+                                    <div className="flex flex-col justify-center items-center hue-rotate-180">
+                                        <p className="text font-medium font-publicSans text-zinc-700 mt-2">
+                                            Something went wrong. Please try
+                                            again.
+                                        </p>
+                                        <div
+                                            className="mt-4"
+                                            onClick={() => refetch()}
+                                        >
+                                            <Button variant="reverse" className="bg-white text-black font-publicSans font-medium py-2 px-4 rounded-base">
+                                                Retry
+                                            </Button>
+                                        </div>
+                                    </div>
+                                </div>
+                            )}
                         </div>
                         {/* pagination */}
                         <div>
-                            {isLoading
+                            {(isLoading || isFetching )
                                 ? Array.from({ length: 5 }).map((_, index) => (
                                       <div
                                           key={index + 100}
