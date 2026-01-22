@@ -4,8 +4,8 @@ import { Link } from "react-router-dom";
 const HeroSection = () => {
     return (
         <div className="w-11/12 lg:w-10/12 xl:w-8/12 mx-auto grid grid-cols-10 gap-10 py-16 mb-4 ">
-            <div className="col-span-10 md:col-span-6 lg:col-span-6 mt-2 md:mt-10 ">
-                <div className="w-fit">
+            <div className="col-span-10 md:col-span-6 lg:col-span-6 pt-2 md:pt-10">
+                <div className="w-fit h-[25rem]">
                     <h1 className="font-RedHat text-2xl md:text-4xl xl:text-[3rem] leading-none font-extrabold w-fit">
                         Revolutionize Learning
                         <br /> with Adaptive Intelligence.
@@ -34,11 +34,11 @@ const HeroSection = () => {
                 </div>
             </div>
 
-            <div className="col-span-10 md:col-span-4 lg:col-span-4  xl:w-[35rem] ">
+            <div className="col-span-10 md:col-span-4 lg:col-span-4 h-[30rem] xl:w-[35rem]">
                 <img
-                    src="/hero-art-optimized.png"
-                    className="object-fill"
-                    alt=""
+                    src="/hero-art-optimized.webp"
+                    className="object-contain w-full h-full"
+                    alt="Photo of a student learning"  
                 />
             </div>
         </div>
