@@ -5,15 +5,15 @@ export default {
     theme: {
     	extend: {
     		fontFamily: {
-				sans: ['Inter', 'Helvetica Neue', 'Arial', 'sans-serif'],
+				sans: ['Inter', 'Helvetica Neue', 'sans-serif' ,'Arial', ],
 				inter: ['Inter', 'sans-serif'],
     			RedHat: [
     				'Red Hat Display', 
-    				'serif'
+    				'sans-serif'
     			],
     			publicSans: [
     				'Public Sans',
-    				'serif'
+    				'sans-serif'
     			]
     		},
     		colors: {
