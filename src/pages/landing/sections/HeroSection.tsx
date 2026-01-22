@@ -34,10 +34,10 @@ const HeroSection = () => {
                 </div>
             </div>
 
-            <div className="col-span-10 md:col-span-4 lg:col-span-4 h-[30rem] xl:w-[35rem]">
+            <div className="col-span-10 md:col-span-4 lg:col-span-4 h-[30rem] xl:w-[35rem] hidden sm:block">
                 <img
                     src="/hero-art-optimized.webp"
-                    className="object-fit w-full h-full"
+                    className="object-contain w-full h-full"
                     alt="Photo of a student learning"  
                 />
             </div>
