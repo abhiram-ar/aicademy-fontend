@@ -48,9 +48,7 @@ const ReviewCard: React.FC<{ review: IReview }> = ({ review }) => {
                 </div>
                 <div>
                     <p>
-                        {review.createdBy.firstName +
-                            " " +
-                            review.createdBy.lastName}
+                        {`${review.createdBy.firstName} ${review.createdBy.lastName ?? ""}`}
                     </p>
                     <div className="flex items-center">
                         {Array.from({
