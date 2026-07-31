@@ -54,6 +54,7 @@ const SignInWithGoogle: React.FC<{ gAuthRole: GoogleAuthRoles }> = ({
             <GoogleOAuthProvider
                 clientId={import.meta.env.VITE_GOOGLE_CLIENT_ID}
                 onScriptLoadSuccess={() => setLoading(false)}
+                onScriptLoadError={() => setLoading(false)}
             >
                 {!loading ? (
                     <div className="flex justify-center items-center">
@@ -61,6 +62,7 @@ const SignInWithGoogle: React.FC<{ gAuthRole: GoogleAuthRoles }> = ({
                             onSuccess={handleGoogleSuccess}
                             theme="filled_black"
                             width={"320px"}
+                            type="popup"
                         />
                     </div>
                 ) : (
